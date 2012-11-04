@@ -29,7 +29,11 @@ $(OUTPUTDIR)/%.html:
 
 clean:
 	if [ -d $(OUTPUTDIR) ]; then \
-		rm -rf $(OUTPUTDIR)/* ;\
+		rm -f $(OUTPUTDIR)/*.html ;\
+		rm -rf $(OUTPUTDIR)/author ;\
+		rm -rf $(OUTPUTDIR)/feeds ;\
+		rm -rf $(OUTPUTDIR)/category ;\
+		rm -rf $(OUTPUTDIR)/theme ;\
 	fi
 	touch $(OUTPUTDIR)/index.php
 	echo 'php_flag engine off' > $(OUTPUTDIR)/.htaccess
@@ -45,5 +49,8 @@ devserver:
 
 publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
+
+heroku:
+	@echo "Sorry, not yet implemented"
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload github
