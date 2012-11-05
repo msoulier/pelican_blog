@@ -44,7 +44,7 @@ clean:
 		rm -rf $(OUTPUTDIR)/category ;\
 		rm -rf $(OUTPUTDIR)/theme ;\
 		rm -rf $(OUTPUTDIR)/static ;\
-		rm -rf $(OUTPUTDIR)/ButIDigress ;\
+		rm -f $(OUTPUTDIR)/ButIDigress ;\
 	fi
 	touch $(OUTPUTDIR)/index.php
 	echo 'php_flag engine off' > $(OUTPUTDIR)/.htaccess

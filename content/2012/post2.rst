@@ -19,6 +19,8 @@ ever seen before, and even spun off a pretty cool `video game`_ that spawned a
 couple of sequels. I still have the first one.
 
 .. figure:: images/sfb.png
+   :width: 800
+   :height: 478
 
 The tabletop game was as complex as any chess game, and a lot more fun in my
 opinion, so it was with no small amount of nostalgia that I dusted off the
