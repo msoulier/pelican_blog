@@ -35,3 +35,5 @@ STATIC_PATHS = ["images", ]
 FILES_TO_COPY = (('extra/robots.txt', 'robots.txt'),)
 
 DEFAULT_CATEGORY = 'Ramblings'
+
+FEED_DOMAIN = 'http://www.but-i-digress.com'
