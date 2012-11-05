@@ -22,7 +22,7 @@ DEFAULT_PAGINATION = 10
 
 TWITTER_USERNAME = 'msoulier'
 
-THEME = 'notmyidea'
+THEME = 'butidigress'
 
 GITHUB_URL = 'http://github.com/msoulier'
 
@@ -32,7 +32,8 @@ FILES_TO_COPY = (('extra/robots.txt', 'robots.txt'),)
 
 DEFAULT_CATEGORY = 'Ramblings'
 
-FEED_DOMAIN = 'http://www.but-i-digress.com'
-FEED_RSS = 'feeds/all.rss.xml'
-FEED_ATOM = 'feeds/all.atom.xml'
+FEED_DOMAIN = 'http://feeds.feedburner.com'
+FEED_RSS = 'ButIDigress/all.rss.xml'
+FEED_ATOM = None
 CATEGORY_FEED_RSS = 'feeds/%s.rss.xml'
+FEEDBURNER_URL = 'http://feeds.feedburner.com/ButIDigress'

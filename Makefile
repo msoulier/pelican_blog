@@ -18,12 +18,17 @@ help:
 	@echo '   make devserver                   start/restart develop_server.sh    '
 	@echo '   make heroku                      push to production heroku site     '
 	@echo '   make view                        view the static site in firefox    '
+	@echo '   make installthemes               install the local themes to the virtualenv for use '
 	@echo '                                                                       '
+
+installthemes:
+	rm -rf $(HOME)/envs/pelican/lib/python2.6/site-packages/pelican/themes/butidigress
+	cp -R themes/butidigress $(HOME)/envs/pelican/lib/python2.6/site-packages/pelican/themes
 
 view:
 	(cd ../static_blog && firefox index.html)
 
-html: clean $(OUTPUTDIR)/index.html
+html: clean installthemes $(OUTPUTDIR)/index.html
 	mkdir $(OUTPUTDIR)/static
 	cp -R images $(OUTPUTDIR)/static
 	@echo 'Done'
@@ -39,6 +44,7 @@ clean:
 		rm -rf $(OUTPUTDIR)/category ;\
 		rm -rf $(OUTPUTDIR)/theme ;\
 		rm -rf $(OUTPUTDIR)/static ;\
+		rm -rf $(OUTPUTDIR)/ButIDigress ;\
 	fi
 	touch $(OUTPUTDIR)/index.php
 	echo 'php_flag engine off' > $(OUTPUTDIR)/.htaccess
