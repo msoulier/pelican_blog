@@ -3,9 +3,10 @@ PELICANOPTS=
 
 BASEDIR=$(PWD)
 INPUTDIR=$(BASEDIR)/content
-OUTPUTDIR=$(BASEDIR)/../static_blog
+OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
+HEROKUDIR=$(HOME)/work/static_blog
 
 help:
 	@echo 'Makefile for a pelican Web site                                        '
@@ -21,12 +22,16 @@ help:
 	@echo '   make installthemes               install the local themes to the virtualenv for use '
 	@echo '                                                                       '
 
+heroku:
+	rsync -vaz --delete --exclude '.git' $(OUTPUTDIR)/ $(HEROKUDIR)
+	(cd $(HEROKUDIR) && git commit -a && git push && git push heroku)
+
 installthemes:
 	rm -rf $(HOME)/envs/pelican/lib/python2.6/site-packages/pelican/themes/butidigress
 	cp -R themes/butidigress $(HOME)/envs/pelican/lib/python2.6/site-packages/pelican/themes
 
 view:
-	(cd ../static_blog && firefox index.html)
+	(cd $(OUTPUTDIR) && firefox index.html)
 
 html: clean installthemes $(OUTPUTDIR)/index.html
 	mkdir $(OUTPUTDIR)/static
@@ -37,15 +42,7 @@ $(OUTPUTDIR)/%.html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
-	if [ -d $(OUTPUTDIR) ]; then \
-		rm -f $(OUTPUTDIR)/*.html ;\
-		rm -rf $(OUTPUTDIR)/author ;\
-		rm -rf $(OUTPUTDIR)/feeds ;\
-		rm -rf $(OUTPUTDIR)/category ;\
-		rm -rf $(OUTPUTDIR)/theme ;\
-		rm -rf $(OUTPUTDIR)/static ;\
-		rm -f $(OUTPUTDIR)/ButIDigress ;\
-	fi
+	find $(OUTPUTDIR) -mindepth 1 -delete
 	touch $(OUTPUTDIR)/index.php
 	echo 'php_flag engine off' > $(OUTPUTDIR)/.htaccess
 
@@ -60,8 +57,5 @@ devserver:
 
 publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
-
-heroku:
-	@echo "Sorry, not yet implemented"
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload github

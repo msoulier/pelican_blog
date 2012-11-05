@@ -36,3 +36,5 @@ FEED_DOMAIN = 'http://feeds.feedburner.com'
 FEED_RSS = 'ButIDigress'
 FEED_ATOM = None
 CATEGORY_FEED_RSS = 'feeds/%s.rss.xml'
+
+RELATIVE_URLS = False

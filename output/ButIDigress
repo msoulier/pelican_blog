@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Sun, 04 Nov 2012 18:43:00 -0500</lastBuildDate><item><title>Dusting off old games</title><link>http://www.but-i-digress.ca/dusting-off-old-games.html</link><description>&lt;p&gt;Back before I had any real responsibilities, I spent a lot of time playing
+various games. I've probably played most of them. Roleplaying games, tabletop
+battle simulations, although I stayed away from the card games like &lt;a class="reference external" href="http://www.wizards.com/Magic/Summoner/"&gt;Magic&lt;/a&gt;.
+I'll rant about that some other time.&lt;/p&gt;
+&lt;p&gt;My two favorite games were &lt;a class="reference external" href="http://boardgamegeek.com/thread/474579/air-superiority-playable-jet-combat"&gt;Air Superiority&lt;/a&gt;, and &lt;a class="reference external" href="http://www.starfleetgames.com"&gt;Starfleet Battles&lt;/a&gt;. As a
+science fiction fan, I did like Star Trek, and like a lot of boys my favorite
+parts were the ship to ship combat. SFB simulated that combat better than I'd
+ever seen before, and even spun off a pretty cool &lt;a class="reference external" href="http://www.youtube.com/watch?v=HwQ3rm0LcWU"&gt;video game&lt;/a&gt; that spawned a
+couple of sequels. I still have the first one.&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="http://www.but-i-digress.ca/static/images/sfb.png" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
+&lt;/div&gt;
+&lt;p&gt;The tabletop game was as complex as any chess game, and a lot more fun in my
+opinion, so it was with no small amount of nostalgia that I dusted off the
+game for my 10-year-old son and I to look at a couple of months ago. To my
+surprise, Jaan ate the game up, even if the rules sound like legalese and
+combined weigh a few pounds. Now he can't get enough of the game, and I get to
+play too, which is pretty cool, 'cause I don't have a lot of time for these
+things anymore and I wasn't sure if anyone around Ottawa played it anyway.&lt;/p&gt;
+&lt;p&gt;I'm not really interested in all of the new material that ADB has released
+since I was into the game, as I have plenty of material for it already, and
+it'll take Jaan and I ages to get tired of it. The physics of the game are
+broken and there are holes in the logic that I'll go into later, but it
+suceeds in providing a fun gaming experience, and it's a hell of a lot more
+fun than playing Monopoly or Clue, with all due respect to those games.&lt;/p&gt;
+&lt;p&gt;Lets be honest, in the end, boys don't grow up, our toys just get more
+expensive.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 04 Nov 2012 18:43:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-04:dusting-off-old-games.html</guid><category>Hobbies</category><category>SFB</category></item><item><title>New blog</title><link>http://www.but-i-digress.ca/new-static-blog.html</link><description>&lt;p&gt;So I decided to dump Wordpress and go to something that I have more control
+over. I was thinking of building my own static blogging system, but I looked
+around and found that there are a few already. Being a fan of &lt;a class="reference external" href="http://www.python.org/"&gt;Python&lt;/a&gt; I
+decided to try out &lt;a class="reference external" href="http://docs.getpelican.com/en/3.0/"&gt;Pelican&lt;/a&gt;. It uses a bunch of technology that I would use
+anyway, like &lt;a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html"&gt;reStructuredText&lt;/a&gt;, &lt;a class="reference external" href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt;, etc.&lt;/p&gt;
+&lt;p&gt;It also gives me an excuse to play with &lt;a class="reference external" href="http://heroku.com/"&gt;Heroku&lt;/a&gt; for hosting. Which, I must
+say, is pretty cool for getting a website or web service hosted quickly, with
+nothing but a push from &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt; to trigger the publishing of the site.&lt;/p&gt;
+&lt;p&gt;Granted, Heroku was meant to host dynamic sites driven by WSGI apps, but I
+found a &lt;a class="reference external" href="http://kennethreitz.com/static-sites-on-heroku-cedar.html"&gt;great hack&lt;/a&gt; to fool Heroku
+into running a static site.&lt;/p&gt;
+&lt;p&gt;So, we'll see how this goes. My main blogging tools now are &lt;a class="reference external" href="http://www.vim.org/"&gt;Vim&lt;/a&gt; and &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt;, so
+how can I go wrong?&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sat, 03 Nov 2012 10:20:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2012-11-03:new-static-blog.html</guid><category>Blogging</category></item></channel></rss>
