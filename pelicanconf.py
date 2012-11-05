@@ -3,7 +3,7 @@
 
 AUTHOR = u"Michael P. Soulier"
 SITENAME = u"But I Digress"
-SITEURL = ''
+SITEURL = 'http://www.but-i-digress.ca'
 
 TIMEZONE = 'America/Montreal'
 
