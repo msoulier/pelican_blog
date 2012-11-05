@@ -14,14 +14,18 @@ help:
 	@echo '   make html                        (re)generate the web site          '
 	@echo '   make clean                       remove the generated files         '
 	@echo '   make regenerate                  regenerate files upon modification '
-	@echo '   make publish                     generate using production settings '
 	@echo '   make serve                       serve site at http://localhost:8000'
 	@echo '   make devserver                   start/restart develop_server.sh    '
 	@echo '   make heroku                      push to production heroku site     '
+	@echo '   make view                        view the static site in firefox    '
 	@echo '                                                                       '
 
+view:
+	(cd ../static_blog && firefox index.html)
 
 html: clean $(OUTPUTDIR)/index.html
+	mkdir $(OUTPUTDIR)/static
+	cp -R images $(OUTPUTDIR)/static
 	@echo 'Done'
 
 $(OUTPUTDIR)/%.html:
@@ -34,6 +38,7 @@ clean:
 		rm -rf $(OUTPUTDIR)/feeds ;\
 		rm -rf $(OUTPUTDIR)/category ;\
 		rm -rf $(OUTPUTDIR)/theme ;\
+		rm -rf $(OUTPUTDIR)/static ;\
 	fi
 	touch $(OUTPUTDIR)/index.php
 	echo 'php_flag engine off' > $(OUTPUTDIR)/.htaccess
