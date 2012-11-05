@@ -18,7 +18,7 @@ parts were the ship to ship combat. SFB simulated that combat better than I'd
 ever seen before, and even spun off a pretty cool `video game`_ that spawned a
 couple of sequels. I still have the first one.
 
-.. figure:: images/sfb.png
+.. figure:: http://www.but-i-digress.ca/static/images/sfb.png
    :width: 800
    :height: 478
 
