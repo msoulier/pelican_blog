@@ -37,4 +37,6 @@ FEED_RSS = 'ButIDigress'
 FEED_ATOM = None
 CATEGORY_FEED_RSS = 'feeds/%s.rss.xml'
 
-RELATIVE_URLS = False
+RELATIVE_URLS = True
+
+DISPLAY_PAGES_ON_MENU = True
