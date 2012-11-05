@@ -24,7 +24,6 @@ help:
 
 heroku:
 	rsync -vaz --delete --exclude '.git' $(OUTPUTDIR)/ $(HEROKUDIR)
-	(cd $(HEROKUDIR) && git commit -a && git push && git push heroku)
 
 installthemes:
 	rm -rf $(HOME)/envs/pelican/lib/python2.6/site-packages/pelican/themes/butidigress
