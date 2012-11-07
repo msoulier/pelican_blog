@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>New blog</title>
+        <title>21st Century C</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="http://www.but-i-digress.ca/theme/css/main.css" type="text/css" />
         
@@ -37,9 +37,9 @@
                 
                 
                 
-                    <li ><a href="http://www.but-i-digress.ca/category/development.html">Development</a></li>
+                    <li class="active"><a href="http://www.but-i-digress.ca/category/development.html">Development</a></li>
                 
-                    <li class="active"><a href="http://www.but-i-digress.ca/category/personal.html">Personal</a></li>
+                    <li ><a href="http://www.but-i-digress.ca/category/personal.html">Personal</a></li>
                 
                 </ul></nav>
         </header><!-- /#banner -->
@@ -48,8 +48,8 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="new-static-blog.html" rel="bookmark"
-           title="Permalink to New blog">New blog</a></h1>
+        <a href="21st-century-c.html" rel="bookmark"
+           title="Permalink to 21st Century C">21st Century C</a></h1>
       
 <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="msoulier">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
@@ -57,8 +57,8 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2012-11-03T10:20:00">
-                Sat 03 November 2012
+        <abbr class="published" title="2012-11-06T22:12:00">
+                Tue 06 November 2012
         </abbr>
 
         
@@ -66,24 +66,41 @@
                 By <a class="url fn" href="http://www.but-i-digress.ca/author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
         
-<p>In <a href="http://www.but-i-digress.ca/category/personal.html">Personal</a>. </p>
-<p>tags: <a href="http://www.but-i-digress.ca/tag/blogging.html">Blogging</a></p>
+<p>In <a href="http://www.but-i-digress.ca/category/development.html">Development</a>. </p>
+<p>tags: <a href="http://www.but-i-digress.ca/tag/programming.html">Programming</a><a href="http://www.but-i-digress.ca/tag/c.html">C</a><a href="http://www.but-i-digress.ca/tag/books.html">Books</a></p>
 
 
 </footer><!-- /.post-info -->
-      <p>So I decided to dump Wordpress and go to something that I have more control
-over. I was thinking of building my own static blogging system, but I looked
-around and found that there are a few already. Being a fan of <a class="reference external" href="http://www.python.org/">Python</a> I
-decided to try out <a class="reference external" href="http://docs.getpelican.com/en/3.0/">Pelican</a>. It uses a bunch of technology that I would use
-anyway, like <a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">reStructuredText</a>, <a class="reference external" href="http://jinja.pocoo.org/">Jinja2</a>, etc.</p>
-<p>It also gives me an excuse to play with <a class="reference external" href="http://heroku.com/">Heroku</a> for hosting. Which, I must
-say, is pretty cool for getting a website or web service hosted quickly, with
-nothing but a push from <a class="reference external" href="http://git-scm.com/">Git</a> to trigger the publishing of the site.</p>
-<p>Granted, Heroku was meant to host dynamic sites driven by WSGI apps, but I
-found a <a class="reference external" href="http://kennethreitz.com/static-sites-on-heroku-cedar.html">great hack</a> to fool Heroku
-into running a static site.</p>
-<p>So, we'll see how this goes. My main blogging tools now are <a class="reference external" href="http://www.vim.org/">Vim</a> and <a class="reference external" href="http://git-scm.com/">Git</a>, so
-how can I go wrong?</p>
+      <p>I saw a sale from <a class="reference external" href="http://oreilly.com/">O'Reilly Publishing</a> tonight on an new ebook for
+<a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM">21st Century C</a>. I have a good history with O'Reilly and C programming, so
+it caught my attention. When I was in University, <a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM">Practical C Programming</a>
+taught me much more than any of my professors, and
+<a class="reference external" href="http://shop.oreilly.com/product/9781565921634.do">Unix System Programming for System VR4</a> taught me a great deal more about
+programming C on Unix/Linux. After reading those books, I became actually
+comfortable in working in C for all of my assignments, and other students
+kept coming to me for help until I had somehow become a local C expert.
+Amazing what a good investment in reading material will do, not to mention
+actually reading said material. Another friend in University taught me that.
+He told me not to ever begrudge the cost of a book that helps you get better
+at what you do. I've applied that lesson ever since.</p>
+<p>I relied on O'Reilly for my first introduction to C++, with
+<a class="reference external" href="http://shop.oreilly.com/product/9781565921160.do">C++, the Core Language</a>, which finally explained to me where some of my
+memory leaks were coming from, by explaining copy constructors and assignment
+operators. I turned to <a class="reference external" href="http://books.google.com/books/about/Beginning_C++.html?id=vtcpAQAAMAAJ">another book</a> to finish most of my C++ education, but
+o'Reilly got me started.</p>
+<p>Since University, with the wealth of information on the Internet, I haven't
+bought many C books, but I did pick up <a class="reference external" href="http://basepath.com/aup/">Advanced Unix Programming</a>, second
+edition, on the recommendation of a coworker, and he did not lead me astray,
+the book is excellent. Mind you, I still haven't finished reading it. I seem
+to buy books faster than I read them these days.</p>
+<p>Maybe one day I'll take a little vacation just to read. Anyway...</p>
+<p>Looking at the new O'Reilly book, it looks like it has many practical ideas
+for someone living with C from day to day, and should also provide a nice
+introduction to the new C11 standard, just released in December of last year.
+Hopefully it'll sharpen my skills like previous O'Reilly books have. I'll try
+to post a full review once I've finished it...err...if I finish it.</p>
+<p>I will stop buying faster than I can read. I will stop buying faster than I
+can read. Maybe if I keep repeating that, it'll sink in.</p>
 
     </div><!-- /.entry-content -->
     
