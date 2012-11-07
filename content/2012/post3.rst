@@ -9,7 +9,9 @@
 
 I saw a sale from `O'Reilly Publishing`_ tonight on an new ebook for
 `21st Century C`_. I have a good history with O'Reilly and C programming, so
-it caught my attention. When I was in University, `Practical C Programming`_
+it caught my attention.
+
+When I was in University, `Practical C Programming`_
 taught me much more than any of my professors, and
 `Unix System Programming for System VR4`_ taught me a great deal more about
 programming C on Unix/Linux. After reading those books, I became actually
@@ -24,7 +26,7 @@ I relied on O'Reilly for my first introduction to C++, with
 `C++, the Core Language`_, which finally explained to me where some of my
 memory leaks were coming from, by explaining copy constructors and assignment
 operators. I turned to `another book`_ to finish most of my C++ education, but
-o'Reilly got me started.
+O'Reilly got me started.
 
 Since University, with the wealth of information on the Internet, I haven't
 bought many C books, but I did pick up `Advanced Unix Programming`_, second

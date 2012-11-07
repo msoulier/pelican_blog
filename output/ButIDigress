@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Tue, 06 Nov 2012 22:12:00 -0500</lastBuildDate><item><title>21st Century C</title><link>http://www.but-i-digress.ca/21st-century-c.html</link><description>&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
 &lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
-it caught my attention. When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
+it caught my attention.&lt;/p&gt;
+&lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
 taught me much more than any of my professors, and
 &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921634.do"&gt;Unix System Programming for System VR4&lt;/a&gt; taught me a great deal more about
 programming C on Unix/Linux. After reading those books, I became actually
@@ -15,7 +16,7 @@ at what you do. I've applied that lesson ever since.&lt;/p&gt;
 &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921160.do"&gt;C++, the Core Language&lt;/a&gt;, which finally explained to me where some of my
 memory leaks were coming from, by explaining copy constructors and assignment
 operators. I turned to &lt;a class="reference external" href="http://books.google.com/books/about/Beginning_C++.html?id=vtcpAQAAMAAJ"&gt;another book&lt;/a&gt; to finish most of my C++ education, but
-o'Reilly got me started.&lt;/p&gt;
+O'Reilly got me started.&lt;/p&gt;
 &lt;p&gt;Since University, with the wealth of information on the Internet, I haven't
 bought many C books, but I did pick up &lt;a class="reference external" href="http://basepath.com/aup/"&gt;Advanced Unix Programming&lt;/a&gt;, second
 edition, on the recommendation of a coworker, and he did not lead me astray,
