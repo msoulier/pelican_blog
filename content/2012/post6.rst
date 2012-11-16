@@ -35,7 +35,7 @@ take the plunge with my new desktop, and try a `Mac Mini`_ from Apple_, running
 in commercial software land, while being `BSD Unix`_ underneath, so maybe it's
 the best of both worlds.
 
-.. figure:: images/apple-logo1.jpg
+.. figure:: http://www.but-i-digress.ca/static/images/apple-logo1.jpg
    :width: 289
    :height: 350
 
