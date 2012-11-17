@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-16T18:00:00-05:00</updated><entry><title>Ok, nobody panic, there's a fruit on my screen</title><link href="http://www.but-i-digress.ca/fruit-on-my-screen.html" rel="alternate"></link><updated>2012-11-16T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</id><summary type="html">&lt;p&gt;I've needed a new desktop for a while now. As I'm primarily a Unix user, I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-17T14:00:00-05:00</updated><entry><title>Umm, done unzipping yet?</title><link href="http://www.but-i-digress.ca/umm-done-unzipping-yet.html" rel="alternate"></link><updated>2012-11-17T14:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-17:umm-done-unzipping-yet.html</id><summary type="html">&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
+interface was to start installing software like a madman. I wanted Firefox,
+VLC, Kobo, Gimp, Vim, etc, etc, etc. So, I had to learn how to install apps on
+OS X.&lt;/p&gt;
+&lt;p&gt;Apps in OS X seem to come in at least two different forms: .app files, which
+are self-contained application packages that you simply drop into
+&lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt; on the system (totally awesome), and .pkg files, which are
+more windows-like installers.&lt;/p&gt;
+&lt;p&gt;The latter seems to be required with more complex installs, like plug-ins that
+need to put files in privileged places all over the system, requiring root
+access to install. As an admin user, I can already put .app files into
+&lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt; without root access, the implications of which are that a
+virus could infect the apps in &lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt; too, so that's a strike,
+security-wise, for OS X over Linux. Still better than Windows though, where a
+Power User can change anything under &lt;tt class="docutils literal"&gt;Program Files&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;Windows&lt;/tt&gt; without
+escalating privileges.&lt;/p&gt;
+&lt;p&gt;The .app files or .pkg files can come in many forms, the most common of which
+is a .dmg file, which is a disk image that OS X will casually mount on a
+loopback. I've noticed that the &lt;tt class="docutils literal"&gt;Finder&lt;/tt&gt; can mount .dmg and .iso files with
+a simple click. With an .app file, you just drag it to &lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt;, and
+you're done, and uninstalling is just a simple. Far superior to &lt;em&gt;any&lt;/em&gt; OS that
+I've used in the past. It's also common to download .zip files, which clicking
+on in the &lt;tt class="docutils literal"&gt;Finder&lt;/tt&gt; fires-up the &lt;tt class="docutils literal"&gt;Archive Utility&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;So there I was, clicking along and installing, and then a progress bar
+indicating that the .zip file was opening just kept going, and going, and
+going. I looked online, and found that &lt;a class="reference external" href="http://apple.stackexchange.com/questions/70160/can-i-fix-things-so-archive-utility-doesnt-hang-on-all-zip-files"&gt;I am not alone&lt;/a&gt; in having this
+problem. Apparently, the &lt;tt class="docutils literal"&gt;appleeventsd&lt;/tt&gt; daemon requires killing under those
+circumstances, something that the nice guy at Apple support did not know.
+Looks like the issue is in OS X 10.8.2, which I am running.&lt;/p&gt;
+&lt;p&gt;Hmm. Bad timing in jumping on the Apple bandwagon? I wonder how long they'll
+take to fix the issue. Good test for what it will be like to live as part of
+Apple's ecosystem.&lt;/p&gt;
+</summary><category term="Apple"></category><category term="Hobbies"></category><category term="Technology"></category></entry><entry><title>Ok, nobody panic, there's a fruit on my screen</title><link href="http://www.but-i-digress.ca/fruit-on-my-screen.html" rel="alternate"></link><updated>2012-11-16T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</id><summary type="html">&lt;p&gt;I've needed a new desktop for a while now. As I'm primarily a Unix user, I
 typically buy a cheap PC and put &lt;a class="reference external" href="http://www.linux.org"&gt;Linux&lt;/a&gt; on it. This involves doing a bunch of
 research into available hardware to make sure that everything is going to
 work, like accelerated graphics for any games I'd like to play, supported
@@ -53,7 +85,7 @@ about life. I thought I'd share some of what it has taught me:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Cheers&lt;/p&gt;
-</summary><category term="Curling"></category></entry><entry><title>I sit too much</title><link href="http://www.but-i-digress.ca/i-sit-too-much.html" rel="alternate"></link><updated>2012-11-08T12:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-08:i-sit-too-much.html</id><summary type="html">&lt;p&gt;Yeah, I really do. From my childhood I always prefered more intellectual
+</summary><category term="Curling"></category><category term="Hobbies"></category></entry><entry><title>I sit too much</title><link href="http://www.but-i-digress.ca/i-sit-too-much.html" rel="alternate"></link><updated>2012-11-08T12:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-08:i-sit-too-much.html</id><summary type="html">&lt;p&gt;Yeah, I really do. From my childhood I always prefered more intellectual
 activities than active ones, reading, watching movies, tv. Growing up
 asthmatic had something to do with that, but I overcame it later in life and
 had no excuses anymore. Still, studies to do, computers to play with, digital
