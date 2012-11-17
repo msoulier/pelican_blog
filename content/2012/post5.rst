@@ -4,7 +4,7 @@ What Curling has taught me about life
 :date: 2012-11-09 10:00
 :category: Personal
 :author: Michael P. Soulier
-:tags: Curling
+:tags: Curling, Hobbies
 :slug: curling-and-life
 
 I've been curling for about 4 years now, and it's already taught me a lot
