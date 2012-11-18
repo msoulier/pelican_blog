@@ -15,7 +15,9 @@ DEFAULT_LANG = 'en'
 LINKS =  (('Pelican', 'http://docs.notmyidea.org/alexis/pelican/'),
           ('Python.org', 'http://python.org'),
           ('Jinja2', 'http://jinja.pocoo.org'),
-          ('Ian Ward\'s blog', 'http://excess.org'))
+          ('Ian Ward\'s blog', 'http://excess.org'),
+          ('Fit613', 'http://fit613.wordpress.com')
+          )
 
 # Social widget
 SOCIAL = (('Twitter', 'http://twitter.com/msoulier'),)
