@@ -7,8 +7,13 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 HEROKUDIR=$(HOME)/work/static_blog
+FIREFOX=$(shell which firefox)
+ifeq ($(FIREFOX),)
+	FIREFOX = /Applications/Firefox.app/Contents/MacOS/firefox
+endif
 
 help:
+	@echo "Firefox is '$(FIREFOX)'"
 	@echo 'Makefile for a pelican Web site                                        '
 	@echo '                                                                       '
 	@echo 'Usage:                                                                 '
@@ -19,20 +24,15 @@ help:
 	@echo '   make devserver                   start/restart develop_server.sh    '
 	@echo '   make heroku                      push to production heroku site     '
 	@echo '   make view                        view the static site in firefox    '
-	@echo '   make installthemes               install the local themes to the virtualenv for use '
 	@echo '                                                                       '
 
 heroku:
 	rsync -vaz --delete --exclude '.git' $(OUTPUTDIR)/ $(HEROKUDIR)
 
-installthemes:
-	rm -rf $(HOME)/envs/pelican/lib/python2.6/site-packages/pelican/themes/butidigress
-	cp -R themes/butidigress $(HOME)/envs/pelican/lib/python2.6/site-packages/pelican/themes
-
 view:
-	(cd $(OUTPUTDIR) && firefox index.html)
+	(cd $(OUTPUTDIR) && $(FIREFOX) index.html)
 
-html: clean installthemes $(OUTPUTDIR)/index.html
+html: clean $(OUTPUTDIR)/index.html
 	mkdir $(OUTPUTDIR)/static
 	cp -R images $(OUTPUTDIR)/static
 	@echo 'Done'

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 
+import os
+
 AUTHOR = u"Michael P. Soulier"
 SITENAME = u"But I Digress"
 SITEURL = 'http://www.but-i-digress.ca'
@@ -22,7 +24,8 @@ DEFAULT_PAGINATION = 10
 
 TWITTER_USERNAME = 'msoulier'
 
-THEME = 'butidigress'
+THEME = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'themes/butidigress')
+print "theme is", THEME
 
 GITHUB_URL = 'http://github.com/msoulier'
 
