@@ -55,8 +55,77 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./umm-done-unzipping-yet.html">Umm, done unzipping yet?</a></h1> 
+                    <h1 class="entry-title"><a href="./apple-and-joysticks.html">Joysticks? We don't need no stinking joysticks...</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2012-11-19T13:00:00">
+                Mon 19 November 2012
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/personal.html">Personal</a>. </p>
+<p>tags: <a href="./tag/apple.html">Apple</a><a href="./tag/hobbies.html">Hobbies</a><a href="./tag/technology.html">Technology</a></p>
+
+
+</footer><!-- /.post-info --><p>So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+<a class="reference external" href="http://www.x-plane.com">X-Plane</a> demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
+itself asked me if I wanted to calibrate the joystick, which struck me as odd,
+that hasn't happened in years, not since my days with plain old DOS. DOS
+didn't have a controller subsystem so there was no way to calibrate a joystick
+once, for all apps, but Microsoft fixed that long, long ago. Even Linux has
+<a class="reference external" href="static/gentle-taiga-2880">jscal</a> to allow the same thing. It's command-line, but it works.</p>
+<p>So of course I assumed that on a Mac, with it's reputation for dead simple
+plug and play, everything just works, dead simple and easy, it would have the
+same right? Umm, no. No command-line tool, no graphical tool, no voice
+activated tool, no swiping on my LCD, nothing. It's left up to the
+application, kinda like DOS. Way to go Apple.</p>
+<p>Now, why do I care, since X-Plane has such a utility? Well, in X-Plane, I
+don't. But after downloading and installing Flightgear, I do. They leave the
+joystick calibration up to the OS, and rightly so. So, I can't use the
+joystick in Flightgear, not that I'd want to use it on this machine anyway, as
+I've already found out that the OpenGL rendering performance on the Mac Mini
+is horrid. Wow, another strike over my cheap Linux box sitting next to me that
+was made out of spare parts from a friend's basement. That is truly, utterly,
+sad.</p>
+<p>Seriously Apple, is that the best you can do? If you think I'm interested in
+tilting an ipad to fly a plane in any realistic simulation, you guys have been
+smoking way too much of what you usually smoke. I want realism, and last time
+I flew, the pilot didn't have to lean to bank the plane. At least, I hope not,
+the door was closed and locked, post-9/11 and all, but I digress.</p>
+<p>Bottom line Apple, for what I paid for this thing, you could have done much,
+much better in this regard. X-Plane rocks, but Intel graphics in the mini?
+Pleease, put a smoking Nvidia chipset in there and give me a decent framerate
+for games!</p>
+<p>Are you listening?</p>
+
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./umm-done-unzipping-yet.html" rel="bookmark"
+                           title="Permalink to Umm, done unzipping yet?">Umm, done unzipping yet?</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-11-17T14:00:00">
                 Sat 17 November 2012
         </abbr>
@@ -70,49 +139,16 @@
 <p>tags: <a href="./tag/apple.html">Apple</a><a href="./tag/hobbies.html">Hobbies</a><a href="./tag/technology.html">Technology</a></p>
 
 
-</footer><!-- /.post-info --><p>So, the first thing I did after after wrapping my head around the cocoa
+</footer><!-- /.post-info -->
+                <p>So, the first thing I did after after wrapping my head around the cocoa
 interface was to start installing software like a madman. I wanted Firefox,
 VLC, Kobo, Gimp, Vim, etc, etc, etc. So, I had to learn how to install apps on
 OS X.</p>
-<p>Apps in OS X seem to come in at least two different forms: .app files, which
-are self-contained application packages that you simply drop into
-<tt class="docutils literal">/Applications</tt> on the system (totally awesome), and .pkg files, which are
-more windows-like installers.</p>
-<p>The latter seems to be required with more complex installs, like plug-ins that
-need to put files in privileged places all over the system, requiring root
-access to install. As an admin user, I can already put .app files into
-<tt class="docutils literal">/Applications</tt> without root access, the implications of which are that a
-virus could infect the apps in <tt class="docutils literal">/Applications</tt> too, so that's a strike,
-security-wise, for OS X over Linux. Still better than Windows though, where a
-Power User can change anything under <tt class="docutils literal">Program Files</tt> or <tt class="docutils literal">Windows</tt> without
-escalating privileges.</p>
-<p>The .app files or .pkg files can come in many forms, the most common of which
-is a .dmg file, which is a disk image that OS X will casually mount on a
-loopback. I've noticed that the <tt class="docutils literal">Finder</tt> can mount .dmg and .iso files with
-a simple click. With an .app file, you just drag it to <tt class="docutils literal">/Applications</tt>, and
-you're done, and uninstalling is just a simple. Far superior to <em>any</em> OS that
-I've used in the past. It's also common to download .zip files, which clicking
-on in the <tt class="docutils literal">Finder</tt> fires-up the <tt class="docutils literal">Archive Utility</tt>.</p>
-<p>So there I was, clicking along and installing, and then a progress bar
-indicating that the .zip file was opening just kept going, and going, and
-going. I looked online, and found that <a class="reference external" href="http://apple.stackexchange.com/questions/70160/can-i-fix-things-so-archive-utility-doesnt-hang-on-all-zip-files">I am not alone</a> in having this
-problem. Apparently, the <tt class="docutils literal">appleeventsd</tt> daemon requires killing under those
-circumstances, something that the nice guy at Apple support did not know.
-Looks like the issue is in OS X 10.8.2, which I am running.</p>
-<p>Hmm. Bad timing in jumping on the Apple bandwagon? I wonder how long they'll
-take to fix the issue. Good test for what it will be like to live as part of
-Apple's ecosystem.</p>
-
-                </article>
+<p>Apps in OS X seem ...</p>
+                <a class="readmore" href="./umm-done-unzipping-yet.html">read more</a>
                 
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             

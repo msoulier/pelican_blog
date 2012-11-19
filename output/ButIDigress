@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Sat, 17 Nov 2012 14:00:00 -0500</lastBuildDate><item><title>Umm, done unzipping yet?</title><link>http://www.but-i-digress.ca/umm-done-unzipping-yet.html</link><description>&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Mon, 19 Nov 2012 13:00:00 -0500</lastBuildDate><item><title>Joysticks? We don't need no stinking joysticks...</title><link>http://www.but-i-digress.ca/apple-and-joysticks.html</link><description>&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+&lt;a class="reference external" href="http://www.x-plane.com"&gt;X-Plane&lt;/a&gt; demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
+itself asked me if I wanted to calibrate the joystick, which struck me as odd,
+that hasn't happened in years, not since my days with plain old DOS. DOS
+didn't have a controller subsystem so there was no way to calibrate a joystick
+once, for all apps, but Microsoft fixed that long, long ago. Even Linux has
+&lt;a class="reference external" href="gentle-taiga-2880"&gt;jscal&lt;/a&gt; to allow the same thing. It's command-line, but it works.&lt;/p&gt;
+&lt;p&gt;So of course I assumed that on a Mac, with it's reputation for dead simple
+plug and play, everything just works, dead simple and easy, it would have the
+same right? Umm, no. No command-line tool, no graphical tool, no voice
+activated tool, no swiping on my LCD, nothing. It's left up to the
+application, kinda like DOS. Way to go Apple.&lt;/p&gt;
+&lt;p&gt;Now, why do I care, since X-Plane has such a utility? Well, in X-Plane, I
+don't. But after downloading and installing Flightgear, I do. They leave the
+joystick calibration up to the OS, and rightly so. So, I can't use the
+joystick in Flightgear, not that I'd want to use it on this machine anyway, as
+I've already found out that the OpenGL rendering performance on the Mac Mini
+is horrid. Wow, another strike over my cheap Linux box sitting next to me that
+was made out of spare parts from a friend's basement. That is truly, utterly,
+sad.&lt;/p&gt;
+&lt;p&gt;Seriously Apple, is that the best you can do? If you think I'm interested in
+tilting an ipad to fly a plane in any realistic simulation, you guys have been
+smoking way too much of what you usually smoke. I want realism, and last time
+I flew, the pilot didn't have to lean to bank the plane. At least, I hope not,
+the door was closed and locked, post-9/11 and all, but I digress.&lt;/p&gt;
+&lt;p&gt;Bottom line Apple, for what I paid for this thing, you could have done much,
+much better in this regard. X-Plane rocks, but Intel graphics in the mini?
+Pleease, put a smoking Nvidia chipset in there and give me a decent framerate
+for games!&lt;/p&gt;
+&lt;p&gt;Are you listening?&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 19 Nov 2012 13:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</guid><category>Apple</category><category>Hobbies</category><category>Technology</category></item><item><title>Umm, done unzipping yet?</title><link>http://www.but-i-digress.ca/umm-done-unzipping-yet.html</link><description>&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
 interface was to start installing software like a madman. I wanted Firefox,
 VLC, Kobo, Gimp, Vim, etc, etc, etc. So, I had to learn how to install apps on
 OS X.&lt;/p&gt;
