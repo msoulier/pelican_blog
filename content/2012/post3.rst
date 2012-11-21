@@ -3,7 +3,7 @@
 
 :date: 2012-11-06 22:12
 :category: Development
-:tags: Programming, C/C++, Books
+:tags: C/C++, Books
 :author: Michael P. Soulier
 :slug: 21st-century-c
 
