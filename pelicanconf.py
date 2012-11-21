@@ -16,7 +16,7 @@ LINKS =  (('Pelican', 'http://docs.notmyidea.org/alexis/pelican/'),
           ('Python.org', 'http://python.org'),
           ('Jinja2', 'http://jinja.pocoo.org'),
           ('Fit613', 'http://fit613.wordpress.com'),
-          ('Ian Ward\'s blog', 'http://excess.org'),
+          ('Ian Ward', 'http://excess.org'),
           ('Mahdi Yusuf', 'http://www.mahdiyusuf.com/'),
           ('Mike Grouchy', 'http://mikegrouchy.com/'),
           )
