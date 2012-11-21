@@ -2,9 +2,9 @@ Ok, nobody panic, there's a fruit on my screen
 ==============================================
 
 :date: 2012-11-16 18:00
-:category: Personal
+:category: Technology
 :author: Michael P. Soulier
-:tags: Apple, Hobbies, Technology
+:tags: OS X
 :slug: fruit-on-my-screen
 
 I've needed a new desktop for a while now. As I'm primarily a Unix user, I

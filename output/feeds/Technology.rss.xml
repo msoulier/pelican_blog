@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-20T22:10:00-05:00</updated><entry><title>Suspend on lid close in Debian Squeeze</title><link href="http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html" rel="alternate"></link><updated>2012-11-20T22:10:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</id><summary type="html">&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Technology.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 20 Nov 2012 22:10:00 -0500</lastBuildDate><item><title>Suspend on lid close in Debian Squeeze</title><link>http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html</link><description>&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
 netbook with a little 10.5&amp;quot; screen. So I'm playing around with a window
 manager that mainly just maximizes everything. I've tried &lt;a class="reference external" href="http://www.nongnu.org/ratpoison/"&gt;Ratpoison&lt;/a&gt;, I've
 tried &lt;a class="reference external" href="https://code.google.com/p/wmii/"&gt;wmii&lt;/a&gt;, and now I'm trying &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt;.&lt;/p&gt;
@@ -68,7 +68,7 @@ it working, so I thought I'd share.&lt;/p&gt;
 &lt;p&gt;Now I just run it in the background from my &lt;cite&gt;.xsession&lt;/cite&gt; script at X11 login,
 and it's sitting there waiting for any change in UPower status. Works like a
 charm.&lt;/p&gt;
-</summary><category term="Linux"></category><category term="Open Source"></category><category term="Python"></category></entry><entry><title>Joysticks? We don't need no stinking joysticks...</title><link href="http://www.but-i-digress.ca/apple-and-joysticks.html" rel="alternate"></link><updated>2012-11-19T13:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</id><summary type="html">&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Nov 2012 22:10:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</guid><category>Linux</category><category>Open Source</category><category>Python</category></item><item><title>Joysticks? We don't need no stinking joysticks...</title><link>http://www.but-i-digress.ca/apple-and-joysticks.html</link><description>&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
 &lt;a class="reference external" href="http://www.x-plane.com"&gt;X-Plane&lt;/a&gt; demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
 itself asked me if I wanted to calibrate the joystick, which struck me as odd,
 that hasn't happened in years, not since my days with plain old DOS. DOS
@@ -98,7 +98,7 @@ much better in this regard. X-Plane rocks, but Intel graphics in the mini?
 Pleease, put a smoking Nvidia chipset in there and give me a decent framerate
 for games!&lt;/p&gt;
 &lt;p&gt;Are you listening?&lt;/p&gt;
-</summary><category term="OS X"></category></entry><entry><title>Umm, done unzipping yet?</title><link href="http://www.but-i-digress.ca/umm-done-unzipping-yet.html" rel="alternate"></link><updated>2012-11-17T14:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-17:umm-done-unzipping-yet.html</id><summary type="html">&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 19 Nov 2012 13:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</guid><category>OS X</category></item><item><title>Umm, done unzipping yet?</title><link>http://www.but-i-digress.ca/umm-done-unzipping-yet.html</link><description>&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
 interface was to start installing software like a madman. I wanted Firefox,
 VLC, Kobo, Gimp, Vim, etc, etc, etc. So, I had to learn how to install apps on
 OS X.&lt;/p&gt;
@@ -130,7 +130,7 @@ Looks like the issue is in OS X 10.8.2, which I am running.&lt;/p&gt;
 &lt;p&gt;Hmm. Bad timing in jumping on the Apple bandwagon? I wonder how long they'll
 take to fix the issue. Good test for what it will be like to live as part of
 Apple's ecosystem.&lt;/p&gt;
-</summary><category term="OS X"></category></entry><entry><title>Ok, nobody panic, there's a fruit on my screen</title><link href="http://www.but-i-digress.ca/fruit-on-my-screen.html" rel="alternate"></link><updated>2012-11-16T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</id><summary type="html">&lt;p&gt;I've needed a new desktop for a while now. As I'm primarily a Unix user, I
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sat, 17 Nov 2012 14:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-17:umm-done-unzipping-yet.html</guid><category>OS X</category></item><item><title>Ok, nobody panic, there's a fruit on my screen</title><link>http://www.but-i-digress.ca/fruit-on-my-screen.html</link><description>&lt;p&gt;I've needed a new desktop for a while now. As I'm primarily a Unix user, I
 typically buy a cheap PC and put &lt;a class="reference external" href="http://www.linux.org"&gt;Linux&lt;/a&gt; on it. This involves doing a bunch of
 research into available hardware to make sure that everything is going to
 work, like accelerated graphics for any games I'd like to play, supported
@@ -162,128 +162,4 @@ keybindings, and do a lot of reading. I hope to post my experiences here, so
 stay tuned if you're interested.&lt;/p&gt;
 &lt;p&gt;Sure, I could have just thrown Linux on another box, and maybe I still will,
 but I've &lt;em&gt;done&lt;/em&gt; that. I felt like doing something new.&lt;/p&gt;
-</summary><category term="OS X"></category></entry><entry><title>What Curling has taught me about life</title><link href="http://www.but-i-digress.ca/curling-and-life.html" rel="alternate"></link><updated>2012-11-09T10:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-09:curling-and-life.html</id><summary type="html">&lt;p&gt;I've been curling for about 4 years now, and it's already taught me a lot
-about life. I thought I'd share some of what it has taught me:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;balance is very important&lt;/li&gt;
-&lt;li&gt;anything worthwhile requires hard work&lt;/li&gt;
-&lt;li&gt;you often can't brute force your way out of a problem&lt;/li&gt;
-&lt;li&gt;you must think before you act&lt;/li&gt;
-&lt;li&gt;you can often do much more with help from others&lt;/li&gt;
-&lt;li&gt;shouting at people doesn't actually make them work harder&lt;/li&gt;
-&lt;li&gt;hope for the best and plan for the worst&lt;/li&gt;
-&lt;li&gt;when you finally understand the conditions, they change&lt;/li&gt;
-&lt;li&gt;don't take anything too seriously&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;and finally&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;men can still look like men while holding a broom :)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Cheers&lt;/p&gt;
-</summary><category term="Curling"></category><category term="Hobbies"></category></entry><entry><title>I sit too much</title><link href="http://www.but-i-digress.ca/i-sit-too-much.html" rel="alternate"></link><updated>2012-11-08T12:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-08:i-sit-too-much.html</id><summary type="html">&lt;p&gt;Yeah, I really do. From my childhood I always prefered more intellectual
-activities than active ones, reading, watching movies, tv. Growing up
-asthmatic had something to do with that, but I overcame it later in life and
-had no excuses anymore. Still, studies to do, computers to play with, digital
-bad guys to beat up, and a lot of my activities involved sitting.&lt;/p&gt;
-&lt;p&gt;I played baseball as a kid, got into Tae kwon Do in my late teens, but as a
-University student I couldn't afford the money to continue, and I moved a lot
-for a while. I was never much of a runner, but for a while I was a damn good
-cyclist because I didn't have a car and it was how I got around.&lt;/p&gt;
-&lt;p&gt;In recent years a back injury made it clear that I sit too much, and I've
-tried various things to try to fix it, usually charging in too fast,
-determined to conquer the problem and I ended up with another injury. I needed
-to figure out how to go slower, targeting my problems and not doing too much,
-but making progress.&lt;/p&gt;
-&lt;p&gt;Recently the wife that I don't deserve found &lt;a class="reference external" href="http://www.athlete365.com/"&gt;Athlete365&lt;/a&gt; and Mr. John
-Sokolowski. He looked at my flexibility and strength, or lack thereof, and has
-put together an evolving program to help me fix them, at a speed that won't
-set me back with another injury. He also gave me some tools to help with
-muscles that keep me awake at night, ruining my sleep. He also thinks that I
-should become a Yoga master. Heh...sure John. Maybe in 20 years of practice.
-I'm right on that.&lt;/p&gt;
-&lt;p&gt;I've also been tweaking my diet, not that my diet was bad, but I recently
-found out about some of the evils of excessive carbohydrates, from an amusing
-documentary, &lt;a class="reference external" href="http://www.fathead-movie.com/"&gt;Fat Head&lt;/a&gt;, a response to &amp;quot;Supersize Me&amp;quot;. Since reducing
-bread (not hard, I have a gluten tolerance issue), rice and potatoes in my
-diet, and exercising more, I've lost about ten pounds in the past couple of
-months.&lt;/p&gt;
-&lt;p&gt;My issues aren't gone by any means, I have a lot of work to do, but guidance
-helps. There's a difference between working hard and working smart.
-Previously, I was just working hard.&lt;/p&gt;
-&lt;p&gt;If you've read this sitting down, get up and move around. Trust me.&lt;/p&gt;
-</summary><category term="Health"></category></entry><entry><title>21st Century C</title><link href="http://www.but-i-digress.ca/21st-century-c.html" rel="alternate"></link><updated>2012-11-06T22:12:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</id><summary type="html">&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
-&lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
-it caught my attention.&lt;/p&gt;
-&lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
-taught me much more than any of my professors, and
-&lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921634.do"&gt;Unix System Programming for System VR4&lt;/a&gt; taught me a great deal more about
-programming C on Unix/Linux. After reading those books, I became actually
-comfortable in working in C for all of my assignments, and other students
-kept coming to me for help until I had somehow become a local C expert.
-Amazing what a good investment in reading material will do, not to mention
-actually reading said material. Another friend in University taught me that.
-He told me not to ever begrudge the cost of a book that helps you get better
-at what you do. I've applied that lesson ever since.&lt;/p&gt;
-&lt;p&gt;I relied on O'Reilly for my first introduction to C++, with
-&lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921160.do"&gt;C++, the Core Language&lt;/a&gt;, which finally explained to me where some of my
-memory leaks were coming from, by explaining copy constructors and assignment
-operators. I turned to &lt;a class="reference external" href="http://books.google.com/books/about/Beginning_C++.html?id=vtcpAQAAMAAJ"&gt;another book&lt;/a&gt; to finish most of my C++ education, but
-O'Reilly got me started.&lt;/p&gt;
-&lt;p&gt;Since University, with the wealth of information on the Internet, I haven't
-bought many C books, but I did pick up &lt;a class="reference external" href="http://basepath.com/aup/"&gt;Advanced Unix Programming&lt;/a&gt;, second
-edition, on the recommendation of a coworker, and he did not lead me astray,
-the book is excellent. Mind you, I still haven't finished reading it. I seem
-to buy books faster than I read them these days.&lt;/p&gt;
-&lt;p&gt;Maybe one day I'll take a little vacation just to read. Anyway...&lt;/p&gt;
-&lt;p&gt;Looking at the new O'Reilly book, it looks like it has many practical ideas
-for someone living with C from day to day, and should also provide a nice
-introduction to the new C11 standard, just released in December of last year.
-Hopefully it'll sharpen my skills like previous O'Reilly books have. I'll try
-to post a full review once I've finished it...err...if I finish it.&lt;/p&gt;
-&lt;p&gt;I will stop buying faster than I can read. I will stop buying faster than I
-can read. Maybe if I keep repeating that, it'll sink in.&lt;/p&gt;
-</summary><category term="Programming"></category><category term="C/C++"></category><category term="Books"></category></entry><entry><title>Dusting off old games</title><link href="http://www.but-i-digress.ca/dusting-off-old-games.html" rel="alternate"></link><updated>2012-11-04T18:43:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-04:dusting-off-old-games.html</id><summary type="html">&lt;p&gt;Back before I had any real responsibilities, I spent a lot of time playing
-various games. I've probably played most of them. Roleplaying games, tabletop
-battle simulations, although I stayed away from the card games like &lt;a class="reference external" href="http://www.wizards.com/Magic/Summoner/"&gt;Magic&lt;/a&gt;.
-I'll rant about that some other time.&lt;/p&gt;
-&lt;p&gt;My two favorite games were &lt;a class="reference external" href="http://boardgamegeek.com/thread/474579/air-superiority-playable-jet-combat"&gt;Air Superiority&lt;/a&gt;, and &lt;a class="reference external" href="http://www.starfleetgames.com"&gt;Starfleet Battles&lt;/a&gt;. As a
-science fiction fan, I did like Star Trek, and like a lot of boys my favorite
-parts were the ship to ship combat. SFB simulated that combat better than I'd
-ever seen before, and even spun off a pretty cool &lt;a class="reference external" href="http://www.youtube.com/watch?v=HwQ3rm0LcWU"&gt;video game&lt;/a&gt; that spawned a
-couple of sequels. I still have the first one.&lt;/p&gt;
-&lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/sfb.png" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
-&lt;/div&gt;
-&lt;p&gt;The tabletop game was as complex as any chess game, and a lot more fun in my
-opinion, so it was with no small amount of nostalgia that I dusted off the
-game for my 10-year-old son and I to look at a couple of months ago. To my
-surprise, Jaan ate the game up, even if the rules sound like legalese and
-combined weigh a few pounds. Now he can't get enough of the game, and I get to
-play too, which is pretty cool, 'cause I don't have a lot of time for these
-things anymore and I wasn't sure if anyone around Ottawa played it anyway.&lt;/p&gt;
-&lt;p&gt;I'm not really interested in all of the new material that ADB has released
-since I was into the game, as I have plenty of material for it already, and
-it'll take Jaan and I ages to get tired of it. The physics of the game are
-broken and there are holes in the logic that I'll go into later, but it
-suceeds in providing a fun gaming experience, and it's a hell of a lot more
-fun than playing Monopoly or Clue, with all due respect to those games.&lt;/p&gt;
-&lt;p&gt;Lets be honest, in the end, boys don't grow up, our toys just get more
-expensive.&lt;/p&gt;
-</summary><category term="Hobbies"></category><category term="SFB"></category></entry><entry><title>New blog</title><link href="http://www.but-i-digress.ca/new-static-blog.html" rel="alternate"></link><updated>2012-11-03T10:20:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-03:new-static-blog.html</id><summary type="html">&lt;p&gt;So I decided to dump Wordpress and go to something that I have more control
-over. I was thinking of building my own static blogging system, but I looked
-around and found that there are a few already. Being a fan of &lt;a class="reference external" href="http://www.python.org/"&gt;Python&lt;/a&gt; I
-decided to try out &lt;a class="reference external" href="http://docs.getpelican.com/en/3.0/"&gt;Pelican&lt;/a&gt;. It uses a bunch of technology that I would use
-anyway, like &lt;a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html"&gt;reStructuredText&lt;/a&gt;, &lt;a class="reference external" href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt;, etc.&lt;/p&gt;
-&lt;p&gt;It also gives me an excuse to play with &lt;a class="reference external" href="http://heroku.com/"&gt;Heroku&lt;/a&gt; for hosting. Which, I must
-say, is pretty cool for getting a website or web service hosted quickly, with
-nothing but a push from &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt; to trigger the publishing of the site.&lt;/p&gt;
-&lt;p&gt;Granted, Heroku was meant to host dynamic sites driven by WSGI apps, but I
-found a &lt;a class="reference external" href="http://kennethreitz.com/static-sites-on-heroku-cedar.html"&gt;great hack&lt;/a&gt; to fool Heroku
-into running a static site.&lt;/p&gt;
-&lt;p&gt;So, we'll see how this goes. My main blogging tools now are &lt;a class="reference external" href="http://www.vim.org/"&gt;Vim&lt;/a&gt; and &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt;, so
-how can I go wrong?&lt;/p&gt;
-</summary><category term="Blogging"></category><category term="Python"></category></entry></feed>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 16 Nov 2012 18:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</guid><category>OS X</category></item></channel></rss>

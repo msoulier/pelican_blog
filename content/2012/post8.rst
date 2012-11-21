@@ -2,9 +2,9 @@ Joysticks? We don't need no stinking joysticks...
 =================================================
 
 :date: 2012-11-19 13:00
-:category: Personal
+:category: Technology
 :author: Michael P. Soulier
-:tags: Apple, Hobbies, Technology
+:tags: OS X
 :slug: apple-and-joysticks
 
 So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the

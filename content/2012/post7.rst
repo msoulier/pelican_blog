@@ -2,9 +2,9 @@ Umm, done unzipping yet?
 ========================
 
 :date: 2012-11-17 14:00
-:category: Personal
+:category: Technology
 :author: Michael P. Soulier
-:tags: Apple, Hobbies, Technology
+:tags: OS X
 :slug: umm-done-unzipping-yet
 
 So, the first thing I did after after wrapping my head around the cocoa

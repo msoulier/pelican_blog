@@ -1,99 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Personal.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-19T13:00:00-05:00</updated><entry><title>Joysticks? We don't need no stinking joysticks...</title><link href="http://www.but-i-digress.ca/apple-and-joysticks.html" rel="alternate"></link><updated>2012-11-19T13:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</id><summary type="html">&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
-&lt;a class="reference external" href="http://www.x-plane.com"&gt;X-Plane&lt;/a&gt; demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
-itself asked me if I wanted to calibrate the joystick, which struck me as odd,
-that hasn't happened in years, not since my days with plain old DOS. DOS
-didn't have a controller subsystem so there was no way to calibrate a joystick
-once, for all apps, but Microsoft fixed that long, long ago. Even Linux has
-&lt;a class="reference external" href="gentle-taiga-2880"&gt;jscal&lt;/a&gt; to allow the same thing. It's command-line, but it works.&lt;/p&gt;
-&lt;p&gt;So of course I assumed that on a Mac, with it's reputation for dead simple
-plug and play, everything just works, dead simple and easy, it would have the
-same right? Umm, no. No command-line tool, no graphical tool, no voice
-activated tool, no swiping on my LCD, nothing. It's left up to the
-application, kinda like DOS. Way to go Apple.&lt;/p&gt;
-&lt;p&gt;Now, why do I care, since X-Plane has such a utility? Well, in X-Plane, I
-don't. But after downloading and installing Flightgear, I do. They leave the
-joystick calibration up to the OS, and rightly so. So, I can't use the
-joystick in Flightgear, not that I'd want to use it on this machine anyway, as
-I've already found out that the OpenGL rendering performance on the Mac Mini
-is horrid. Wow, another strike over my cheap Linux box sitting next to me that
-was made out of spare parts from a friend's basement. That is truly, utterly,
-sad.&lt;/p&gt;
-&lt;p&gt;Seriously Apple, is that the best you can do? If you think I'm interested in
-tilting an ipad to fly a plane in any realistic simulation, you guys have been
-smoking way too much of what you usually smoke. I want realism, and last time
-I flew, the pilot didn't have to lean to bank the plane. At least, I hope not,
-the door was closed and locked, post-9/11 and all, but I digress.&lt;/p&gt;
-&lt;p&gt;Bottom line Apple, for what I paid for this thing, you could have done much,
-much better in this regard. X-Plane rocks, but Intel graphics in the mini?
-Pleease, put a smoking Nvidia chipset in there and give me a decent framerate
-for games!&lt;/p&gt;
-&lt;p&gt;Are you listening?&lt;/p&gt;
-</summary><category term="Apple"></category><category term="Hobbies"></category><category term="Technology"></category></entry><entry><title>Umm, done unzipping yet?</title><link href="http://www.but-i-digress.ca/umm-done-unzipping-yet.html" rel="alternate"></link><updated>2012-11-17T14:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-17:umm-done-unzipping-yet.html</id><summary type="html">&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
-interface was to start installing software like a madman. I wanted Firefox,
-VLC, Kobo, Gimp, Vim, etc, etc, etc. So, I had to learn how to install apps on
-OS X.&lt;/p&gt;
-&lt;p&gt;Apps in OS X seem to come in at least two different forms: .app files, which
-are self-contained application packages that you simply drop into
-&lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt; on the system (totally awesome), and .pkg files, which are
-more windows-like installers.&lt;/p&gt;
-&lt;p&gt;The latter seems to be required with more complex installs, like plug-ins that
-need to put files in privileged places all over the system, requiring root
-access to install. As an admin user, I can already put .app files into
-&lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt; without root access, the implications of which are that a
-virus could infect the apps in &lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt; too, so that's a strike,
-security-wise, for OS X over Linux. Still better than Windows though, where a
-Power User can change anything under &lt;tt class="docutils literal"&gt;Program Files&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;Windows&lt;/tt&gt; without
-escalating privileges.&lt;/p&gt;
-&lt;p&gt;The .app files or .pkg files can come in many forms, the most common of which
-is a .dmg file, which is a disk image that OS X will casually mount on a
-loopback. I've noticed that the &lt;tt class="docutils literal"&gt;Finder&lt;/tt&gt; can mount .dmg and .iso files with
-a simple click. With an .app file, you just drag it to &lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt;, and
-you're done, and uninstalling is just a simple. Far superior to &lt;em&gt;any&lt;/em&gt; OS that
-I've used in the past. It's also common to download .zip files, which clicking
-on in the &lt;tt class="docutils literal"&gt;Finder&lt;/tt&gt; fires-up the &lt;tt class="docutils literal"&gt;Archive Utility&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;So there I was, clicking along and installing, and then a progress bar
-indicating that the .zip file was opening just kept going, and going, and
-going. I looked online, and found that &lt;a class="reference external" href="http://apple.stackexchange.com/questions/70160/can-i-fix-things-so-archive-utility-doesnt-hang-on-all-zip-files"&gt;I am not alone&lt;/a&gt; in having this
-problem. Apparently, the &lt;tt class="docutils literal"&gt;appleeventsd&lt;/tt&gt; daemon requires killing under those
-circumstances, something that the nice guy at Apple support did not know.
-Looks like the issue is in OS X 10.8.2, which I am running.&lt;/p&gt;
-&lt;p&gt;Hmm. Bad timing in jumping on the Apple bandwagon? I wonder how long they'll
-take to fix the issue. Good test for what it will be like to live as part of
-Apple's ecosystem.&lt;/p&gt;
-</summary><category term="Apple"></category><category term="Hobbies"></category><category term="Technology"></category></entry><entry><title>Ok, nobody panic, there's a fruit on my screen</title><link href="http://www.but-i-digress.ca/fruit-on-my-screen.html" rel="alternate"></link><updated>2012-11-16T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</id><summary type="html">&lt;p&gt;I've needed a new desktop for a while now. As I'm primarily a Unix user, I
-typically buy a cheap PC and put &lt;a class="reference external" href="http://www.linux.org"&gt;Linux&lt;/a&gt; on it. This involves doing a bunch of
-research into available hardware to make sure that everything is going to
-work, like accelerated graphics for any games I'd like to play, supported
-network drivers, etc. Over the years it's gotten easier and easier to get
-Linux working on a box, but sometimes I still have to work to get something
-working.&lt;/p&gt;
-&lt;p&gt;The end result is a working Linux workstation that I can use for work, and my
-basic computing needs, often involving fighting with the fact that noone wants
-to support it or any software that I'm using. That part does get old year
-after year.&lt;/p&gt;
-&lt;p&gt;For example, I bought a &lt;a class="reference external" href="http://www.kobobooks.com"&gt;Kobo&lt;/a&gt; ages ago, and I had to use a Windows box to run
-the Kobo desktop software, to patch its firmware and put books on it. Later I
-found out that I could just copy .epub books into it like a flash drive, which
-is awesome by the way Kobo, but you get the idea. For my iPod shuffle, I copy
-mp3s onto it and run the rebuild_db Python script to update the db on the
-iPod. There are workarounds for these issues, but sometimes it's nice to just
-plug something in and have it work. And fighting with my devices isn't as much
-fun as it used to be. I'm too damn busy.&lt;/p&gt;
-&lt;p&gt;So, based the recommendations of various friends and colleagues, I decided to
-take the plunge with my new desktop, and try a &lt;a class="reference external" href="http://www.apple.com/mac-mini/"&gt;Mac Mini&lt;/a&gt; from &lt;a class="reference external" href="http://www.apple.com"&gt;Apple&lt;/a&gt;, running
-&lt;a class="reference external" href="http://www.apple.com/osx/"&gt;Mac OS X&lt;/a&gt; 10.8, &amp;quot;Mountain Lion&amp;quot;. I figured that it's a lot better supported
-in commercial software land, while being &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Darwin_%28operating_system%29"&gt;BSD Unix&lt;/a&gt; underneath, so maybe it's
-the best of both worlds.&lt;/p&gt;
-&lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
-&lt;/div&gt;
-&lt;p&gt;I need to customize the crap out of it, and get used to the interface and
-keybindings, and do a lot of reading. I hope to post my experiences here, so
-stay tuned if you're interested.&lt;/p&gt;
-&lt;p&gt;Sure, I could have just thrown Linux on another box, and maybe I still will,
-but I've &lt;em&gt;done&lt;/em&gt; that. I felt like doing something new.&lt;/p&gt;
-</summary><category term="Apple"></category><category term="Hobbies"></category><category term="Technology"></category></entry><entry><title>What Curling has taught me about life</title><link href="http://www.but-i-digress.ca/curling-and-life.html" rel="alternate"></link><updated>2012-11-09T10:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-09:curling-and-life.html</id><summary type="html">&lt;p&gt;I've been curling for about 4 years now, and it's already taught me a lot
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Personal.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-09T10:00:00-05:00</updated><entry><title>What Curling has taught me about life</title><link href="http://www.but-i-digress.ca/curling-and-life.html" rel="alternate"></link><updated>2012-11-09T10:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-09:curling-and-life.html</id><summary type="html">&lt;p&gt;I've been curling for about 4 years now, and it's already taught me a lot
 about life. I thought I'd share some of what it has taught me:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul class="simple"&gt;
@@ -186,4 +92,4 @@ found a &lt;a class="reference external" href="http://kennethreitz.com/static-si
 into running a static site.&lt;/p&gt;
 &lt;p&gt;So, we'll see how this goes. My main blogging tools now are &lt;a class="reference external" href="http://www.vim.org/"&gt;Vim&lt;/a&gt; and &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt;, so
 how can I go wrong?&lt;/p&gt;
-</summary><category term="Blogging"></category></entry></feed>
+</summary><category term="Blogging"></category><category term="Python"></category></entry></feed>
