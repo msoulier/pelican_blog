@@ -68,7 +68,7 @@ it working, so I thought I'd share.&lt;/p&gt;
 &lt;p&gt;Now I just run it in the background from my &lt;cite&gt;.xsession&lt;/cite&gt; script at X11 login,
 and it's sitting there waiting for any change in UPower status. Works like a
 charm.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Nov 2012 22:10:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</guid><category>Technology</category><category>Open Source</category></item><item><title>Joysticks? We don't need no stinking joysticks...</title><link>http://www.but-i-digress.ca/apple-and-joysticks.html</link><description>&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Nov 2012 22:10:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</guid><category>Technology</category><category>Open Source</category><category>Python</category></item><item><title>Joysticks? We don't need no stinking joysticks...</title><link>http://www.but-i-digress.ca/apple-and-joysticks.html</link><description>&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
 &lt;a class="reference external" href="http://www.x-plane.com"&gt;X-Plane&lt;/a&gt; demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
 itself asked me if I wanted to calibrate the joystick, which struck me as odd,
 that hasn't happened in years, not since my days with plain old DOS. DOS

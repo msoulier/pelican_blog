@@ -68,4 +68,4 @@ it working, so I thought I'd share.&lt;/p&gt;
 &lt;p&gt;Now I just run it in the background from my &lt;cite&gt;.xsession&lt;/cite&gt; script at X11 login,
 and it's sitting there waiting for any change in UPower status. Works like a
 charm.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Nov 2012 22:10:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</guid><category>Technology</category><category>Open Source</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Nov 2012 22:10:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</guid><category>Technology</category><category>Open Source</category><category>Python</category></item></channel></rss>
