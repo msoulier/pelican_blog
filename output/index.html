@@ -43,6 +43,8 @@
                 
                     <li ><a href="./category/development.html">Development</a></li>
                 
+                    <li ><a href="./category/linux.html">Linux</a></li>
+                
                     <li ><a href="./category/personal.html">Personal</a></li>
                 
                 </ul></nav>
@@ -55,8 +57,116 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./apple-and-joysticks.html">Joysticks? We don't need no stinking joysticks...</a></h1> 
+                    <h1 class="entry-title"><a href="./suspend-on-lid-close-debian-squeeze.html">Suspend on lid close in Debian Squeeze</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2012-11-20T22:10:00">
+                Tue 20 November 2012
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/linux.html">Linux</a>. </p>
+<p>tags: <a href="./tag/technology.html">Technology</a><a href="./tag/open-source.html">Open Source</a></p>
+
+
+</footer><!-- /.post-info --><p>I recently decided that <a class="reference external" href="http://www.gnome.org">Gnome</a> is not the best desktop for my little <a class="reference external" href="http://www.asus.com/Eee/">EeePC</a>
+netbook with a little 10.5&quot; screen. So I'm playing around with a window
+manager that mainly just maximizes everything. I've tried <a class="reference external" href="http://www.nongnu.org/ratpoison/">Ratpoison</a>, I've
+tried <a class="reference external" href="https://code.google.com/p/wmii/">wmii</a>, and now I'm trying <a class="reference external" href="http://awesome.naquadah.org/">Awesome</a>.</p>
+<p>I have a lot of customizations to do, but one thing that was missing was a way
+to suspend the netbook when the laptop lid is closed. I could manually run
+<tt class="docutils literal">acpitool <span class="pre">-s</span></tt> in a shell, or <tt class="docutils literal"><span class="pre">pm-suspend</span></tt>, but it's best handled by DBus, as
+intended.</p>
+<p>Now, a simple way to have DBus do the work is using <tt class="docutils literal"><span class="pre">dbus-send</span></tt>, like so:</p>
+<pre class="literal-block">
+dbus-send --print-reply \
+          --system \
+          --dest=org.freedesktop.UPower \
+          /org/freedesktop/UPower \
+          org.freedesktop.UPower.Suspend
+</pre>
+<p>The hard part is subscribing to the lid close event, so I'm not polling all
+the time, exactly what DBus was written to prevent. I had a Python script for
+this, but the API was changed in Squeeze to use the <a class="reference external" href="http://upower.freedesktop.org/">UPower</a> daemon and API.</p>
+<p>I had to do some poking around to figure out how to update it, but I just got
+it working, so I thought I'd share.</p>
+<div class="highlight"><pre><span class="c">#!/usr/bin/python</span>
+
+<span class="kn">import</span> <span class="nn">dbus</span><span class="o">,</span> <span class="nn">gobject</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">dbus.mainloop.glib</span> <span class="kn">import</span> <span class="n">DBusGMainLoop</span>
+
+<span class="n">pow_prop_iface</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">pow_iface</span> <span class="o">=</span> <span class="bp">None</span>
+
+<span class="k">def</span> <span class="nf">handle_lidclose</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">closed</span> <span class="o">=</span> <span class="n">pow_prop_iface</span><span class="o">.</span><span class="n">Get</span><span class="p">(</span><span class="s">&#39;&#39;</span><span class="p">,</span>
+                                <span class="s">&#39;LidIsClosed&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">closed</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;lid is closed, suspending&quot;</span>
+        <span class="n">pow_iface</span><span class="o">.</span><span class="n">Suspend</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">&quot;lid is open&quot;</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">pow_prop_iface</span><span class="p">,</span> <span class="n">pow_iface</span>
+
+    <span class="n">DBusGMainLoop</span><span class="p">(</span><span class="n">set_as_default</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">bus</span> <span class="o">=</span> <span class="n">dbus</span><span class="o">.</span><span class="n">SystemBus</span><span class="p">()</span>
+
+    <span class="n">power_proxy</span> <span class="o">=</span> <span class="n">bus</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s">&#39;org.freedesktop.UPower&#39;</span><span class="p">,</span>
+                                <span class="s">&#39;/org/freedesktop/UPower&#39;</span><span class="p">)</span>
+
+    <span class="n">pow_prop_iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="o">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">power_proxy</span><span class="p">,</span>
+                                    <span class="s">&#39;org.freedesktop.DBus.Properties&#39;</span><span class="p">)</span>
+    <span class="n">pow_iface</span> <span class="o">=</span> <span class="n">dbus</span><span class="o">.</span><span class="n">Interface</span><span class="p">(</span><span class="n">power_proxy</span><span class="p">,</span>
+                               <span class="s">&#39;org.freedesktop.UPower&#39;</span><span class="p">)</span>
+
+    <span class="k">print</span> <span class="s">&quot;Registering a signal receiver for upower events...&quot;</span>
+
+    <span class="n">bus</span><span class="o">.</span><span class="n">add_signal_receiver</span><span class="p">(</span><span class="n">handle_lidclose</span><span class="p">,</span>
+                            <span class="n">dbus_interface</span><span class="o">=</span><span class="s">&quot;org.freedesktop.UPower&quot;</span><span class="p">,</span>
+                            <span class="n">signal_name</span><span class="o">=</span><span class="s">&quot;Changed&quot;</span><span class="p">)</span>
+
+
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">gobject</span><span class="o">.</span><span class="n">MainLoop</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+<p>Now I just run it in the background from my <cite>.xsession</cite> script at X11 login,
+and it's sitting there waiting for any change in UPower status. Works like a
+charm.</p>
+
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./apple-and-joysticks.html" rel="bookmark"
+                           title="Permalink to Joysticks? We don't need no stinking joysticks...">Joysticks? We don't need no stinking joysticks...</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-11-19T13:00:00">
                 Mon 19 November 2012
         </abbr>
@@ -70,47 +180,15 @@
 <p>tags: <a href="./tag/apple.html">Apple</a><a href="./tag/hobbies.html">Hobbies</a><a href="./tag/technology.html">Technology</a></p>
 
 
-</footer><!-- /.post-info --><p>So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+</footer><!-- /.post-info -->
+                <p>So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
 <a class="reference external" href="http://www.x-plane.com">X-Plane</a> demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
 itself asked me if I wanted to calibrate the joystick, which struck me as odd,
-that hasn't happened in years, not since my days with plain old DOS. DOS
-didn't have a controller subsystem so there was no way to calibrate a joystick
-once, for all apps, but Microsoft fixed that long, long ago. Even Linux has
-<a class="reference external" href="static/gentle-taiga-2880">jscal</a> to allow the same thing. It's command-line, but it works.</p>
-<p>So of course I assumed that on a Mac, with it's reputation for dead simple
-plug and play, everything just works, dead simple and easy, it would have the
-same right? Umm, no. No command-line tool, no graphical tool, no voice
-activated tool, no swiping on my LCD, nothing. It's left up to the
-application, kinda like DOS. Way to go Apple.</p>
-<p>Now, why do I care, since X-Plane has such a utility? Well, in X-Plane, I
-don't. But after downloading and installing Flightgear, I do. They leave the
-joystick calibration up to the OS, and rightly so. So, I can't use the
-joystick in Flightgear, not that I'd want to use it on this machine anyway, as
-I've already found out that the OpenGL rendering performance on the Mac Mini
-is horrid. Wow, another strike over my cheap Linux box sitting next to me that
-was made out of spare parts from a friend's basement. That is truly, utterly,
-sad.</p>
-<p>Seriously Apple, is that the best you can do? If you think I'm interested in
-tilting an ipad to fly a plane in any realistic simulation, you guys have been
-smoking way too much of what you usually smoke. I want realism, and last time
-I flew, the pilot didn't have to lean to bank the plane. At least, I hope not,
-the door was closed and locked, post-9/11 and all, but I digress.</p>
-<p>Bottom line Apple, for what I paid for this thing, you could have done much,
-much better in this regard. X-Plane rocks, but Intel graphics in the mini?
-Pleease, put a smoking Nvidia chipset in there and give me a decent framerate
-for games!</p>
-<p>Are you listening?</p>
-
-                </article>
+that hasn't happened in years, not ...</p>
+                <a class="readmore" href="./apple-and-joysticks.html">read more</a>
                 
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             

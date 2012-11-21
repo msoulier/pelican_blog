@@ -26,8 +26,7 @@ DEFAULT_PAGINATION = 10
 
 TWITTER_USERNAME = 'msoulier'
 
-THEME = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'themes/butidigress')
-print "theme is", THEME
+THEME = 'themes/butidigress'
 
 GITHUB_URL = 'http://github.com/msoulier'
 
