@@ -50,7 +50,7 @@ I used it like so:
         notif.setInformativeText_(status.text)
         notifCenter.deliverNotification_(notif)
 
-Now, this does causes a little icon on the dock to jump up and down, so I'll
+Now, this does cause a little icon on the dock to jump up and down, so I'll
 need to look into that, and how to open the browser to twitter or the embedded
 link when the notification is clicked on, but it's a good start.
 

@@ -35,7 +35,7 @@ to use it online, which made this much, much simpler, so thanks there.&lt;/p&gt;
     &lt;span class="n"&gt;notif&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setInformativeText_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;notifCenter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deliverNotification_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;notif&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now, this does causes a little icon on the dock to jump up and down, so I'll
+&lt;p&gt;Now, this does cause a little icon on the dock to jump up and down, so I'll
 need to look into that, and how to open the browser to twitter or the embedded
 link when the notification is clicked on, but it's a good start.&lt;/p&gt;
 </summary><category term="OS X"></category><category term="Python"></category></entry><entry><title>Suspend on lid close in Debian Squeeze</title><link href="http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html" rel="alternate"></link><updated>2012-11-20T22:10:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</id><summary type="html">&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;

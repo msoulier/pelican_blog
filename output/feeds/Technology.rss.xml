@@ -35,7 +35,7 @@ to use it online, which made this much, much simpler, so thanks there.&lt;/p&gt;
     &lt;span class="n"&gt;notif&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setInformativeText_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;notifCenter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deliverNotification_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;notif&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now, this does causes a little icon on the dock to jump up and down, so I'll
+&lt;p&gt;Now, this does cause a little icon on the dock to jump up and down, so I'll
 need to look into that, and how to open the browser to twitter or the embedded
 link when the notification is clicked on, but it's a good start.&lt;/p&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 25 Nov 2012 09:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-25:tweeting-on-osx.html</guid><category>OS X</category><category>Python</category></item><item><title>Suspend on lid close in Debian Squeeze</title><link>http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html</link><description>&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
