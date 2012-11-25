@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-20T22:10:00-05:00</updated><entry><title>Suspend on lid close in Debian Squeeze</title><link href="http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html" rel="alternate"></link><updated>2012-11-20T22:10:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</id><summary type="html">&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-25T09:00:00-05:00</updated><entry><title>Tweeting on OS X</title><link href="http://www.but-i-digress.ca/tweeting-on-osx.html" rel="alternate"></link><updated>2012-11-25T09:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-25:tweeting-on-osx.html</id><summary type="html">&lt;p&gt;For some time my desktop has been an older, underpowered Linux box, so using
+services like &lt;a class="reference external" href="http://www.twitter.com"&gt;Twitter&lt;/a&gt; via the website has been painful, as loaded with heavy
+javascript that would consume my CPU's limited resources.&lt;/p&gt;
+&lt;p&gt;So, like any &lt;a class="reference external" href="http://www.python.org"&gt;Python&lt;/a&gt; programmer would do, I wrote my own client. Well, lets be
+honest, the hard work was done by the &lt;a class="reference external" href="https://github.com/tweepy/tweepy"&gt;tweepy&lt;/a&gt; library, I'm just using it. I
+call it &lt;a class="reference external" href="https://github.com/msoulier/twit"&gt;Twit&lt;/a&gt;, and I've been using it to post for some time now, lightweight
+from the command-line. I also keep one running, polling my account for new
+posts, and notifying me when there are new posts and pulling them down.&lt;/p&gt;
+&lt;p&gt;My notifications come in many forms, depending on the command-line options. I
+can just watch them show up in text in the shell, I can use &lt;a class="reference external" href="http://freecode.com/projects/xosd"&gt;xosd&lt;/a&gt; to display
+notifications on your X11 desktop, It can use &lt;a class="reference external" href="http://developer-next.gnome.org/libnotify/"&gt;libnotify&lt;/a&gt; in Gnome to display
+temporary notifications that drop down in the corner of the screen.&lt;/p&gt;
+&lt;p&gt;As I'm now playing with an OS X desktop, libnotify isn't supported. I could
+use xosd along with &lt;a class="reference external" href="http://xquartz.macosforge.org/trac/wiki"&gt;XQuartz&lt;/a&gt;, but I'd prefer more native integration with OS
+X, as it does have a notification system, via &lt;a class="reference external" href="https://developer.apple.com/library/mac/#releasenotes/Cocoa/AppKit.html"&gt;AppKit&lt;/a&gt;. Python is preinstalled
+on OS X, and the AppKit module is included. I found a &lt;a class="reference external" href="https://github.com/albertz/music-player/blob/master/notifications.py"&gt;great example&lt;/a&gt; of how
+to use it online, which made this much, much simpler, so thanks there.&lt;/p&gt;
+&lt;p&gt;I used it like so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;notify_appkit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Thanks to&lt;/span&gt;
+&lt;span class="sd"&gt;    https://github.com/albertz/music-player/blob/master/notifications.py&lt;/span&gt;
+&lt;span class="sd"&gt;    for how to do this.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;notifCenter&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;notifCenter&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;AppKit&lt;/span&gt;
+        &lt;span class="n"&gt;notifCenter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; \
+            &lt;span class="n"&gt;AppKit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NSUserNotificationCenter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;defaultUserNotificationCenter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;appDelegate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;AppKit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NSApplication&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sharedApplication&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;delegate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="n"&gt;notifCenter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setDelegate_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;appDelegate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;notif&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;AppKit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NSUserNotification&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;alloc&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;title&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Tweet by &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+    &lt;span class="n"&gt;notif&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setTitle_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;notif&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setInformativeText_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;notifCenter&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;deliverNotification_&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;notif&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, this does causes a little icon on the dock to jump up and down, so I'll
+need to look into that, and how to open the browser to twitter or the embedded
+link when the notification is clicked on, but it's a good start.&lt;/p&gt;
+</summary><category term="OS X"></category><category term="Python"></category></entry><entry><title>Suspend on lid close in Debian Squeeze</title><link href="http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html" rel="alternate"></link><updated>2012-11-20T22:10:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</id><summary type="html">&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
 netbook with a little 10.5&amp;quot; screen. So I'm playing around with a window
 manager that mainly just maximizes everything. I've tried &lt;a class="reference external" href="http://www.nongnu.org/ratpoison/"&gt;Ratpoison&lt;/a&gt;, I've
 tried &lt;a class="reference external" href="https://code.google.com/p/wmii/"&gt;wmii&lt;/a&gt;, and now I'm trying &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt;.&lt;/p&gt;

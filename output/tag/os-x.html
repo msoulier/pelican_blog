@@ -57,8 +57,86 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href=".././apple-and-joysticks.html">Joysticks? We don't need no stinking joysticks...</a></h1> 
+                    <h1 class="entry-title"><a href=".././tweeting-on-osx.html">Tweeting on OS X</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2012-11-25T09:00:00">
+                Sun 25 November 2012
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href=".././category/technology.html">Technology</a>. </p>
+<p>tags: <a href=".././tag/os-x.html">OS X</a><a href=".././tag/python.html">Python</a></p>
+
+
+</footer><!-- /.post-info --><p>For some time my desktop has been an older, underpowered Linux box, so using
+services like <a class="reference external" href="http://www.twitter.com">Twitter</a> via the website has been painful, as loaded with heavy
+javascript that would consume my CPU's limited resources.</p>
+<p>So, like any <a class="reference external" href="http://www.python.org">Python</a> programmer would do, I wrote my own client. Well, lets be
+honest, the hard work was done by the <a class="reference external" href="https://github.com/tweepy/tweepy">tweepy</a> library, I'm just using it. I
+call it <a class="reference external" href="https://github.com/msoulier/twit">Twit</a>, and I've been using it to post for some time now, lightweight
+from the command-line. I also keep one running, polling my account for new
+posts, and notifying me when there are new posts and pulling them down.</p>
+<p>My notifications come in many forms, depending on the command-line options. I
+can just watch them show up in text in the shell, I can use <a class="reference external" href="http://freecode.com/projects/xosd">xosd</a> to display
+notifications on your X11 desktop, It can use <a class="reference external" href="http://developer-next.gnome.org/libnotify/">libnotify</a> in Gnome to display
+temporary notifications that drop down in the corner of the screen.</p>
+<p>As I'm now playing with an OS X desktop, libnotify isn't supported. I could
+use xosd along with <a class="reference external" href="http://xquartz.macosforge.org/trac/wiki">XQuartz</a>, but I'd prefer more native integration with OS
+X, as it does have a notification system, via <a class="reference external" href="https://developer.apple.com/library/mac/#releasenotes/Cocoa/AppKit.html">AppKit</a>. Python is preinstalled
+on OS X, and the AppKit module is included. I found a <a class="reference external" href="https://github.com/albertz/music-player/blob/master/notifications.py">great example</a> of how
+to use it online, which made this much, much simpler, so thanks there.</p>
+<p>I used it like so:</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">notify_appkit</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Thanks to</span>
+<span class="sd">    https://github.com/albertz/music-player/blob/master/notifications.py</span>
+<span class="sd">    for how to do this.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">notifCenter</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">notifCenter</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">AppKit</span>
+        <span class="n">notifCenter</span> <span class="o">=</span> \
+            <span class="n">AppKit</span><span class="o">.</span><span class="n">NSUserNotificationCenter</span><span class="o">.</span><span class="n">defaultUserNotificationCenter</span><span class="p">()</span>
+        <span class="n">appDelegate</span> <span class="o">=</span> <span class="n">AppKit</span><span class="o">.</span><span class="n">NSApplication</span><span class="o">.</span><span class="n">sharedApplication</span><span class="p">()</span><span class="o">.</span><span class="n">delegate</span><span class="p">()</span>
+        <span class="n">notifCenter</span><span class="o">.</span><span class="n">setDelegate_</span><span class="p">(</span><span class="n">appDelegate</span><span class="p">)</span>
+
+    <span class="n">notif</span> <span class="o">=</span> <span class="n">AppKit</span><span class="o">.</span><span class="n">NSUserNotification</span><span class="o">.</span><span class="n">alloc</span><span class="p">()</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Tweet by </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">status</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">notif</span><span class="o">.</span><span class="n">setTitle_</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">notif</span><span class="o">.</span><span class="n">setInformativeText_</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">notifCenter</span><span class="o">.</span><span class="n">deliverNotification_</span><span class="p">(</span><span class="n">notif</span><span class="p">)</span>
+</pre></div>
+<p>Now, this does causes a little icon on the dock to jump up and down, so I'll
+need to look into that, and how to open the browser to twitter or the embedded
+link when the notification is clicked on, but it's a good start.</p>
+<p>There are <a href=".././tweeting-on-osx.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href=".././apple-and-joysticks.html" rel="bookmark"
+                           title="Permalink to Joysticks? We don't need no stinking joysticks...">Joysticks? We don't need no stinking joysticks...</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-11-19T13:00:00">
                 Mon 19 November 2012
         </abbr>
@@ -72,47 +150,15 @@
 <p>tags: <a href=".././tag/os-x.html">OS X</a></p>
 
 
-</footer><!-- /.post-info --><p>So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+</footer><!-- /.post-info -->
+                <p>So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
 <a class="reference external" href="http://www.x-plane.com">X-Plane</a> demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
 itself asked me if I wanted to calibrate the joystick, which struck me as odd,
-that hasn't happened in years, not since my days with plain old DOS. DOS
-didn't have a controller subsystem so there was no way to calibrate a joystick
-once, for all apps, but Microsoft fixed that long, long ago. Even Linux has
-<a class="reference external" href="../static/gentle-taiga-2880">jscal</a> to allow the same thing. It's command-line, but it works.</p>
-<p>So of course I assumed that on a Mac, with it's reputation for dead simple
-plug and play, everything just works, dead simple and easy, it would have the
-same right? Umm, no. No command-line tool, no graphical tool, no voice
-activated tool, no swiping on my LCD, nothing. It's left up to the
-application, kinda like DOS. Way to go Apple.</p>
-<p>Now, why do I care, since X-Plane has such a utility? Well, in X-Plane, I
-don't. But after downloading and installing Flightgear, I do. They leave the
-joystick calibration up to the OS, and rightly so. So, I can't use the
-joystick in Flightgear, not that I'd want to use it on this machine anyway, as
-I've already found out that the OpenGL rendering performance on the Mac Mini
-is horrid. Wow, another strike over my cheap Linux box sitting next to me that
-was made out of spare parts from a friend's basement. That is truly, utterly,
-sad.</p>
-<p>Seriously Apple, is that the best you can do? If you think I'm interested in
-tilting an ipad to fly a plane in any realistic simulation, you guys have been
-smoking way too much of what you usually smoke. I want realism, and last time
-I flew, the pilot didn't have to lean to bank the plane. At least, I hope not,
-the door was closed and locked, post-9/11 and all, but I digress.</p>
-<p>Bottom line Apple, for what I paid for this thing, you could have done much,
-much better in this regard. X-Plane rocks, but Intel graphics in the mini?
-Pleease, put a smoking Nvidia chipset in there and give me a decent framerate
-for games!</p>
-<p>Are you listening?</p>
-<p>There are <a href=".././apple-and-joysticks.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+that hasn't happened in years, not ...</p>
+                <a class="readmore" href=".././apple-and-joysticks.html">read more</a>
+                <p>There are <a href=".././apple-and-joysticks.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
