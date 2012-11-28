@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-28T07:00:00-05:00</updated><entry><title>Customizing Awesome</title><link href="http://www.but-i-digress.ca/customizing-awesome.html" rel="alternate"></link><updated>2012-11-28T07:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-28:customizing-awesome.html</id><summary type="html">&lt;p&gt;As I mentioned previously, I'm currently running &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt; on my netbook. While
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-28T08:00:00-05:00</updated><entry><title>Parenting can really make you feel helpless</title><link href="http://www.but-i-digress.ca/parenting-can-make-you-feel-helpless.html" rel="alternate"></link><updated>2012-11-28T08:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-28:parenting-can-make-you-feel-helpless.html</id><summary type="html">&lt;p&gt;I've only been kicking around for a bit over 40 years now, but I've never
+found anything in the world to make me feel more helpless than my own child
+telling me that they feel bad, and knowing that I can't fix it.&lt;/p&gt;
+&lt;p&gt;My daughter was sick last night, and we monitored her fever as it rose up to a
+slightly worrisome 39.4C. I went out for some children's ibuprofen, as all I
+had in the cupboard had expired. Good thing that, the kids haven't been sick
+much. Meanwhile my lovely wife put her into the bath while I was gone. I
+brought back popsicles too, since her throat hurt and maybe the cold would
+help with the fever.&lt;/p&gt;
+&lt;p&gt;I ended up not using the medicine, as her temperature slowly dropped after the
+bath, and she feel asleep with her Mom for the night. I checked on her at
+about 2am and 4am, and she was definitely cooling off, so I just sighed in
+relief and got some sleep.&lt;/p&gt;
+&lt;p&gt;Still, it doesn't really feel like she got better because of anything that we
+did. We could comfort her, but in the end, her body was at war with an
+invader, and it was on its own. We were helpless to help. If her temperature
+suddenly spiked we'd be off to the hospital to let someone else try to save
+her. Still helpless to do anything personally. We pray that her body is
+stronger than the virus. We pray that the doctors know what they're doing. I
+hope the world will pardon me for feeling that prayer isn't particularly
+effective, and primarily an act of desperation. I don't like being deperate.&lt;/p&gt;
+&lt;p&gt;I had heard that nothing would terrify me as much as being a parent, but
+there's simply no way to prepare someone for just how scary it can be to have
+this perfect, beautiful little person in pain, or sick, or just crying, and
+not being able to do anything about it. It's even worse for a control freak
+like me, and like most parents, I think that the Universe would make more
+sense if parents could take the children's hurts on themselves. The rational
+part of my mind knows that some pain is necessary as part of life, and that
+getting sick makes your immune system stronger. The parent in me doesn't care.
+Child hurt. Must fix.&lt;/p&gt;
+&lt;p&gt;The little one is home today, as I want to keep an eye on her (see &amp;quot;Control
+Freak&amp;quot;), but the worse is past and she'll be fine. Her immune system wins
+another one, and comes away stronger. Me, I'm just relieved and very tired. I
+really should call my parents and thank them, repeatedly.&lt;/p&gt;
+</summary><category term="Parenting"></category></entry><entry><title>Customizing Awesome</title><link href="http://www.but-i-digress.ca/customizing-awesome.html" rel="alternate"></link><updated>2012-11-28T07:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-28:customizing-awesome.html</id><summary type="html">&lt;p&gt;As I mentioned previously, I'm currently running &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt; on my netbook. While
 I added suspend on lid close, I still need to customize the crap out of it. I
 had nothing showing me my current battery status, so I searched around to find
 the appropriate &lt;a class="reference external" href="http://www.lua.org/"&gt;lua&lt;/a&gt; code, a language that I'm still picking up.&lt;/p&gt;
