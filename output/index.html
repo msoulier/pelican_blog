@@ -57,8 +57,114 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./apple-support-experience.html">The Apple Support Experience</a></h1> 
+                    <h1 class="entry-title"><a href="./brewing-a-better-unix.html">Brewing a better UNIX</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2012-12-09T08:00:00">
+                Sun 09 December 2012
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/technology.html">Technology</a>. </p>
+<p>tags: <a href="./tag/os-x.html">OS X</a><a href="./tag/unix.html">UNIX</a></p>
+
+
+</footer><!-- /.post-info --><p>Being a <a class="reference external" href="http://www.linux.org/">Linux</a> user, I'm used to a fairly standard set of tools on my
+command-line. On <a class="reference external" href="http://www.apple.com/osx/">OS X</a>, it's essentially BSD UNIX underneath, which I have had
+some experience with thanks to <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>. The environment is very similar, but
+not identical, and on <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>, you quickly find yourself using the ports
+system to install new packages that have been ported to <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a> from places
+like <a class="reference external" href="http://www.linux.org/">Linux</a>.</p>
+<p>It took about five minutes of <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a> use for me to go install <tt class="docutils literal">bash</tt>,
+<tt class="docutils literal">wget</tt>, <tt class="docutils literal">vim</tt>, <tt class="docutils literal">imagemagick</tt>, and a host of other packages. There's a
+lot already installed with <a class="reference external" href="http://www.apple.com/osx/">OS X</a>, but a few key things or me were definitely
+missing. I pulled <tt class="docutils literal">vim</tt> from <a class="reference external" href="http://code.google.com/p/macvim/">MacVim</a>, but then I had to look for somewhere to
+get everything else I needed.</p>
+<p>Being UNIX, I had several choices:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Grab the source and build it myself.</li>
+<li>Install <a class="reference external" href="http://www.macports.org/">MacPorts</a> and build it from there.</li>
+<li>Install <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew</a> and build it from there.</li>
+</ol>
+</blockquote>
+<p>Well, I've done source installs, I've done ports out of FreeBSD, so I figured
+I'd see how <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew</a> works. Basically, it makes <tt class="docutils literal">/usr/local</tt> owned by the
+user that installs it, which on <a class="reference external" href="http://www.apple.com/osx/">OS X</a> is me, as an administrative user (like a
+Windows power user). From there you can double-check that everything is set up
+properly by running:</p>
+<pre class="literal-block">
+brew doctor
+</pre>
+<p>It will pick up permission problems, issues with your <tt class="docutils literal">PATH</tt> environment
+variable, warn you about packages that were built but not symlinked into
+<tt class="docutils literal">/usr/local</tt> properly, etc. Then it's not much different than using
+<tt class="docutils literal"><span class="pre">apt-get</span></tt> on Debian, except that the packages are building when they
+install, they're not pre-built binaries. So wget was just:</p>
+<pre class="literal-block">
+brew update
+brew install wget
+</pre>
+<p>Since then I've installed some essentials, and non-essentials if I include
+<tt class="docutils literal">freeciv</tt>. Lets see, I have:</p>
+<pre class="literal-block">
+msoulier&#64;merlin:~$ brew list
+c-ares      git         lame        lua     sdl_mixer
+cracklib    glib        libevent    lynx    tmux
+feh         gmp         libffi      mutt    tokyo-cabinet
+flac        gnupg       libgcrypt   nettle  unrar
+fontconfig  gnuplot     libgpg-error p11-kit wget
+freeciv     gnutls      libmikmod   pcre    xz
+freetype    imagemagick libogg      pkg-config
+gd          imlib2      libpng      readline
+gettext     irssi       libtasn1    sdl
+giblib      jpeg        libvorbis   sdl_image
+</pre>
+<p>Rather nicely, the packages are all installed under <tt class="docutils literal">/usr/local/Cellar/</tt>,
+and symlinked into the right places so they show up in my path, and for
+building. As I really hate installing from source, because you never know what
+you have installed or how to uninstall it, or what you'll break if you upgrade
+it, I like this.</p>
+<p>I do find that other packages mess with those careful permissions, so I keep
+running <tt class="docutils literal">brew doctor</tt> so I know about the issues. I also noticed, thanks to
+a coworker, that the Perl community has done something similar for install
+Perl modules called Perlbrew. I'm going to look into that soon, as honestly,
+it's about damn time. Managing personal Perl modules sucks, has always sucked,
+and now thanks to Perlbrew will hopefully suck no longer. But I digress, more
+on that in another post.</p>
+<p>I give <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew</a> an <em>A</em>. An <em>A+</em> would be a command to fix permissions problems
+without my help, and maybe there is one, these things elude me at times. I
+highly recommend it if you're trying to complete your *nix environment on OS
+X.</p>
+<p>There are <a href="./brewing-a-better-unix.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./apple-support-experience.html" rel="bookmark"
+                           title="Permalink to The Apple Support Experience">The Apple Support Experience</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-12-06T12:20:00">
                 Thu 06 December 2012
         </abbr>
@@ -72,72 +178,15 @@
 <p>tags: <a href="./tag/apple.html">Apple</a><a href="./tag/customer-service.html">Customer Service</a></p>
 
 
-</footer><!-- /.post-info --><p>So, having jumped into Apple land with a Mac Mini recently, and having some
+</footer><!-- /.post-info -->
+                <p>So, having jumped into Apple land with a Mac Mini recently, and having some
 problems, I of course took advantage of my included 90 days technical support.
 Being part of the Apple ecosystem includes being subject to how they support
-their customers, so I think it's important to write about.</p>
-<p>Normally my idea of support is to figure out what piece of software I'm having
-a problem with, locating the open-source community responsible for it, and
-then tracking down a mailing list, IRC channel, whatever, where I can ask for
-help. I usually loathe help lines of any kind, as North America and most of
-the world handles these very poorly these days.</p>
-<p>You know the story. You call hoping that you'll talk to a flesh and blood
-human, and you get a machine telling you that, &quot;we are currently experiencing
-a higher than normal call volume,&quot; which is what you'll hear every damn time
-you call so obviously it's not higher than normal, and they're just cheap
-bastards who understaff their support infrastructure, but I digress.</p>
-<p>Well, I collected a few questions together before calling Apple Canada, as I
-hate calling help lines so I figured once I found a human I'd hammer him/her
-with several questions. Better throughput. Can't help it, I think like a
-programmer. And, of course, I got a machine. I asked me what product I was
-calling about, using voice recognition to understand me as I said, &quot;Mac Mini&quot;,
-and asked me for the serial number. That all worked, and I finally got a
-human, with little difficulty. No Indian accent either, I think it was
-Spanish, but I've called a few times since and there's no discernable pattern,
-so perhaps it's not overseas for a change. Not that I care all that much, as
-long as they actually help, but I've had some really bad experiences before
-with uninformed first-line support reading from their scripts.</p>
-<p>Well, the guy I talked to couldn't help with the software bugs, obviously he
-doesn't own the code, but he can report the issues and I can hope that a
-developer at Apple will fix them. I already reported the issues at
-<a class="reference external" href="http://www.apple.com/feedback/">http://www.apple.com/feedback/</a> anyway, and hopefully that's not a digital
-black hole like most feedback pages. He did help me understand how to do a
-couple of things that OS X considers advanced, like launching a terminal from
-a keystroke. BTW Apple, that's pretty basic in any Linux window manager, so
-please do better.</p>
-<p>Then we got down to the hardware issue I'm having. At least, I think it's
-hardware. <a class="reference external" href="https://discussions.apple.com/thread/4490924">Many other people</a> are having the same problem. It makes me wonder
-if there was a bad batch of Mac Minis out of Apple recently. I called in about
-it, mentioned to the nice lady that wanted to sell me an Applecare package
-that I likely wouldn't need it, as I was thinking of taking the unit back, and
-suddenly I was talking to a nice man in second level support.</p>
-<p>He took the issue on personally, gave me a direct contact number to him, and
-the email address, and we started swapping hardware to narrow down the
-potential problems. I swapped the LCD with one upstairs, no help. Got a new
-HDMI to DVI adaptor from Apple, no help. He arranged for a full unit exchange
-and data migration, which was done very professionally (albiet with some data
-loss that was easily made up for), unfortunately it didn't help.</p>
-<p>Finally, we're running an app from Apple to gather up logs, and I'm told that
-the Engineers at Apple know what the problem is, they think it's software, and
-to keep my eyes on the software updates. There was one recently in fact,
-labelled graphics performance and reliability, so I wonder if that was it. I'm
-waiting to see if the issue happens again.</p>
-<p>Thus far, I must say that Apple raises the bar for what good customer support
-should be. I've had plenty of bad experiences with other companies, and so far
-I've had mostly good ones with Apple, and now an exceptional one. The guy I'm
-talking to deserves a raise. Fingers crossed that the experience continues to
-be this good.</p>
-<p>There are <a href="./apple-support-experience.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+their customers, so I think it's important to write ...</p>
+                <a class="readmore" href="./apple-support-experience.html">read more</a>
+                <p>There are <a href="./apple-support-experience.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
@@ -437,43 +486,6 @@ about life. I thought I'd share some of what it has taught me:</p>
 <li>you often can't brute force your way out of ...</li></ul></blockquote>
                 <a class="readmore" href="./curling-and-life.html">read more</a>
                 <p>There are <a href="./curling-and-life.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="./i-sit-too-much.html" rel="bookmark"
-                           title="Permalink to I sit too much">I sit too much</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-08T12:00:00">
-                Thu 08 November 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href="./category/personal.html">Personal</a>. </p>
-<p>tags: <a href="./tag/health.html">Health</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>Yeah, I really do. From my childhood I always prefered more intellectual
-activities than active ones, reading, watching movies, tv. Growing up
-asthmatic had something to do with that, but I overcame it later in life and
-had no excuses anymore. Still, studies to do, computers to play with, digital ...</p>
-                <a class="readmore" href="./i-sit-too-much.html">read more</a>
-                <p>There are <a href="./i-sit-too-much.html#disqus_thread">comments</a>.</p>
                 </div><!-- /.entry-content -->
             </article></li>
         
