@@ -57,8 +57,102 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href=".././customizing-awesome.html">Customizing Awesome</a></h1> 
+                    <h1 class="entry-title"><a href=".././apple-support-experience.html">The Apple Support Experience</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2012-12-06T12:20:00">
+                Thu 06 December 2012
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href=".././category/technology.html">Technology</a>. </p>
+<p>tags: <a href=".././tag/apple.html">Apple</a><a href=".././tag/customer-service.html">Customer Service</a></p>
+
+
+</footer><!-- /.post-info --><p>So, having jumped into Apple land with a Mac Mini recently, and having some
+problems, I of course took advantage of my included 90 days technical support.
+Being part of the Apple ecosystem includes being subject to how they support
+their customers, so I think it's important to write about.</p>
+<p>Normally my idea of support is to figure out what piece of software I'm having
+a problem with, locating the open-source community responsible for it, and
+then tracking down a mailing list, IRC channel, whatever, where I can ask for
+help. I usually loathe help lines of any kind, as North America and most of
+the world handles these very poorly these days.</p>
+<p>You know the story. You call hoping that you'll talk to a flesh and blood
+human, and you get a machine telling you that, &quot;we are currently experiencing
+a higher than normal call volume,&quot; which is what you'll hear every damn time
+you call so obviously it's not higher than normal, and they're just cheap
+bastards who understaff their support infrastructure, but I digress.</p>
+<p>Well, I collected a few questions together before calling Apple Canada, as I
+hate calling help lines so I figured once I found a human I'd hammer him/her
+with several questions. Better throughput. Can't help it, I think like a
+programmer. And, of course, I got a machine. I asked me what product I was
+calling about, using voice recognition to understand me as I said, &quot;Mac Mini&quot;,
+and asked me for the serial number. That all worked, and I finally got a
+human, with little difficulty. No Indian accent either, I think it was
+Spanish, but I've called a few times since and there's no discernable pattern,
+so perhaps it's not overseas for a change. Not that I care all that much, as
+long as they actually help, but I've had some really bad experiences before
+with uninformed first-line support reading from their scripts.</p>
+<p>Well, the guy I talked to couldn't help with the software bugs, obviously he
+doesn't own the code, but he can report the issues and I can hope that a
+developer at Apple fill fix them. I already reported the issues at
+<a class="reference external" href="http://www.apple.com/feedback/">http://www.apple.com/feedback/</a> anyway, and hopefully that's not a digital
+black hole like most feedback pages. He did help me understand how to do a
+couple of things that OS X considers advanced, like launching a terminal from
+a keystroke. BTW Apple, that's pretty basic in any Linux window manager, so
+please do better.</p>
+<p>Then we got down to the hardware issue I'm having. At least, I think it's
+hardware. <a class="reference external" href="https://discussions.apple.com/thread/4490924">Many other people</a> are having the same problem. It makes me wonder
+if there was a bad batch of Mac Minis out of Apple recently. I called in about
+it, mentioned to the nice lady that wanted to sell me an Applecare package
+that I likely wouldn't need it, as I was thinking of taking the unit back, and
+suddenly I was talking to a nice man in second level support.</p>
+<p>He took the issue on personally, gave me a direct contact number to him, and
+the email address, and we started swapping hardware to narrow down the
+potential problems. I swapped the LCD with one upstairs, no help. Got a new
+HDMI to DVI adaptor from Apple, no help. He arranged for a full unit exchange
+and data migration, which was done very professionally (albiet with some data
+loss that was easily made up for), unfortunately it didn't help.</p>
+<p>Finally, we're running an app from Apple to gather up logs, and I'm told that
+the Engineers at Apple know what the problem is, they think it's software, and
+to keep my eyes on the software updates. There was one recently in fact,
+labelled graphics performance and reliability, so I wonder if that was it. I'm
+waiting to see if the issue happens again.</p>
+<p>Thus far, I must say that Apple raises the bar for what good customer support
+should be. I've had plenty of bad experiences with other companies, and so far
+I've had mostly good ones with Apple, and now an exceptional one. The guy I'm
+talking to deserves a raise. Fingers crossed that the experience continues to
+be this good.</p>
+<p>There are <a href=".././apple-support-experience.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href=".././customizing-awesome.html" rel="bookmark"
+                           title="Permalink to Customizing Awesome">Customizing Awesome</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-11-28T07:00:00">
                 Wed 28 November 2012
         </abbr>
@@ -72,63 +166,15 @@
 <p>tags: <a href=".././tag/linux.html">Linux</a><a href=".././tag/open-source.html">Open Source</a><a href=".././tag/awesome-wm.html">Awesome WM</a></p>
 
 
-</footer><!-- /.post-info --><p>As I mentioned previously, I'm currently running <a class="reference external" href="http://awesome.naquadah.org/">Awesome</a> on my netbook. While
+</footer><!-- /.post-info -->
+                <p>As I mentioned previously, I'm currently running <a class="reference external" href="http://awesome.naquadah.org/">Awesome</a> on my netbook. While
 I added suspend on lid close, I still need to customize the crap out of it. I
 had nothing showing me my current battery status, so I searched around to find
-the appropriate <a class="reference external" href="http://www.lua.org/">lua</a> code, a language that I'm still picking up.</p>
-<p>So, I hacked my <tt class="docutils literal"><span class="pre">$HOME/.config/awesome/rc.lua</span></tt> and added this:</p>
-<div class="highlight"><pre><span class="c1">-- {{{ Battery state</span>
-
-<span class="c1">-- Initialize widget</span>
-<span class="n">batwidget</span> <span class="o">=</span> <span class="n">widget</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">textbox&quot;</span> <span class="p">})</span>
-<span class="n">baticon</span> <span class="o">=</span> <span class="n">widget</span><span class="p">({</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">imagebox&quot;</span> <span class="p">})</span>
-
-<span class="c1">-- Register widget</span>
-<span class="n">vicious</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">batwidget</span><span class="p">,</span> <span class="n">vicious</span><span class="p">.</span><span class="n">widgets</span><span class="p">.</span><span class="n">bat</span><span class="p">,</span>
-    <span class="k">function</span> <span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span> <span class="k">return</span> <span class="s2">&quot;</span><span class="s">&quot;</span>
-        <span class="k">else</span>
-            <span class="n">baticon</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">(</span><span class="n">beautiful</span><span class="p">.</span><span class="n">widget_bat</span><span class="p">)</span>
-            <span class="k">return</span> <span class="s2">&quot;</span><span class="s">&lt;span color=&#39;white&#39;&gt;&quot;</span><span class="p">..</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">..</span> <span class="s2">&quot;</span><span class="s">%&lt;/span&gt;&quot;</span>
-        <span class="k">end</span>
-    <span class="k">end</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">BAT0&quot;</span>
-<span class="p">)</span>
-
-<span class="c1">-- }}}</span>
-</pre></div>
-<p>And then added the widget to the top of my screen. I was warned on the awesome
-mailing list (the name does confuse the english language) that I had to be
-careful where to put it, since the tasklist is greedy and will take all
-available space.</p>
-<div class="highlight"><pre><span class="n">mywibox</span><span class="p">[</span><span class="n">s</span><span class="p">].</span><span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">{</span>
-        <span class="n">mylauncher</span><span class="p">,</span>
-        <span class="n">mytaglist</span><span class="p">[</span><span class="n">s</span><span class="p">],</span>
-        <span class="n">mypromptbox</span><span class="p">[</span><span class="n">s</span><span class="p">],</span>
-        <span class="n">layout</span> <span class="o">=</span> <span class="n">awful</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">horizontal</span><span class="p">.</span><span class="n">leftright</span>
-    <span class="p">},</span>
-    <span class="n">mylayoutbox</span><span class="p">[</span><span class="n">s</span><span class="p">],</span>
-    <span class="n">mytextclock</span><span class="p">,</span>
-    <span class="n">s</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">mysystray</span> <span class="ow">or</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="n">baticon</span><span class="p">.</span><span class="n">image</span> <span class="ow">and</span> <span class="n">separator</span><span class="p">,</span> <span class="n">batwidget</span><span class="p">,</span> <span class="n">baticon</span> <span class="ow">or</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="n">separator</span><span class="p">,</span> <span class="n">mytasklist</span><span class="p">[</span><span class="n">s</span><span class="p">],</span>
-    <span class="n">layout</span> <span class="o">=</span> <span class="n">awful</span><span class="p">.</span><span class="n">widget</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">horizontal</span><span class="p">.</span><span class="n">rightleft</span>
-<span class="p">}</span>
-</pre></div>
-<p>And, it works. Now I need a system load, cpu load, etc. And I should hack the
-keybindings, although I'm getting used to the default ones. Maybe update the
-default layout since I prefer maximized layout.</p>
-<p>There are <a href=".././customizing-awesome.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+the appropriate <a class="reference external" href="http://www.lua.org/">lua</a> code, a language ...</p>
+                <a class="readmore" href=".././customizing-awesome.html">read more</a>
+                <p>There are <a href=".././customizing-awesome.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             

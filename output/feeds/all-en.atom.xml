@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-28T08:00:00-05:00</updated><entry><title>Parenting can really make you feel helpless</title><link href="http://www.but-i-digress.ca/parenting-can-make-you-feel-helpless.html" rel="alternate"></link><updated>2012-11-28T08:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-28:parenting-can-make-you-feel-helpless.html</id><summary type="html">&lt;p&gt;I've only been kicking around for a bit over 40 years now, but I've never
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-12-06T12:20:00-05:00</updated><entry><title>The Apple Support Experience</title><link href="http://www.but-i-digress.ca/apple-support-experience.html" rel="alternate"></link><updated>2012-12-06T12:20:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-06:apple-support-experience.html</id><summary type="html">&lt;p&gt;So, having jumped into Apple land with a Mac Mini recently, and having some
+problems, I of course took advantage of my included 90 days technical support.
+Being part of the Apple ecosystem includes being subject to how they support
+their customers, so I think it's important to write about.&lt;/p&gt;
+&lt;p&gt;Normally my idea of support is to figure out what piece of software I'm having
+a problem with, locating the open-source community responsible for it, and
+then tracking down a mailing list, IRC channel, whatever, where I can ask for
+help. I usually loathe help lines of any kind, as North America and most of
+the world handles these very poorly these days.&lt;/p&gt;
+&lt;p&gt;You know the story. You call hoping that you'll talk to a flesh and blood
+human, and you get a machine telling you that, &amp;quot;we are currently experiencing
+a higher than normal call volume,&amp;quot; which is what you'll hear every damn time
+you call so obviously it's not higher than normal, and they're just cheap
+bastards who understaff their support infrastructure, but I digress.&lt;/p&gt;
+&lt;p&gt;Well, I collected a few questions together before calling Apple Canada, as I
+hate calling help lines so I figured once I found a human I'd hammer him/her
+with several questions. Better throughput. Can't help it, I think like a
+programmer. And, of course, I got a machine. I asked me what product I was
+calling about, using voice recognition to understand me as I said, &amp;quot;Mac Mini&amp;quot;,
+and asked me for the serial number. That all worked, and I finally got a
+human, with little difficulty. No Indian accent either, I think it was
+Spanish, but I've called a few times since and there's no discernable pattern,
+so perhaps it's not overseas for a change. Not that I care all that much, as
+long as they actually help, but I've had some really bad experiences before
+with uninformed first-line support reading from their scripts.&lt;/p&gt;
+&lt;p&gt;Well, the guy I talked to couldn't help with the software bugs, obviously he
+doesn't own the code, but he can report the issues and I can hope that a
+developer at Apple fill fix them. I already reported the issues at
+&lt;a class="reference external" href="http://www.apple.com/feedback/"&gt;http://www.apple.com/feedback/&lt;/a&gt; anyway, and hopefully that's not a digital
+black hole like most feedback pages. He did help me understand how to do a
+couple of things that OS X considers advanced, like launching a terminal from
+a keystroke. BTW Apple, that's pretty basic in any Linux window manager, so
+please do better.&lt;/p&gt;
+&lt;p&gt;Then we got down to the hardware issue I'm having. At least, I think it's
+hardware. &lt;a class="reference external" href="https://discussions.apple.com/thread/4490924"&gt;Many other people&lt;/a&gt; are having the same problem. It makes me wonder
+if there was a bad batch of Mac Minis out of Apple recently. I called in about
+it, mentioned to the nice lady that wanted to sell me an Applecare package
+that I likely wouldn't need it, as I was thinking of taking the unit back, and
+suddenly I was talking to a nice man in second level support.&lt;/p&gt;
+&lt;p&gt;He took the issue on personally, gave me a direct contact number to him, and
+the email address, and we started swapping hardware to narrow down the
+potential problems. I swapped the LCD with one upstairs, no help. Got a new
+HDMI to DVI adaptor from Apple, no help. He arranged for a full unit exchange
+and data migration, which was done very professionally (albiet with some data
+loss that was easily made up for), unfortunately it didn't help.&lt;/p&gt;
+&lt;p&gt;Finally, we're running an app from Apple to gather up logs, and I'm told that
+the Engineers at Apple know what the problem is, they think it's software, and
+to keep my eyes on the software updates. There was one recently in fact,
+labelled graphics performance and reliability, so I wonder if that was it. I'm
+waiting to see if the issue happens again.&lt;/p&gt;
+&lt;p&gt;Thus far, I must say that Apple raises the bar for what good customer support
+should be. I've had plenty of bad experiences with other companies, and so far
+I've had mostly good ones with Apple, and now an exceptional one. The guy I'm
+talking to deserves a raise. Fingers crossed that the experience continues to
+be this good.&lt;/p&gt;
+</summary><category term="Apple"></category><category term="Customer Service"></category></entry><entry><title>Parenting can really make you feel helpless</title><link href="http://www.but-i-digress.ca/parenting-can-make-you-feel-helpless.html" rel="alternate"></link><updated>2012-11-28T08:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-28:parenting-can-make-you-feel-helpless.html</id><summary type="html">&lt;p&gt;I've only been kicking around for a bit over 40 years now, but I've never
 found anything in the world to make me feel more helpless than my own child
 telling me that they feel bad, and knowing that I can't fix it.&lt;/p&gt;
 &lt;p&gt;My daughter was sick last night, and we monitored her fever as it rose up to a
