@@ -38,7 +38,7 @@ with uninformed first-line support reading from their scripts.
 
 Well, the guy I talked to couldn't help with the software bugs, obviously he
 doesn't own the code, but he can report the issues and I can hope that a
-developer at Apple fill fix them. I already reported the issues at
+developer at Apple will fix them. I already reported the issues at
 http://www.apple.com/feedback/ anyway, and hopefully that's not a digital
 black hole like most feedback pages. He did help me understand how to do a
 couple of things that OS X considers advanced, like launching a terminal from
