@@ -4,7 +4,7 @@ Brewing a better UNIX
 :date: 2012-12-09 08:00
 :category: Technology
 :author: Michael P. Soulier
-:tags: OS X, UNIX
+:tags: OS X, UNIX, FOSS
 :slug: brewing-a-better-unix
 
 Being a Linux_ user, I'm used to a fairly standard set of tools on my

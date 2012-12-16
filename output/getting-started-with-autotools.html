@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Brewing a better UNIX</title>
+        <title>Getting started with autotools</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
         
@@ -54,8 +54,8 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="brewing-a-better-unix.html" rel="bookmark"
-           title="Permalink to Brewing a better UNIX">Brewing a better UNIX</a></h1>
+        <a href="getting-started-with-autotools.html" rel="bookmark"
+           title="Permalink to Getting started with autotools">Getting started with autotools</a></h1>
       
 <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="msoulier">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
@@ -63,8 +63,8 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2012-12-09T08:00:00">
-                Sun 09 December 2012
+        <abbr class="published" title="2012-12-16T08:30:00">
+                Sun 16 December 2012
         </abbr>
 
         
@@ -73,77 +73,69 @@
         </address>
         
 <p>In <a href="./category/technology.html">Technology</a>. </p>
-<p>tags: <a href="./tag/os-x.html">OS X</a><a href="./tag/unix.html">UNIX</a><a href="./tag/foss.html">FOSS</a></p>
+<p>tags: <a href="./tag/cc.html">C/C++</a><a href="./tag/foss.html">FOSS</a><a href="./tag/autotools.html">Autotools</a></p>
 
 
 </footer><!-- /.post-info -->
-      <p>Being a <a class="reference external" href="http://www.linux.org/">Linux</a> user, I'm used to a fairly standard set of tools on my
-command-line. On <a class="reference external" href="http://www.apple.com/osx/">OS X</a>, it's essentially BSD UNIX underneath, which I have had
-some experience with thanks to <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>. The environment is very similar, but
-not identical, and on <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>, you quickly find yourself using the ports
-system to install new packages that have been ported to <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a> from places
-like <a class="reference external" href="http://www.linux.org/">Linux</a>.</p>
-<p>It took about five minutes of <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a> use for me to go install <tt class="docutils literal">bash</tt>,
-<tt class="docutils literal">wget</tt>, <tt class="docutils literal">vim</tt>, <tt class="docutils literal">imagemagick</tt>, and a host of other packages. There's a
-lot already installed with <a class="reference external" href="http://www.apple.com/osx/">OS X</a>, but a few key things or me were definitely
-missing. I pulled <tt class="docutils literal">vim</tt> from <a class="reference external" href="http://code.google.com/p/macvim/">MacVim</a>, but then I had to look for somewhere to
-get everything else I needed.</p>
-<p>Being UNIX, I had several choices:</p>
-<blockquote>
-<ol class="arabic simple">
-<li>Grab the source and build it myself.</li>
-<li>Install <a class="reference external" href="http://www.macports.org/">MacPorts</a> and build it from there.</li>
-<li>Install <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew</a> and build it from there.</li>
-</ol>
-</blockquote>
-<p>Well, I've done source installs, I've done ports out of FreeBSD, so I figured
-I'd see how <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew</a> works. Basically, it makes <tt class="docutils literal">/usr/local</tt> owned by the
-user that installs it, which on <a class="reference external" href="http://www.apple.com/osx/">OS X</a> is me, as an administrative user (like a
-Windows power user). From there you can double-check that everything is set up
-properly by running:</p>
-<pre class="literal-block">
-brew doctor
-</pre>
-<p>It will pick up permission problems, issues with your <tt class="docutils literal">PATH</tt> environment
-variable, warn you about packages that were built but not symlinked into
-<tt class="docutils literal">/usr/local</tt> properly, etc. Then it's not much different than using
-<tt class="docutils literal"><span class="pre">apt-get</span></tt> on Debian, except that the packages are building when they
-install, they're not pre-built binaries. So wget was just:</p>
-<pre class="literal-block">
-brew update
-brew install wget
-</pre>
-<p>Since then I've installed some essentials, and non-essentials if I include
-<tt class="docutils literal">freeciv</tt>. Lets see, I have:</p>
-<pre class="literal-block">
-msoulier&#64;merlin:~$ brew list
-c-ares      git         lame        lua     sdl_mixer
-cracklib    glib        libevent    lynx    tmux
-feh         gmp         libffi      mutt    tokyo-cabinet
-flac        gnupg       libgcrypt   nettle  unrar
-fontconfig  gnuplot     libgpg-error p11-kit wget
-freeciv     gnutls      libmikmod   pcre    xz
-freetype    imagemagick libogg      pkg-config
-gd          imlib2      libpng      readline
-gettext     irssi       libtasn1    sdl
-giblib      jpeg        libvorbis   sdl_image
-</pre>
-<p>Rather nicely, the packages are all installed under <tt class="docutils literal">/usr/local/Cellar/</tt>,
-and symlinked into the right places so they show up in my path, and for
-building. As I really hate installing from source, because you never know what
-you have installed or how to uninstall it, or what you'll break if you upgrade
-it, I like this.</p>
-<p>I do find that other packages mess with those careful permissions, so I keep
-running <tt class="docutils literal">brew doctor</tt> so I know about the issues. I also noticed, thanks to
-a coworker, that the Perl community has done something similar for install
-Perl modules called Perlbrew. I'm going to look into that soon, as honestly,
-it's about damn time. Managing personal Perl modules sucks, has always sucked,
-and now thanks to Perlbrew will hopefully suck no longer. But I digress, more
-on that in another post.</p>
-<p>I give <a class="reference external" href="http://mxcl.github.com/homebrew/">Homebrew</a> an <em>A</em>. An <em>A+</em> would be a command to fix permissions problems
-without my help, and maybe there is one, these things elude me at times. I
-highly recommend it if you're trying to complete your *nix environment on OS
-X.</p>
+      <p>So, I'm still reading O'Rielly's <a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html">21st Century C</a>. I know, too many books on
+the go and I read slowly, and not often enough. I'm going through the section
+on <a class="reference external" href="http://www.gnu.org/software/autoconf/">GNU autotools</a>, which I've never been a heavy user of, albiet I'm a heavy
+consumer of. I just don't spend much time distributing C/C++ across platforms.</p>
+<p>I have a little C tool that I figured I'd try it on, a small replacement for
+GNU tree that I wrote a while back, and since <tt class="docutils literal">tree</tt> isn't available on
+OS X, it seemed a good excuse to port it. Previously I just had a Makefile
+that I maintained, and it works fine, but it's a good excuse to learn how to
+use autotools for the future. I do have some libraries, and they're harder to
+port, which is where <a class="reference external" href="http://www.gnu.org/software/libtool/">libtool</a> comes in.</p>
+<p>This <tt class="docutils literal">build</tt> script outlines the process of using autotools for the first
+time. This script borrows very heavily from the book's author.</p>
+<div class="highlight"><pre><span class="c">#!/bin/sh</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;Creating Makefile.am&quot;</span>
+cat &gt; Makefile.am <span class="s">&lt;&lt;EOF</span>
+<span class="s">bin_PROGRAMS=twig</span>
+<span class="s">twig_SOURCES=twig.c</span>
+<span class="s">EOF</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;Running autoscan...&quot;</span>
+autoscan
+
+<span class="nb">echo</span> <span class="s2">&quot;Creating configure.ac...&quot;</span>
+sed -e <span class="s1">&#39;s/FULL-PACKAGE-NAME/twig/&#39;</span> <span class="se">\</span>
+    -e <span class="s1">&#39;s/VERSION/1.0/&#39;</span>   <span class="se">\</span>
+    -e <span class="s1">&#39;s|BUG-REPORT-ADDRESS|msoulier@digitaltorque.ca|&#39;</span> <span class="se">\</span>
+    -e <span class="s1">&#39;10i\</span>
+<span class="s1">    AM_INIT_AUTOMAKE&#39;</span> <span class="se">\</span>
+        &lt; configure.scan &gt; configure.ac
+
+<span class="nb">echo</span> <span class="s2">&quot;Creating additional files...&quot;</span>
+touch NEWS README AUTHORS ChangeLog
+
+<span class="nb">echo</span> <span class="s2">&quot;Running autoreconf...&quot;</span>
+autoreconf -iv
+
+<span class="nb">echo</span> <span class="s2">&quot;Running configure...&quot;</span>
+./configure
+
+<span class="nb">echo</span> <span class="s2">&quot;Running make distcheck to package sources...&quot;</span>
+make distcheck
+</pre></div>
+<p>At this point, it's not ready to ship, as the <tt class="docutils literal">NEWS</tt>, <tt class="docutils literal">README</tt>,
+<tt class="docutils literal">AUTHORS</tt> and <tt class="docutils literal">ChangeLog</tt> aren't populated yet. But it's close. The
+<tt class="docutils literal">configure</tt> script works, and I could then build it on OS X using the
+expected.</p>
+<div class="highlight"><pre>./configure --prefix<span class="o">=</span>/usr/local
+make
+make install
+</pre></div>
+<p>My next project to package is a shared library for work, so that will be more
+interesting. Still, if you're looking to use autotools for the first time for
+something simple, this should take the mystery out of kick-starting it. Sure,
+there's some magic like the <tt class="docutils literal">AM_INIT_AUTOMAKE</tt> macro, and I've a ton to
+learn yet, but this worked on the first try, and the resulting tarball is good
+to push to <a class="reference external" href="http://sourceforge.net/">SourceForge</a> or elsewhere if you want to.</p>
+<p>As I pick up more, I'll try to share it. I don't find autotools intuitive at
+all, but with some simple recipes I think I'll survive.</p>
 
     </div><!-- /.entry-content -->
     
@@ -151,7 +143,7 @@ X.</p>
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
-        var disqus_identifier = "brewing-a-better-unix.html";
+        var disqus_identifier = "getting-started-with-autotools.html";
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = 'http://butidigressca.disqus.com/embed.js';

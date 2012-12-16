@@ -4,7 +4,7 @@ Tweeting on OS X
 :date: 2012-11-25 09:00
 :category: Technology
 :author: Michael P. Soulier
-:tags: OS X, Python
+:tags: OS X, Python, FOSS
 :slug: tweeting-on-osx
 
 For some time my desktop has been an older, underpowered Linux box, so using

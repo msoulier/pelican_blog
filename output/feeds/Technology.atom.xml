@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-12-09T08:00:00-05:00</updated><entry><title>Brewing a better UNIX</title><link href="http://www.but-i-digress.ca/brewing-a-better-unix.html" rel="alternate"></link><updated>2012-12-09T08:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-09:brewing-a-better-unix.html</id><summary type="html">&lt;p&gt;Being a &lt;a class="reference external" href="http://www.linux.org/"&gt;Linux&lt;/a&gt; user, I'm used to a fairly standard set of tools on my
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-12-16T08:30:00-05:00</updated><entry><title>Getting started with autotools</title><link href="http://www.but-i-digress.ca/getting-started-with-autotools.html" rel="alternate"></link><updated>2012-12-16T08:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-16:getting-started-with-autotools.html</id><summary type="html">&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
+the go and I read slowly, and not often enough. I'm going through the section
+on &lt;a class="reference external" href="http://www.gnu.org/software/autoconf/"&gt;GNU autotools&lt;/a&gt;, which I've never been a heavy user of, albiet I'm a heavy
+consumer of. I just don't spend much time distributing C/C++ across platforms.&lt;/p&gt;
+&lt;p&gt;I have a little C tool that I figured I'd try it on, a small replacement for
+GNU tree that I wrote a while back, and since &lt;tt class="docutils literal"&gt;tree&lt;/tt&gt; isn't available on
+OS X, it seemed a good excuse to port it. Previously I just had a Makefile
+that I maintained, and it works fine, but it's a good excuse to learn how to
+use autotools for the future. I do have some libraries, and they're harder to
+port, which is where &lt;a class="reference external" href="http://www.gnu.org/software/libtool/"&gt;libtool&lt;/a&gt; comes in.&lt;/p&gt;
+&lt;p&gt;This &lt;tt class="docutils literal"&gt;build&lt;/tt&gt; script outlines the process of using autotools for the first
+time. This script borrows very heavily from the book's author.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating Makefile.am&amp;quot;&lt;/span&gt;
+cat &amp;gt; Makefile.am &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF&lt;/span&gt;
+&lt;span class="s"&gt;bin_PROGRAMS=twig&lt;/span&gt;
+&lt;span class="s"&gt;twig_SOURCES=twig.c&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoscan...&amp;quot;&lt;/span&gt;
+autoscan
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating configure.ac...&amp;quot;&lt;/span&gt;
+sed -e &lt;span class="s1"&gt;&amp;#39;s/FULL-PACKAGE-NAME/twig/&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;s/VERSION/1.0/&amp;#39;&lt;/span&gt;   &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;s|BUG-REPORT-ADDRESS|msoulier@digitaltorque.ca|&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;10i\&lt;/span&gt;
+&lt;span class="s1"&gt;    AM_INIT_AUTOMAKE&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+        &amp;lt; configure.scan &amp;gt; configure.ac
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating additional files...&amp;quot;&lt;/span&gt;
+touch NEWS README AUTHORS ChangeLog
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoreconf...&amp;quot;&lt;/span&gt;
+autoreconf -iv
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running configure...&amp;quot;&lt;/span&gt;
+./configure
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running make distcheck to package sources...&amp;quot;&lt;/span&gt;
+make distcheck
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At this point, it's not ready to ship, as the &lt;tt class="docutils literal"&gt;NEWS&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;README&lt;/tt&gt;,
+&lt;tt class="docutils literal"&gt;AUTHORS&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;ChangeLog&lt;/tt&gt; aren't populated yet. But it's close. The
+&lt;tt class="docutils literal"&gt;configure&lt;/tt&gt; script works, and I could then build it on OS X using the
+expected.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My next project to package is a shared library for work, so that will be more
+interesting. Still, if you're looking to use autotools for the first time for
+something simple, this should take the mystery out of kick-starting it. Sure,
+there's some magic like the &lt;tt class="docutils literal"&gt;AM_INIT_AUTOMAKE&lt;/tt&gt; macro, and I've a ton to
+learn yet, but this worked on the first try, and the resulting tarball is good
+to push to &lt;a class="reference external" href="http://sourceforge.net/"&gt;SourceForge&lt;/a&gt; or elsewhere if you want to.&lt;/p&gt;
+&lt;p&gt;As I pick up more, I'll try to share it. I don't find autotools intuitive at
+all, but with some simple recipes I think I'll survive.&lt;/p&gt;
+</summary><category term="C/C++"></category><category term="FOSS"></category><category term="Autotools"></category></entry><entry><title>Brewing a better UNIX</title><link href="http://www.but-i-digress.ca/brewing-a-better-unix.html" rel="alternate"></link><updated>2012-12-09T08:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-09:brewing-a-better-unix.html</id><summary type="html">&lt;p&gt;Being a &lt;a class="reference external" href="http://www.linux.org/"&gt;Linux&lt;/a&gt; user, I'm used to a fairly standard set of tools on my
 command-line. On &lt;a class="reference external" href="http://www.apple.com/osx/"&gt;OS X&lt;/a&gt;, it's essentially BSD UNIX underneath, which I have had
 some experience with thanks to &lt;a class="reference external" href="http://www.freebsd.org/"&gt;FreeBSD&lt;/a&gt;. The environment is very similar, but
 not identical, and on &lt;a class="reference external" href="http://www.freebsd.org/"&gt;FreeBSD&lt;/a&gt;, you quickly find yourself using the ports
@@ -66,7 +125,7 @@ on that in another post.&lt;/p&gt;
 without my help, and maybe there is one, these things elude me at times. I
 highly recommend it if you're trying to complete your *nix environment on OS
 X.&lt;/p&gt;
-</summary><category term="OS X"></category><category term="UNIX"></category></entry><entry><title>The Apple Support Experience</title><link href="http://www.but-i-digress.ca/apple-support-experience.html" rel="alternate"></link><updated>2012-12-06T12:20:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-06:apple-support-experience.html</id><summary type="html">&lt;p&gt;So, having jumped into Apple land with a Mac Mini recently, and having some
+</summary><category term="OS X"></category><category term="UNIX"></category><category term="FOSS"></category></entry><entry><title>The Apple Support Experience</title><link href="http://www.but-i-digress.ca/apple-support-experience.html" rel="alternate"></link><updated>2012-12-06T12:20:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-06:apple-support-experience.html</id><summary type="html">&lt;p&gt;So, having jumped into Apple land with a Mac Mini recently, and having some
 problems, I of course took advantage of my included 90 days technical support.
 Being part of the Apple ecosystem includes being subject to how they support
 their customers, so I think it's important to write about.&lt;/p&gt;
@@ -167,7 +226,7 @@ available space.&lt;/p&gt;
 &lt;p&gt;And, it works. Now I need a system load, cpu load, etc. And I should hack the
 keybindings, although I'm getting used to the default ones. Maybe update the
 default layout since I prefer maximized layout.&lt;/p&gt;
-</summary><category term="Linux"></category><category term="Open Source"></category><category term="Awesome WM"></category></entry><entry><title>Tweeting on OS X</title><link href="http://www.but-i-digress.ca/tweeting-on-osx.html" rel="alternate"></link><updated>2012-11-25T09:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-25:tweeting-on-osx.html</id><summary type="html">&lt;p&gt;For some time my desktop has been an older, underpowered Linux box, so using
+</summary><category term="Linux"></category><category term="FOSS"></category><category term="Awesome WM"></category></entry><entry><title>Tweeting on OS X</title><link href="http://www.but-i-digress.ca/tweeting-on-osx.html" rel="alternate"></link><updated>2012-11-25T09:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-25:tweeting-on-osx.html</id><summary type="html">&lt;p&gt;For some time my desktop has been an older, underpowered Linux box, so using
 services like &lt;a class="reference external" href="http://www.twitter.com"&gt;Twitter&lt;/a&gt; via the website has been painful, as loaded with heavy
 javascript that would consume my CPU's limited resources.&lt;/p&gt;
 &lt;p&gt;So, like any &lt;a class="reference external" href="http://www.python.org"&gt;Python&lt;/a&gt; programmer would do, I wrote my own client. Well, lets be
@@ -206,7 +265,7 @@ to use it online, which made this much, much simpler, so thanks there.&lt;/p&gt;
 &lt;p&gt;Now, this does cause a little icon on the dock to jump up and down, so I'll
 need to look into that, and how to open the browser to twitter or the embedded
 link when the notification is clicked on, but it's a good start.&lt;/p&gt;
-</summary><category term="OS X"></category><category term="Python"></category></entry><entry><title>Suspend on lid close in Debian Squeeze</title><link href="http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html" rel="alternate"></link><updated>2012-11-20T22:10:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</id><summary type="html">&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
+</summary><category term="OS X"></category><category term="Python"></category><category term="FOSS"></category></entry><entry><title>Suspend on lid close in Debian Squeeze</title><link href="http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html" rel="alternate"></link><updated>2012-11-20T22:10:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</id><summary type="html">&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
 netbook with a little 10.5&amp;quot; screen. So I'm playing around with a window
 manager that mainly just maximizes everything. I've tried &lt;a class="reference external" href="http://www.nongnu.org/ratpoison/"&gt;Ratpoison&lt;/a&gt;, I've
 tried &lt;a class="reference external" href="https://code.google.com/p/wmii/"&gt;wmii&lt;/a&gt;, and now I'm trying &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt;.&lt;/p&gt;
@@ -275,7 +334,7 @@ it working, so I thought I'd share.&lt;/p&gt;
 &lt;p&gt;Now I just run it in the background from my &lt;cite&gt;.xsession&lt;/cite&gt; script at X11 login,
 and it's sitting there waiting for any change in UPower status. Works like a
 charm.&lt;/p&gt;
-</summary><category term="Linux"></category><category term="Open Source"></category><category term="Python"></category></entry><entry><title>Joysticks? We don't need no stinking joysticks...</title><link href="http://www.but-i-digress.ca/apple-and-joysticks.html" rel="alternate"></link><updated>2012-11-19T13:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</id><summary type="html">&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+</summary><category term="Linux"></category><category term="FOSS"></category><category term="Python"></category></entry><entry><title>Joysticks? We don't need no stinking joysticks...</title><link href="http://www.but-i-digress.ca/apple-and-joysticks.html" rel="alternate"></link><updated>2012-11-19T13:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</id><summary type="html">&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
 &lt;a class="reference external" href="http://www.x-plane.com"&gt;X-Plane&lt;/a&gt; demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
 itself asked me if I wanted to calibrate the joystick, which struck me as odd,
 that hasn't happened in years, not since my days with plain old DOS. DOS

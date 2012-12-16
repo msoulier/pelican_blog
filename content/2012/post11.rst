@@ -4,7 +4,7 @@ Customizing Awesome
 :date: 2012-11-28 07:00
 :category: Technology
 :author: Michael P. Soulier
-:tags: Linux, Open Source, Awesome WM
+:tags: Linux, FOSS, Awesome WM
 :slug: customizing-awesome
 
 As I mentioned previously, I'm currently running Awesome_ on my netbook. While

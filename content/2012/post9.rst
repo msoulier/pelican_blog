@@ -4,7 +4,7 @@ Suspend on lid close in Debian Squeeze
 :date: 2012-11-20 22:10
 :category: Technology
 :author: Michael P. Soulier
-:tags: Linux, Open Source, Python
+:tags: Linux, FOSS, Python
 :slug: suspend-on-lid-close-debian-squeeze
 
 I recently decided that Gnome_ is not the best desktop for my little EeePC_
