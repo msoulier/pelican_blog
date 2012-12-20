@@ -43,6 +43,7 @@ $(OUTPUTDIR)/%.html:
 clean:
 	find $(OUTPUTDIR) -mindepth 1 -delete
 	touch $(OUTPUTDIR)/index.php
+	cp proxy.pac $(OUTPUTDIR)/proxy.pac
 	echo 'php_flag engine off' > $(OUTPUTDIR)/.htaccess
 
 regenerate: clean
