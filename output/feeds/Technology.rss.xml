@@ -45,7 +45,7 @@ problem in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Net::OAuth
             &lt;span class="nb"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;your OAuth message appears to contain some &amp;quot;&lt;/span&gt;
                 &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;multi-byte characters that need to be decoded &amp;quot;&lt;/span&gt;
                 &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;via Encode.pm or a PerlIO layer first. &amp;quot;&lt;/span&gt;
-                &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;may&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;incorrect&lt;/span&gt; &lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="err"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;This may result in an incorrect signature.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
         &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt;

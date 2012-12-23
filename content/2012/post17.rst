@@ -48,7 +48,7 @@ problem in ``Net::OAuth``, which I converted to a Mojolicious helper.
                 warn("your OAuth message appears to contain some "
                     . "multi-byte characters that need to be decoded "
                     . "via Encode.pm or a PerlIO layer first. "
-                    . This may result in an incorrect signature.");
+                    . "This may result in an incorrect signature.");
             }
         }
         return
