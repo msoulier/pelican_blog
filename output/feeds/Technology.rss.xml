@@ -1,5 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Technology.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 20 Dec 2012 10:30:00 -0500</lastBuildDate><item><title>Understanding OAuth</title><link>http://www.but-i-digress.ca/understanding-oauth.html</link><description>&lt;p&gt;We meet again. Thanks for stopping by. This post has a high geek factor, so if
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Technology.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 21 Dec 2012 18:00:00 -0500</lastBuildDate><item><title>Signatures in OAuth</title><link>http://www.but-i-digress.ca/signatures-in-oauth.html</link><description>&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
+alluded to the signatures being the hard part of the implementation. I'm using
+a &lt;a class="reference external" href="https://github.com/leah/python-oauth/"&gt;python-oauth&lt;/a&gt; module for the client, but for the server, I decided to
+implement my own in &lt;a class="reference external" href="http://www.perl.org/"&gt;Perl&lt;/a&gt; and &lt;a class="reference external" href="http://mojolicio.us/"&gt;Mojolicious&lt;/a&gt;, since I had problems with
+&lt;a class="reference external" href="http://search.cpan.org/dist/Net-OAuth/lib/Net/OAuth.pm"&gt;Net::OAuth&lt;/a&gt; that I deemed a protocol violation. Besides, I learn more this
+way.&lt;/p&gt;
+&lt;p&gt;There are multiple signature methods supported in OAuth 1.0, specifically
+three.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;PLAINTEXT&lt;/li&gt;
+&lt;li&gt;HMAC-SHA1&lt;/li&gt;
+&lt;li&gt;RSA-SHA1&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Unsurprisingly, &lt;tt class="docutils literal"&gt;PLAINTEXT&lt;/tt&gt; is the simplest. In this case, the signature is
+a simple combination of the consumer secret and the token secret, if there is
+any yet, with a slight twist. To ensure that the characters are treated
+properly, they must first be &amp;quot;normalized&amp;quot;. This means decoding them as you
+would any percent-encoded string, and then...&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;convert them to UTF-8&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;escape them with percent-encoding from RFC 3986 like so&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;these characters are not encoded: alphanumerics, &amp;quot;-&amp;quot;, &amp;quot;.&amp;quot;, &amp;quot;_&amp;quot;, &amp;quot;~&amp;quot;&lt;/li&gt;
+&lt;li&gt;all other characters &lt;em&gt;must&lt;/em&gt; be encoded&lt;/li&gt;
+&lt;li&gt;any hexidecimal used in encoding must be upper-case&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I found that hard to read, but I did find this bit of Perl to solve the
+problem in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Net::OAuth&lt;/span&gt;&lt;/tt&gt;, which I converted to a Mojolicious helper.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;helper&lt;/span&gt; &lt;span class="n"&gt;encode&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;sub &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;$self&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;$str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="nv"&gt;$str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="nb"&gt;defined&lt;/span&gt; &lt;span class="nv"&gt;$str&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;unless&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$SKIP_UTF8_DOUBLE_ENCODE_CHECK&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$str&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt;&lt;span class="sr"&gt; /[\x80-\xFF]/&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="nn"&gt;utf8::&lt;/span&gt;&lt;span class="n"&gt;is_utf8&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$str&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nb"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;your OAuth message appears to contain some &amp;quot;&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;multi-byte characters that need to be decoded &amp;quot;&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;via Encode.pm or a PerlIO layer first. &amp;quot;&lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;may&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;incorrect&lt;/span&gt; &lt;span class="n"&gt;signature&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="err"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt;
+    &lt;span class="nn"&gt;URI::Escape::&lt;/span&gt;&lt;span class="n"&gt;uri_escape_utf8&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;^\w.~-&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Decoding is even simpler.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;helper&lt;/span&gt; &lt;span class="n"&gt;decode&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;sub &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;$self&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;$str&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;shift&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;uri_unescape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$str&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In Python, the same code looks like so.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;escape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Escape a URL including any /.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;safe&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;~&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_utf8_str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Convert unicode to utf-8.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;unicode&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;escaped&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;escape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;_utf8_str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c"&gt;# Unquoting is just&lt;/span&gt;
+&lt;span class="n"&gt;unquoted&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unquote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;So, this needs to be done to each of the parameters, in this case, the
+consumer key and the token secret, if any, and then they are combined with an
+ampersand. So, if your consumer key is, say, &amp;quot;myconsumerkey&amp;quot;, and you don't
+have a token yet, then the initial &lt;tt class="docutils literal"&gt;PLAINTEXT&lt;/tt&gt; signature is
+&lt;tt class="docutils literal"&gt;myconsumerkey&amp;amp;&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;Now, this isn't too bad, but once you get into &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;HMAC-SHA1&lt;/span&gt;&lt;/tt&gt; signatures, it
+gets a lot worse. The signature from the &lt;tt class="docutils literal"&gt;PLAINTEXT&lt;/tt&gt; method becomes the key
+for the signature, and you'll already have the code for that now, but the raw
+input to the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;HMAC-SHA1&lt;/span&gt;&lt;/tt&gt; algorithm is a base string, that is rather
+difficult to construct. The input is the HTTP method, the request URI, both
+normalized like above and contatenated with an ampersand. Then, this will be
+contatenated with an ampersand to all of the input parameters in the request,
+constructed in a particular way.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Take all input parameter names and values from all sources, and normalize them like above. (but skip the oauth_signature parameter)&lt;/li&gt;
+&lt;li&gt;Sort all parameters by the normalized parameter name.&lt;/li&gt;
+&lt;li&gt;Pair the names and values, contatenated with an &amp;quot;=&amp;quot;.&lt;/li&gt;
+&lt;li&gt;Concatenate all pairs with ampersands in the sorted order.&lt;/li&gt;
+&lt;li&gt;Escape the entire string using the method above.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is the base string to the &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;HMAC-SHA1&lt;/span&gt;&lt;/tt&gt; algorithm, along with the key we
+mentioned. The final signature should match what the client generated. Oh, and
+if you're running your service on a nonstandard port (80 or 443), then you
+&lt;em&gt;must&lt;/em&gt; include the port in the URI.&lt;/p&gt;
+&lt;p&gt;Example:&lt;/p&gt;
+&lt;p&gt;A call to &lt;a class="reference external" href="http://localhost/initiate"&gt;http://localhost/initiate&lt;/a&gt; on port 80 or 443, a GET request, with the
+following params:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+{'oauth_nonce': '21823552', 'oauth_timestamp': 1356129798,
+ 'oauth_consumer_key': 'Mitel test', 'oauth_signature_method': 'HMAC-SHA1',
+ 'oauth_version': '1.0', 'oauth_signature': 'pevzNqSnJ8QtqFUDWVlYhVRp8D0=',
+ 'oauth_callback': 'oob'}
+&lt;/pre&gt;
+&lt;p&gt;The base string would look like this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+GET&amp;amp;http%3A%2F%2Flocalhost%2Finitiate&amp;amp;oauth_callback%3Doob%26oauth_consumer_key%3DMitel%2520test%26oauth_nonce%3D21823552%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1356129798%26oauth_version%3D1.0
+&lt;/pre&gt;
+&lt;p&gt;with a key of:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+mitelsharedsecret&amp;amp;
+&lt;/pre&gt;
+&lt;p&gt;and a final signature of:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+pevzNqSnJ8QtqFUDWVlYhVRp8D0=
+&lt;/pre&gt;
+&lt;p&gt;Oddly, if I used the &lt;tt class="docutils literal"&gt;b64encode&lt;/tt&gt; method in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;Digest::HMAC_SHA1&lt;/span&gt;&lt;/tt&gt;, a final
+&amp;quot;=&amp;quot; sign is missing on the final result, so I had to pull in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;MIME::Base64&lt;/span&gt;&lt;/tt&gt;
+and do this instead:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;my&lt;/span&gt; &lt;span class="nv"&gt;$sig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;encode_base64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$hmac&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;digest&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The equivalent Python in the &lt;tt class="docutils literal"&gt;oauth&lt;/tt&gt; library does this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;binascii&lt;/span&gt;
+
+&lt;span class="c"&gt;# HMAC object.&lt;/span&gt;
+&lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;hashlib&lt;/span&gt; &lt;span class="c"&gt;# 2.5&lt;/span&gt;
+    &lt;span class="n"&gt;hashed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hmac&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;hashlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sha1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;except&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sha&lt;/span&gt; &lt;span class="c"&gt;# Deprecated&lt;/span&gt;
+    &lt;span class="n"&gt;hashed&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;hmac&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;raw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sha&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c"&gt;# Calculate the digest base 64.&lt;/span&gt;
+&lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;binascii&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;b2a_base64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;hashed&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;digest&lt;/span&gt;&lt;span class="p"&gt;())[:&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That just leaves &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;RSA-SHA1&lt;/span&gt;&lt;/tt&gt;, but that requires a pre-existing SSL
+relationship with the server, using SSL certificates. As such, I'm not worrying
+about it just yet. I don't think it'll be used much.&lt;/p&gt;
+&lt;p&gt;I'll need to do some interop testing with a few different clients, I'm hoping that
+they're not all snowflakes. The point of the rigid nature of the base string
+construction is that the final product is supposed to be reproducable.&lt;/p&gt;
+&lt;p&gt;The base string construction is definitely the hardest part, and I've read
+that the signatures were dropped in OAuth 2.0 because they were too hard to
+do. I'd rather not drop the added security, and while they're a pain, there
+are sample implementations to follow. I think that OAuth 1.0 is a better
+choice. And it's, like, finished.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 21 Dec 2012 18:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-21:signatures-in-oauth.html</guid><category>OAuth</category><category>Web Services</category><category>Python</category><category>Perl</category></item><item><title>Understanding OAuth</title><link>http://www.but-i-digress.ca/understanding-oauth.html</link><description>&lt;p&gt;We meet again. Thanks for stopping by. This post has a high geek factor, so if
 you're not one, feel free to move along, nothing to see here.&lt;/p&gt;
 &lt;p&gt;Still here? K, your funeral. At work, I'm trying to add a &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Representational_state_transfer"&gt;ReST&lt;/a&gt; Web Service to
 a product that could desperately use it. I want to do this to permit better

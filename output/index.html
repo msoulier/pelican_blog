@@ -57,8 +57,203 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./understanding-oauth.html">Understanding OAuth</a></h1> 
+                    <h1 class="entry-title"><a href="./signatures-in-oauth.html">Signatures in OAuth</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2012-12-21T18:00:00">
+                Fri 21 December 2012
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/technology.html">Technology</a>. </p>
+<p>tags: <a href="./tag/oauth.html">OAuth</a><a href="./tag/web-services.html">Web Services</a><a href="./tag/python.html">Python</a><a href="./tag/perl.html">Perl</a></p>
+
+
+</footer><!-- /.post-info --><p>Hi again. I already went into the basics of OAuth in a <a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html">previous post</a>, and
+alluded to the signatures being the hard part of the implementation. I'm using
+a <a class="reference external" href="https://github.com/leah/python-oauth/">python-oauth</a> module for the client, but for the server, I decided to
+implement my own in <a class="reference external" href="http://www.perl.org/">Perl</a> and <a class="reference external" href="http://mojolicio.us/">Mojolicious</a>, since I had problems with
+<a class="reference external" href="http://search.cpan.org/dist/Net-OAuth/lib/Net/OAuth.pm">Net::OAuth</a> that I deemed a protocol violation. Besides, I learn more this
+way.</p>
+<p>There are multiple signature methods supported in OAuth 1.0, specifically
+three.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>PLAINTEXT</li>
+<li>HMAC-SHA1</li>
+<li>RSA-SHA1</li>
+</ol>
+</blockquote>
+<p>Unsurprisingly, <tt class="docutils literal">PLAINTEXT</tt> is the simplest. In this case, the signature is
+a simple combination of the consumer secret and the token secret, if there is
+any yet, with a slight twist. To ensure that the characters are treated
+properly, they must first be &quot;normalized&quot;. This means decoding them as you
+would any percent-encoded string, and then...</p>
+<blockquote>
+<ul>
+<li><p class="first">convert them to UTF-8</p>
+</li>
+<li><p class="first">escape them with percent-encoding from RFC 3986 like so</p>
+<blockquote>
+<ul class="simple">
+<li>these characters are not encoded: alphanumerics, &quot;-&quot;, &quot;.&quot;, &quot;_&quot;, &quot;~&quot;</li>
+<li>all other characters <em>must</em> be encoded</li>
+<li>any hexidecimal used in encoding must be upper-case</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<p>I found that hard to read, but I did find this bit of Perl to solve the
+problem in <tt class="docutils literal"><span class="pre">Net::OAuth</span></tt>, which I converted to a Mojolicious helper.</p>
+<div class="highlight"><pre><span class="n">helper</span> <span class="n">encode</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+    <span class="k">my</span> <span class="nv">$str</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+    <span class="nv">$str</span> <span class="o">=</span> <span class="s">&quot;&quot;</span> <span class="k">unless</span> <span class="nb">defined</span> <span class="nv">$str</span><span class="p">;</span>
+    <span class="k">unless</span><span class="p">(</span><span class="nv">$SKIP_UTF8_DOUBLE_ENCODE_CHECK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$str</span> <span class="o">=~</span><span class="sr"> /[\x80-\xFF]/</span> <span class="ow">and</span> <span class="o">!</span><span class="nn">utf8::</span><span class="n">is_utf8</span><span class="p">(</span><span class="nv">$str</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nb">warn</span><span class="p">(</span><span class="s">&quot;your OAuth message appears to contain some &quot;</span>
+                <span class="o">.</span> <span class="s">&quot;multi-byte characters that need to be decoded &quot;</span>
+                <span class="o">.</span> <span class="s">&quot;via Encode.pm or a PerlIO layer first. &quot;</span>
+                <span class="o">.</span> <span class="n">This</span> <span class="n">may</span> <span class="n">result</span> <span class="n">in</span> <span class="n">an</span> <span class="n">incorrect</span> <span class="n">signature</span><span class="o">.</span><span class="err">&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span>
+    <span class="nn">URI::Escape::</span><span class="n">uri_escape_utf8</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span><span class="s">&#39;^\w.~-&#39;</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+<p>Decoding is even simpler.</p>
+<div class="highlight"><pre><span class="n">helper</span> <span class="n">decode</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
+    <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+    <span class="k">my</span> <span class="nv">$str</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">uri_unescape</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+<span class="p">};</span>
+</pre></div>
+<p>In Python, the same code looks like so.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">urllib</span>
+
+<span class="k">def</span> <span class="nf">escape</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Escape a URL including any /.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s">&#39;~&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_utf8_str</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert unicode to utf-8.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">escaped</span> <span class="o">=</span> <span class="n">escape</span><span class="p">(</span><span class="n">_utf8_str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+<span class="c"># Unquoting is just</span>
+<span class="n">unquoted</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+<p>So, this needs to be done to each of the parameters, in this case, the
+consumer key and the token secret, if any, and then they are combined with an
+ampersand. So, if your consumer key is, say, &quot;myconsumerkey&quot;, and you don't
+have a token yet, then the initial <tt class="docutils literal">PLAINTEXT</tt> signature is
+<tt class="docutils literal">myconsumerkey&amp;</tt>.</p>
+<p>Now, this isn't too bad, but once you get into <tt class="docutils literal"><span class="pre">HMAC-SHA1</span></tt> signatures, it
+gets a lot worse. The signature from the <tt class="docutils literal">PLAINTEXT</tt> method becomes the key
+for the signature, and you'll already have the code for that now, but the raw
+input to the <tt class="docutils literal"><span class="pre">HMAC-SHA1</span></tt> algorithm is a base string, that is rather
+difficult to construct. The input is the HTTP method, the request URI, both
+normalized like above and contatenated with an ampersand. Then, this will be
+contatenated with an ampersand to all of the input parameters in the request,
+constructed in a particular way.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Take all input parameter names and values from all sources, and normalize them like above. (but skip the oauth_signature parameter)</li>
+<li>Sort all parameters by the normalized parameter name.</li>
+<li>Pair the names and values, contatenated with an &quot;=&quot;.</li>
+<li>Concatenate all pairs with ampersands in the sorted order.</li>
+<li>Escape the entire string using the method above.</li>
+</ol>
+</blockquote>
+<p>This is the base string to the <tt class="docutils literal"><span class="pre">HMAC-SHA1</span></tt> algorithm, along with the key we
+mentioned. The final signature should match what the client generated. Oh, and
+if you're running your service on a nonstandard port (80 or 443), then you
+<em>must</em> include the port in the URI.</p>
+<p>Example:</p>
+<p>A call to <a class="reference external" href="http://localhost/initiate">http://localhost/initiate</a> on port 80 or 443, a GET request, with the
+following params:</p>
+<pre class="literal-block">
+{'oauth_nonce': '21823552', 'oauth_timestamp': 1356129798,
+ 'oauth_consumer_key': 'Mitel test', 'oauth_signature_method': 'HMAC-SHA1',
+ 'oauth_version': '1.0', 'oauth_signature': 'pevzNqSnJ8QtqFUDWVlYhVRp8D0=',
+ 'oauth_callback': 'oob'}
+</pre>
+<p>The base string would look like this:</p>
+<pre class="literal-block">
+GET&amp;http%3A%2F%2Flocalhost%2Finitiate&amp;oauth_callback%3Doob%26oauth_consumer_key%3DMitel%2520test%26oauth_nonce%3D21823552%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1356129798%26oauth_version%3D1.0
+</pre>
+<p>with a key of:</p>
+<pre class="literal-block">
+mitelsharedsecret&amp;
+</pre>
+<p>and a final signature of:</p>
+<pre class="literal-block">
+pevzNqSnJ8QtqFUDWVlYhVRp8D0=
+</pre>
+<p>Oddly, if I used the <tt class="docutils literal">b64encode</tt> method in <tt class="docutils literal"><span class="pre">Digest::HMAC_SHA1</span></tt>, a final
+&quot;=&quot; sign is missing on the final result, so I had to pull in <tt class="docutils literal"><span class="pre">MIME::Base64</span></tt>
+and do this instead:</p>
+<div class="highlight"><pre><span class="k">my</span> <span class="nv">$sig</span> <span class="o">=</span> <span class="n">encode_base64</span><span class="p">(</span><span class="nv">$hmac</span><span class="o">-&gt;</span><span class="n">digest</span><span class="p">);</span>
+</pre></div>
+<p>The equivalent Python in the <tt class="docutils literal">oauth</tt> library does this:</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">binascii</span>
+
+<span class="c"># HMAC object.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">hashlib</span> <span class="c"># 2.5</span>
+    <span class="n">hashed</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sha</span> <span class="c"># Deprecated</span>
+    <span class="n">hashed</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">sha</span><span class="p">)</span>
+
+<span class="c"># Calculate the digest base 64.</span>
+<span class="k">return</span> <span class="n">binascii</span><span class="o">.</span><span class="n">b2a_base64</span><span class="p">(</span><span class="n">hashed</span><span class="o">.</span><span class="n">digest</span><span class="p">())[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+<p>That just leaves <tt class="docutils literal"><span class="pre">RSA-SHA1</span></tt>, but that requires a pre-existing SSL
+relationship with the server, using SSL certificates. As such, I'm not worrying
+about it just yet. I don't think it'll be used much.</p>
+<p>I'll need to do some interop testing with a few different clients, I'm hoping that
+they're not all snowflakes. The point of the rigid nature of the base string
+construction is that the final product is supposed to be reproducable.</p>
+<p>The base string construction is definitely the hardest part, and I've read
+that the signatures were dropped in OAuth 2.0 because they were too hard to
+do. I'd rather not drop the added security, and while they're a pain, there
+are sample implementations to follow. I think that OAuth 1.0 is a better
+choice. And it's, like, finished.</p>
+<p>There are <a href="./signatures-in-oauth.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./understanding-oauth.html" rel="bookmark"
+                           title="Permalink to Understanding OAuth">Understanding OAuth</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-12-20T10:30:00">
                 Thu 20 December 2012
         </abbr>
@@ -72,113 +267,15 @@
 <p>tags: <a href="./tag/oauth.html">OAuth</a><a href="./tag/web-services.html">Web Services</a></p>
 
 
-</footer><!-- /.post-info --><p>We meet again. Thanks for stopping by. This post has a high geek factor, so if
+</footer><!-- /.post-info -->
+                <p>We meet again. Thanks for stopping by. This post has a high geek factor, so if
 you're not one, feel free to move along, nothing to see here.</p>
 <p>Still here? K, your funeral. At work, I'm trying to add a <a class="reference external" href="http://en.wikipedia.org/wiki/Representational_state_transfer">ReST</a> Web Service to
-a product that could desperately use it. I want to do this to permit better
-remote monitoring of said product and remote control for one of our management
-services and future UIs that I may implement (think apps on Android and iOS).</p>
-<p>This is no small task, and it cannot be taken lightly. It will likely be used
-by many, so it must be easy to debug and integrate with, hence ReST. I'll rant
-about the evils of <a class="reference external" href="http://en.wikipedia.org/wiki/SOAP">SOAP</a> later. It must be secure, which is easy, <a class="reference external" href="http://www.apache.org/">Apache</a> is
-already on the system, with <a class="reference external" href="http://en.wikipedia.org/wiki/Secure_Sockets_Layer">SSL</a> support. It must be authenticated. This is
-tougher.</p>
-<p>Since I expect SSL, I could require client certificates, but they're a pain to
-provision. You don't authenticate to amazon.com with client certificates for
-this reason. Setting them up is about as much fun as visiting the passport
-office, and it hurts the wallet too. Why should anyone pay for the privilege
-of shopping in a store? Oh...I'll rant about <a class="reference external" href="http://www.costco.com/">CostCo</a> later.</p>
-<p>A popular method of authentication for web services is now <a class="reference external" href="http://oauth.net/">OAuth</a>. OAuth was
-designed to fix a particular problem. Example: I like <a class="reference external" href="http://twitter.com/">Twitter</a>. I hate
-Twitter's web interface. I prefer lightweight and simple. Plus, it's terrible
-to use from a smartphone. Fortunately, Twitter has a ReST web service that
-uses OAuth for authentication, so a vendor can release a Twitter app for my
-phone that I can connect to my account. &quot;But,&quot; you ask, &quot;surely you don't give
-this app your Twitter password!&quot; No. I don't. It's a closed-source app and for
-all I know, they'd send it to themselves for nefarious purposes. I want the
-app to access my Twitter account, but I do <em>not</em> want them to have my
-password. How do we do this? Enter OAuth.</p>
-<p>How does it work? The idea is simple. I'm going to go to my Twitter account,
-and tell Twitter to issue a random &quot;token&quot; in my name. If you think you don't
-know what a token is, think again. I suspect you carry keys, id badges,
-smartcards, that kind of thing. There isn't any practical difference, beyond
-keys being functional mechanically. This token I will then <em>securely</em> provide
-to the Twitter client on my phone, and when Twitter sees it, it will know that
-the client is mine, and grant access. The token will be transmitted over SSL
-to avoid spying and replay attacks, the hard part is securely getting the
-token into the client, and keeping it convenient. We do <em>not</em> want a repeat of
-SSL client certificates. Provisioning needs to be simple.</p>
-<p>But, automating such things is problematic. Even if you implement a request
-queue for token requests, you don't want it to fill up with spammed garbage
-requests, and it will if we don't prevent it. Spammers should be pulled into
-the street and shot, but I digress. A way to prevent this is to at least have
-an existing relationship between the app vendor and the service. So, if I want
-to distribute an app, I need to go into Twitter and tell them that I want to
-be a &quot;consumer&quot; of their service. They'll ask me all kinds of details about
-who I am, and then issue me a consumer ID, and a shared secret. The shared
-secret is a random string that only they and I know. Now, when my app <em>asks</em>
-them for a token, it identifies itself with the consumer ID, and they validate
-it, which includes checking a signature built from the shared secret, so they
-know it's a valid request. BTW, this consumer ID can be used for billing
-later, as not all web services are free. Here comes <a class="reference external" href="http://en.wikipedia.org/wiki/Software_as_a_service">SAAS</a>.</p>
-<p>Furthermore, it's not Twitter staff that need to approve this request, it's
-the owner of the resource in question, the Twitter account holder. This is
-good, as the account holder is the one who really cares here, and the Twitter
-staff would otherwise be overloaded with handling requests like these. Now,
-HTTP is a stateless protocol, so OAuth needs to add some state in the approval
-process. So, initially when we request a token, OAuth responds with a
-temporary one, so that the resource owner can be redirected to Twitter itself
-to approve access to their account. Assuming that you approve, a new token
-called a <em>verifier</em> will be issued. This verifier can be provided in the
-response, or simply displayed in the web page so that you can copy it into the
-app in an &quot;out-of-band&quot; manner (ie. cut and paste).</p>
-<p>This verifier is then used to request the final set of tokens from the
-service. It proves to the OAuth subsystem attached to the service that:</p>
-<blockquote>
-<ol class="arabic simple">
-<li>The client was written by an approved vendor. <em>consumer id</em></li>
-<li>The owner of the account wishes to grant access to this client. <em>token and verifier</em></li>
-<li>The request was not forged by some random ass-hat on the net.  <em>signature including shared secrets</em></li>
-</ol>
-</blockquote>
-<p>Once done, the app has a set of tokens that it can continually use to make
-HTTP requests to Twitter's web service. The tokens issued can also be limited
-in permissions, perhaps providing read access but not write access, and
-perhaps to only specific areas of the <a class="reference external" href="http://en.wikipedia.org/wiki/Application_programming_interface">API</a>. The tokens can also be revoked, if
-you wish to pull said access in the future. This is a &quot;good thing&quot;. I use this
-to fetch tweets, to make them, to manage follower lists, etc. All securely and
-authenticated over HTTPS. And I do it from the command-line, with my own
-client written in <a class="reference external" href="http://www.python.org/">Python</a>, which I dubbed <a class="reference external" href="https://github.com/msoulier/twit">Twit</a>. I pull my data from Google in
-the same manner, for calendar events and contacts. Thus far it has worked
-well.</p>
-<p>Now, for what I want to do, I'm implementing OAuth 1.0, even though the 2.0
-&quot;standard&quot; is kinda coming. I phrase it this way because it's been coming for
-a while now, and as communities often do, it's already forked, dropped some
-security in the form of strong signatures, in the name of developer
-convenience. So, I'm sticking with 1.0. It's harder to implement, but it's
-<em>done</em>, and it's more secure. I've only just gotten PLAINTEXT and HMAC-SHA1
-signatures working, I'll post on that soon. I'm doing the server in <a class="reference external" href="http://www.perl.org/">Perl</a> and
-<a class="reference external" href="http://mojolicio.us/">Mojolicious</a> for legacy reasons, and implementing it myself because I've had
-issues with the <tt class="docutils literal"><span class="pre">Net::OAuth</span></tt> module for Perl. Maybe I'm using it wrong, but
-thus far I've gotten no response from the author. Plus, I learn much, much
-more this way.</p>
-<p>This post is running a tad long, so I'll end it here, with more to come on my
-trip into OAuth. Specifically implementing support for the signatures. Funny
-thing is that the signing part is simple, but constructing the base string is
-freakin' hard. You'll get what I mean if you read the <a class="reference external" href="http://tools.ietf.org/html/rfc5849">RFC</a>, or just stay
-tuned.</p>
-<p>See? Geeky. I warned you.</p>
-<p>There are <a href="./understanding-oauth.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+a product that could ...</p>
+                <a class="readmore" href="./understanding-oauth.html">read more</a>
+                <p>There are <a href="./understanding-oauth.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
@@ -473,44 +570,6 @@ itself asked me if I wanted to calibrate the joystick, which struck me as odd,
 that hasn't happened in years, not ...</p>
                 <a class="readmore" href="./apple-and-joysticks.html">read more</a>
                 <p>There are <a href="./apple-and-joysticks.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="./umm-done-unzipping-yet.html" rel="bookmark"
-                           title="Permalink to Umm, done unzipping yet?">Umm, done unzipping yet?</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-17T14:00:00">
-                Sat 17 November 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href="./category/technology.html">Technology</a>. </p>
-<p>tags: <a href="./tag/os-x.html">OS X</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>So, the first thing I did after after wrapping my head around the cocoa
-interface was to start installing software like a madman. I wanted Firefox,
-VLC, Kobo, Gimp, Vim, etc, etc, etc. So, I had to learn how to install apps on
-OS X.</p>
-<p>Apps in OS X seem ...</p>
-                <a class="readmore" href="./umm-done-unzipping-yet.html">read more</a>
-                <p>There are <a href="./umm-done-unzipping-yet.html#disqus_thread">comments</a>.</p>
                 </div><!-- /.entry-content -->
             </article></li>
         
