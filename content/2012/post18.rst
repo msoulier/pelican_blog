@@ -2,7 +2,7 @@ Checking the weather
 ====================
 
 :date: 2012-12-23 20:30
-:category: Technology
+:category: Development
 :author: Michael P. Soulier
 :tags: Python
 :slug: checking-the-weather

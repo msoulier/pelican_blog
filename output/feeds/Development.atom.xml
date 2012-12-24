@@ -1,5 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Development.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-06T22:12:00-05:00</updated><entry><title>21st Century C</title><link href="http://www.but-i-digress.ca/21st-century-c.html" rel="alternate"></link><updated>2012-11-06T22:12:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</id><summary type="html">&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Development.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-12-23T20:30:00-05:00</updated><entry><title>Checking the weather</title><link href="http://www.but-i-digress.ca/checking-the-weather.html" rel="alternate"></link><updated>2012-12-23T20:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-23:checking-the-weather.html</id><summary type="html">&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
+terminal, as is the preference of most Unix geeks like me. Being a Canadian,
+I'm not interested in the Weather Channel as much as the Environment Canada
+data. Thankfully, they do publish an RSS feed, and good for them.&lt;/p&gt;
+&lt;p&gt;I'm interested in this one:
+&lt;a class="reference external" href="http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml"&gt;http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml&lt;/a&gt;. So, to check the
+weather, I need to pull the feed and parse it. Pulling a page in Python is as
+simple as using &lt;tt class="docutils literal"&gt;urllib&lt;/tt&gt;. From there, I can walk the elements I want like
+so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;xml.etree.ElementTree&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, I wanted the option of picking a certain number of lines, and wrapping at
+a certain number of columns. I wanted this for using the script output as
+input into other apps, like &lt;a class="reference external" href="http://conky.sourceforge.net/"&gt;Conky&lt;/a&gt;. Skipping lines is easy, intelligently
+wrapping them is not. Luckily, Python has a &lt;tt class="docutils literal"&gt;textwrap&lt;/tt&gt; module in the
+standard library.&lt;/p&gt;
+&lt;p&gt;You use it like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;textwrap&lt;/span&gt;
+
+&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Put together, it's really that simple. I think the majority of my code is
+option parsing. The core loop is just this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parse_options&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ignore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;continue&lt;/span&gt;
+    &lt;span class="k"&gt;break&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The whole thing &lt;a class="reference external" href="https://github.com/msoulier/mikes-tools/blob/master/weather.py"&gt;is here&lt;/a&gt;. Sample output looks like this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+No watches or warnings in effect, Ottawa (Kanata - Orléans)
+Current Conditions: Light Snow, -11.1°C
+Sunday night: A few flurries. Low minus 18.
+Monday: Sunny. High minus 9.
+Monday night: Increasing cloudiness. Low minus 12.
+Tuesday: Chance of flurries. High minus 7. POP 60%
+Wednesday: A mix of sun and cloud. Low minus 16. High minus 8.
+Thursday: Periods of snow. Low minus 8. High minus 2.
+Friday: Sunny. Low minus 12. High minus 7.
+Saturday: Periods of snow. Low minus 12. High minus 7.
+&lt;/pre&gt;
+&lt;p&gt;I love building my own tools like this, it's the ultimate in end-user
+computing. Unix and Python are my playground.&lt;/p&gt;
+</summary><category term="Python"></category></entry><entry><title>Getting started with autotools</title><link href="http://www.but-i-digress.ca/getting-started-with-autotools.html" rel="alternate"></link><updated>2012-12-16T08:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-16:getting-started-with-autotools.html</id><summary type="html">&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
+the go and I read slowly, and not often enough. I'm going through the section
+on &lt;a class="reference external" href="http://www.gnu.org/software/autoconf/"&gt;GNU autotools&lt;/a&gt;, which I've never been a heavy user of, albiet I'm a heavy
+consumer of. I just don't spend much time distributing C/C++ across platforms.&lt;/p&gt;
+&lt;p&gt;I have a little C tool that I figured I'd try it on, a small replacement for
+GNU tree that I wrote a while back, and since &lt;tt class="docutils literal"&gt;tree&lt;/tt&gt; isn't available on
+OS X, it seemed a good excuse to port it. Previously I just had a Makefile
+that I maintained, and it works fine, but it's a good excuse to learn how to
+use autotools for the future. I do have some libraries, and they're harder to
+port, which is where &lt;a class="reference external" href="http://www.gnu.org/software/libtool/"&gt;libtool&lt;/a&gt; comes in.&lt;/p&gt;
+&lt;p&gt;This &lt;tt class="docutils literal"&gt;build&lt;/tt&gt; script outlines the process of using autotools for the first
+time. This script borrows very heavily from the book's author.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating Makefile.am&amp;quot;&lt;/span&gt;
+cat &amp;gt; Makefile.am &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF&lt;/span&gt;
+&lt;span class="s"&gt;bin_PROGRAMS=twig&lt;/span&gt;
+&lt;span class="s"&gt;twig_SOURCES=twig.c&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoscan...&amp;quot;&lt;/span&gt;
+autoscan
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating configure.ac...&amp;quot;&lt;/span&gt;
+sed -e &lt;span class="s1"&gt;&amp;#39;s/FULL-PACKAGE-NAME/twig/&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;s/VERSION/1.0/&amp;#39;&lt;/span&gt;   &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;s|BUG-REPORT-ADDRESS|msoulier@digitaltorque.ca|&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;10i\&lt;/span&gt;
+&lt;span class="s1"&gt;    AM_INIT_AUTOMAKE&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+        &amp;lt; configure.scan &amp;gt; configure.ac
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating additional files...&amp;quot;&lt;/span&gt;
+touch NEWS README AUTHORS ChangeLog
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoreconf...&amp;quot;&lt;/span&gt;
+autoreconf -iv
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running configure...&amp;quot;&lt;/span&gt;
+./configure
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running make distcheck to package sources...&amp;quot;&lt;/span&gt;
+make distcheck
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At this point, it's not ready to ship, as the &lt;tt class="docutils literal"&gt;NEWS&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;README&lt;/tt&gt;,
+&lt;tt class="docutils literal"&gt;AUTHORS&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;ChangeLog&lt;/tt&gt; aren't populated yet. But it's close. The
+&lt;tt class="docutils literal"&gt;configure&lt;/tt&gt; script works, and I could then build it on OS X using the
+expected.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My next project to package is a shared library for work, so that will be more
+interesting. Still, if you're looking to use autotools for the first time for
+something simple, this should take the mystery out of kick-starting it. Sure,
+there's some magic like the &lt;tt class="docutils literal"&gt;AM_INIT_AUTOMAKE&lt;/tt&gt; macro, and I've a ton to
+learn yet, but this worked on the first try, and the resulting tarball is good
+to push to &lt;a class="reference external" href="http://sourceforge.net/"&gt;SourceForge&lt;/a&gt; or elsewhere if you want to.&lt;/p&gt;
+&lt;p&gt;As I pick up more, I'll try to share it. I don't find autotools intuitive at
+all, but with some simple recipes I think I'll survive.&lt;/p&gt;
+</summary><category term="C/C++"></category><category term="FOSS"></category><category term="Autotools"></category></entry><entry><title>21st Century C</title><link href="http://www.but-i-digress.ca/21st-century-c.html" rel="alternate"></link><updated>2012-11-06T22:12:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</id><summary type="html">&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
 &lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
 it caught my attention.&lt;/p&gt;
 &lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
