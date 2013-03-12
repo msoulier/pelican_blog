@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Technology.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 21 Dec 2012 18:00:00 -0500</lastBuildDate><item><title>Signatures in OAuth</title><link>http://www.but-i-digress.ca/signatures-in-oauth.html</link><description>&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Technology.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 11 Mar 2013 21:00:00 -0400</lastBuildDate><item><title>Video on Raspbian</title><link>http://www.but-i-digress.ca/video-on-raspbian.html</link><description>&lt;p&gt;Currently our upstairs TV has a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;raspberry pi&lt;/a&gt; attached to it. It's running
+the basic &lt;a class="reference external" href="http://www.raspbian.org/"&gt;Raspbian&lt;/a&gt; distribution, based on &lt;a class="reference external" href="http://www.debian.org/"&gt;Debian Linux&lt;/a&gt;. I'm using it for
+development as well as for a media center at the moment, so I'm not using
+&lt;a class="reference external" href="http://www.raspbmc.com/"&gt;RaspBMC&lt;/a&gt;, I'm going to order another one has a dedicated media center, but
+for now I need to be able to play movies off of a usb stick.&lt;/p&gt;
+&lt;p&gt;I tried &lt;a class="reference external" href="http://www.videolan.org/"&gt;VLC&lt;/a&gt;, but the performance was horrible. Apparently it doesn't use
+the native GPU. I read about it online, and thanks to that finally found
+&lt;a class="reference external" href="http://elinux.org/Omxplayer"&gt;omxplayer&lt;/a&gt;, which does use the native GPU. Unfortunately, it's not all that
+polished when playing from the command-line. It leaves behind text in the
+terminal above and below the video at certain aspect ratios, which is visually
+distracting.&lt;/p&gt;
+&lt;p&gt;They haven't fixed it yet so I put a wrapper script around it to work around
+the issue. I plan to put a whole interface around it at some point just for
+fun, but for now at least I can watch movies without text in the black bars
+above and below:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+#!/bin/sh
+
+setterm -cursor off
+clear
+omxplayer -o hdmi $1
+clear
+setterm -cursor on
+&lt;/pre&gt;
+&lt;p&gt;Simple, but it works.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 11 Mar 2013 21:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</guid><category>Linux</category><category>Raspberry Pi</category></item><item><title>Signatures in OAuth</title><link>http://www.but-i-digress.ca/signatures-in-oauth.html</link><description>&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
 alluded to the signatures being the hard part of the implementation. I'm using
 a &lt;a class="reference external" href="https://github.com/leah/python-oauth/"&gt;python-oauth&lt;/a&gt; module for the client, but for the server, I decided to
 implement my own in &lt;a class="reference external" href="http://www.perl.org/"&gt;Perl&lt;/a&gt; and &lt;a class="reference external" href="http://mojolicio.us/"&gt;Mojolicious&lt;/a&gt;, since I had problems with

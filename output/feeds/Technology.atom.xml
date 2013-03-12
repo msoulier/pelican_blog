@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-12-21T18:00:00-05:00</updated><entry><title>Signatures in OAuth</title><link href="http://www.but-i-digress.ca/signatures-in-oauth.html" rel="alternate"></link><updated>2012-12-21T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-21:signatures-in-oauth.html</id><summary type="html">&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-03-11T21:00:00-04:00</updated><entry><title>Video on Raspbian</title><link href="http://www.but-i-digress.ca/video-on-raspbian.html" rel="alternate"></link><updated>2013-03-11T21:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</id><summary type="html">&lt;p&gt;Currently our upstairs TV has a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;raspberry pi&lt;/a&gt; attached to it. It's running
+the basic &lt;a class="reference external" href="http://www.raspbian.org/"&gt;Raspbian&lt;/a&gt; distribution, based on &lt;a class="reference external" href="http://www.debian.org/"&gt;Debian Linux&lt;/a&gt;. I'm using it for
+development as well as for a media center at the moment, so I'm not using
+&lt;a class="reference external" href="http://www.raspbmc.com/"&gt;RaspBMC&lt;/a&gt;, I'm going to order another one has a dedicated media center, but
+for now I need to be able to play movies off of a usb stick.&lt;/p&gt;
+&lt;p&gt;I tried &lt;a class="reference external" href="http://www.videolan.org/"&gt;VLC&lt;/a&gt;, but the performance was horrible. Apparently it doesn't use
+the native GPU. I read about it online, and thanks to that finally found
+&lt;a class="reference external" href="http://elinux.org/Omxplayer"&gt;omxplayer&lt;/a&gt;, which does use the native GPU. Unfortunately, it's not all that
+polished when playing from the command-line. It leaves behind text in the
+terminal above and below the video at certain aspect ratios, which is visually
+distracting.&lt;/p&gt;
+&lt;p&gt;They haven't fixed it yet so I put a wrapper script around it to work around
+the issue. I plan to put a whole interface around it at some point just for
+fun, but for now at least I can watch movies without text in the black bars
+above and below:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+#!/bin/sh
+
+setterm -cursor off
+clear
+omxplayer -o hdmi $1
+clear
+setterm -cursor on
+&lt;/pre&gt;
+&lt;p&gt;Simple, but it works.&lt;/p&gt;
+</summary><category term="Linux"></category><category term="Raspberry Pi"></category></entry><entry><title>Signatures in OAuth</title><link href="http://www.but-i-digress.ca/signatures-in-oauth.html" rel="alternate"></link><updated>2012-12-21T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-21:signatures-in-oauth.html</id><summary type="html">&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
 alluded to the signatures being the hard part of the implementation. I'm using
 a &lt;a class="reference external" href="https://github.com/leah/python-oauth/"&gt;python-oauth&lt;/a&gt; module for the client, but for the server, I decided to
 implement my own in &lt;a class="reference external" href="http://www.perl.org/"&gt;Perl&lt;/a&gt; and &lt;a class="reference external" href="http://mojolicio.us/"&gt;Mojolicious&lt;/a&gt;, since I had problems with

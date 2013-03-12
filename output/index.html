@@ -59,8 +59,72 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./jim-butcher-on-men-vs-women.html">Jim Butcher on Men vs. Women</a></h1> 
+                    <h1 class="entry-title"><a href="./video-on-raspbian.html">Video on Raspbian</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-03-11T21:00:00">
+                Mon 11 March 2013
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/technology.html">Technology</a>. </p>
+<p>tags: <a href="./tag/linux.html">Linux</a><a href="./tag/raspberry-pi.html">Raspberry Pi</a></p>
+
+
+</footer><!-- /.post-info --><p>Currently our upstairs TV has a <a class="reference external" href="http://www.raspberrypi.org/">raspberry pi</a> attached to it. It's running
+the basic <a class="reference external" href="http://www.raspbian.org/">Raspbian</a> distribution, based on <a class="reference external" href="http://www.debian.org/">Debian Linux</a>. I'm using it for
+development as well as for a media center at the moment, so I'm not using
+<a class="reference external" href="http://www.raspbmc.com/">RaspBMC</a>, I'm going to order another one has a dedicated media center, but
+for now I need to be able to play movies off of a usb stick.</p>
+<p>I tried <a class="reference external" href="http://www.videolan.org/">VLC</a>, but the performance was horrible. Apparently it doesn't use
+the native GPU. I read about it online, and thanks to that finally found
+<a class="reference external" href="http://elinux.org/Omxplayer">omxplayer</a>, which does use the native GPU. Unfortunately, it's not all that
+polished when playing from the command-line. It leaves behind text in the
+terminal above and below the video at certain aspect ratios, which is visually
+distracting.</p>
+<p>They haven't fixed it yet so I put a wrapper script around it to work around
+the issue. I plan to put a whole interface around it at some point just for
+fun, but for now at least I can watch movies without text in the black bars
+above and below:</p>
+<pre class="literal-block">
+#!/bin/sh
+
+setterm -cursor off
+clear
+omxplayer -o hdmi $1
+clear
+setterm -cursor on
+</pre>
+<p>Simple, but it works.</p>
+<p>There are <a href="./video-on-raspbian.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./jim-butcher-on-men-vs-women.html" rel="bookmark"
+                           title="Permalink to Jim Butcher on Men vs. Women">Jim Butcher on Men vs. Women</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-01-01T09:30:00">
                 Tue 01 January 2013
         </abbr>
@@ -74,31 +138,17 @@
 <p>tags: <a href="./tag/funny.html">Funny</a></p>
 
 
-</footer><!-- /.post-info --><p>I'm reading Jim Butcher's &quot;Cold Days&quot;, his latest installment in the
+</footer><!-- /.post-info -->
+                <p>I'm reading Jim Butcher's &quot;Cold Days&quot;, his latest installment in the
 <a class="reference external" href="http://www.jim-butcher.com/books/dresden">Dresden Files</a>, and I felt the need to share this quote:</p>
 <blockquote>
 <p>So, ladies, if you ever have some conversation with your boyfriend or
 husband or brother or male friend, and you are telling him something
-perfectly obvious, and he comes away from it utterly clueless? I know it's
-tempting to think to yourself, &quot;The man can't possibly be that stupid!&quot;</p>
-<p>But yes. Yes, he can.</p>
-<p>Our innate strengths just aren't the same. We are the mighty hunters, who
-are good at focusing on one thing at a time. For crying out loud, we have
-to turn down the radio in the car if we suspect we're lost and need to
-figure out how to get where we're going.</p>
-</blockquote>
-<p>Umm, yeah, I've had to turn the radio down...</p>
-<p>There are <a href="./jim-butcher-on-men-vs-women.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+perfectly obvious ...</p></blockquote>
+                <a class="readmore" href="./jim-butcher-on-men-vs-women.html">read more</a>
+                <p>There are <a href="./jim-butcher-on-men-vs-women.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
@@ -392,43 +442,6 @@ had nothing showing me my current battery status, so I searched around to find
 the appropriate <a class="reference external" href="http://www.lua.org/">lua</a> code, a language ...</p>
                 <a class="readmore" href="./customizing-awesome.html">read more</a>
                 <p>There are <a href="./customizing-awesome.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="./tweeting-on-osx.html" rel="bookmark"
-                           title="Permalink to Tweeting on OS X">Tweeting on OS X</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-25T09:00:00">
-                Sun 25 November 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href="./category/technology.html">Technology</a>. </p>
-<p>tags: <a href="./tag/os-x.html">OS X</a><a href="./tag/python.html">Python</a><a href="./tag/foss.html">FOSS</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>For some time my desktop has been an older, underpowered Linux box, so using
-services like <a class="reference external" href="http://www.twitter.com">Twitter</a> via the website has been painful, as loaded with heavy
-javascript that would consume my CPU's limited resources.</p>
-<p>So, like any <a class="reference external" href="http://www.python.org">Python</a> programmer would do, I wrote my own client. Well, lets ...</p>
-                <a class="readmore" href="./tweeting-on-osx.html">read more</a>
-                <p>There are <a href="./tweeting-on-osx.html#disqus_thread">comments</a>.</p>
                 </div><!-- /.entry-content -->
             </article></li>
         
