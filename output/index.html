@@ -59,8 +59,228 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./video-on-raspbian.html">Video on Raspbian</a></h1> 
+                    <h1 class="entry-title"><a href="./joystick-mac-os-x-flightgear.html">Joysticks on Mac OS X in Flightgear</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-03-11T22:00:00">
+                Mon 11 March 2013
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/technology.html">Technology</a>. </p>
+<p>tags: <a href="./tag/os-x.html">OS X</a></p>
+
+
+</footer><!-- /.post-info --><p>I like flight simulators. I've played all of the good ones, <a class="reference external" href="http://www.flightgear.org/">Flightgear</a> is
+an open-source flight simulator that isn't bad, and is steadily getting better
+with every release. While it is available to run on Mac, there's no way to
+calibrate the Joystick due to a lack of caring on Apple's part.</p>
+<p>But, Flightgear is hackable. The joystick file is just a set of XML bindings,
+those bindings can run code, so using coefficients to the input and
+controlling the output, in theory I can calibrate the settings myself. So, I
+did:</p>
+<pre class="literal-block">
+&lt;?xml version=&quot;1.0&quot;?&gt;
+
+&lt;PropertyList&gt;
+    &lt;axis n=&quot;0&quot;&gt;
+        &lt;desc&gt;Aileron&lt;/desc&gt;
+        &lt;binding&gt;
+            &lt;command&gt;nasal&lt;/command&gt;
+            &lt;script&gt;
+                var value = cmdarg().getNode(&quot;setting&quot;).getValue();
+                if (abs(value) &amp;lt; 0.05) {
+                    value = 0;
+                }
+                else {
+                    value -= 0.15;
+                    value *= 1.5;
+                }
+                setprop(&quot;/controls/flight/aileron&quot;, value);
+            &lt;/script&gt;
+        &lt;/binding&gt;
+    &lt;/axis&gt;
+    &lt;axis n=&quot;1&quot;&gt;
+        &lt;desc&gt;Elevator&lt;/desc&gt;
+        &lt;binding&gt;
+            &lt;command&gt;nasal&lt;/command&gt;
+            &lt;script&gt;
+                var value = cmdarg().getNode(&quot;setting&quot;).getValue();
+                if (abs(value) &amp;lt; 0.05) {
+                    value = 0;
+                }
+                else {
+                    value -= 0.1;
+                    value *= -1.5;
+                }
+                setprop(&quot;/controls/flight/elevator&quot;, value);
+            &lt;/script&gt;
+        &lt;/binding&gt;
+    &lt;/axis&gt;
+    &lt;axis n=&quot;2&quot;&gt;
+        &lt;desc&gt;Rudder&lt;/desc&gt;
+        &lt;binding&gt;
+            &lt;command&gt;nasal&lt;/command&gt;
+            &lt;script&gt;
+                var value = cmdarg().getNode(&quot;setting&quot;).getValue();
+                if (abs(value) &amp;lt; 0.05) {
+                    value = 0;
+                }
+                else {
+                    value *= 1.5;
+                }
+                setprop(&quot;/controls/flight/rudder&quot;, value);
+            &lt;/script&gt;
+        &lt;/binding&gt;
+    &lt;/axis&gt;
+    &lt;axis n=&quot;3&quot;&gt;
+        &lt;desc&gt;Throttle&lt;/desc&gt;
+        &lt;binding&gt;
+            &lt;command&gt;nasal&lt;/command&gt;
+            &lt;script&gt;
+                var value = cmdarg().getNode(&quot;setting&quot;).getValue();
+                value -= 0.5;
+                value *= -1.5;
+                setprop(&quot;/controls/engines/engine/throttle&quot;, value);
+            &lt;/script&gt;
+        &lt;/binding&gt;
+    &lt;/axis&gt;
+
+&lt;axis n=&quot;4&quot;&gt;
+    &lt;desc&gt;View Direction&lt;/desc&gt;
+    &lt;direction&gt;left&lt;/direction&gt;
+    &lt;low&gt;
+    &lt;repeatable&gt;true&lt;/repeatable&gt;
+    &lt;binding&gt;
+        &lt;command&gt;nasal&lt;/command&gt;
+        &lt;script&gt;view.panViewDir(1)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;/low&gt;
+    &lt;high&gt;
+    &lt;repeatable&gt;true&lt;/repeatable&gt;
+    &lt;binding&gt;
+        &lt;command&gt;nasal&lt;/command&gt;
+        &lt;script&gt;view.panViewDir(-1)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;/high&gt;
+    &lt;dead-band type=&quot;double&quot;&gt;0&lt;/dead-band&gt;
+    &lt;binding&gt;
+    &lt;factor type=&quot;double&quot;&gt;-1&lt;/factor&gt;
+    &lt;/binding&gt;
+&lt;/axis&gt;
+&lt;axis n=&quot;5&quot;&gt;
+    &lt;desc&gt;View Elevation&lt;/desc&gt;
+    &lt;direction&gt;upward&lt;/direction&gt;
+    &lt;low&gt;
+    &lt;repeatable&gt;true&lt;/repeatable&gt;
+    &lt;binding&gt;
+        &lt;command&gt;nasal&lt;/command&gt;
+        &lt;script&gt;view.panViewPitch(1)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;/low&gt;
+    &lt;high&gt;
+    &lt;repeatable&gt;true&lt;/repeatable&gt;
+    &lt;binding&gt;
+        &lt;command&gt;nasal&lt;/command&gt;
+        &lt;script&gt;view.panViewPitch(-1)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;/high&gt;
+    &lt;dead-band type=&quot;double&quot;&gt;0&lt;/dead-band&gt;
+    &lt;binding&gt;
+    &lt;factor type=&quot;double&quot;&gt;-1&lt;/factor&gt;
+    &lt;/binding&gt;
+&lt;/axis&gt;
+&lt;button&gt;
+    &lt;desc&gt;Brakes&lt;/desc&gt;
+    &lt;binding&gt;
+    &lt;command&gt;nasal&lt;/command&gt;
+    &lt;script&gt;controls.applyBrakes(1)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;mod-up&gt;
+    &lt;binding&gt;
+        &lt;command&gt;nasal&lt;/command&gt;
+        &lt;script&gt;controls.applyBrakes(0)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;/mod-up&gt;
+&lt;/button&gt;
+&lt;button n=&quot;3&quot;&gt;
+    &lt;desc&gt;Flaps Up&lt;/desc&gt;
+    &lt;repeatable&gt;false&lt;/repeatable&gt;
+    &lt;binding&gt;
+    &lt;command&gt;nasal&lt;/command&gt;
+    &lt;script&gt;controls.flapsDown(-1)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;mod-up&gt;
+    &lt;binding&gt;
+        &lt;command&gt;nasal&lt;/command&gt;
+        &lt;script&gt;controls.flapsDown(0)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;/mod-up&gt;
+&lt;/button&gt;
+&lt;button n=&quot;4&quot;&gt;
+    &lt;desc&gt;Flaps Down&lt;/desc&gt;
+    &lt;repeatable&gt;false&lt;/repeatable&gt;
+    &lt;binding&gt;
+    &lt;command&gt;nasal&lt;/command&gt;
+    &lt;script&gt;controls.flapsDown(1)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;mod-up&gt;
+    &lt;binding&gt;
+        &lt;command&gt;nasal&lt;/command&gt;
+        &lt;script&gt;controls.flapsDown(0)&lt;/script&gt;
+    &lt;/binding&gt;
+    &lt;/mod-up&gt;
+&lt;/button&gt;
+&lt;button n=&quot;1&quot;&gt;
+    &lt;desc&gt;Elevator Trim Forward&lt;/desc&gt;
+    &lt;repeatable&gt;true&lt;/repeatable&gt;
+    &lt;binding&gt;
+    &lt;command&gt;nasal&lt;/command&gt;
+    &lt;script&gt;controls.elevatorTrim(0.75)&lt;/script&gt;
+    &lt;/binding&gt;
+&lt;/button&gt;
+&lt;button n=&quot;2&quot;&gt;
+    &lt;desc&gt;Elevator Trim Backward&lt;/desc&gt;
+    &lt;repeatable&gt;true&lt;/repeatable&gt;
+    &lt;binding&gt;
+    &lt;command&gt;nasal&lt;/command&gt;
+    &lt;script&gt;controls.elevatorTrim(-0.75)&lt;/script&gt;
+    &lt;/binding&gt;
+&lt;/button&gt;
+&lt;name type=&quot;string&quot;&gt;WingMan Extreme Digital 3D&lt;/name&gt;
+&lt;/PropertyList&gt;
+</pre>
+<p>Right now, the calibration is good, but the controls are really jerky and
+overly sensitive. I'll have to see if I can smooth them out. But, they work.</p>
+<p>There are <a href="./joystick-mac-os-x-flightgear.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./video-on-raspbian.html" rel="bookmark"
+                           title="Permalink to Video on Raspbian">Video on Raspbian</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-03-11T21:00:00">
                 Mon 11 March 2013
         </abbr>
@@ -74,42 +294,15 @@
 <p>tags: <a href="./tag/linux.html">Linux</a><a href="./tag/raspberry-pi.html">Raspberry Pi</a></p>
 
 
-</footer><!-- /.post-info --><p>Currently our upstairs TV has a <a class="reference external" href="http://www.raspberrypi.org/">raspberry pi</a> attached to it. It's running
+</footer><!-- /.post-info -->
+                <p>Currently our upstairs TV has a <a class="reference external" href="http://www.raspberrypi.org/">raspberry pi</a> attached to it. It's running
 the basic <a class="reference external" href="http://www.raspbian.org/">Raspbian</a> distribution, based on <a class="reference external" href="http://www.debian.org/">Debian Linux</a>. I'm using it for
 development as well as for a media center at the moment, so I'm not using
-<a class="reference external" href="http://www.raspbmc.com/">RaspBMC</a>, I'm going to order another one has a dedicated media center, but
-for now I need to be able to play movies off of a usb stick.</p>
-<p>I tried <a class="reference external" href="http://www.videolan.org/">VLC</a>, but the performance was horrible. Apparently it doesn't use
-the native GPU. I read about it online, and thanks to that finally found
-<a class="reference external" href="http://elinux.org/Omxplayer">omxplayer</a>, which does use the native GPU. Unfortunately, it's not all that
-polished when playing from the command-line. It leaves behind text in the
-terminal above and below the video at certain aspect ratios, which is visually
-distracting.</p>
-<p>They haven't fixed it yet so I put a wrapper script around it to work around
-the issue. I plan to put a whole interface around it at some point just for
-fun, but for now at least I can watch movies without text in the black bars
-above and below:</p>
-<pre class="literal-block">
-#!/bin/sh
-
-setterm -cursor off
-clear
-omxplayer -o hdmi $1
-clear
-setterm -cursor on
-</pre>
-<p>Simple, but it works.</p>
-<p>There are <a href="./video-on-raspbian.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+<a class="reference external" href="http://www.raspbmc.com/">RaspBMC</a>, I'm going to order another ...</p>
+                <a class="readmore" href="./video-on-raspbian.html">read more</a>
+                <p>There are <a href="./video-on-raspbian.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
@@ -409,49 +602,12 @@ telling me that they feel bad, and knowing that I can't fix it.</p>
             </article></li>
         
         
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="./customizing-awesome.html" rel="bookmark"
-                           title="Permalink to Customizing Awesome">Customizing Awesome</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-28T07:00:00">
-                Wed 28 November 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href="./category/technology.html">Technology</a>. </p>
-<p>tags: <a href="./tag/linux.html">Linux</a><a href="./tag/foss.html">FOSS</a><a href="./tag/awesome-wm.html">Awesome WM</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>As I mentioned previously, I'm currently running <a class="reference external" href="http://awesome.naquadah.org/">Awesome</a> on my netbook. While
-I added suspend on lid close, I still need to customize the crap out of it. I
-had nothing showing me my current battery status, so I searched around to find
-the appropriate <a class="reference external" href="http://www.lua.org/">lua</a> code, a language ...</p>
-                <a class="readmore" href="./customizing-awesome.html">read more</a>
-                <p>There are <a href="./customizing-awesome.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
             </ol><!-- /#posts-list -->
             
                 
 <p class="paginator">
     
-    Page 1 / 2
+    Page 1 / 3
     
         <a href="./index2.html">&raquo;</a>
     

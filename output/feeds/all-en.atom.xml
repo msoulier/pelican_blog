@@ -1,5 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-03-11T21:00:00-04:00</updated><entry><title>Video on Raspbian</title><link href="http://www.but-i-digress.ca/video-on-raspbian.html" rel="alternate"></link><updated>2013-03-11T21:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</id><summary type="html">&lt;p&gt;Currently our upstairs TV has a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;raspberry pi&lt;/a&gt; attached to it. It's running
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-03-11T22:00:00-04:00</updated><entry><title>Joysticks on Mac OS X in Flightgear</title><link href="http://www.but-i-digress.ca/joystick-mac-os-x-flightgear.html" rel="alternate"></link><updated>2013-03-11T22:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:joystick-mac-os-x-flightgear.html</id><summary type="html">&lt;p&gt;I like flight simulators. I've played all of the good ones, &lt;a class="reference external" href="http://www.flightgear.org/"&gt;Flightgear&lt;/a&gt; is
+an open-source flight simulator that isn't bad, and is steadily getting better
+with every release. While it is available to run on Mac, there's no way to
+calibrate the Joystick due to a lack of caring on Apple's part.&lt;/p&gt;
+&lt;p&gt;But, Flightgear is hackable. The joystick file is just a set of XML bindings,
+those bindings can run code, so using coefficients to the input and
+controlling the output, in theory I can calibrate the settings myself. So, I
+did:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot;?&amp;gt;
+
+&amp;lt;PropertyList&amp;gt;
+    &amp;lt;axis n=&amp;quot;0&amp;quot;&amp;gt;
+        &amp;lt;desc&amp;gt;Aileron&amp;lt;/desc&amp;gt;
+        &amp;lt;binding&amp;gt;
+            &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+            &amp;lt;script&amp;gt;
+                var value = cmdarg().getNode(&amp;quot;setting&amp;quot;).getValue();
+                if (abs(value) &amp;amp;lt; 0.05) {
+                    value = 0;
+                }
+                else {
+                    value -= 0.15;
+                    value *= 1.5;
+                }
+                setprop(&amp;quot;/controls/flight/aileron&amp;quot;, value);
+            &amp;lt;/script&amp;gt;
+        &amp;lt;/binding&amp;gt;
+    &amp;lt;/axis&amp;gt;
+    &amp;lt;axis n=&amp;quot;1&amp;quot;&amp;gt;
+        &amp;lt;desc&amp;gt;Elevator&amp;lt;/desc&amp;gt;
+        &amp;lt;binding&amp;gt;
+            &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+            &amp;lt;script&amp;gt;
+                var value = cmdarg().getNode(&amp;quot;setting&amp;quot;).getValue();
+                if (abs(value) &amp;amp;lt; 0.05) {
+                    value = 0;
+                }
+                else {
+                    value -= 0.1;
+                    value *= -1.5;
+                }
+                setprop(&amp;quot;/controls/flight/elevator&amp;quot;, value);
+            &amp;lt;/script&amp;gt;
+        &amp;lt;/binding&amp;gt;
+    &amp;lt;/axis&amp;gt;
+    &amp;lt;axis n=&amp;quot;2&amp;quot;&amp;gt;
+        &amp;lt;desc&amp;gt;Rudder&amp;lt;/desc&amp;gt;
+        &amp;lt;binding&amp;gt;
+            &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+            &amp;lt;script&amp;gt;
+                var value = cmdarg().getNode(&amp;quot;setting&amp;quot;).getValue();
+                if (abs(value) &amp;amp;lt; 0.05) {
+                    value = 0;
+                }
+                else {
+                    value *= 1.5;
+                }
+                setprop(&amp;quot;/controls/flight/rudder&amp;quot;, value);
+            &amp;lt;/script&amp;gt;
+        &amp;lt;/binding&amp;gt;
+    &amp;lt;/axis&amp;gt;
+    &amp;lt;axis n=&amp;quot;3&amp;quot;&amp;gt;
+        &amp;lt;desc&amp;gt;Throttle&amp;lt;/desc&amp;gt;
+        &amp;lt;binding&amp;gt;
+            &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+            &amp;lt;script&amp;gt;
+                var value = cmdarg().getNode(&amp;quot;setting&amp;quot;).getValue();
+                value -= 0.5;
+                value *= -1.5;
+                setprop(&amp;quot;/controls/engines/engine/throttle&amp;quot;, value);
+            &amp;lt;/script&amp;gt;
+        &amp;lt;/binding&amp;gt;
+    &amp;lt;/axis&amp;gt;
+
+&amp;lt;axis n=&amp;quot;4&amp;quot;&amp;gt;
+    &amp;lt;desc&amp;gt;View Direction&amp;lt;/desc&amp;gt;
+    &amp;lt;direction&amp;gt;left&amp;lt;/direction&amp;gt;
+    &amp;lt;low&amp;gt;
+    &amp;lt;repeatable&amp;gt;true&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+        &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+        &amp;lt;script&amp;gt;view.panViewDir(1)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;/low&amp;gt;
+    &amp;lt;high&amp;gt;
+    &amp;lt;repeatable&amp;gt;true&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+        &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+        &amp;lt;script&amp;gt;view.panViewDir(-1)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;/high&amp;gt;
+    &amp;lt;dead-band type=&amp;quot;double&amp;quot;&amp;gt;0&amp;lt;/dead-band&amp;gt;
+    &amp;lt;binding&amp;gt;
+    &amp;lt;factor type=&amp;quot;double&amp;quot;&amp;gt;-1&amp;lt;/factor&amp;gt;
+    &amp;lt;/binding&amp;gt;
+&amp;lt;/axis&amp;gt;
+&amp;lt;axis n=&amp;quot;5&amp;quot;&amp;gt;
+    &amp;lt;desc&amp;gt;View Elevation&amp;lt;/desc&amp;gt;
+    &amp;lt;direction&amp;gt;upward&amp;lt;/direction&amp;gt;
+    &amp;lt;low&amp;gt;
+    &amp;lt;repeatable&amp;gt;true&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+        &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+        &amp;lt;script&amp;gt;view.panViewPitch(1)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;/low&amp;gt;
+    &amp;lt;high&amp;gt;
+    &amp;lt;repeatable&amp;gt;true&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+        &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+        &amp;lt;script&amp;gt;view.panViewPitch(-1)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;/high&amp;gt;
+    &amp;lt;dead-band type=&amp;quot;double&amp;quot;&amp;gt;0&amp;lt;/dead-band&amp;gt;
+    &amp;lt;binding&amp;gt;
+    &amp;lt;factor type=&amp;quot;double&amp;quot;&amp;gt;-1&amp;lt;/factor&amp;gt;
+    &amp;lt;/binding&amp;gt;
+&amp;lt;/axis&amp;gt;
+&amp;lt;button&amp;gt;
+    &amp;lt;desc&amp;gt;Brakes&amp;lt;/desc&amp;gt;
+    &amp;lt;binding&amp;gt;
+    &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+    &amp;lt;script&amp;gt;controls.applyBrakes(1)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;mod-up&amp;gt;
+    &amp;lt;binding&amp;gt;
+        &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+        &amp;lt;script&amp;gt;controls.applyBrakes(0)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;/mod-up&amp;gt;
+&amp;lt;/button&amp;gt;
+&amp;lt;button n=&amp;quot;3&amp;quot;&amp;gt;
+    &amp;lt;desc&amp;gt;Flaps Up&amp;lt;/desc&amp;gt;
+    &amp;lt;repeatable&amp;gt;false&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+    &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+    &amp;lt;script&amp;gt;controls.flapsDown(-1)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;mod-up&amp;gt;
+    &amp;lt;binding&amp;gt;
+        &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+        &amp;lt;script&amp;gt;controls.flapsDown(0)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;/mod-up&amp;gt;
+&amp;lt;/button&amp;gt;
+&amp;lt;button n=&amp;quot;4&amp;quot;&amp;gt;
+    &amp;lt;desc&amp;gt;Flaps Down&amp;lt;/desc&amp;gt;
+    &amp;lt;repeatable&amp;gt;false&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+    &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+    &amp;lt;script&amp;gt;controls.flapsDown(1)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;mod-up&amp;gt;
+    &amp;lt;binding&amp;gt;
+        &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+        &amp;lt;script&amp;gt;controls.flapsDown(0)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+    &amp;lt;/mod-up&amp;gt;
+&amp;lt;/button&amp;gt;
+&amp;lt;button n=&amp;quot;1&amp;quot;&amp;gt;
+    &amp;lt;desc&amp;gt;Elevator Trim Forward&amp;lt;/desc&amp;gt;
+    &amp;lt;repeatable&amp;gt;true&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+    &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+    &amp;lt;script&amp;gt;controls.elevatorTrim(0.75)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+&amp;lt;/button&amp;gt;
+&amp;lt;button n=&amp;quot;2&amp;quot;&amp;gt;
+    &amp;lt;desc&amp;gt;Elevator Trim Backward&amp;lt;/desc&amp;gt;
+    &amp;lt;repeatable&amp;gt;true&amp;lt;/repeatable&amp;gt;
+    &amp;lt;binding&amp;gt;
+    &amp;lt;command&amp;gt;nasal&amp;lt;/command&amp;gt;
+    &amp;lt;script&amp;gt;controls.elevatorTrim(-0.75)&amp;lt;/script&amp;gt;
+    &amp;lt;/binding&amp;gt;
+&amp;lt;/button&amp;gt;
+&amp;lt;name type=&amp;quot;string&amp;quot;&amp;gt;WingMan Extreme Digital 3D&amp;lt;/name&amp;gt;
+&amp;lt;/PropertyList&amp;gt;
+&lt;/pre&gt;
+&lt;p&gt;Right now, the calibration is good, but the controls are really jerky and
+overly sensitive. I'll have to see if I can smooth them out. But, they work.&lt;/p&gt;
+</summary><category term="OS X"></category></entry><entry><title>Video on Raspbian</title><link href="http://www.but-i-digress.ca/video-on-raspbian.html" rel="alternate"></link><updated>2013-03-11T21:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</id><summary type="html">&lt;p&gt;Currently our upstairs TV has a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;raspberry pi&lt;/a&gt; attached to it. It's running
 the basic &lt;a class="reference external" href="http://www.raspbian.org/"&gt;Raspbian&lt;/a&gt; distribution, based on &lt;a class="reference external" href="http://www.debian.org/"&gt;Debian Linux&lt;/a&gt;. I'm using it for
 development as well as for a media center at the moment, so I'm not using
 &lt;a class="reference external" href="http://www.raspbmc.com/"&gt;RaspBMC&lt;/a&gt;, I'm going to order another one has a dedicated media center, but
