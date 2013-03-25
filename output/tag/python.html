@@ -59,8 +59,79 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href=".././checking-the-weather.html">Checking the weather</a></h1> 
+                    <h1 class="entry-title"><a href=".././matplotlib-is-really-cool.html">Matplotlib is really cool</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-03-25T15:30:00">
+                Mon 25 March 2013
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href=".././category/technology.html">Technology</a>. </p>
+<p>tags: <a href=".././tag/python.html">Python</a></p>
+
+
+</footer><!-- /.post-info --><p>Recently at work I needed to produce a pie chart for some data that I had to
+crawl through using basic scripting. Pulling out the numbers, sorting,
+filtering, etc., was all tasks that I'm used to doing, but for graphing I
+normally use <a class="reference external" href="http://www.gnuplot.org">Gnuplot</a>. But, Gnuplot can't do pie charts AFAIK, so I needed
+to look for another way.</p>
+<p>I didn't want to use a spreadsheet for the task because I don't find them very
+scriptable. So, I turned to <a class="reference external" href="http://matplotlib.org">matplotlib</a>, Python's uber-graphing library.</p>
+<p>I found a simple example online, and before I knew it, I had a nice looking
+pie chart, with very little code.</p>
+<div class="highlight"><pre><span class="c"># make a square figure and axes</span>
+<span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">fracs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="n">country</span><span class="p">]</span>
+    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
+    <span class="n">fracs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+
+<span class="n">pie</span><span class="p">(</span><span class="n">fracs</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%1.1f%%</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;By Country&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;facecolor&#39;</span><span class="p">:</span><span class="s">&#39;0.8&#39;</span><span class="p">,</span> <span class="s">&#39;pad&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
+
+<span class="n">show</span><span class="p">()</span>
+</pre></div>
+<div class="figure">
+<img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" />
+</div>
+<p>Very impressive. I tried it a few years ago and found it difficult, but it
+seems to have gotten much simpler. I must delve deeper now.</p>
+<p>There are <a href=".././matplotlib-is-really-cool.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href=".././checking-the-weather.html" rel="bookmark"
+                           title="Permalink to Checking the weather">Checking the weather</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2012-12-23T20:30:00">
                 Sun 23 December 2012
         </abbr>
@@ -74,77 +145,15 @@
 <p>tags: <a href=".././tag/python.html">Python</a></p>
 
 
-</footer><!-- /.post-info --><p>A while back I needed a way to check the weather forecast, simply, from a
+</footer><!-- /.post-info -->
+                <p>A while back I needed a way to check the weather forecast, simply, from a
 terminal, as is the preference of most Unix geeks like me. Being a Canadian,
 I'm not interested in the Weather Channel as much as the Environment Canada
-data. Thankfully, they do publish an RSS feed, and good for them.</p>
-<p>I'm interested in this one:
-<a class="reference external" href="http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml">http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml</a>. So, to check the
-weather, I need to pull the feed and parse it. Pulling a page in Python is as
-simple as using <tt class="docutils literal">urllib</tt>. From there, I can walk the elements I want like
-so:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">urllib</span>
-<span class="kn">from</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">import</span> <span class="n">parse</span>
-
-<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">parse</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">rssfeed</span><span class="p">))</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;channel/item/title&#39;</span><span class="p">):</span>
-</pre></div>
-<p>Now, I wanted the option of picking a certain number of lines, and wrapping at
-a certain number of columns. I wanted this for using the script output as
-input into other apps, like <a class="reference external" href="http://conky.sourceforge.net/">Conky</a>. Skipping lines is easy, intelligently
-wrapping them is not. Luckily, Python has a <tt class="docutils literal">textwrap</tt> module in the
-standard library.</p>
-<p>You use it like this:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">textwrap</span>
-
-<span class="n">wrapper</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">TextWrapper</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">wrap</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="s">&quot;    &quot;</span><span class="p">)</span>
-<span class="n">lines</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">line</span>
-</pre></div>
-<p>Put together, it's really that simple. I think the majority of my code is
-option parsing. The core loop is just this:</p>
-<div class="highlight"><pre><span class="n">options</span> <span class="o">=</span> <span class="n">parse_options</span><span class="p">()</span>
-<span class="n">wrapper</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">TextWrapper</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">options</span><span class="o">.</span><span class="n">wrap</span><span class="p">,</span> <span class="n">subsequent_indent</span><span class="o">=</span><span class="s">&quot;    &quot;</span><span class="p">)</span>
-<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">parse</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">rssfeed</span><span class="p">))</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s">&#39;channel/item/title&#39;</span><span class="p">):</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">elem</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">,</span> <span class="s">&#39;ignore&#39;</span><span class="p">)</span>
-    <span class="n">lines</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">lines</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="n">options</span><span class="o">.</span><span class="n">lines</span><span class="p">:</span>
-            <span class="k">break</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="n">line</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">continue</span>
-    <span class="k">break</span>
-</pre></div>
-<p>The whole thing <a class="reference external" href="https://github.com/msoulier/mikes-tools/blob/master/weather.py">is here</a>. Sample output looks like this:</p>
-<pre class="literal-block">
-No watches or warnings in effect, Ottawa (Kanata - Orléans)
-Current Conditions: Light Snow, -11.1°C
-Sunday night: A few flurries. Low minus 18.
-Monday: Sunny. High minus 9.
-Monday night: Increasing cloudiness. Low minus 12.
-Tuesday: Chance of flurries. High minus 7. POP 60%
-Wednesday: A mix of sun and cloud. Low minus 16. High minus 8.
-Thursday: Periods of snow. Low minus 8. High minus 2.
-Friday: Sunny. Low minus 12. High minus 7.
-Saturday: Periods of snow. Low minus 12. High minus 7.
-</pre>
-<p>I love building my own tools like this, it's the ultimate in end-user
-computing. Unix and Python are my playground.</p>
-<p>There are <a href=".././checking-the-weather.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+data. Thankfully, they do publish an RSS ...</p>
+                <a class="readmore" href=".././checking-the-weather.html">read more</a>
+                <p>There are <a href=".././checking-the-weather.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             

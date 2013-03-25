@@ -1,7 +1,7 @@
 New post
 ========
 
-:date: 2012-11-03 10:20
+:date: 2013-11-03 10:20
 :category: Personal
 :author: Michael P. Soulier
 :tags: Blogging

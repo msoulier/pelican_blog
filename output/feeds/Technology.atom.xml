@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-03-11T22:00:00-04:00</updated><entry><title>Joysticks on Mac OS X in Flightgear</title><link href="http://www.but-i-digress.ca/joystick-mac-os-x-flightgear.html" rel="alternate"></link><updated>2013-03-11T22:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:joystick-mac-os-x-flightgear.html</id><summary type="html">&lt;p&gt;I like flight simulators. I've played all of the good ones, &lt;a class="reference external" href="http://www.flightgear.org/"&gt;Flightgear&lt;/a&gt; is
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/Technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-03-25T15:30:00-04:00</updated><entry><title>Matplotlib is really cool</title><link href="http://www.but-i-digress.ca/matplotlib-is-really-cool.html" rel="alternate"></link><updated>2013-03-25T15:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-25:matplotlib-is-really-cool.html</id><summary type="html">&lt;p&gt;Recently at work I needed to produce a pie chart for some data that I had to
+crawl through using basic scripting. Pulling out the numbers, sorting,
+filtering, etc., was all tasks that I'm used to doing, but for graphing I
+normally use &lt;a class="reference external" href="http://www.gnuplot.org"&gt;Gnuplot&lt;/a&gt;. But, Gnuplot can't do pie charts AFAIK, so I needed
+to look for another way.&lt;/p&gt;
+&lt;p&gt;I didn't want to use a spreadsheet for the task because I don't find them very
+scriptable. So, I turned to &lt;a class="reference external" href="http://matplotlib.org"&gt;matplotlib&lt;/a&gt;, Python's uber-graphing library.&lt;/p&gt;
+&lt;p&gt;I found a simple example online, and before I knew it, I had a nice looking
+pie chart, with very little code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# make a square figure and axes&lt;/span&gt;
+&lt;span class="n"&gt;figure&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;figsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;ax&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;axes&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="n"&gt;labels&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+&lt;span class="n"&gt;fracs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;country&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;countries&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;countries&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;labels&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;country&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;fracs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;count&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;pie&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fracs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;labels&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;labels&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;autopct&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%1.1f%%&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shadow&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;title&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;By Country&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bbox&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;facecolor&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;0.8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;pad&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;
+
+&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
+&lt;/div&gt;
+&lt;p&gt;Very impressive. I tried it a few years ago and found it difficult, but it
+seems to have gotten much simpler. I must delve deeper now.&lt;/p&gt;
+</summary><category term="Python"></category></entry><entry><title>Joysticks on Mac OS X in Flightgear</title><link href="http://www.but-i-digress.ca/joystick-mac-os-x-flightgear.html" rel="alternate"></link><updated>2013-03-11T22:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:joystick-mac-os-x-flightgear.html</id><summary type="html">&lt;p&gt;I like flight simulators. I've played all of the good ones, &lt;a class="reference external" href="http://www.flightgear.org/"&gt;Flightgear&lt;/a&gt; is
 an open-source flight simulator that isn't bad, and is steadily getting better
 with every release. While it is available to run on Mac, there's no way to
 calibrate the Joystick due to a lack of caring on Apple's part.&lt;/p&gt;
