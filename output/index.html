@@ -59,8 +59,94 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./matplotlib-is-really-cool.html">Matplotlib is really cool</a></h1> 
+                    <h1 class="entry-title"><a href="./java-pointlessly-difficult.html">Java, usable but pointlessly difficult</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-06-05T00:30:00">
+                Wed 05 June 2013
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/technology.html">Technology</a>. </p>
+<p>tags: <a href="./tag/java.html">Java</a></p>
+
+
+</footer><!-- /.post-info --><p>I've been working on a REST client in Java at work lately. I know, it scares
+me too. I've had to revisit much of my old Java knowledge, and pick up a lot
+of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.</p>
+<p>Our internal servers use self-signed SSL certs at work, so to talk to them I
+had to disable any host-certificate checking. Should be a simple boolean in
+the API right? Wrong. I forgot. Java.</p>
+<p>First, you need to install your own trust manager.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.net.ssl.X509TrustManager</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.cert.X509Certificate</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.net.ssl.SSLContext</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.net.ssl.HttpsURLConnection</span><span class="o">;</span>
+
+ <span class="n">TrustManager</span><span class="o">[]</span> <span class="n">trustAllCerts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrustManager</span><span class="o">[]</span> <span class="o">{</span>
+         <span class="k">new</span> <span class="nf">X509TrustManager</span><span class="o">()</span> <span class="o">{</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">cert</span><span class="o">.</span><span class="na">X509Certificate</span><span class="o">[]</span> <span class="nf">getAcceptedIssuers</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkClientTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">certs</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
+     <span class="o">}</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkServerTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">certs</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
+     <span class="o">}</span>
+ <span class="o">}};</span>
+ <span class="c1">// Install this trust manager.</span>
+ <span class="k">try</span> <span class="o">{</span>
+     <span class="n">SSLContext</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">SSLContext</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;SSL&quot;</span><span class="o">);</span>
+     <span class="n">sc</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">trustAllCerts</span><span class="o">,</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">SecureRandom</span><span class="o">());</span>
+     <span class="n">HttpsURLConnection</span><span class="o">.</span><span class="na">setDefaultSSLSocketFactory</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">getSocketFactory</span><span class="o">());</span>
+ <span class="o">}</span>
+</pre></div>
+<p>Then, you need to install a hostname verifier that accepts a bad host, as
+that's likely wrong too, especially if you access the box by IP address when
+the IP isn't in the cert.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.net.ssl.HostnameVerifier</span><span class="o">;</span>
+
+ <span class="n">HttpsURLConnection</span> <span class="n">sconnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">unwrap</span><span class="o">();</span>
+ <span class="n">sconnection</span><span class="o">.</span><span class="na">setHostnameVerifier</span><span class="o">(</span><span class="k">new</span> <span class="n">HostnameVerifier</span><span class="o">()</span> <span class="o">{</span>
+     <span class="nd">@Override</span>
+     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verify</span><span class="o">(</span><span class="n">String</span> <span class="n">hostname</span><span class="o">,</span> <span class="n">SSLSession</span> <span class="n">session</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">});</span>
+</pre></div>
+<p>Usable? Yes. But it's no wonder that Java programmers insist on IDEs when it's
+so damn wordy. I mean, wouldn't a simple boolean have done here?</p>
+<p>There are <a href="./java-pointlessly-difficult.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./matplotlib-is-really-cool.html" rel="bookmark"
+                           title="Permalink to Matplotlib is really cool">Matplotlib is really cool</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-03-25T15:30:00">
                 Mon 25 March 2013
         </abbr>
@@ -74,49 +160,15 @@
 <p>tags: <a href="./tag/python.html">Python</a></p>
 
 
-</footer><!-- /.post-info --><p>Recently at work I needed to produce a pie chart for some data that I had to
+</footer><!-- /.post-info -->
+                <p>Recently at work I needed to produce a pie chart for some data that I had to
 crawl through using basic scripting. Pulling out the numbers, sorting,
 filtering, etc., was all tasks that I'm used to doing, but for graphing I
-normally use <a class="reference external" href="http://www.gnuplot.org">Gnuplot</a>. But, Gnuplot can't do pie charts AFAIK, so I needed
-to look for another way.</p>
-<p>I didn't want to use a spreadsheet for the task because I don't find them very
-scriptable. So, I turned to <a class="reference external" href="http://matplotlib.org">matplotlib</a>, Python's uber-graphing library.</p>
-<p>I found a simple example online, and before I knew it, I had a nice looking
-pie chart, with very little code.</p>
-<div class="highlight"><pre><span class="c"># make a square figure and axes</span>
-<span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
-
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">fracs</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="n">country</span><span class="p">]</span>
-    <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">country</span><span class="p">)</span>
-    <span class="n">fracs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
-
-<span class="n">pie</span><span class="p">(</span><span class="n">fracs</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%1.1f%%</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
-<span class="n">title</span><span class="p">(</span><span class="s">&#39;By Country&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;facecolor&#39;</span><span class="p">:</span><span class="s">&#39;0.8&#39;</span><span class="p">,</span> <span class="s">&#39;pad&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">})</span>
-
-<span class="n">show</span><span class="p">()</span>
-</pre></div>
-<div class="figure">
-<img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" />
-</div>
-<p>Very impressive. I tried it a few years ago and found it difficult, but it
-seems to have gotten much simpler. I must delve deeper now.</p>
-<p>There are <a href="./matplotlib-is-really-cool.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+normally use <a class="reference external" href="http://www.gnuplot.org">Gnuplot</a>. But, Gnuplot can't do ...</p>
+                <a class="readmore" href="./matplotlib-is-really-cool.html">read more</a>
+                <p>There are <a href="./matplotlib-is-really-cool.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
@@ -412,43 +464,6 @@ some experience with thanks to <a class="reference external" href="http://www.fr
 not identical, and on <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>, you quickly find ...</p>
                 <a class="readmore" href="./brewing-a-better-unix.html">read more</a>
                 <p>There are <a href="./brewing-a-better-unix.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="./apple-support-experience.html" rel="bookmark"
-                           title="Permalink to The Apple Support Experience">The Apple Support Experience</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-12-06T12:20:00">
-                Thu 06 December 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href="./category/technology.html">Technology</a>. </p>
-<p>tags: <a href="./tag/apple.html">Apple</a><a href="./tag/customer-service.html">Customer Service</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>So, having jumped into Apple land with a Mac Mini recently, and having some
-problems, I of course took advantage of my included 90 days technical support.
-Being part of the Apple ecosystem includes being subject to how they support
-their customers, so I think it's important to write ...</p>
-                <a class="readmore" href="./apple-support-experience.html">read more</a>
-                <p>There are <a href="./apple-support-experience.html#disqus_thread">comments</a>.</p>
                 </div><!-- /.entry-content -->
             </article></li>
         

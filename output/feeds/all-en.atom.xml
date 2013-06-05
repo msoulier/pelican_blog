@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-03-25T15:30:00-04:00</updated><entry><title>Matplotlib is really cool</title><link href="http://www.but-i-digress.ca/matplotlib-is-really-cool.html" rel="alternate"></link><updated>2013-03-25T15:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-25:matplotlib-is-really-cool.html</id><summary type="html">&lt;p&gt;Recently at work I needed to produce a pie chart for some data that I had to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-06-05T00:30:00-04:00</updated><entry><title>Java, usable but pointlessly difficult</title><link href="http://www.but-i-digress.ca/java-pointlessly-difficult.html" rel="alternate"></link><updated>2013-06-05T00:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-06-05:java-pointlessly-difficult.html</id><summary type="html">&lt;p&gt;I've been working on a REST client in Java at work lately. I know, it scares
+me too. I've had to revisit much of my old Java knowledge, and pick up a lot
+of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.&lt;/p&gt;
+&lt;p&gt;Our internal servers use self-signed SSL certs at work, so to talk to them I
+had to disable any host-certificate checking. Should be a simple boolean in
+the API right? Wrong. I forgot. Java.&lt;/p&gt;
+&lt;p&gt;First, you need to install your own trust manager.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.net.ssl.X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;java.security.cert.X509Certificate&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.net.ssl.SSLContext&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.net.ssl.HttpsURLConnection&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+ &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;trustAllCerts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+         &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nf"&gt;X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+     &lt;span class="nd"&gt;@Override&lt;/span&gt;
+     &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;security&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;X509Certificate&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="nf"&gt;getAcceptedIssuers&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+     &lt;span class="o"&gt;}&lt;/span&gt;
+     &lt;span class="nd"&gt;@Override&lt;/span&gt;
+     &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;checkClientTrusted&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X509Certificate&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;certs&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;authType&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+     &lt;span class="o"&gt;}&lt;/span&gt;
+     &lt;span class="nd"&gt;@Override&lt;/span&gt;
+     &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;checkServerTrusted&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;X509Certificate&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;certs&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;authType&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+     &lt;span class="o"&gt;}&lt;/span&gt;
+ &lt;span class="o"&gt;}};&lt;/span&gt;
+ &lt;span class="c1"&gt;// Install this trust manager.&lt;/span&gt;
+ &lt;span class="k"&gt;try&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+     &lt;span class="n"&gt;SSLContext&lt;/span&gt; &lt;span class="n"&gt;sc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SSLContext&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getInstance&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;SSL&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+     &lt;span class="n"&gt;sc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;init&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;trustAllCerts&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;security&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;SecureRandom&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
+     &lt;span class="n"&gt;HttpsURLConnection&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setDefaultSSLSocketFactory&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getSocketFactory&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
+ &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Then, you need to install a hostname verifier that accepts a bad host, as
+that's likely wrong too, especially if you access the box by IP address when
+the IP isn't in the cert.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.net.ssl.HostnameVerifier&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+ &lt;span class="n"&gt;HttpsURLConnection&lt;/span&gt; &lt;span class="n"&gt;sconnection&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;HttpsURLConnection&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;unwrap&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+ &lt;span class="n"&gt;sconnection&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setHostnameVerifier&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;HostnameVerifier&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+     &lt;span class="nd"&gt;@Override&lt;/span&gt;
+     &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;boolean&lt;/span&gt; &lt;span class="nf"&gt;verify&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt; &lt;span class="n"&gt;hostname&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;SSLSession&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+     &lt;span class="o"&gt;}&lt;/span&gt;
+ &lt;span class="o"&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Usable? Yes. But it's no wonder that Java programmers insist on IDEs when it's
+so damn wordy. I mean, wouldn't a simple boolean have done here?&lt;/p&gt;
+</summary><category term="Java"></category></entry><entry><title>Matplotlib is really cool</title><link href="http://www.but-i-digress.ca/matplotlib-is-really-cool.html" rel="alternate"></link><updated>2013-03-25T15:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-25:matplotlib-is-really-cool.html</id><summary type="html">&lt;p&gt;Recently at work I needed to produce a pie chart for some data that I had to
 crawl through using basic scripting. Pulling out the numbers, sorting,
 filtering, etc., was all tasks that I'm used to doing, but for graphing I
 normally use &lt;a class="reference external" href="http://www.gnuplot.org"&gt;Gnuplot&lt;/a&gt;. But, Gnuplot can't do pie charts AFAIK, so I needed
@@ -795,7 +842,7 @@ the appropriate &lt;a class="reference external" href="http://www.lua.org/"&gt;l
         &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;then&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
         &lt;span class="k"&gt;else&lt;/span&gt;
             &lt;span class="n"&gt;baticon&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;beautiful&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;widget_bat&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;span color=&amp;#39;white&amp;#39;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;%&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;&amp;lt;span color=&amp;#39;white&amp;#39;&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;..&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;%&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;
         &lt;span class="k"&gt;end&lt;/span&gt;
     &lt;span class="k"&gt;end&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;61&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s"&gt;BAT0&amp;quot;&lt;/span&gt;
 &lt;span class="p"&gt;)&lt;/span&gt;
