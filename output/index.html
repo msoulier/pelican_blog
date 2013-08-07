@@ -43,6 +43,8 @@
                 
                     <li ><a href="./category/development.html">Development</a></li>
                 
+                    <li ><a href="./category/driving.html">Driving</a></li>
+                
                     <li ><a href="./category/personal.html">Personal</a></li>
                 
                     <li ><a href="./category/quotes.html">Quotes</a></li>
@@ -59,8 +61,64 @@
         
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="./java-pointlessly-difficult.html">Java, usable but pointlessly difficult</a></h1> 
+                    <h1 class="entry-title"><a href="./drivers-its-not-that-hard.html">Drivers, it's really not that hard</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-11-03T10:20:00">
+                Sun 03 November 2013
+        </abbr>
+
+        
+        <address class="vcard author">
+                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        
+<p>In <a href="./category/driving.html">Driving</a>. </p>
+<p>tags: <a href="./tag/cars.html">Cars</a><a href="./tag/canada.html">Canada</a></p>
+
+
+</footer><!-- /.post-info --><p>I am constantly amazed at the ignorance and outright laziness of Canadian
+drivers. Yes, we could be worse, but we could also be much, much better.</p>
+<p>Case in point, I see people constantly turning left, and swinging out into the
+right lane, or turning right, and swinging out into the left lane.</p>
+<p>The rules really are <a class="reference external" href="http://www.mto.gov.on.ca/english/dandv/driver/handbook/section2.6.4.shtml">not that hard</a> to understand, and given the
+implications at an intersection with traffic coming from all directions, if
+you violate the rules, you're a idiot. Either you're too dumb to remember the
+rules, and can't figure out how, in this connected day and age, to look them
+up, or you simply don't care about the rules. And given the rules are there to
+not only keep me and my children alive, but also you, then yes, you're an
+idiot.</p>
+<p>Kinda like not bothering to signal. What, lever too far away? Can't be
+bothered to be safe while sharing the road with me, and my two beautiful
+children? Then you shouldn't be driving. Idiot.</p>
+<p>I'm very tempted to drive with a dash cam at all times, and post the worst
+offenders on youtube. Granted, we all have idiot moments, and sometimes it's
+me, but it's the consistent idiots I'm interested in.</p>
+<p>There are <a href="./drivers-its-not-that-hard.html#disqus_thread">comments</a>.</p>
+                </article>
+                
+            </aside><!-- /#featured -->
+            
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+            
+        
+        
+        
+            
+
+        
+         
+            
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="./java-pointlessly-difficult.html" rel="bookmark"
+                           title="Permalink to Java, usable but pointlessly difficult">Java, usable but pointlessly difficult</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-06-05T00:30:00">
                 Wed 05 June 2013
         </abbr>
@@ -74,64 +132,15 @@
 <p>tags: <a href="./tag/java.html">Java</a></p>
 
 
-</footer><!-- /.post-info --><p>I've been working on a REST client in Java at work lately. I know, it scares
+</footer><!-- /.post-info -->
+                <p>I've been working on a REST client in Java at work lately. I know, it scares
 me too. I've had to revisit much of my old Java knowledge, and pick up a lot
 of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.</p>
-<p>Our internal servers use self-signed SSL certs at work, so to talk to them I
-had to disable any host-certificate checking. Should be a simple boolean in
-the API right? Wrong. I forgot. Java.</p>
-<p>First, you need to install your own trust manager.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.net.ssl.X509TrustManager</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.security.cert.X509Certificate</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.net.ssl.SSLContext</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.net.ssl.HttpsURLConnection</span><span class="o">;</span>
-
- <span class="n">TrustManager</span><span class="o">[]</span> <span class="n">trustAllCerts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrustManager</span><span class="o">[]</span> <span class="o">{</span>
-         <span class="k">new</span> <span class="nf">X509TrustManager</span><span class="o">()</span> <span class="o">{</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">cert</span><span class="o">.</span><span class="na">X509Certificate</span><span class="o">[]</span> <span class="nf">getAcceptedIssuers</span><span class="o">()</span> <span class="o">{</span>
-         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-     <span class="o">}</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkClientTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">certs</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
-     <span class="o">}</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkServerTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">certs</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
-     <span class="o">}</span>
- <span class="o">}};</span>
- <span class="c1">// Install this trust manager.</span>
- <span class="k">try</span> <span class="o">{</span>
-     <span class="n">SSLContext</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">SSLContext</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;SSL&quot;</span><span class="o">);</span>
-     <span class="n">sc</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">trustAllCerts</span><span class="o">,</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">SecureRandom</span><span class="o">());</span>
-     <span class="n">HttpsURLConnection</span><span class="o">.</span><span class="na">setDefaultSSLSocketFactory</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">getSocketFactory</span><span class="o">());</span>
- <span class="o">}</span>
-</pre></div>
-<p>Then, you need to install a hostname verifier that accepts a bad host, as
-that's likely wrong too, especially if you access the box by IP address when
-the IP isn't in the cert.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.net.ssl.HostnameVerifier</span><span class="o">;</span>
-
- <span class="n">HttpsURLConnection</span> <span class="n">sconnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">unwrap</span><span class="o">();</span>
- <span class="n">sconnection</span><span class="o">.</span><span class="na">setHostnameVerifier</span><span class="o">(</span><span class="k">new</span> <span class="n">HostnameVerifier</span><span class="o">()</span> <span class="o">{</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verify</span><span class="o">(</span><span class="n">String</span> <span class="n">hostname</span><span class="o">,</span> <span class="n">SSLSession</span> <span class="n">session</span><span class="o">)</span> <span class="o">{</span>
-         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-     <span class="o">}</span>
- <span class="o">});</span>
-</pre></div>
-<p>Usable? Yes. But it's no wonder that Java programmers insist on IDEs when it's
-so damn wordy. I mean, wouldn't a simple boolean have done here?</p>
-<p>There are <a href="./java-pointlessly-difficult.html#disqus_thread">comments</a>.</p>
-                </article>
-                
-            </aside><!-- /#featured -->
-            
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-            
-        
+<p>Our internal ...</p>
+                <a class="readmore" href="./java-pointlessly-difficult.html">read more</a>
+                <p>There are <a href="./java-pointlessly-difficult.html#disqus_thread">comments</a>.</p>
+                </div><!-- /.entry-content -->
+            </article></li>
         
         
             
@@ -427,43 +436,6 @@ the go and I read slowly, and not often enough. I'm going through the section
 on <a class="reference external" href="http://www.gnu.org/software/autoconf/">GNU autotools</a>, which I've never been a heavy user of, albiet I'm a heavy ...</p>
                 <a class="readmore" href="./getting-started-with-autotools.html">read more</a>
                 <p>There are <a href="./getting-started-with-autotools.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="./brewing-a-better-unix.html" rel="bookmark"
-                           title="Permalink to Brewing a better UNIX">Brewing a better UNIX</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-12-09T08:00:00">
-                Sun 09 December 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href="./category/technology.html">Technology</a>. </p>
-<p>tags: <a href="./tag/os-x.html">OS X</a><a href="./tag/unix.html">UNIX</a><a href="./tag/foss.html">FOSS</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>Being a <a class="reference external" href="http://www.linux.org/">Linux</a> user, I'm used to a fairly standard set of tools on my
-command-line. On <a class="reference external" href="http://www.apple.com/osx/">OS X</a>, it's essentially BSD UNIX underneath, which I have had
-some experience with thanks to <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>. The environment is very similar, but
-not identical, and on <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>, you quickly find ...</p>
-                <a class="readmore" href="./brewing-a-better-unix.html">read more</a>
-                <p>There are <a href="./brewing-a-better-unix.html#disqus_thread">comments</a>.</p>
                 </div><!-- /.entry-content -->
             </article></li>
         

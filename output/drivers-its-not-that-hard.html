@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Video on Raspbian</title>
+        <title>Drivers, it's really not that hard</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
         
@@ -43,13 +43,13 @@
                 
                     <li ><a href="./category/development.html">Development</a></li>
                 
-                    <li ><a href="./category/driving.html">Driving</a></li>
+                    <li class="active"><a href="./category/driving.html">Driving</a></li>
                 
                     <li ><a href="./category/personal.html">Personal</a></li>
                 
                     <li ><a href="./category/quotes.html">Quotes</a></li>
                 
-                    <li class="active"><a href="./category/technology.html">Technology</a></li>
+                    <li ><a href="./category/technology.html">Technology</a></li>
                 
                 </ul></nav>
         </header><!-- /#banner -->
@@ -58,8 +58,8 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="video-on-raspbian.html" rel="bookmark"
-           title="Permalink to Video on Raspbian">Video on Raspbian</a></h1>
+        <a href="drivers-its-not-that-hard.html" rel="bookmark"
+           title="Permalink to Drivers, it's really not that hard">Drivers, it's really not that hard</a></h1>
       
 <a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="msoulier">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
@@ -67,8 +67,8 @@
 
     <div class="entry-content">
       <footer class="post-info">
-        <abbr class="published" title="2013-03-11T21:00:00">
-                Mon 11 March 2013
+        <abbr class="published" title="2013-11-03T10:20:00">
+                Sun 03 November 2013
         </abbr>
 
         
@@ -76,36 +76,28 @@
                 By <a class="url fn" href="./author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
         
-<p>In <a href="./category/technology.html">Technology</a>. </p>
-<p>tags: <a href="./tag/linux.html">Linux</a><a href="./tag/raspberry-pi.html">Raspberry Pi</a></p>
+<p>In <a href="./category/driving.html">Driving</a>. </p>
+<p>tags: <a href="./tag/cars.html">Cars</a><a href="./tag/canada.html">Canada</a></p>
 
 
 </footer><!-- /.post-info -->
-      <p>Currently our upstairs TV has a <a class="reference external" href="http://www.raspberrypi.org/">raspberry pi</a> attached to it. It's running
-the basic <a class="reference external" href="http://www.raspbian.org/">Raspbian</a> distribution, based on <a class="reference external" href="http://www.debian.org/">Debian Linux</a>. I'm using it for
-development as well as for a media center at the moment, so I'm not using
-<a class="reference external" href="http://www.raspbmc.com/">RaspBMC</a>, I'm going to order another one has a dedicated media center, but
-for now I need to be able to play movies off of a usb stick.</p>
-<p>I tried <a class="reference external" href="http://www.videolan.org/">VLC</a>, but the performance was horrible. Apparently it doesn't use
-the native GPU. I read about it online, and thanks to that finally found
-<a class="reference external" href="http://elinux.org/Omxplayer">omxplayer</a>, which does use the native GPU. Unfortunately, it's not all that
-polished when playing from the command-line. It leaves behind text in the
-terminal above and below the video at certain aspect ratios, which is visually
-distracting.</p>
-<p>They haven't fixed it yet so I put a wrapper script around it to work around
-the issue. I plan to put a whole interface around it at some point just for
-fun, but for now at least I can watch movies without text in the black bars
-above and below:</p>
-<pre class="literal-block">
-#!/bin/sh
-
-setterm -cursor off
-clear
-omxplayer -o hdmi $1
-clear
-setterm -cursor on
-</pre>
-<p>Simple, but it works.</p>
+      <p>I am constantly amazed at the ignorance and outright laziness of Canadian
+drivers. Yes, we could be worse, but we could also be much, much better.</p>
+<p>Case in point, I see people constantly turning left, and swinging out into the
+right lane, or turning right, and swinging out into the left lane.</p>
+<p>The rules really are <a class="reference external" href="http://www.mto.gov.on.ca/english/dandv/driver/handbook/section2.6.4.shtml">not that hard</a> to understand, and given the
+implications at an intersection with traffic coming from all directions, if
+you violate the rules, you're a idiot. Either you're too dumb to remember the
+rules, and can't figure out how, in this connected day and age, to look them
+up, or you simply don't care about the rules. And given the rules are there to
+not only keep me and my children alive, but also you, then yes, you're an
+idiot.</p>
+<p>Kinda like not bothering to signal. What, lever too far away? Can't be
+bothered to be safe while sharing the road with me, and my two beautiful
+children? Then you shouldn't be driving. Idiot.</p>
+<p>I'm very tempted to drive with a dash cam at all times, and post the worst
+offenders on youtube. Granted, we all have idiot moments, and sometimes it's
+me, but it's the consistent idiots I'm interested in.</p>
 
     </div><!-- /.entry-content -->
     
@@ -113,7 +105,7 @@ setterm -cursor on
       <h2>Comments !</h2>
       <div id="disqus_thread"></div>
       <script type="text/javascript">
-        var disqus_identifier = "video-on-raspbian.html";
+        var disqus_identifier = "drivers-its-not-that-hard.html";
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = 'http://butidigressca.disqus.com/embed.js';
