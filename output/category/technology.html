@@ -40,8 +40,141 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../java-pointlessly-difficult.html">Java, usable but pointlessly difficult</a></h1> 
+                    <h1 class="entry-title"><a href="../scrypting-rsa-encryption.html">Scripting RSA Encryption</a></h1> 
                     <footer class="post-info">
+        <abbr class="published" title="2013-08-20T08:30:00">
+                Tue 20 August 2013
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+        <p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/crypto.html">Crypto</a><a href="../tag/python.html">Python</a><a href="../tag/perl.html">Perl</a></p></footer><!-- /.post-info --><p>So, I have an <a class="reference external" href="http://oauth.net/core/1.0/">OAuth 1.0</a> implementation for work that I'm extending, and the
+one area of OAuth 1.0 that I didn't implement was <a class="reference external" href="http://oauth.net/core/1.0/#anchor19">RSA-SHA1</a> signatures, as I
+didn't think that anyone would care. Of course, someone cares. So, I'm looking
+into them now, and looking into how to work with RSA in Perl and Python.</p>
+<p>I thought it would be painful, but it's actually refreshingly easy. Here's a
+<a class="reference external" href="https://www.dlitz.net/software/pycrypto/">PyCrypto</a> example from Python, where PyCrypto was a simple <cite>pip install
+pycrypto</cite> in a virtualenv:</p>
+<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">rng</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">RSAKey</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">RSAKey</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s">&#39;PEM&#39;</span><span class="p">)</span>
+<span class="o">-----</span><span class="n">BEGIN</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
+<span class="n">MIICWwIBAAKBgQC1v8OaZ83</span><span class="o">+</span><span class="n">er082XyLcwCeFfgT5urSlORbdRTWGc95EilUFQ5E</span>
+<span class="mi">4</span><span class="n">uQ9gafAzjh09PJmnQOeMH</span><span class="o">/</span><span class="n">uJQGDmvAW4n9ilKWB</span><span class="o">/</span><span class="n">n6e7Yk8FA56fPA</span><span class="o">+</span><span class="n">Fnb8oJ</span><span class="o">/</span><span class="n">X</span>
+<span class="n">f4KhhChMvhyRwrpMR03</span><span class="o">+</span><span class="n">bQgERVzu8bxLm1zKVxDpzytzKVc6PxAXXPcFeQIDAQAB</span>
+<span class="n">AoGAB3ATlywMWA</span><span class="o">+</span><span class="mi">50</span><span class="n">tWrrSFFszJ</span><span class="o">+</span><span class="mi">9</span><span class="n">oGKtpd1SPDfq2te</span><span class="o">/</span><span class="n">DtsCY7bCKKoaIP304Ic</span>
+<span class="o">+</span><span class="n">VxU1zIxxbWCZsKI71PV43ndcJ</span><span class="o">+</span><span class="n">npXG8AfI6gX6TPDKlStFnUmUe5gfLdFqxi8ES</span>
+<span class="mi">5</span><span class="n">c7Il9wV7THnNTIdZHPTTkMA</span><span class="o">/</span><span class="n">e3IOTD34wDj</span><span class="o">+</span><span class="n">dUD1lvvBgECQQDKPnFEjIDg6</span><span class="o">+</span><span class="n">E0</span>
+<span class="n">IvmI3ZXGXptqEPHyS6FPqtWSUqEWqb5AxjORgBpSaW3BiE5iYSwlSec9qn6S8zQN</span>
+<span class="n">Y0gdCXDZAkEA5g7DeFPjzTEjyqj</span><span class="o">+</span><span class="mi">9</span><span class="n">db0zFv6dyaN3H0MN762HBKW</span><span class="o">+</span><span class="n">ny8KLjsSB2q</span>
+<span class="mi">0</span><span class="n">zSMVdV788Gvfh</span><span class="o">+</span><span class="n">vyz6GK</span><span class="o">/</span><span class="n">bzMzva6qdVoQJAP2KqpU1T5yqGfoynoJmyI2XrV6bP</span>
+<span class="mi">7</span><span class="n">Zx</span><span class="o">+</span><span class="n">hjWIkj</span><span class="o">+</span><span class="n">LdUrl8e8somF</span><span class="o">/</span><span class="mi">3</span><span class="n">mxklc9eob7K0zUCYHVbDjtjCP8gztjyoQJAbHy</span><span class="o">/</span>
+<span class="n">zul4flXS9Am3mcTRUeF5</span><span class="o">/</span><span class="n">mAu</span><span class="o">+</span><span class="mi">6</span><span class="o">/</span><span class="mi">4</span><span class="n">Z</span><span class="o">/</span><span class="mi">1</span><span class="n">GMXzOt7bEoEt8GRHscYbROtTei</span><span class="o">/</span><span class="n">dlQ4u7</span>
+<span class="n">wZNtgCQHUbzDIm7goQJAO7Krl8p4HXTWlPCnVZk5</span><span class="o">/</span><span class="mi">4</span><span class="n">R4OxlQOCF7KeEPLBZaduQn</span>
+<span class="n">InJUtIPdV</span><span class="o">+</span><span class="n">aOGt3bp7bKgZqMMe5uZ</span><span class="o">/</span><span class="n">vHIAv</span><span class="o">/</span><span class="n">OlIX</span><span class="o">/</span><span class="n">w</span><span class="o">==</span>
+<span class="o">-----</span><span class="n">END</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pubkey</span> <span class="o">=</span> <span class="n">RSAKey</span><span class="o">.</span><span class="n">publickey</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">pubkey</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s">&#39;PEM&#39;</span><span class="p">)</span>
+<span class="o">-----</span><span class="n">BEGIN</span> <span class="n">PUBLIC</span> <span class="n">KEY</span><span class="o">-----</span>
+<span class="n">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1v8OaZ83</span><span class="o">+</span><span class="n">er082XyLcwCeFfgT</span>
+<span class="mi">5</span><span class="n">urSlORbdRTWGc95EilUFQ5E4uQ9gafAzjh09PJmnQOeMH</span><span class="o">/</span><span class="n">uJQGDmvAW4n9ilKWB</span>
+<span class="o">/</span><span class="n">n6e7Yk8FA56fPA</span><span class="o">+</span><span class="n">Fnb8oJ</span><span class="o">/</span><span class="n">Xf4KhhChMvhyRwrpMR03</span><span class="o">+</span><span class="n">bQgERVzu8bxLm1zKVxDp</span>
+<span class="n">zytzKVc6PxAXXPcFeQIDAQAB</span>
+<span class="o">-----</span><span class="n">END</span> <span class="n">PUBLIC</span> <span class="n">KEY</span><span class="o">-----</span>
+</pre></div>
+<p>Now, the only issue here is that I'm not sure how to put the public key into
+PKCS#1 format, where it starts with &quot;BEGIN RSA PUBLIC KEY&quot;. It's pretty obvious
+in the Perl API though.</p>
+<div class="highlight"><pre>use Crypt::OpenSSL::Random;
+use Crypt::OpenSSL::RSA;
+
+print &quot;Seeding prng...\n&quot;;
+Crypt::OpenSSL::Random::random_egd(&#39;/dev/urandom&#39;);
+Crypt::OpenSSL::RSA-&gt;import_random_seed();
+
+print &quot;Generating 1024-bit pair...\n&quot;;
+$rsa = Crypt::OpenSSL::RSA-&gt;generate_key(1024);
+
+print &quot;private key is:\n&quot;, $rsa-&gt;get_private_key_string();
+print &quot;public key (in PKCS1 format) is:\n&quot;,
+    $rsa-&gt;get_public_key_string();
+print &quot;public key (in X509 format) is:\n&quot;,
+    $rsa-&gt;get_public_key_x509_string();
+
+# perl gencert.pl
+Seeding prng...
+Generating 1024-bit pair...
+private key is:
+-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQDSwv8lhOF83/uoMJrNLPIRjarl5+EGB0fEiGAEEKByrM+VJOIU
+z2cvRfJfvNkcB+XzjXlHLSTnM0hI/PGCTyS5Ym119f5svNkLi3gKKs7WRf0xWVKj
+X27HIXP5OSXsS6M/d06HyHfJ3vp44e9sWQ1qDoFH8+elixh/vVH8TEpiBQIDAQAB
+AoGAWj0bOVk3olvUSCLnZMnFqzZY4a7ybb5YQBGT6qmjyPWsu1LbacWTjG4KZGtb
+GeFX13vPXWY60rLmVDnYvc5dDis+wDu8/JQDelV3zbq9fdRchi+QtJCsPbvMN2VU
+8sFK8JpWFPpfmyxgLk8VHfKqihSWWr7Eh2ywuQN/yG/3/FECQQD8HkewAitxM+BU
+TCpwoZJIs8x/ZKg1hYdMqOiqhnIWjwoIdGfK4WUjHc3JTpoyHyn//I4l2896T7Cq
+5Y/j9iqLAkEA1gG13AjOS9O/zqv49RWA19wS0E42aoiFNFnoEm7wyjYX+KmYYKlI
+ak419axFN5qHJ0sb7Me4RqWmfU4PyjyHrwJAb9HSQ8tCj0vN5DV/4UKYCezM93ei
+b1KQ5rxHrVJCCaVZctSGMGJ1o/SVEALvuuk9jI7sUPhD9mCf37w/bIEC7wJAJNqK
+jOffTuOaRmcLKnmXhJTbkI/HgzUba1aIRpRgVxJVsnbSTOMaG2R4mmQeT2MHH1cp
+6e7C5zejojSNN5CQ9QJBAMqkN/IGp/Y7gelca9SAYNceIdsg2LMla/pQ7+Zd43OE
+J6za7+RkeqGhMH95ON/2HctnDdqt/vp8lGMxLpwxk7U=
+-----END RSA PRIVATE KEY-----
+public key (in PKCS1 format) is:
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANLC/yWE4Xzf+6gwms0s8hGNquXn4QYHR8SIYAQQoHKsz5Uk4hTPZy9F
+8l+82RwH5fONeUctJOczSEj88YJPJLlibXX1/my82QuLeAoqztZF/TFZUqNfbsch
+c/k5JexLoz93TofId8ne+njh72xZDWoOgUfz56WLGH+9UfxMSmIFAgMBAAE=
+-----END RSA PUBLIC KEY-----
+public key (in X509 format) is:
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSwv8lhOF83/uoMJrNLPIRjarl
+5+EGB0fEiGAEEKByrM+VJOIUz2cvRfJfvNkcB+XzjXlHLSTnM0hI/PGCTyS5Ym11
+9f5svNkLi3gKKs7WRf0xWVKjX27HIXP5OSXsS6M/d06HyHfJ3vp44e9sWQ1qDoFH
+8+elixh/vVH8TEpiBQIDAQAB
+-----END PUBLIC KEY-----
+</pre></div>
+<p>Yes, seeding from <cite>/dev/urandom</cite> is bad, this is just a simple example. The
+point is that picking the output format of the public key is trivial in Perl,
+but not in Python. I'm not sure why PyCrypto has this limitation. I can convert
+from X-509 to PKCS#1 with a one-liner...</p>
+<div class="highlight"><pre><span class="c1"># perl -MCrypt::OpenSSL::RSA -MCrypt::OpenSSL::X509 -e &#39;$rsa =</span>
+<span class="nn">Crypt::OpenSSL::</span><span class="n">RSA</span><span class="o">-&gt;</span><span class="n">new_public_key</span><span class="p">(</span><span class="nn">Crypt::OpenSSL::</span><span class="n">X509</span><span class="o">-&gt;</span><span class="n">new_from_file</span><span class="p">(</span><span class="nv">$ARGV</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-&gt;</span><span class="n">pubkey</span><span class="p">());</span>
+<span class="k">print</span> <span class="nv">$rsa</span><span class="o">-&gt;</span><span class="n">get_public_key_string</span><span class="p">()</span><span class="err">&#39;</span> <span class="sr">/var/c</span><span class="n">ache</span><span class="sr">/mslrest/c</span><span class="n">erts</span><span class="o">/</span><span class="n">google_cert</span><span class="o">.</span><span class="n">pem</span>
+<span class="o">-----</span><span class="k">BEGIN</span> <span class="n">RSA</span> <span class="n">PUBLIC</span> <span class="n">KEY</span><span class="o">-----</span>
+<span class="n">MIGJAoGBANBRXu6Qh8iLFuiQc40Yxb3553QT1fib30jy6k9CneIC2oi9aztcJsBs</span>
+<span class="n">arNAfWpf1jTSGtDlFFCPw4je1GJCz8p</span><span class="o">/</span><span class="n">MZY528ukiTmhel1Pny2DgWViHl9uEihW</span>
+<span class="n">hWfga</span><span class="o">+</span><span class="mi">1</span><span class="n">KMqYkWygzw1G0QkcvVpZ3751fORCMSw1wFfBC98NvRidtAgMBAAE</span><span class="o">=</span>
+<span class="o">-----</span><span class="k">END</span> <span class="n">RSA</span> <span class="n">PUBLIC</span> <span class="n">KEY</span><span class="o">-----</span>
+</pre></div>
+<p>My understanding on these formats is limited, so hopefully someone more
+knowledgeable can comment. Right now I want PKCS#1 because we have a tool at
+work that expects it as input.</p>
+<p>Anywho, quite nice that basic RSA keys are so simple to work with. I wish I
+could find some simple calls to make a CSR, without wrapping the openssl command
+line. I can't seem to find one, and it terribly overlooked in O'Reilly's
+&quot;Network Security with OpenSSL&quot;.</p>
+<p>There are <a href="../scrypting-rsa-encryption.html#disqus_thread">comments</a>.</p>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../java-pointlessly-difficult.html" rel="bookmark"
+                           title="Permalink to Java, usable but pointlessly difficult">Java, usable but pointlessly difficult</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
         <abbr class="published" title="2013-06-05T00:30:00">
                 Wed 05 June 2013
         </abbr>
@@ -50,60 +183,14 @@
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
         <p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/java.html">Java</a></p></footer><!-- /.post-info --><p>I've been working on a REST client in Java at work lately. I know, it scares
+<p>tags: <a href="../tag/java.html">Java</a></p></footer><!-- /.post-info -->                <p>I've been working on a REST client in Java at work lately. I know, it scares
 me too. I've had to revisit much of my old Java knowledge, and pick up a lot
 of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.</p>
-<p>Our internal servers use self-signed SSL certs at work, so to talk to them I
-had to disable any host-certificate checking. Should be a simple boolean in
-the API right? Wrong. I forgot. Java.</p>
-<p>First, you need to install your own trust manager.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.net.ssl.X509TrustManager</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.security.cert.X509Certificate</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.net.ssl.SSLContext</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">javax.net.ssl.HttpsURLConnection</span><span class="o">;</span>
-
- <span class="n">TrustManager</span><span class="o">[]</span> <span class="n">trustAllCerts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TrustManager</span><span class="o">[]</span> <span class="o">{</span>
-         <span class="k">new</span> <span class="nf">X509TrustManager</span><span class="o">()</span> <span class="o">{</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">cert</span><span class="o">.</span><span class="na">X509Certificate</span><span class="o">[]</span> <span class="nf">getAcceptedIssuers</span><span class="o">()</span> <span class="o">{</span>
-         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-     <span class="o">}</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkClientTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">certs</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
-     <span class="o">}</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">checkServerTrusted</span><span class="o">(</span><span class="n">X509Certificate</span><span class="o">[]</span> <span class="n">certs</span><span class="o">,</span> <span class="n">String</span> <span class="n">authType</span><span class="o">)</span> <span class="o">{</span>
-     <span class="o">}</span>
- <span class="o">}};</span>
- <span class="c1">// Install this trust manager.</span>
- <span class="k">try</span> <span class="o">{</span>
-     <span class="n">SSLContext</span> <span class="n">sc</span> <span class="o">=</span> <span class="n">SSLContext</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">&quot;SSL&quot;</span><span class="o">);</span>
-     <span class="n">sc</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="n">trustAllCerts</span><span class="o">,</span> <span class="k">new</span> <span class="n">java</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">SecureRandom</span><span class="o">());</span>
-     <span class="n">HttpsURLConnection</span><span class="o">.</span><span class="na">setDefaultSSLSocketFactory</span><span class="o">(</span><span class="n">sc</span><span class="o">.</span><span class="na">getSocketFactory</span><span class="o">());</span>
- <span class="o">}</span>
-</pre></div>
-<p>Then, you need to install a hostname verifier that accepts a bad host, as
-that's likely wrong too, especially if you access the box by IP address when
-the IP isn't in the cert.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">javax.net.ssl.HostnameVerifier</span><span class="o">;</span>
-
- <span class="n">HttpsURLConnection</span> <span class="n">sconnection</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpsURLConnection</span><span class="o">)</span><span class="n">request</span><span class="o">.</span><span class="na">unwrap</span><span class="o">();</span>
- <span class="n">sconnection</span><span class="o">.</span><span class="na">setHostnameVerifier</span><span class="o">(</span><span class="k">new</span> <span class="n">HostnameVerifier</span><span class="o">()</span> <span class="o">{</span>
-     <span class="nd">@Override</span>
-     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verify</span><span class="o">(</span><span class="n">String</span> <span class="n">hostname</span><span class="o">,</span> <span class="n">SSLSession</span> <span class="n">session</span><span class="o">)</span> <span class="o">{</span>
-         <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-     <span class="o">}</span>
- <span class="o">});</span>
-</pre></div>
-<p>Usable? Yes. But it's no wonder that Java programmers insist on IDEs when it's
-so damn wordy. I mean, wouldn't a simple boolean have done here?</p>
-<p>There are <a href="../java-pointlessly-difficult.html#disqus_thread">comments</a>.</p>                </article>
-                            </aside><!-- /#featured -->
-                            <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-                                                
+<p>Our internal ...</p>
+                <a class="readmore" href="../java-pointlessly-difficult.html">read more</a>
+                <p>There are <a href="../java-pointlessly-difficult.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            
 
                  
                         <li><article class="hentry">    
@@ -310,32 +397,6 @@ had nothing showing me my current battery status, so I searched around to find
 the appropriate <a class="reference external" href="http://www.lua.org/">lua</a> code, a language ...</p>
                 <a class="readmore" href="../customizing-awesome.html">read more</a>
                 <p>There are <a href="../customizing-awesome.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-                            
-
-                 
-                        <li><article class="hentry">    
-                <header>
-                    <h1><a href="../tweeting-on-osx.html" rel="bookmark"
-                           title="Permalink to Tweeting on OS X">Tweeting on OS X</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-25T09:00:00">
-                Sun 25 November 2012
-        </abbr>
-
-                <address class="vcard author">
-                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        <p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/os-x.html">OS X</a><a href="../tag/python.html">Python</a><a href="../tag/foss.html">FOSS</a></p></footer><!-- /.post-info -->                <p>For some time my desktop has been an older, underpowered Linux box, so using
-services like <a class="reference external" href="http://www.twitter.com">Twitter</a> via the website has been painful, as loaded with heavy
-javascript that would consume my CPU's limited resources.</p>
-<p>So, like any <a class="reference external" href="http://www.python.org">Python</a> programmer would do, I wrote my own client. Well, lets ...</p>
-                <a class="readmore" href="../tweeting-on-osx.html">read more</a>
-                <p>There are <a href="../tweeting-on-osx.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
                             </ol><!-- /#posts-list -->
                             <p class="paginator">

@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-11-03T10:20:00-05:00</updated><entry><title>Drivers, it's really not that hard</title><link href="http://www.but-i-digress.ca/drivers-its-not-that-hard.html" rel="alternate"></link><updated>2013-11-03T10:20:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-11-03:drivers-its-not-that-hard.html</id><summary type="html">&lt;p&gt;I am constantly amazed at the ignorance and outright laziness of Canadian
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-08-20T08:30:00-04:00</updated><entry><title>Scripting RSA Encryption</title><link href="http://www.but-i-digress.ca/scrypting-rsa-encryption.html" rel="alternate"></link><updated>2013-08-20T08:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-08-20:scrypting-rsa-encryption.html</id><summary type="html">&lt;p&gt;So, I have an &lt;a class="reference external" href="http://oauth.net/core/1.0/"&gt;OAuth 1.0&lt;/a&gt; implementation for work that I'm extending, and the
+one area of OAuth 1.0 that I didn't implement was &lt;a class="reference external" href="http://oauth.net/core/1.0/#anchor19"&gt;RSA-SHA1&lt;/a&gt; signatures, as I
+didn't think that anyone would care. Of course, someone cares. So, I'm looking
+into them now, and looking into how to work with RSA in Perl and Python.&lt;/p&gt;
+&lt;p&gt;I thought it would be painful, but it's actually refreshingly easy. Here's a
+&lt;a class="reference external" href="https://www.dlitz.net/software/pycrypto/"&gt;PyCrypto&lt;/a&gt; example from Python, where PyCrypto was a simple &lt;cite&gt;pip install
+pycrypto&lt;/cite&gt; in a virtualenv:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Crypto.PublicKey&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;RSA&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;Crypto&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Random&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;rng&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;RSAKey&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RSA&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rng&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;RSAKey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exportKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;PEM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;-----&lt;/span&gt;&lt;span class="n"&gt;BEGIN&lt;/span&gt; &lt;span class="n"&gt;RSA&lt;/span&gt; &lt;span class="n"&gt;PRIVATE&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-----&lt;/span&gt;
+&lt;span class="n"&gt;MIICWwIBAAKBgQC1v8OaZ83&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;er082XyLcwCeFfgT5urSlORbdRTWGc95EilUFQ5E&lt;/span&gt;
+&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="n"&gt;uQ9gafAzjh09PJmnQOeMH&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;uJQGDmvAW4n9ilKWB&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;n6e7Yk8FA56fPA&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;Fnb8oJ&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;
+&lt;span class="n"&gt;f4KhhChMvhyRwrpMR03&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;bQgERVzu8bxLm1zKVxDpzytzKVc6PxAXXPcFeQIDAQAB&lt;/span&gt;
+&lt;span class="n"&gt;AoGAB3ATlywMWA&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="n"&gt;tWrrSFFszJ&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="n"&gt;oGKtpd1SPDfq2te&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;DtsCY7bCKKoaIP304Ic&lt;/span&gt;
+&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;VxU1zIxxbWCZsKI71PV43ndcJ&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;npXG8AfI6gX6TPDKlStFnUmUe5gfLdFqxi8ES&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="n"&gt;c7Il9wV7THnNTIdZHPTTkMA&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;e3IOTD34wDj&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;dUD1lvvBgECQQDKPnFEjIDg6&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;E0&lt;/span&gt;
+&lt;span class="n"&gt;IvmI3ZXGXptqEPHyS6FPqtWSUqEWqb5AxjORgBpSaW3BiE5iYSwlSec9qn6S8zQN&lt;/span&gt;
+&lt;span class="n"&gt;Y0gdCXDZAkEA5g7DeFPjzTEjyqj&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="n"&gt;db0zFv6dyaN3H0MN762HBKW&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;ny8KLjsSB2q&lt;/span&gt;
+&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="n"&gt;zSMVdV788Gvfh&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;vyz6GK&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bzMzva6qdVoQJAP2KqpU1T5yqGfoynoJmyI2XrV6bP&lt;/span&gt;
+&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="n"&gt;Zx&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;hjWIkj&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;LdUrl8e8somF&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="n"&gt;mxklc9eob7K0zUCYHVbDjtjCP8gztjyoQJAbHy&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="n"&gt;zul4flXS9Am3mcTRUeF5&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mAu&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="n"&gt;Z&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;GMXzOt7bEoEt8GRHscYbROtTei&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dlQ4u7&lt;/span&gt;
+&lt;span class="n"&gt;wZNtgCQHUbzDIm7goQJAO7Krl8p4HXTWlPCnVZk5&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="n"&gt;R4OxlQOCF7KeEPLBZaduQn&lt;/span&gt;
+&lt;span class="n"&gt;InJUtIPdV&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;aOGt3bp7bKgZqMMe5uZ&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vHIAv&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;OlIX&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="o"&gt;==&lt;/span&gt;
+&lt;span class="o"&gt;-----&lt;/span&gt;&lt;span class="n"&gt;END&lt;/span&gt; &lt;span class="n"&gt;RSA&lt;/span&gt; &lt;span class="n"&gt;PRIVATE&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-----&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;pubkey&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;RSAKey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;publickey&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;pubkey&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exportKey&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;PEM&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;-----&lt;/span&gt;&lt;span class="n"&gt;BEGIN&lt;/span&gt; &lt;span class="n"&gt;PUBLIC&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-----&lt;/span&gt;
+&lt;span class="n"&gt;MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1v8OaZ83&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;er082XyLcwCeFfgT&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="n"&gt;urSlORbdRTWGc95EilUFQ5E4uQ9gafAzjh09PJmnQOeMH&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;uJQGDmvAW4n9ilKWB&lt;/span&gt;
+&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;n6e7Yk8FA56fPA&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;Fnb8oJ&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Xf4KhhChMvhyRwrpMR03&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;bQgERVzu8bxLm1zKVxDp&lt;/span&gt;
+&lt;span class="n"&gt;zytzKVc6PxAXXPcFeQIDAQAB&lt;/span&gt;
+&lt;span class="o"&gt;-----&lt;/span&gt;&lt;span class="n"&gt;END&lt;/span&gt; &lt;span class="n"&gt;PUBLIC&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-----&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, the only issue here is that I'm not sure how to put the public key into
+PKCS#1 format, where it starts with &amp;quot;BEGIN RSA PUBLIC KEY&amp;quot;. It's pretty obvious
+in the Perl API though.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;use Crypt::OpenSSL::Random;
+use Crypt::OpenSSL::RSA;
+
+print &amp;quot;Seeding prng...\n&amp;quot;;
+Crypt::OpenSSL::Random::random_egd(&amp;#39;/dev/urandom&amp;#39;);
+Crypt::OpenSSL::RSA-&amp;gt;import_random_seed();
+
+print &amp;quot;Generating 1024-bit pair...\n&amp;quot;;
+$rsa = Crypt::OpenSSL::RSA-&amp;gt;generate_key(1024);
+
+print &amp;quot;private key is:\n&amp;quot;, $rsa-&amp;gt;get_private_key_string();
+print &amp;quot;public key (in PKCS1 format) is:\n&amp;quot;,
+    $rsa-&amp;gt;get_public_key_string();
+print &amp;quot;public key (in X509 format) is:\n&amp;quot;,
+    $rsa-&amp;gt;get_public_key_x509_string();
+
+# perl gencert.pl
+Seeding prng...
+Generating 1024-bit pair...
+private key is:
+-----BEGIN RSA PRIVATE KEY-----
+MIICXAIBAAKBgQDSwv8lhOF83/uoMJrNLPIRjarl5+EGB0fEiGAEEKByrM+VJOIU
+z2cvRfJfvNkcB+XzjXlHLSTnM0hI/PGCTyS5Ym119f5svNkLi3gKKs7WRf0xWVKj
+X27HIXP5OSXsS6M/d06HyHfJ3vp44e9sWQ1qDoFH8+elixh/vVH8TEpiBQIDAQAB
+AoGAWj0bOVk3olvUSCLnZMnFqzZY4a7ybb5YQBGT6qmjyPWsu1LbacWTjG4KZGtb
+GeFX13vPXWY60rLmVDnYvc5dDis+wDu8/JQDelV3zbq9fdRchi+QtJCsPbvMN2VU
+8sFK8JpWFPpfmyxgLk8VHfKqihSWWr7Eh2ywuQN/yG/3/FECQQD8HkewAitxM+BU
+TCpwoZJIs8x/ZKg1hYdMqOiqhnIWjwoIdGfK4WUjHc3JTpoyHyn//I4l2896T7Cq
+5Y/j9iqLAkEA1gG13AjOS9O/zqv49RWA19wS0E42aoiFNFnoEm7wyjYX+KmYYKlI
+ak419axFN5qHJ0sb7Me4RqWmfU4PyjyHrwJAb9HSQ8tCj0vN5DV/4UKYCezM93ei
+b1KQ5rxHrVJCCaVZctSGMGJ1o/SVEALvuuk9jI7sUPhD9mCf37w/bIEC7wJAJNqK
+jOffTuOaRmcLKnmXhJTbkI/HgzUba1aIRpRgVxJVsnbSTOMaG2R4mmQeT2MHH1cp
+6e7C5zejojSNN5CQ9QJBAMqkN/IGp/Y7gelca9SAYNceIdsg2LMla/pQ7+Zd43OE
+J6za7+RkeqGhMH95ON/2HctnDdqt/vp8lGMxLpwxk7U=
+-----END RSA PRIVATE KEY-----
+public key (in PKCS1 format) is:
+-----BEGIN RSA PUBLIC KEY-----
+MIGJAoGBANLC/yWE4Xzf+6gwms0s8hGNquXn4QYHR8SIYAQQoHKsz5Uk4hTPZy9F
+8l+82RwH5fONeUctJOczSEj88YJPJLlibXX1/my82QuLeAoqztZF/TFZUqNfbsch
+c/k5JexLoz93TofId8ne+njh72xZDWoOgUfz56WLGH+9UfxMSmIFAgMBAAE=
+-----END RSA PUBLIC KEY-----
+public key (in X509 format) is:
+-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSwv8lhOF83/uoMJrNLPIRjarl
+5+EGB0fEiGAEEKByrM+VJOIUz2cvRfJfvNkcB+XzjXlHLSTnM0hI/PGCTyS5Ym11
+9f5svNkLi3gKKs7WRf0xWVKjX27HIXP5OSXsS6M/d06HyHfJ3vp44e9sWQ1qDoFH
+8+elixh/vVH8TEpiBQIDAQAB
+-----END PUBLIC KEY-----
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Yes, seeding from &lt;cite&gt;/dev/urandom&lt;/cite&gt; is bad, this is just a simple example. The
+point is that picking the output format of the public key is trivial in Perl,
+but not in Python. I'm not sure why PyCrypto has this limitation. I can convert
+from X-509 to PKCS#1 with a one-liner...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# perl -MCrypt::OpenSSL::RSA -MCrypt::OpenSSL::X509 -e &amp;#39;$rsa =&lt;/span&gt;
+&lt;span class="nn"&gt;Crypt::OpenSSL::&lt;/span&gt;&lt;span class="n"&gt;RSA&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;new_public_key&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nn"&gt;Crypt::OpenSSL::&lt;/span&gt;&lt;span class="n"&gt;X509&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;new_from_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;$ARGV&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;pubkey&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="nv"&gt;$rsa&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;get_public_key_string&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="sr"&gt;/var/c&lt;/span&gt;&lt;span class="n"&gt;ache&lt;/span&gt;&lt;span class="sr"&gt;/mslrest/c&lt;/span&gt;&lt;span class="n"&gt;erts&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;google_cert&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pem&lt;/span&gt;
+&lt;span class="o"&gt;-----&lt;/span&gt;&lt;span class="k"&gt;BEGIN&lt;/span&gt; &lt;span class="n"&gt;RSA&lt;/span&gt; &lt;span class="n"&gt;PUBLIC&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-----&lt;/span&gt;
+&lt;span class="n"&gt;MIGJAoGBANBRXu6Qh8iLFuiQc40Yxb3553QT1fib30jy6k9CneIC2oi9aztcJsBs&lt;/span&gt;
+&lt;span class="n"&gt;arNAfWpf1jTSGtDlFFCPw4je1GJCz8p&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;MZY528ukiTmhel1Pny2DgWViHl9uEihW&lt;/span&gt;
+&lt;span class="n"&gt;hWfga&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;KMqYkWygzw1G0QkcvVpZ3751fORCMSw1wFfBC98NvRidtAgMBAAE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="o"&gt;-----&lt;/span&gt;&lt;span class="k"&gt;END&lt;/span&gt; &lt;span class="n"&gt;RSA&lt;/span&gt; &lt;span class="n"&gt;PUBLIC&lt;/span&gt; &lt;span class="n"&gt;KEY&lt;/span&gt;&lt;span class="o"&gt;-----&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My understanding on these formats is limited, so hopefully someone more
+knowledgeable can comment. Right now I want PKCS#1 because we have a tool at
+work that expects it as input.&lt;/p&gt;
+&lt;p&gt;Anywho, quite nice that basic RSA keys are so simple to work with. I wish I
+could find some simple calls to make a CSR, without wrapping the openssl command
+line. I can't seem to find one, and it terribly overlooked in O'Reilly's
+&amp;quot;Network Security with OpenSSL&amp;quot;.&lt;/p&gt;
+</summary><category term="Crypto"></category><category term="Python"></category><category term="Perl"></category></entry><entry><title>Drivers, it's really not that hard</title><link href="http://www.but-i-digress.ca/drivers-its-not-that-hard.html" rel="alternate"></link><updated>2013-08-01T10:20:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-08-01:drivers-its-not-that-hard.html</id><summary type="html">&lt;p&gt;I am constantly amazed at the ignorance and outright laziness of Canadian
 drivers. Yes, we could be worse, but we could also be much, much better.&lt;/p&gt;
 &lt;p&gt;Case in point, I see people constantly turning left, and swinging out into the
 right lane, or turning right, and swinging out into the left lane.&lt;/p&gt;
