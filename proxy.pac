@@ -9,6 +9,7 @@ function FindProxyForURL(url,host)
     }
     else if (host.match(".mitel.com")
             || host.match("inter-tel.com")
+            || host.match("mitels.ca")
             || host.match("^10.")
             || host.match("^134.199."))
     {

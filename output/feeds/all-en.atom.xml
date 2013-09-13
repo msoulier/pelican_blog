@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-08-20T08:30:00-04:00</updated><entry><title>Scripting RSA Encryption</title><link href="http://www.but-i-digress.ca/scrypting-rsa-encryption.html" rel="alternate"></link><updated>2013-08-20T08:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-08-20:scrypting-rsa-encryption.html</id><summary type="html">&lt;p&gt;So, I have an &lt;a class="reference external" href="http://oauth.net/core/1.0/"&gt;OAuth 1.0&lt;/a&gt; implementation for work that I'm extending, and the
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/all-en.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2013-11-03T10:20:00-05:00</updated><entry><title>Getting RunSnakeRun Working on Mac OS X</title><link href="http://www.but-i-digress.ca/getting-runsnakerun-osx.html" rel="alternate"></link><updated>2013-11-03T10:20:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-11-03:getting-runsnakerun-osx.html</id><summary type="html">&lt;p&gt;As I &lt;a class="reference external" href="http://www.but-i-digress.ca/fruit-on-my-screen.html"&gt;mentioned previously&lt;/a&gt;, I have a Mac Mini at home as a workstation. While
+some things are easier working with it, like video editing, and basic office
+productivity, some things are harder.&lt;/p&gt;
+&lt;p&gt;One of the harder areas on OS X is customizing the Unix side of it for my
+development environment on Linux. I work primarily with Python, which does
+ship with Mountain Lion (Python 2.7), but it doesn't have everything. For
+example, the incredibly useful &lt;a class="reference external" href="http://www.virtualenv.org/en/latest/"&gt;virtualenv&lt;/a&gt; was something that I had to add
+on later, and many things I pulled from the &lt;a class="reference external" href="http://brew.sh/"&gt;Homebrew&lt;/a&gt; project, which has
+been incredibly useful to a Linux geek like me.&lt;/p&gt;
+&lt;p&gt;I currently have a strong need to profile my work, and there's no
+substitute to the impressive work of &lt;a class="reference external" href="http://www.vrplumber.com/programming/runsnakerun/"&gt;RunSnakeRun&lt;/a&gt;. RunSnakeRun requires
+&lt;a class="reference external" href="http://www.wxpython.org/"&gt;wxPython&lt;/a&gt;, which requires wxGtk, which requires wxWindows, etc, etc. One
+simple way to get wxPython on Mac is Homebrew, where it's called &lt;cite&gt;wxMac&lt;/cite&gt;:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+brew install wxmac
+&lt;/pre&gt;
+&lt;p&gt;That works just fine, although it does not, at present, update the PYTHONPATH
+to include it. I found this was required to put it into the path:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo cat /usr/local/lib/python2.7/site-packages &amp;gt; \
+    /Library/Python/2.7/site-packages/wx.pth
+&lt;/pre&gt;
+&lt;p&gt;At which point, you should be able to &amp;quot;import wx&amp;quot; in python, and it should
+work. Now, RunSnakeRun can be easily installed in a virtualenv, like so:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+mkvirtualenv snake
+pip install SquareMap RunSnakeRun
+&lt;/pre&gt;
+&lt;p&gt;The problem is that wx requires permission to access the display on the Mac. I
+don't know the details of this, but Robin Dunn of wxPython fame goes into
+the issue &lt;a class="reference external" href="http://wiki.wxpython.org/wxPythonVirtualenvOnMac"&gt;here, with a solution&lt;/a&gt;. His solution is a bit old, and I'm running
+Mountain Lion, so I adapted it a bit.&lt;/p&gt;
+&lt;p&gt;The python executable is simply &lt;cite&gt;/usr/bin/python&lt;/cite&gt;, so I just did this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+(snake)msoulier&amp;#64;merlin:~/envs/snake$ cat ~/envs/snake/bin/runwx
+#!/bin/bash
+
+PYVER=2.7
+PYTHON=/usr/bin/python
+
+ENV=$HOME/envs/snake
+
+export PYTHONHOME=$ENV
+exec $PYTHON &amp;quot;$&amp;#64;&amp;quot;
+&lt;/pre&gt;
+&lt;p&gt;Now, the silly indirection of easy_install makes this a little tougher. You
+can't just run the runsnake script with this wrapper, as it apparently invokes
+the actual runsnake.py script in some indirect manner that results in losing
+desired environment we're trying to establish here. If I understood
+what easy_install was doing better, I could likely hack it, but I kept it
+simple, and just run the &lt;cite&gt;runsnake.py&lt;/cite&gt; directly with the wrapper:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+runwx ./lib/python2.7/site-packages/runsnakerun/runsnake.py \
+    ~/mycode.prof
+&lt;/pre&gt;
+&lt;p&gt;And, it works!&lt;/p&gt;
+&lt;p&gt;Improvements welcome. I'm just happy that it's working. Not everything &amp;quot;just
+works&amp;quot; when you're on a Mac.&lt;/p&gt;
+</summary><category term="OS X"></category></entry><entry><title>Scripting RSA Encryption</title><link href="http://www.but-i-digress.ca/scrypting-rsa-encryption.html" rel="alternate"></link><updated>2013-08-20T08:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-08-20:scrypting-rsa-encryption.html</id><summary type="html">&lt;p&gt;So, I have an &lt;a class="reference external" href="http://oauth.net/core/1.0/"&gt;OAuth 1.0&lt;/a&gt; implementation for work that I'm extending, and the
 one area of OAuth 1.0 that I didn't implement was &lt;a class="reference external" href="http://oauth.net/core/1.0/#anchor19"&gt;RSA-SHA1&lt;/a&gt; signatures, as I
 didn't think that anyone would care. Of course, someone cares. So, I'm looking
 into them now, and looking into how to work with RSA in Perl and Python.&lt;/p&gt;
