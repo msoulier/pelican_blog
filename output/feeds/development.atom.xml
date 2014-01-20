@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Development.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 23 Dec 2012 20:30:00 -0500</lastBuildDate><item><title>Checking the weather</title><link>http://www.but-i-digress.ca/checking-the-weather.html</link><description>&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/development.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-12-23T20:30:00-05:00</updated><entry><title>Checking the weather</title><link href="http://www.but-i-digress.ca/checking-the-weather.html" rel="alternate"></link><updated>2012-12-23T20:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-23:checking-the-weather.html</id><summary type="html">&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
 terminal, as is the preference of most Unix geeks like me. Being a Canadian,
 I'm not interested in the Weather Channel as much as the Environment Canada
 data. Thankfully, they do publish an RSS feed, and good for them.&lt;/p&gt;
@@ -59,7 +59,7 @@ Saturday: Periods of snow. Low minus 12. High minus 7.
 &lt;/pre&gt;
 &lt;p&gt;I love building my own tools like this, it's the ultimate in end-user
 computing. Unix and Python are my playground.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 23 Dec 2012 20:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-23:checking-the-weather.html</guid><category>Python</category></item><item><title>Getting started with autotools</title><link>http://www.but-i-digress.ca/getting-started-with-autotools.html</link><description>&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
+</summary><category term="Python"></category></entry><entry><title>Getting started with autotools</title><link href="http://www.but-i-digress.ca/getting-started-with-autotools.html" rel="alternate"></link><updated>2012-12-16T08:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-16:getting-started-with-autotools.html</id><summary type="html">&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
 the go and I read slowly, and not often enough. I'm going through the section
 on &lt;a class="reference external" href="http://www.gnu.org/software/autoconf/"&gt;GNU autotools&lt;/a&gt;, which I've never been a heavy user of, albiet I'm a heavy
 consumer of. I just don't spend much time distributing C/C++ across platforms.&lt;/p&gt;
@@ -118,7 +118,7 @@ learn yet, but this worked on the first try, and the resulting tarball is good
 to push to &lt;a class="reference external" href="http://sourceforge.net/"&gt;SourceForge&lt;/a&gt; or elsewhere if you want to.&lt;/p&gt;
 &lt;p&gt;As I pick up more, I'll try to share it. I don't find autotools intuitive at
 all, but with some simple recipes I think I'll survive.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 16 Dec 2012 08:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-16:getting-started-with-autotools.html</guid><category>C/C++</category><category>FOSS</category><category>Autotools</category></item><item><title>21st Century C</title><link>http://www.but-i-digress.ca/21st-century-c.html</link><description>&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
+</summary><category term="C/C++"></category><category term="FOSS"></category><category term="Autotools"></category></entry><entry><title>21st Century C</title><link href="http://www.but-i-digress.ca/21st-century-c.html" rel="alternate"></link><updated>2012-11-06T22:12:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</id><summary type="html">&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
 &lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
 it caught my attention.&lt;/p&gt;
 &lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
@@ -149,4 +149,4 @@ Hopefully it'll sharpen my skills like previous O'Reilly books have. I'll try
 to post a full review once I've finished it...err...if I finish it.&lt;/p&gt;
 &lt;p&gt;I will stop buying faster than I can read. I will stop buying faster than I
 can read. Maybe if I keep repeating that, it'll sink in.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 06 Nov 2012 22:12:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</guid><category>C/C++</category><category>Books</category></item></channel></rss>
+</summary><category term="C/C++"></category><category term="Books"></category></entry></feed>

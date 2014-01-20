@@ -3,514 +3,377 @@
 <head>
         <title>But I Digress - Michael P. Soulier</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href=".././theme/css/main.css" type="text/css" />
-        
-        
+        <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
         <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
-        
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie.css"/>
-                <script src=".././js/IE8.js" type="text/javascript"></script><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie.css"/>
+                <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
 
         <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie6.css"/><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
 
 </head>
 
 <body id="index" class="home">
-
 <a href="http://github.com/msoulier">
-
 <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
-
 </a>
-
         <header id="banner" class="body">
-                <h1><a href="../.">But I Digress </a></h1>
+                <h1><a href="..">But I Digress </a></h1>
                 <h2>Random neuron firings, digitized heedless of the
                 repurcussions.</h2>
                 <nav><ul>
-                
-                
-                
-                    <li><a href=".././pages/resume.html">Resumé</a></li>
-                
-                
-                
-                    <li ><a href=".././category/development.html">Development</a></li>
-                
-                    <li ><a href=".././category/personal.html">Personal</a></li>
-                
-                    <li ><a href=".././category/quotes.html">Quotes</a></li>
-                
-                    <li ><a href=".././category/technology.html">Technology</a></li>
-                
+                    <li><a href="../pages/mike-souliers-curriculum-vitae.html">Mike Soulier's Curriculum Vitae</a></li>
+                    <li ><a href="../category/development.html">Development</a></li>
+                    <li ><a href="../category/driving.html">Driving</a></li>
+                    <li ><a href="../category/personal.html">Personal</a></li>
+                    <li ><a href="../category/quotes.html">Quotes</a></li>
+                    <li ><a href="../category/technology.html">Technology</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-                
-
-            
-
         
         
+
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href=".././21st-century-c.html">21st Century C</a></h1> 
-                    <footer class="post-info">
-        <abbr class="published" title="2012-11-06T22:12:00">
-                Tue 06 November 2012
+                    <h1 class="entry-title"><a href="../validation-server-call-angularjs.html">Validation with Server-side call in AngularJS</a></h1> 
+<footer class="post-info">
+        <abbr class="published" title="2014-01-19T19:30:00">
+                Sun 19 January 2014
         </abbr>
 
-        
         <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        
-<p>In <a href=".././category/development.html">Development</a>. </p>
-<p>tags: <a href=".././tag/cc.html">C/C++</a><a href=".././tag/books.html">Books</a></p>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/angularjs.html">AngularJS</a><a href="../tag/rest.html">ReST</a></p></footer><!-- /.post-info --><p>I've been playing with <a class="reference external" href="http://www.angularjs.org">AngularJS</a> for a little while, and in trying to
+understand how to validate a user's data as it's being entered, it didn't take
+long to find that to check with the server for some validation rules, like
+uniqueness constraints.</p>
+<p>This presented a problem since the built-in validators know nothing about the
+data on the server. I looked into the issue and found that creating my own
+directive was the way to go. Difficult when I'm an AngularJS newbie and I
+barely understand such things, but luckily the AngularJS online community was
+helpful. To validate the uniqeness of an &quot;ICP&quot; (don't ask) when the user stops
+typing, it's not overly difficult.</p>
+<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;uniqueIcpName&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$http</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">promise</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
+        <span class="nx">require</span><span class="o">:</span> <span class="s1">&#39;ngModel&#39;</span><span class="p">,</span>
+        <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">elem</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">ctrl</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//when the scope changes, check</span>
+            <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">ngModel</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// if there was a previous attempt, stop it.</span>
+                <span class="nx">$timeout</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="nx">promise</span><span class="p">);</span>
 
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">uniqueIcpName</span><span class="p">);</span>
 
-</footer><!-- /.post-info --><p>I saw a sale from <a class="reference external" href="http://oreilly.com/">O'Reilly Publishing</a> tonight on an new ebook for
-<a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM">21st Century C</a>. I have a good history with O'Reilly and C programming, so
-it caught my attention.</p>
-<p>When I was in University, <a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM">Practical C Programming</a>
-taught me much more than any of my professors, and
-<a class="reference external" href="http://shop.oreilly.com/product/9781565921634.do">Unix System Programming for System VR4</a> taught me a great deal more about
-programming C on Unix/Linux. After reading those books, I became actually
-comfortable in working in C for all of my assignments, and other students
-kept coming to me for help until I had somehow become a local C expert.
-Amazing what a good investment in reading material will do, not to mention
-actually reading said material. Another friend in University taught me that.
-He told me not to ever begrudge the cost of a book that helps you get better
-at what you do. I've applied that lesson ever since.</p>
-<p>I relied on O'Reilly for my first introduction to C++, with
-<a class="reference external" href="http://shop.oreilly.com/product/9781565921160.do">C++, the Core Language</a>, which finally explained to me where some of my
-memory leaks were coming from, by explaining copy constructors and assignment
-operators. I turned to <a class="reference external" href="http://books.google.com/books/about/Beginning_C++.html?id=vtcpAQAAMAAJ">another book</a> to finish most of my C++ education, but
-O'Reilly got me started.</p>
-<p>Since University, with the wealth of information on the Internet, I haven't
-bought many C books, but I did pick up <a class="reference external" href="http://basepath.com/aup/">Advanced Unix Programming</a>, second
-edition, on the recommendation of a coworker, and he did not lead me astray,
-the book is excellent. Mind you, I still haven't finished reading it. I seem
-to buy books faster than I read them these days.</p>
-<p>Maybe one day I'll take a little vacation just to read. Anyway...</p>
-<p>Looking at the new O'Reilly book, it looks like it has many practical ideas
-for someone living with C from day to day, and should also provide a nice
-introduction to the new C11 standard, just released in December of last year.
-Hopefully it'll sharpen my skills like previous O'Reilly books have. I'll try
-to post a full review once I've finished it...err...if I finish it.</p>
-<p>I will stop buying faster than I can read. I will stop buying faster than I
-can read. Maybe if I keep repeating that, it'll sink in.</p>
-<p>There are <a href=".././21st-century-c.html#disqus_thread">comments</a>.</p>
-                </article>
-                
+                <span class="c1">// Determine the url based on whether this is an add or a</span>
+                <span class="c1">// modify.</span>
+                <span class="kd">var</span> <span class="nx">url</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">uniqueIcpName</span> <span class="o">===</span> <span class="s2">&quot;add&quot;</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;/valid/icp/add/name/&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;/valid/icp/modify/name/&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="c1">// start a new attempt with a delay to keep it from</span>
+                <span class="c1">// getting too &quot;chatty&quot;.</span>
+                <span class="nx">promise</span> <span class="o">=</span> <span class="nx">$timeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                    <span class="c1">// call to some API that returns { isValid: true } or</span>
+                    <span class="c1">// { isValid: false }</span>
+                    <span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">success</span><span class="p">(</span>
+                            <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                                <span class="nx">ctrl</span><span class="p">.</span><span class="nx">$setValidity</span><span class="p">(</span><span class="s1">&#39;uniqueIcpName&#39;</span><span class="p">,</span>
+                                                <span class="nx">data</span><span class="p">.</span><span class="nx">isValid</span><span class="p">);</span>
+                            <span class="p">});</span>
+                <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
+            <span class="p">})</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</pre></div>
+<p>The timeout is a neat trick someone taught me, so you launch the event on every
+keypress, but on the next keypress you cancel the previous one, and put in a
+500ms delay on the ReST call, so you don't really make the request until the
+user stops typing for a full half second. Meanwhile I put in a little attribute
+check based on creation vs. modification of the data, since uniqueness checks
+must exclude the current object on a modification.</p>
+<p>Then all you need is the server-side returning an <cite>isValid</cite> attribute, which
+should have a boolean value. Simple, and it works.</p>
+<p>There are <a href="../validation-server-call-angularjs.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
-            
                 <section id="content" class="body">
                     <h1>Other articles</h1>
                     <hr />
                     <ol id="posts-list" class="hfeed">
-            
         
-        
-        
-            
 
-        
-         
-            
+ 
             <li><article class="hentry">    
                 <header>
-                    <h1><a href=".././apple-and-joysticks.html" rel="bookmark"
-                           title="Permalink to Joysticks? We don't need no stinking joysticks...">Joysticks? We don't need no stinking joysticks...</a></h1>
+                    <h1><a href="../drivers-its-not-that-hard.html" rel="bookmark"
+                           title="Permalink to Drivers, it's really not that hard">Drivers, it's really not that hard</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-19T13:00:00">
-                Mon 19 November 2012
+<footer class="post-info">
+        <abbr class="published" title="2013-11-03T10:20:00">
+                Sun 03 November 2013
         </abbr>
 
-        
         <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        
-<p>In <a href=".././category/technology.html">Technology</a>. </p>
-<p>tags: <a href=".././tag/os-x.html">OS X</a></p>
+<p>In <a href="../category/driving.html">Driving</a>. </p>
+<p>tags: <a href="../tag/cars.html">Cars</a><a href="../tag/canada.html">Canada</a></p></footer><!-- /.post-info -->                <p><a class="reference external" href="http://www.mto.gov.on.ca/english/dandv/driver/handbook/section2.6.4.shtml">http://www.mto.gov.on.ca/english/dandv/driver/handbook/section2.6.4.shtml</a></p>
 
-
-</footer><!-- /.post-info -->
-                <p>So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
-<a class="reference external" href="http://www.x-plane.com">X-Plane</a> demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
-itself asked me if I wanted to calibrate the joystick, which struck me as odd,
-that hasn't happened in years, not ...</p>
-                <a class="readmore" href=".././apple-and-joysticks.html">read more</a>
-                <p>There are <a href=".././apple-and-joysticks.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+                <a class="readmore" href="../drivers-its-not-that-hard.html">read more</a>
+<p>There are <a href="../drivers-its-not-that-hard.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
         
-        
-            
 
-        
-         
-            
+ 
             <li><article class="hentry">    
                 <header>
-                    <h1><a href=".././apple-support-experience.html" rel="bookmark"
-                           title="Permalink to The Apple Support Experience">The Apple Support Experience</a></h1>
+                    <h1><a href="../java-pointlessly-difficult.html" rel="bookmark"
+                           title="Permalink to Java, usable but pointlessly difficult">Java, usable but pointlessly difficult</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-12-06T12:20:00">
-                Thu 06 December 2012
+<footer class="post-info">
+        <abbr class="published" title="2013-06-05T00:30:00">
+                Wed 05 June 2013
         </abbr>
 
-        
         <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        
-<p>In <a href=".././category/technology.html">Technology</a>. </p>
-<p>tags: <a href=".././tag/apple.html">Apple</a><a href=".././tag/customer-service.html">Customer Service</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>So, having jumped into Apple land with a Mac Mini recently, and having some
-problems, I of course took advantage of my included 90 days technical support.
-Being part of the Apple ecosystem includes being subject to how they support
-their customers, so I think it's important to write ...</p>
-                <a class="readmore" href=".././apple-support-experience.html">read more</a>
-                <p>There are <a href=".././apple-support-experience.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/java.html">Java</a></p></footer><!-- /.post-info -->                <p>I've been working on a REST client in Java at work lately. I know, it scares
+me too. I've had to revisit much of my old Java knowledge, and pick up a lot
+of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.</p>
+<p>Our internal ...</p>
+                <a class="readmore" href="../java-pointlessly-difficult.html">read more</a>
+<p>There are <a href="../java-pointlessly-difficult.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
         
-        
-            
 
-        
-         
-            
+ 
             <li><article class="hentry">    
                 <header>
-                    <h1><a href=".././brewing-a-better-unix.html" rel="bookmark"
-                           title="Permalink to Brewing a better UNIX">Brewing a better UNIX</a></h1>
+                    <h1><a href="../matplotlib-is-really-cool.html" rel="bookmark"
+                           title="Permalink to Matplotlib is really cool">Matplotlib is really cool</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-12-09T08:00:00">
-                Sun 09 December 2012
+<footer class="post-info">
+        <abbr class="published" title="2013-03-25T15:30:00">
+                Mon 25 March 2013
         </abbr>
 
-        
         <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        
-<p>In <a href=".././category/technology.html">Technology</a>. </p>
-<p>tags: <a href=".././tag/os-x.html">OS X</a><a href=".././tag/unix.html">UNIX</a><a href=".././tag/foss.html">FOSS</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>Being a <a class="reference external" href="http://www.linux.org/">Linux</a> user, I'm used to a fairly standard set of tools on my
-command-line. On <a class="reference external" href="http://www.apple.com/osx/">OS X</a>, it's essentially BSD UNIX underneath, which I have had
-some experience with thanks to <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>. The environment is very similar, but
-not identical, and on <a class="reference external" href="http://www.freebsd.org/">FreeBSD</a>, you quickly find ...</p>
-                <a class="readmore" href=".././brewing-a-better-unix.html">read more</a>
-                <p>There are <a href=".././brewing-a-better-unix.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>Recently at work I needed to produce a pie chart for some data that I had to
+crawl through using basic scripting. Pulling out the numbers, sorting,
+filtering, etc., was all tasks that I'm used to doing, but for graphing I
+normally use <a class="reference external" href="http://www.gnuplot.org">Gnuplot</a>. But, Gnuplot can't do ...</p>
+                <a class="readmore" href="../matplotlib-is-really-cool.html">read more</a>
+<p>There are <a href="../matplotlib-is-really-cool.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
         
-        
-            
 
-        
-         
-            
+ 
             <li><article class="hentry">    
                 <header>
-                    <h1><a href=".././checking-the-weather.html" rel="bookmark"
+                    <h1><a href="../joystick-mac-os-x-flightgear.html" rel="bookmark"
+                           title="Permalink to Joysticks on Mac OS X in Flightgear">Joysticks on Mac OS X in Flightgear</a></h1>
+                </header>
+                
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-03-11T22:00:00">
+                Mon 11 March 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/os-x.html">OS X</a></p></footer><!-- /.post-info -->                <p>I like flight simulators. I've played all of the good ones, <a class="reference external" href="http://www.flightgear.org/">Flightgear</a> is
+an open-source flight simulator that isn't bad, and is steadily getting better
+with every release. While it is available to run on Mac, there's no way to
+calibrate the Joystick due to a lack ...</p>
+                <a class="readmore" href="../joystick-mac-os-x-flightgear.html">read more</a>
+<p>There are <a href="../joystick-mac-os-x-flightgear.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+        
+
+ 
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="../video-on-raspbian.html" rel="bookmark"
+                           title="Permalink to Video on Raspbian">Video on Raspbian</a></h1>
+                </header>
+                
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-03-11T21:00:00">
+                Mon 11 March 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/linux.html">Linux</a><a href="../tag/raspberry-pi.html">Raspberry Pi</a></p></footer><!-- /.post-info -->                <p>Currently our upstairs TV has a <a class="reference external" href="http://www.raspberrypi.org/">raspberry pi</a> attached to it. It's running
+the basic <a class="reference external" href="http://www.raspbian.org/">Raspbian</a> distribution, based on <a class="reference external" href="http://www.debian.org/">Debian Linux</a>. I'm using it for
+development as well as for a media center at the moment, so I'm not using
+<a class="reference external" href="http://www.raspbmc.com/">RaspBMC</a>, I'm going to order another ...</p>
+                <a class="readmore" href="../video-on-raspbian.html">read more</a>
+<p>There are <a href="../video-on-raspbian.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+        
+
+ 
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="../jim-butcher-on-men-vs-women.html" rel="bookmark"
+                           title="Permalink to Jim Butcher on Men vs. Women">Jim Butcher on Men vs. Women</a></h1>
+                </header>
+                
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-01-01T09:30:00">
+                Tue 01 January 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+<p>In <a href="../category/quotes.html">Quotes</a>. </p>
+<p>tags: <a href="../tag/funny.html">Funny</a></p></footer><!-- /.post-info -->                <p>I'm reading Jim Butcher's &quot;Cold Days&quot;, his latest installment in the
+<a class="reference external" href="http://www.jim-butcher.com/books/dresden">Dresden Files</a>, and I felt the need to share this quote:</p>
+<blockquote>
+<p>So, ladies, if you ever have some conversation with your boyfriend or
+husband or brother or male friend, and you are telling him something
+perfectly obvious ...</p></blockquote>
+                <a class="readmore" href="../jim-butcher-on-men-vs-women.html">read more</a>
+<p>There are <a href="../jim-butcher-on-men-vs-women.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+        
+
+ 
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="../checking-the-weather.html" rel="bookmark"
                            title="Permalink to Checking the weather">Checking the weather</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
+<footer class="post-info">
         <abbr class="published" title="2012-12-23T20:30:00">
                 Sun 23 December 2012
         </abbr>
 
-        
         <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        
-<p>In <a href=".././category/development.html">Development</a>. </p>
-<p>tags: <a href=".././tag/python.html">Python</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>A while back I needed a way to check the weather forecast, simply, from a
+<p>In <a href="../category/development.html">Development</a>. </p>
+<p>tags: <a href="../tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>A while back I needed a way to check the weather forecast, simply, from a
 terminal, as is the preference of most Unix geeks like me. Being a Canadian,
 I'm not interested in the Weather Channel as much as the Environment Canada
 data. Thankfully, they do publish an RSS ...</p>
-                <a class="readmore" href=".././checking-the-weather.html">read more</a>
-                <p>There are <a href=".././checking-the-weather.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+                <a class="readmore" href="../checking-the-weather.html">read more</a>
+<p>There are <a href="../checking-the-weather.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
         
-        
-            
 
-        
-         
-            
+ 
             <li><article class="hentry">    
                 <header>
-                    <h1><a href=".././curling-and-life.html" rel="bookmark"
-                           title="Permalink to What Curling has taught me about life">What Curling has taught me about life</a></h1>
+                    <h1><a href="../signatures-in-oauth.html" rel="bookmark"
+                           title="Permalink to Signatures in OAuth">Signatures in OAuth</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-09T10:00:00">
-                Fri 09 November 2012
+<footer class="post-info">
+        <abbr class="published" title="2012-12-21T18:00:00">
+                Fri 21 December 2012
         </abbr>
 
-        
         <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        
-<p>In <a href=".././category/personal.html">Personal</a>. </p>
-<p>tags: <a href=".././tag/curling.html">Curling</a><a href=".././tag/hobbies.html">Hobbies</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>I've been curling for about 4 years now, and it's already taught me a lot
-about life. I thought I'd share some of what it has taught me:</p>
-<blockquote>
-<ul class="simple">
-<li>balance is very important</li>
-<li>anything worthwhile requires hard work</li>
-<li>you often can't brute force your way out of ...</li></ul></blockquote>
-                <a class="readmore" href=".././curling-and-life.html">read more</a>
-                <p>There are <a href=".././curling-and-life.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/oauth.html">OAuth</a><a href="../tag/web-services.html">Web Services</a><a href="../tag/python.html">Python</a><a href="../tag/perl.html">Perl</a></p></footer><!-- /.post-info -->                <p>Hi again. I already went into the basics of OAuth in a <a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html">previous post</a>, and
+alluded to the signatures being the hard part of the implementation. I'm using
+a <a class="reference external" href="https://github.com/leah/python-oauth/">python-oauth</a> module for the client, but for the server, I decided to
+implement my own in <a class="reference external" href="http://www.perl.org/">Perl</a> and <a class="reference external" href="http://mojolicio.us/">Mojolicious</a>, since ...</p>
+                <a class="readmore" href="../signatures-in-oauth.html">read more</a>
+<p>There are <a href="../signatures-in-oauth.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
         
-        
-            
 
-        
-         
-            
+ 
             <li><article class="hentry">    
                 <header>
-                    <h1><a href=".././customizing-awesome.html" rel="bookmark"
-                           title="Permalink to Customizing Awesome">Customizing Awesome</a></h1>
+                    <h1><a href="../understanding-oauth.html" rel="bookmark"
+                           title="Permalink to Understanding OAuth">Understanding OAuth</a></h1>
                 </header>
                 
                 <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-28T07:00:00">
-                Wed 28 November 2012
+<footer class="post-info">
+        <abbr class="published" title="2012-12-20T10:30:00">
+                Thu 20 December 2012
         </abbr>
 
-        
         <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        
-<p>In <a href=".././category/technology.html">Technology</a>. </p>
-<p>tags: <a href=".././tag/linux.html">Linux</a><a href=".././tag/foss.html">FOSS</a><a href=".././tag/awesome-wm.html">Awesome WM</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>As I mentioned previously, I'm currently running <a class="reference external" href="http://awesome.naquadah.org/">Awesome</a> on my netbook. While
-I added suspend on lid close, I still need to customize the crap out of it. I
-had nothing showing me my current battery status, so I searched around to find
-the appropriate <a class="reference external" href="http://www.lua.org/">lua</a> code, a language ...</p>
-                <a class="readmore" href=".././customizing-awesome.html">read more</a>
-                <p>There are <a href=".././customizing-awesome.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/oauth.html">OAuth</a><a href="../tag/web-services.html">Web Services</a></p></footer><!-- /.post-info -->                <p>We meet again. Thanks for stopping by. This post has a high geek factor, so if
+you're not one, feel free to move along, nothing to see here.</p>
+<p>Still here? K, your funeral. At work, I'm trying to add a <a class="reference external" href="http://en.wikipedia.org/wiki/Representational_state_transfer">ReST</a> Web Service to
+a product that could ...</p>
+                <a class="readmore" href="../understanding-oauth.html">read more</a>
+<p>There are <a href="../understanding-oauth.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href=".././dusting-off-old-games.html" rel="bookmark"
-                           title="Permalink to Dusting off old games">Dusting off old games</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-04T18:43:00">
-                Sun 04 November 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href=".././category/personal.html">Personal</a>. </p>
-<p>tags: <a href=".././tag/hobbies.html">Hobbies</a><a href=".././tag/sfb.html">SFB</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>Back before I had any real responsibilities, I spent a lot of time playing
-various games. I've probably played most of them. Roleplaying games, tabletop
-battle simulations, although I stayed away from the card games like <a class="reference external" href="http://www.wizards.com/Magic/Summoner/">Magic</a>.
-I'll rant about that some other time.</p>
-<p>My two favorite games ...</p>
-                <a class="readmore" href=".././dusting-off-old-games.html">read more</a>
-                <p>There are <a href=".././dusting-off-old-games.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href=".././fruit-on-my-screen.html" rel="bookmark"
-                           title="Permalink to Ok, nobody panic, there's a fruit on my screen">Ok, nobody panic, there's a fruit on my screen</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-11-16T18:00:00">
-                Fri 16 November 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href=".././category/technology.html">Technology</a>. </p>
-<p>tags: <a href=".././tag/os-x.html">OS X</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>I've needed a new desktop for a while now. As I'm primarily a Unix user, I
-typically buy a cheap PC and put <a class="reference external" href="http://www.linux.org">Linux</a> on it. This involves doing a bunch of
-research into available hardware to make sure that everything is going to
-work, like accelerated graphics ...</p>
-                <a class="readmore" href=".././fruit-on-my-screen.html">read more</a>
-                <p>There are <a href=".././fruit-on-my-screen.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
-            
-
-        
-         
-            
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href=".././getting-started-with-autotools.html" rel="bookmark"
-                           title="Permalink to Getting started with autotools">Getting started with autotools</a></h1>
-                </header>
-                
-                <div class="entry-content">
-                <footer class="post-info">
-        <abbr class="published" title="2012-12-16T08:30:00">
-                Sun 16 December 2012
-        </abbr>
-
-        
-        <address class="vcard author">
-                By <a class="url fn" href=".././author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-        
-<p>In <a href=".././category/development.html">Development</a>. </p>
-<p>tags: <a href=".././tag/cc.html">C/C++</a><a href=".././tag/foss.html">FOSS</a><a href=".././tag/autotools.html">Autotools</a></p>
-
-
-</footer><!-- /.post-info -->
-                <p>So, I'm still reading O'Rielly's <a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html">21st Century C</a>. I know, too many books on
-the go and I read slowly, and not often enough. I'm going through the section
-on <a class="reference external" href="http://www.gnu.org/software/autoconf/">GNU autotools</a>, which I've never been a heavy user of, albiet I'm a heavy ...</p>
-                <a class="readmore" href=".././getting-started-with-autotools.html">read more</a>
-                <p>There are <a href=".././getting-started-with-autotools.html#disqus_thread">comments</a>.</p>
-                </div><!-- /.entry-content -->
-            </article></li>
-        
-        
             </ol><!-- /#posts-list -->
-            
-                
 <p class="paginator">
-    
     Page 1 / 3
-    
-        <a href=".././author/Michael P. Soulier2.html">&raquo;</a>
-    
+        <a href="../author/michael-p-soulier2.html">&raquo;</a>
 </p>
-
-            
             </section><!-- /#content -->
-        
-    
-
-
         <section id="extras" class="body">
-        
                 <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                        
                             <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                        
                             <li><a href="http://python.org">Python.org</a></li>
-                        
                             <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
-                        
                             <li><a href="http://fit613.wordpress.com">Fit613</a></li>
-                        
                             <li><a href="http://excess.org">Ian Ward</a></li>
-                        
                             <li><a href="http://www.mahdiyusuf.com/">Mahdi Yusuf</a></li>
-                        
                             <li><a href="http://mikegrouchy.com/">Mike Grouchy</a></li>
-                        
                         </ul>
                 </div><!-- /.blogroll -->
-        
-        
                 <div class="social">
                         <h2>social</h2>
                         <ul>
-                            
-                            
-                                
                             <li><a href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate">rss feed</a></li>
-                                
-                            
 
-                        
                             <li><a href="http://twitter.com/msoulier">Twitter</a></li>
-                        
                         </ul>
                 </div><!-- /.social -->
-        
         </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
@@ -521,9 +384,6 @@ on <a class="reference external" href="http://www.gnu.org/software/autoconf/">GN
 
         </footer><!-- /#contentinfo -->
 
-
-
-
 <script type="text/javascript">
     var disqus_shortname = 'butidigressca';
     (function () {
@@ -533,6 +393,5 @@ on <a class="reference external" href="http://www.gnu.org/software/autoconf/">GN
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
-
 </body>
 </html>

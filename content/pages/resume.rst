@@ -1,5 +1,5 @@
-Resumé
-======
+Mike Soulier's Curriculum Vitae
+===============================
 
 Overview
 --------
@@ -29,7 +29,7 @@ My qualifications for the job are as follows. For full details on the
 material in this summary, please refer to the section entitled
 Experience, and the sections that follow it.
 
-1. Ten year's experience with `Mitel`_ as a software engineer,
+1. Eleven year's experience with `Mitel`_ as a software engineer,
    working on the Mitel 6000 Managed Application Server
    (formerly the E-Smith server and gateway), as well as applications
    on top of that server such as the Teleworker Solution (now
@@ -169,7 +169,9 @@ the world of IPv6. MBG has experimental IPv6 support at this time, as
 worldwide IPv6 adoption is slow. Later in 2011 in 7.1 the bulk of the 7.1
 release was finished, enhancing troubleshooting and maintenance or the
 release, and adding the remote management proxy to the application to permit
-web-based remote management of Mitel applications.
+web-based remote management of Mitel applications. One of the features
+included in the 7.1 release was a web-based tcpdump and traceroute that I
+designed and implemented.
 
 In 2012 we continued supporting the 7.1 release, enhancing scaling of SIP
 trunk deployments for hosted environments, greatly enhanced security in a
@@ -177,6 +179,22 @@ special 7.2 release, while continuing in the development release of 8.0. The
 8.0 release further enhanced SIP interoperability, security, maintenance and
 monitoring, and remote management capabilities with Mitel's flagship IP PBX,
 the Mitel Communications Director.
+
+Development of 8.0 continued in 2013, with inclusion of the ability to upload
+large MCD images to MBG, to allow remote upgrades of MCD and prevent
+truck-rolls. In parallel, I implemented a REST Web service for Mitel Standard
+Linux with plugins for applications, implemented in Perl and Mojolicious. The
+existing OAuth libraries were insufficient for my purposes, so I wrote my own.
+Meanwhile, I began playing with the Raspberry Pi, and with the help of a
+long-time coworker, ported MBG to the Raspberry Pi as an experiment. To
+achieve this, I redesigned the entire management layer to work on this
+platform, and wrote a new interface using AngularJS, an impressive new
+single-page application framework from Google that I've come to like.
+
+Work completed in 2013 while maintaining 5 parallel streams, 7.1, 7.2, 8.0, 8.1
+and 9.0. Quite challenging for a small development team, but we've found that
+using the appropriate tools goes a very long way, and Git is the appropriate
+tool here.
 
 On the side, I set up and still maintain an internal R&D Wiki and Mailing list
 server, now used by the bulk of the R&D organization. I have given several

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Personal.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 28 Nov 2012 08:00:00 -0500</lastBuildDate><item><title>Parenting can really make you feel helpless</title><link>http://www.but-i-digress.ca/parenting-can-make-you-feel-helpless.html</link><description>&lt;p&gt;I've only been kicking around for a bit over 40 years now, but I've never
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/personal.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2012-11-28T08:00:00-05:00</updated><entry><title>Parenting can really make you feel helpless</title><link href="http://www.but-i-digress.ca/parenting-can-make-you-feel-helpless.html" rel="alternate"></link><updated>2012-11-28T08:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-28:parenting-can-make-you-feel-helpless.html</id><summary type="html">&lt;p&gt;I've only been kicking around for a bit over 40 years now, but I've never
 found anything in the world to make me feel more helpless than my own child
 telling me that they feel bad, and knowing that I can't fix it.&lt;/p&gt;
 &lt;p&gt;My daughter was sick last night, and we monitored her fever as it rose up to a
@@ -33,7 +33,7 @@ Child hurt. Must fix.&lt;/p&gt;
 Freak&amp;quot;), but the worse is past and she'll be fine. Her immune system wins
 another one, and comes away stronger. Me, I'm just relieved and very tired. I
 really should call my parents and thank them, repeatedly.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Wed, 28 Nov 2012 08:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-28:parenting-can-make-you-feel-helpless.html</guid><category>Parenting</category></item><item><title>What Curling has taught me about life</title><link>http://www.but-i-digress.ca/curling-and-life.html</link><description>&lt;p&gt;I've been curling for about 4 years now, and it's already taught me a lot
+</summary><category term="Parenting"></category></entry><entry><title>What Curling has taught me about life</title><link href="http://www.but-i-digress.ca/curling-and-life.html" rel="alternate"></link><updated>2012-11-09T10:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-09:curling-and-life.html</id><summary type="html">&lt;p&gt;I've been curling for about 4 years now, and it's already taught me a lot
 about life. I thought I'd share some of what it has taught me:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul class="simple"&gt;
@@ -55,7 +55,7 @@ about life. I thought I'd share some of what it has taught me:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Cheers&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 09 Nov 2012 10:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-09:curling-and-life.html</guid><category>Curling</category><category>Hobbies</category></item><item><title>I sit too much</title><link>http://www.but-i-digress.ca/i-sit-too-much.html</link><description>&lt;p&gt;Yeah, I really do. From my childhood I always prefered more intellectual
+</summary><category term="Curling"></category><category term="Hobbies"></category></entry><entry><title>I sit too much</title><link href="http://www.but-i-digress.ca/i-sit-too-much.html" rel="alternate"></link><updated>2012-11-08T12:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-08:i-sit-too-much.html</id><summary type="html">&lt;p&gt;Yeah, I really do. From my childhood I always prefered more intellectual
 activities than active ones, reading, watching movies, tv. Growing up
 asthmatic had something to do with that, but I overcame it later in life and
 had no excuses anymore. Still, studies to do, computers to play with, digital
@@ -86,7 +86,7 @@ months.&lt;/p&gt;
 helps. There's a difference between working hard and working smart.
 Previously, I was just working hard.&lt;/p&gt;
 &lt;p&gt;If you've read this sitting down, get up and move around. Trust me.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 08 Nov 2012 12:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-08:i-sit-too-much.html</guid><category>Health</category></item><item><title>Dusting off old games</title><link>http://www.but-i-digress.ca/dusting-off-old-games.html</link><description>&lt;p&gt;Back before I had any real responsibilities, I spent a lot of time playing
+</summary><category term="Health"></category></entry><entry><title>Dusting off old games</title><link href="http://www.but-i-digress.ca/dusting-off-old-games.html" rel="alternate"></link><updated>2012-11-04T18:43:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-04:dusting-off-old-games.html</id><summary type="html">&lt;p&gt;Back before I had any real responsibilities, I spent a lot of time playing
 various games. I've probably played most of them. Roleplaying games, tabletop
 battle simulations, although I stayed away from the card games like &lt;a class="reference external" href="http://www.wizards.com/Magic/Summoner/"&gt;Magic&lt;/a&gt;.
 I'll rant about that some other time.&lt;/p&gt;
@@ -96,7 +96,7 @@ parts were the ship to ship combat. SFB simulated that combat better than I'd
 ever seen before, and even spun off a pretty cool &lt;a class="reference external" href="http://www.youtube.com/watch?v=HwQ3rm0LcWU"&gt;video game&lt;/a&gt; that spawned a
 couple of sequels. I still have the first one.&lt;/p&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/sfb.png" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;The tabletop game was as complex as any chess game, and a lot more fun in my
 opinion, so it was with no small amount of nostalgia that I dusted off the
@@ -113,7 +113,7 @@ suceeds in providing a fun gaming experience, and it's a hell of a lot more
 fun than playing Monopoly or Clue, with all due respect to those games.&lt;/p&gt;
 &lt;p&gt;Lets be honest, in the end, boys don't grow up, our toys just get more
 expensive.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 04 Nov 2012 18:43:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-04:dusting-off-old-games.html</guid><category>Hobbies</category><category>SFB</category></item><item><title>New blog</title><link>http://www.but-i-digress.ca/new-static-blog.html</link><description>&lt;p&gt;So I decided to dump Wordpress and go to something that I have more control
+</summary><category term="Hobbies"></category><category term="SFB"></category></entry><entry><title>New blog</title><link href="http://www.but-i-digress.ca/new-static-blog.html" rel="alternate"></link><updated>2012-11-03T10:20:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-03:new-static-blog.html</id><summary type="html">&lt;p&gt;So I decided to dump Wordpress and go to something that I have more control
 over. I was thinking of building my own static blogging system, but I looked
 around and found that there are a few already. Being a fan of &lt;a class="reference external" href="http://www.python.org/"&gt;Python&lt;/a&gt; I
 decided to try out &lt;a class="reference external" href="http://docs.getpelican.com/en/3.0/"&gt;Pelican&lt;/a&gt;. It uses a bunch of technology that I would use
@@ -126,4 +126,4 @@ found a &lt;a class="reference external" href="http://kennethreitz.com/static-si
 into running a static site.&lt;/p&gt;
 &lt;p&gt;So, we'll see how this goes. My main blogging tools now are &lt;a class="reference external" href="http://www.vim.org/"&gt;Vim&lt;/a&gt; and &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt;, so
 how can I go wrong?&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sat, 03 Nov 2012 10:20:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2012-11-03:new-static-blog.html</guid><category>Blogging</category><category>Python</category><category>FOSS</category></item></channel></rss>
+</summary><category term="Blogging"></category><category term="Python"></category><category term="FOSS"></category></entry></feed>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Sun, 19 Jan 2014 19:30:00 -0500</lastBuildDate><item><title>Validation with Server-side call in AngularJS</title><link>http://www.but-i-digress.ca/validation-server-call-angularjs.html</link><description>&lt;p&gt;I've been playing with &lt;a class="reference external" href="http://www.angularjs.org"&gt;AngularJS&lt;/a&gt; for a little while, and in trying to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2014-01-19T19:30:00-05:00</updated><entry><title>Validation with Server-side call in AngularJS</title><link href="http://www.but-i-digress.ca/validation-server-call-angularjs.html" rel="alternate"></link><updated>2014-01-19T19:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2014-01-19:validation-server-call-angularjs.html</id><summary type="html">&lt;p&gt;I've been playing with &lt;a class="reference external" href="http://www.angularjs.org"&gt;AngularJS&lt;/a&gt; for a little while, and in trying to
 understand how to validate a user's data as it's being entered, it didn't take
 long to find that to check with the server for some validation rules, like
 uniqueness constraints.&lt;/p&gt;
@@ -56,8 +56,7 @@ check based on creation vs. modification of the data, since uniqueness checks
 must exclude the current object on a modification.&lt;/p&gt;
 &lt;p&gt;Then all you need is the server-side returning an &lt;cite&gt;isValid&lt;/cite&gt; attribute, which
 should have a boolean value. Simple, and it works.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 19 Jan 2014 19:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2014-01-19:validation-server-call-angularjs.html</guid><category>AngularJS</category><category>ReST</category></item><item><title>Drivers, it's really not that hard</title><link>http://www.but-i-digress.ca/drivers-its-not-that-hard.html</link><description>&lt;p&gt;&lt;a class="reference external" href="http://www.mto.gov.on.ca/english/dandv/driver/handbook/section2.6.4.shtml"&gt;http://www.mto.gov.on.ca/english/dandv/driver/handbook/section2.6.4.shtml&lt;/a&gt;&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 03 Nov 2013 10:20:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2013-11-03:drivers-its-not-that-hard.html</guid><category>Cars</category><category>Canada</category></item><item><title>Java, usable but pointlessly difficult</title><link>http://www.but-i-digress.ca/java-pointlessly-difficult.html</link><description>&lt;p&gt;I've been working on a REST client in Java at work lately. I know, it scares
+</summary><category term="AngularJS"></category><category term="ReST"></category></entry><entry><title>Java, usable but pointlessly difficult</title><link href="http://www.but-i-digress.ca/java-pointlessly-difficult.html" rel="alternate"></link><updated>2013-06-05T00:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-06-05:java-pointlessly-difficult.html</id><summary type="html">&lt;p&gt;I've been working on a REST client in Java at work lately. I know, it scares
 me too. I've had to revisit much of my old Java knowledge, and pick up a lot
 of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.&lt;/p&gt;
 &lt;p&gt;Our internal servers use self-signed SSL certs at work, so to talk to them I
@@ -104,7 +103,7 @@ the IP isn't in the cert.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Usable? Yes. But it's no wonder that Java programmers insist on IDEs when it's
 so damn wordy. I mean, wouldn't a simple boolean have done here?&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Wed, 05 Jun 2013 00:30:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-06-05:java-pointlessly-difficult.html</guid><category>Java</category></item><item><title>Matplotlib is really cool</title><link>http://www.but-i-digress.ca/matplotlib-is-really-cool.html</link><description>&lt;p&gt;Recently at work I needed to produce a pie chart for some data that I had to
+</summary><category term="Java"></category></entry><entry><title>Matplotlib is really cool</title><link href="http://www.but-i-digress.ca/matplotlib-is-really-cool.html" rel="alternate"></link><updated>2013-03-25T15:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-25:matplotlib-is-really-cool.html</id><summary type="html">&lt;p&gt;Recently at work I needed to produce a pie chart for some data that I had to
 crawl through using basic scripting. Pulling out the numbers, sorting,
 filtering, etc., was all tasks that I'm used to doing, but for graphing I
 normally use &lt;a class="reference external" href="http://www.gnuplot.org"&gt;Gnuplot&lt;/a&gt;. But, Gnuplot can't do pie charts AFAIK, so I needed
@@ -136,7 +135,7 @@ pie chart, with very little code.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Very impressive. I tried it a few years ago and found it difficult, but it
 seems to have gotten much simpler. I must delve deeper now.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 25 Mar 2013 15:30:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-03-25:matplotlib-is-really-cool.html</guid><category>Python</category></item><item><title>Joysticks on Mac OS X in Flightgear</title><link>http://www.but-i-digress.ca/joystick-mac-os-x-flightgear.html</link><description>&lt;p&gt;I like flight simulators. I've played all of the good ones, &lt;a class="reference external" href="http://www.flightgear.org/"&gt;Flightgear&lt;/a&gt; is
+</summary><category term="Python"></category></entry><entry><title>Joysticks on Mac OS X in Flightgear</title><link href="http://www.but-i-digress.ca/joystick-mac-os-x-flightgear.html" rel="alternate"></link><updated>2013-03-11T22:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:joystick-mac-os-x-flightgear.html</id><summary type="html">&lt;p&gt;I like flight simulators. I've played all of the good ones, &lt;a class="reference external" href="http://www.flightgear.org/"&gt;Flightgear&lt;/a&gt; is
 an open-source flight simulator that isn't bad, and is steadily getting better
 with every release. While it is available to run on Mac, there's no way to
 calibrate the Joystick due to a lack of caring on Apple's part.&lt;/p&gt;
@@ -317,7 +316,7 @@ did:&lt;/p&gt;
 &lt;/pre&gt;
 &lt;p&gt;Right now, the calibration is good, but the controls are really jerky and
 overly sensitive. I'll have to see if I can smooth them out. But, they work.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 11 Mar 2013 22:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-03-11:joystick-mac-os-x-flightgear.html</guid><category>OS X</category></item><item><title>Video on Raspbian</title><link>http://www.but-i-digress.ca/video-on-raspbian.html</link><description>&lt;p&gt;Currently our upstairs TV has a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;raspberry pi&lt;/a&gt; attached to it. It's running
+</summary><category term="OS X"></category></entry><entry><title>Video on Raspbian</title><link href="http://www.but-i-digress.ca/video-on-raspbian.html" rel="alternate"></link><updated>2013-03-11T21:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</id><summary type="html">&lt;p&gt;Currently our upstairs TV has a &lt;a class="reference external" href="http://www.raspberrypi.org/"&gt;raspberry pi&lt;/a&gt; attached to it. It's running
 the basic &lt;a class="reference external" href="http://www.raspbian.org/"&gt;Raspbian&lt;/a&gt; distribution, based on &lt;a class="reference external" href="http://www.debian.org/"&gt;Debian Linux&lt;/a&gt;. I'm using it for
 development as well as for a media center at the moment, so I'm not using
 &lt;a class="reference external" href="http://www.raspbmc.com/"&gt;RaspBMC&lt;/a&gt;, I'm going to order another one has a dedicated media center, but
@@ -342,81 +341,7 @@ clear
 setterm -cursor on
 &lt;/pre&gt;
 &lt;p&gt;Simple, but it works.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 11 Mar 2013 21:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</guid><category>Linux</category><category>Raspberry Pi</category></item><item><title>Jim Butcher on Men vs. Women</title><link>http://www.but-i-digress.ca/jim-butcher-on-men-vs-women.html</link><description>&lt;p&gt;I'm reading Jim Butcher's &amp;quot;Cold Days&amp;quot;, his latest installment in the
-&lt;a class="reference external" href="http://www.jim-butcher.com/books/dresden"&gt;Dresden Files&lt;/a&gt;, and I felt the need to share this quote:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;So, ladies, if you ever have some conversation with your boyfriend or
-husband or brother or male friend, and you are telling him something
-perfectly obvious, and he comes away from it utterly clueless? I know it's
-tempting to think to yourself, &amp;quot;The man can't possibly be that stupid!&amp;quot;&lt;/p&gt;
-&lt;p&gt;But yes. Yes, he can.&lt;/p&gt;
-&lt;p&gt;Our innate strengths just aren't the same. We are the mighty hunters, who
-are good at focusing on one thing at a time. For crying out loud, we have
-to turn down the radio in the car if we suspect we're lost and need to
-figure out how to get where we're going.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Umm, yeah, I've had to turn the radio down...&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 01 Jan 2013 09:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2013-01-01:jim-butcher-on-men-vs-women.html</guid><category>Funny</category></item><item><title>Checking the weather</title><link>http://www.but-i-digress.ca/checking-the-weather.html</link><description>&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
-terminal, as is the preference of most Unix geeks like me. Being a Canadian,
-I'm not interested in the Weather Channel as much as the Environment Canada
-data. Thankfully, they do publish an RSS feed, and good for them.&lt;/p&gt;
-&lt;p&gt;I'm interested in this one:
-&lt;a class="reference external" href="http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml"&gt;http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml&lt;/a&gt;. So, to check the
-weather, I need to pull the feed and parse it. Pulling a page in Python is as
-simple as using &lt;tt class="docutils literal"&gt;urllib&lt;/tt&gt;. From there, I can walk the elements I want like
-so:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;xml.etree.ElementTree&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;
-
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now, I wanted the option of picking a certain number of lines, and wrapping at
-a certain number of columns. I wanted this for using the script output as
-input into other apps, like &lt;a class="reference external" href="http://conky.sourceforge.net/"&gt;Conky&lt;/a&gt;. Skipping lines is easy, intelligently
-wrapping them is not. Luckily, Python has a &lt;tt class="docutils literal"&gt;textwrap&lt;/tt&gt; module in the
-standard library.&lt;/p&gt;
-&lt;p&gt;You use it like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;textwrap&lt;/span&gt;
-
-&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Put together, it's really that simple. I think the majority of my code is
-option parsing. The core loop is just this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parse_options&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ignore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;break&lt;/span&gt;
-        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
-    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="k"&gt;continue&lt;/span&gt;
-    &lt;span class="k"&gt;break&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The whole thing &lt;a class="reference external" href="https://github.com/msoulier/mikes-tools/blob/master/weather.py"&gt;is here&lt;/a&gt;. Sample output looks like this:&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-No watches or warnings in effect, Ottawa (Kanata - Orléans)
-Current Conditions: Light Snow, -11.1°C
-Sunday night: A few flurries. Low minus 18.
-Monday: Sunny. High minus 9.
-Monday night: Increasing cloudiness. Low minus 12.
-Tuesday: Chance of flurries. High minus 7. POP 60%
-Wednesday: A mix of sun and cloud. Low minus 16. High minus 8.
-Thursday: Periods of snow. Low minus 8. High minus 2.
-Friday: Sunny. Low minus 12. High minus 7.
-Saturday: Periods of snow. Low minus 12. High minus 7.
-&lt;/pre&gt;
-&lt;p&gt;I love building my own tools like this, it's the ultimate in end-user
-computing. Unix and Python are my playground.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 23 Dec 2012 20:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-23:checking-the-weather.html</guid><category>Python</category></item><item><title>Signatures in OAuth</title><link>http://www.but-i-digress.ca/signatures-in-oauth.html</link><description>&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
+</summary><category term="Linux"></category><category term="Raspberry Pi"></category></entry><entry><title>Signatures in OAuth</title><link href="http://www.but-i-digress.ca/signatures-in-oauth.html" rel="alternate"></link><updated>2012-12-21T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-21:signatures-in-oauth.html</id><summary type="html">&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
 alluded to the signatures being the hard part of the implementation. I'm using
 a &lt;a class="reference external" href="https://github.com/leah/python-oauth/"&gt;python-oauth&lt;/a&gt; module for the client, but for the server, I decided to
 implement my own in &lt;a class="reference external" href="http://www.perl.org/"&gt;Perl&lt;/a&gt; and &lt;a class="reference external" href="http://mojolicio.us/"&gt;Mojolicious&lt;/a&gt;, since I had problems with
@@ -572,7 +497,7 @@ that the signatures were dropped in OAuth 2.0 because they were too hard to
 do. I'd rather not drop the added security, and while they're a pain, there
 are sample implementations to follow. I think that OAuth 1.0 is a better
 choice. And it's, like, finished.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 21 Dec 2012 18:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-21:signatures-in-oauth.html</guid><category>OAuth</category><category>Web Services</category><category>Python</category><category>Perl</category></item><item><title>Understanding OAuth</title><link>http://www.but-i-digress.ca/understanding-oauth.html</link><description>&lt;p&gt;We meet again. Thanks for stopping by. This post has a high geek factor, so if
+</summary><category term="OAuth"></category><category term="Web Services"></category><category term="Python"></category><category term="Perl"></category></entry><entry><title>Understanding OAuth</title><link href="http://www.but-i-digress.ca/understanding-oauth.html" rel="alternate"></link><updated>2012-12-20T10:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-20:understanding-oauth.html</id><summary type="html">&lt;p&gt;We meet again. Thanks for stopping by. This post has a high geek factor, so if
 you're not one, feel free to move along, nothing to see here.&lt;/p&gt;
 &lt;p&gt;Still here? K, your funeral. At work, I'm trying to add a &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Representational_state_transfer"&gt;ReST&lt;/a&gt; Web Service to
 a product that could desperately use it. I want to do this to permit better
@@ -668,66 +593,7 @@ thing is that the signing part is simple, but constructing the base string is
 freakin' hard. You'll get what I mean if you read the &lt;a class="reference external" href="http://tools.ietf.org/html/rfc5849"&gt;RFC&lt;/a&gt;, or just stay
 tuned.&lt;/p&gt;
 &lt;p&gt;See? Geeky. I warned you.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 20 Dec 2012 10:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-20:understanding-oauth.html</guid><category>OAuth</category><category>Web Services</category></item><item><title>Getting started with autotools</title><link>http://www.but-i-digress.ca/getting-started-with-autotools.html</link><description>&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
-the go and I read slowly, and not often enough. I'm going through the section
-on &lt;a class="reference external" href="http://www.gnu.org/software/autoconf/"&gt;GNU autotools&lt;/a&gt;, which I've never been a heavy user of, albiet I'm a heavy
-consumer of. I just don't spend much time distributing C/C++ across platforms.&lt;/p&gt;
-&lt;p&gt;I have a little C tool that I figured I'd try it on, a small replacement for
-GNU tree that I wrote a while back, and since &lt;tt class="docutils literal"&gt;tree&lt;/tt&gt; isn't available on
-OS X, it seemed a good excuse to port it. Previously I just had a Makefile
-that I maintained, and it works fine, but it's a good excuse to learn how to
-use autotools for the future. I do have some libraries, and they're harder to
-port, which is where &lt;a class="reference external" href="http://www.gnu.org/software/libtool/"&gt;libtool&lt;/a&gt; comes in.&lt;/p&gt;
-&lt;p&gt;This &lt;tt class="docutils literal"&gt;build&lt;/tt&gt; script outlines the process of using autotools for the first
-time. This script borrows very heavily from the book's author.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating Makefile.am&amp;quot;&lt;/span&gt;
-cat &amp;gt; Makefile.am &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF&lt;/span&gt;
-&lt;span class="s"&gt;bin_PROGRAMS=twig&lt;/span&gt;
-&lt;span class="s"&gt;twig_SOURCES=twig.c&lt;/span&gt;
-&lt;span class="s"&gt;EOF&lt;/span&gt;
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoscan...&amp;quot;&lt;/span&gt;
-autoscan
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating configure.ac...&amp;quot;&lt;/span&gt;
-sed -e &lt;span class="s1"&gt;&amp;#39;s/FULL-PACKAGE-NAME/twig/&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-    -e &lt;span class="s1"&gt;&amp;#39;s/VERSION/1.0/&amp;#39;&lt;/span&gt;   &lt;span class="se"&gt;\&lt;/span&gt;
-    -e &lt;span class="s1"&gt;&amp;#39;s|BUG-REPORT-ADDRESS|msoulier@digitaltorque.ca|&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-    -e &lt;span class="s1"&gt;&amp;#39;10i\&lt;/span&gt;
-&lt;span class="s1"&gt;    AM_INIT_AUTOMAKE&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
-        &amp;lt; configure.scan &amp;gt; configure.ac
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating additional files...&amp;quot;&lt;/span&gt;
-touch NEWS README AUTHORS ChangeLog
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoreconf...&amp;quot;&lt;/span&gt;
-autoreconf -iv
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running configure...&amp;quot;&lt;/span&gt;
-./configure
-
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running make distcheck to package sources...&amp;quot;&lt;/span&gt;
-make distcheck
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;At this point, it's not ready to ship, as the &lt;tt class="docutils literal"&gt;NEWS&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;README&lt;/tt&gt;,
-&lt;tt class="docutils literal"&gt;AUTHORS&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;ChangeLog&lt;/tt&gt; aren't populated yet. But it's close. The
-&lt;tt class="docutils literal"&gt;configure&lt;/tt&gt; script works, and I could then build it on OS X using the
-expected.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local
-make
-make install
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;My next project to package is a shared library for work, so that will be more
-interesting. Still, if you're looking to use autotools for the first time for
-something simple, this should take the mystery out of kick-starting it. Sure,
-there's some magic like the &lt;tt class="docutils literal"&gt;AM_INIT_AUTOMAKE&lt;/tt&gt; macro, and I've a ton to
-learn yet, but this worked on the first try, and the resulting tarball is good
-to push to &lt;a class="reference external" href="http://sourceforge.net/"&gt;SourceForge&lt;/a&gt; or elsewhere if you want to.&lt;/p&gt;
-&lt;p&gt;As I pick up more, I'll try to share it. I don't find autotools intuitive at
-all, but with some simple recipes I think I'll survive.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 16 Dec 2012 08:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-16:getting-started-with-autotools.html</guid><category>C/C++</category><category>FOSS</category><category>Autotools</category></item><item><title>Brewing a better UNIX</title><link>http://www.but-i-digress.ca/brewing-a-better-unix.html</link><description>&lt;p&gt;Being a &lt;a class="reference external" href="http://www.linux.org/"&gt;Linux&lt;/a&gt; user, I'm used to a fairly standard set of tools on my
+</summary><category term="OAuth"></category><category term="Web Services"></category></entry><entry><title>Brewing a better UNIX</title><link href="http://www.but-i-digress.ca/brewing-a-better-unix.html" rel="alternate"></link><updated>2012-12-09T08:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-09:brewing-a-better-unix.html</id><summary type="html">&lt;p&gt;Being a &lt;a class="reference external" href="http://www.linux.org/"&gt;Linux&lt;/a&gt; user, I'm used to a fairly standard set of tools on my
 command-line. On &lt;a class="reference external" href="http://www.apple.com/osx/"&gt;OS X&lt;/a&gt;, it's essentially BSD UNIX underneath, which I have had
 some experience with thanks to &lt;a class="reference external" href="http://www.freebsd.org/"&gt;FreeBSD&lt;/a&gt;. The environment is very similar, but
 not identical, and on &lt;a class="reference external" href="http://www.freebsd.org/"&gt;FreeBSD&lt;/a&gt;, you quickly find yourself using the ports
@@ -794,7 +660,7 @@ on that in another post.&lt;/p&gt;
 without my help, and maybe there is one, these things elude me at times. I
 highly recommend it if you're trying to complete your *nix environment on OS
 X.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 09 Dec 2012 08:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-09:brewing-a-better-unix.html</guid><category>OS X</category><category>UNIX</category><category>FOSS</category></item><item><title>The Apple Support Experience</title><link>http://www.but-i-digress.ca/apple-support-experience.html</link><description>&lt;p&gt;So, having jumped into Apple land with a Mac Mini recently, and having some
+</summary><category term="OS X"></category><category term="UNIX"></category><category term="FOSS"></category></entry><entry><title>The Apple Support Experience</title><link href="http://www.but-i-digress.ca/apple-support-experience.html" rel="alternate"></link><updated>2012-12-06T12:20:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-06:apple-support-experience.html</id><summary type="html">&lt;p&gt;So, having jumped into Apple land with a Mac Mini recently, and having some
 problems, I of course took advantage of my included 90 days technical support.
 Being part of the Apple ecosystem includes being subject to how they support
 their customers, so I think it's important to write about.&lt;/p&gt;
@@ -849,41 +715,7 @@ should be. I've had plenty of bad experiences with other companies, and so far
 I've had mostly good ones with Apple, and now an exceptional one. The guy I'm
 talking to deserves a raise. Fingers crossed that the experience continues to
 be this good.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 06 Dec 2012 12:20:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-06:apple-support-experience.html</guid><category>Apple</category><category>Customer Service</category></item><item><title>Parenting can really make you feel helpless</title><link>http://www.but-i-digress.ca/parenting-can-make-you-feel-helpless.html</link><description>&lt;p&gt;I've only been kicking around for a bit over 40 years now, but I've never
-found anything in the world to make me feel more helpless than my own child
-telling me that they feel bad, and knowing that I can't fix it.&lt;/p&gt;
-&lt;p&gt;My daughter was sick last night, and we monitored her fever as it rose up to a
-slightly worrisome 39.4C. I went out for some children's ibuprofen, as all I
-had in the cupboard had expired. Good thing that, the kids haven't been sick
-much. Meanwhile my lovely wife put her into the bath while I was gone. I
-brought back popsicles too, since her throat hurt and maybe the cold would
-help with the fever.&lt;/p&gt;
-&lt;p&gt;I ended up not using the medicine, as her temperature slowly dropped after the
-bath, and she feel asleep with her Mom for the night. I checked on her at
-about 2am and 4am, and she was definitely cooling off, so I just sighed in
-relief and got some sleep.&lt;/p&gt;
-&lt;p&gt;Still, it doesn't really feel like she got better because of anything that we
-did. We could comfort her, but in the end, her body was at war with an
-invader, and it was on its own. We were helpless to help. If her temperature
-suddenly spiked we'd be off to the hospital to let someone else try to save
-her. Still helpless to do anything personally. We pray that her body is
-stronger than the virus. We pray that the doctors know what they're doing. I
-hope the world will pardon me for feeling that prayer isn't particularly
-effective, and primarily an act of desperation. I don't like being deperate.&lt;/p&gt;
-&lt;p&gt;I had heard that nothing would terrify me as much as being a parent, but
-there's simply no way to prepare someone for just how scary it can be to have
-this perfect, beautiful little person in pain, or sick, or just crying, and
-not being able to do anything about it. It's even worse for a control freak
-like me, and like most parents, I think that the Universe would make more
-sense if parents could take the children's hurts on themselves. The rational
-part of my mind knows that some pain is necessary as part of life, and that
-getting sick makes your immune system stronger. The parent in me doesn't care.
-Child hurt. Must fix.&lt;/p&gt;
-&lt;p&gt;The little one is home today, as I want to keep an eye on her (see &amp;quot;Control
-Freak&amp;quot;), but the worse is past and she'll be fine. Her immune system wins
-another one, and comes away stronger. Me, I'm just relieved and very tired. I
-really should call my parents and thank them, repeatedly.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Wed, 28 Nov 2012 08:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-28:parenting-can-make-you-feel-helpless.html</guid><category>Parenting</category></item><item><title>Customizing Awesome</title><link>http://www.but-i-digress.ca/customizing-awesome.html</link><description>&lt;p&gt;As I mentioned previously, I'm currently running &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt; on my netbook. While
+</summary><category term="Apple"></category><category term="Customer Service"></category></entry><entry><title>Customizing Awesome</title><link href="http://www.but-i-digress.ca/customizing-awesome.html" rel="alternate"></link><updated>2012-11-28T07:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-28:customizing-awesome.html</id><summary type="html">&lt;p&gt;As I mentioned previously, I'm currently running &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt; on my netbook. While
 I added suspend on lid close, I still need to customize the crap out of it. I
 had nothing showing me my current battery status, so I searched around to find
 the appropriate &lt;a class="reference external" href="http://www.lua.org/"&gt;lua&lt;/a&gt; code, a language that I'm still picking up.&lt;/p&gt;
@@ -929,7 +761,7 @@ available space.&lt;/p&gt;
 &lt;p&gt;And, it works. Now I need a system load, cpu load, etc. And I should hack the
 keybindings, although I'm getting used to the default ones. Maybe update the
 default layout since I prefer maximized layout.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Wed, 28 Nov 2012 07:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-28:customizing-awesome.html</guid><category>Linux</category><category>FOSS</category><category>Awesome WM</category></item><item><title>Tweeting on OS X</title><link>http://www.but-i-digress.ca/tweeting-on-osx.html</link><description>&lt;p&gt;For some time my desktop has been an older, underpowered Linux box, so using
+</summary><category term="Linux"></category><category term="FOSS"></category><category term="Awesome WM"></category></entry><entry><title>Tweeting on OS X</title><link href="http://www.but-i-digress.ca/tweeting-on-osx.html" rel="alternate"></link><updated>2012-11-25T09:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-25:tweeting-on-osx.html</id><summary type="html">&lt;p&gt;For some time my desktop has been an older, underpowered Linux box, so using
 services like &lt;a class="reference external" href="http://www.twitter.com"&gt;Twitter&lt;/a&gt; via the website has been painful, as loaded with heavy
 javascript that would consume my CPU's limited resources.&lt;/p&gt;
 &lt;p&gt;So, like any &lt;a class="reference external" href="http://www.python.org"&gt;Python&lt;/a&gt; programmer would do, I wrote my own client. Well, lets be
@@ -968,7 +800,7 @@ to use it online, which made this much, much simpler, so thanks there.&lt;/p&gt;
 &lt;p&gt;Now, this does cause a little icon on the dock to jump up and down, so I'll
 need to look into that, and how to open the browser to twitter or the embedded
 link when the notification is clicked on, but it's a good start.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 25 Nov 2012 09:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-25:tweeting-on-osx.html</guid><category>OS X</category><category>Python</category><category>FOSS</category></item><item><title>Suspend on lid close in Debian Squeeze</title><link>http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html</link><description>&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
+</summary><category term="OS X"></category><category term="Python"></category><category term="FOSS"></category></entry><entry><title>Suspend on lid close in Debian Squeeze</title><link href="http://www.but-i-digress.ca/suspend-on-lid-close-debian-squeeze.html" rel="alternate"></link><updated>2012-11-20T22:10:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</id><summary type="html">&lt;p&gt;I recently decided that &lt;a class="reference external" href="http://www.gnome.org"&gt;Gnome&lt;/a&gt; is not the best desktop for my little &lt;a class="reference external" href="http://www.asus.com/Eee/"&gt;EeePC&lt;/a&gt;
 netbook with a little 10.5&amp;quot; screen. So I'm playing around with a window
 manager that mainly just maximizes everything. I've tried &lt;a class="reference external" href="http://www.nongnu.org/ratpoison/"&gt;Ratpoison&lt;/a&gt;, I've
 tried &lt;a class="reference external" href="https://code.google.com/p/wmii/"&gt;wmii&lt;/a&gt;, and now I'm trying &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt;.&lt;/p&gt;
@@ -1037,7 +869,7 @@ it working, so I thought I'd share.&lt;/p&gt;
 &lt;p&gt;Now I just run it in the background from my &lt;cite&gt;.xsession&lt;/cite&gt; script at X11 login,
 and it's sitting there waiting for any change in UPower status. Works like a
 charm.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Nov 2012 22:10:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-20:suspend-on-lid-close-debian-squeeze.html</guid><category>Linux</category><category>FOSS</category><category>Python</category></item><item><title>Joysticks? We don't need no stinking joysticks...</title><link>http://www.but-i-digress.ca/apple-and-joysticks.html</link><description>&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
+</summary><category term="Linux"></category><category term="FOSS"></category><category term="Python"></category></entry><entry><title>Joysticks? We don't need no stinking joysticks...</title><link href="http://www.but-i-digress.ca/apple-and-joysticks.html" rel="alternate"></link><updated>2012-11-19T13:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</id><summary type="html">&lt;p&gt;So, after unpackaging my brand-spanking new Mac Mini, I grabbed a copy of the
 &lt;a class="reference external" href="http://www.x-plane.com"&gt;X-Plane&lt;/a&gt; demo, dropped in an old usb joystick and fired it up. Oddly, X-Plane
 itself asked me if I wanted to calibrate the joystick, which struck me as odd,
 that hasn't happened in years, not since my days with plain old DOS. DOS
@@ -1067,7 +899,7 @@ much better in this regard. X-Plane rocks, but Intel graphics in the mini?
 Pleease, put a smoking Nvidia chipset in there and give me a decent framerate
 for games!&lt;/p&gt;
 &lt;p&gt;Are you listening?&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 19 Nov 2012 13:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-19:apple-and-joysticks.html</guid><category>OS X</category></item><item><title>Umm, done unzipping yet?</title><link>http://www.but-i-digress.ca/umm-done-unzipping-yet.html</link><description>&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
+</summary><category term="OS X"></category></entry><entry><title>Umm, done unzipping yet?</title><link href="http://www.but-i-digress.ca/umm-done-unzipping-yet.html" rel="alternate"></link><updated>2012-11-17T14:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-17:umm-done-unzipping-yet.html</id><summary type="html">&lt;p&gt;So, the first thing I did after after wrapping my head around the cocoa
 interface was to start installing software like a madman. I wanted Firefox,
 VLC, Kobo, Gimp, Vim, etc, etc, etc. So, I had to learn how to install apps on
 OS X.&lt;/p&gt;
@@ -1099,7 +931,7 @@ Looks like the issue is in OS X 10.8.2, which I am running.&lt;/p&gt;
 &lt;p&gt;Hmm. Bad timing in jumping on the Apple bandwagon? I wonder how long they'll
 take to fix the issue. Good test for what it will be like to live as part of
 Apple's ecosystem.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sat, 17 Nov 2012 14:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-17:umm-done-unzipping-yet.html</guid><category>OS X</category></item><item><title>Ok, nobody panic, there's a fruit on my screen</title><link>http://www.but-i-digress.ca/fruit-on-my-screen.html</link><description>&lt;p&gt;I've needed a new desktop for a while now. As I'm primarily a Unix user, I
+</summary><category term="OS X"></category></entry><entry><title>Ok, nobody panic, there's a fruit on my screen</title><link href="http://www.but-i-digress.ca/fruit-on-my-screen.html" rel="alternate"></link><updated>2012-11-16T18:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</id><summary type="html">&lt;p&gt;I've needed a new desktop for a while now. As I'm primarily a Unix user, I
 typically buy a cheap PC and put &lt;a class="reference external" href="http://www.linux.org"&gt;Linux&lt;/a&gt; on it. This involves doing a bunch of
 research into available hardware to make sure that everything is going to
 work, like accelerated graphics for any games I'd like to play, supported
@@ -1131,128 +963,4 @@ keybindings, and do a lot of reading. I hope to post my experiences here, so
 stay tuned if you're interested.&lt;/p&gt;
 &lt;p&gt;Sure, I could have just thrown Linux on another box, and maybe I still will,
 but I've &lt;em&gt;done&lt;/em&gt; that. I felt like doing something new.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 16 Nov 2012 18:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</guid><category>OS X</category></item><item><title>What Curling has taught me about life</title><link>http://www.but-i-digress.ca/curling-and-life.html</link><description>&lt;p&gt;I've been curling for about 4 years now, and it's already taught me a lot
-about life. I thought I'd share some of what it has taught me:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;balance is very important&lt;/li&gt;
-&lt;li&gt;anything worthwhile requires hard work&lt;/li&gt;
-&lt;li&gt;you often can't brute force your way out of a problem&lt;/li&gt;
-&lt;li&gt;you must think before you act&lt;/li&gt;
-&lt;li&gt;you can often do much more with help from others&lt;/li&gt;
-&lt;li&gt;shouting at people doesn't actually make them work harder&lt;/li&gt;
-&lt;li&gt;hope for the best and plan for the worst&lt;/li&gt;
-&lt;li&gt;when you finally understand the conditions, they change&lt;/li&gt;
-&lt;li&gt;don't take anything too seriously&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;and finally&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;men can still look like men while holding a broom :)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;Cheers&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 09 Nov 2012 10:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-09:curling-and-life.html</guid><category>Curling</category><category>Hobbies</category></item><item><title>I sit too much</title><link>http://www.but-i-digress.ca/i-sit-too-much.html</link><description>&lt;p&gt;Yeah, I really do. From my childhood I always prefered more intellectual
-activities than active ones, reading, watching movies, tv. Growing up
-asthmatic had something to do with that, but I overcame it later in life and
-had no excuses anymore. Still, studies to do, computers to play with, digital
-bad guys to beat up, and a lot of my activities involved sitting.&lt;/p&gt;
-&lt;p&gt;I played baseball as a kid, got into Tae kwon Do in my late teens, but as a
-University student I couldn't afford the money to continue, and I moved a lot
-for a while. I was never much of a runner, but for a while I was a damn good
-cyclist because I didn't have a car and it was how I got around.&lt;/p&gt;
-&lt;p&gt;In recent years a back injury made it clear that I sit too much, and I've
-tried various things to try to fix it, usually charging in too fast,
-determined to conquer the problem and I ended up with another injury. I needed
-to figure out how to go slower, targeting my problems and not doing too much,
-but making progress.&lt;/p&gt;
-&lt;p&gt;Recently the wife that I don't deserve found &lt;a class="reference external" href="http://www.athlete365.com/"&gt;Athlete365&lt;/a&gt; and Mr. John
-Sokolowski. He looked at my flexibility and strength, or lack thereof, and has
-put together an evolving program to help me fix them, at a speed that won't
-set me back with another injury. He also gave me some tools to help with
-muscles that keep me awake at night, ruining my sleep. He also thinks that I
-should become a Yoga master. Heh...sure John. Maybe in 20 years of practice.
-I'm right on that.&lt;/p&gt;
-&lt;p&gt;I've also been tweaking my diet, not that my diet was bad, but I recently
-found out about some of the evils of excessive carbohydrates, from an amusing
-documentary, &lt;a class="reference external" href="http://www.fathead-movie.com/"&gt;Fat Head&lt;/a&gt;, a response to &amp;quot;Supersize Me&amp;quot;. Since reducing
-bread (not hard, I have a gluten tolerance issue), rice and potatoes in my
-diet, and exercising more, I've lost about ten pounds in the past couple of
-months.&lt;/p&gt;
-&lt;p&gt;My issues aren't gone by any means, I have a lot of work to do, but guidance
-helps. There's a difference between working hard and working smart.
-Previously, I was just working hard.&lt;/p&gt;
-&lt;p&gt;If you've read this sitting down, get up and move around. Trust me.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 08 Nov 2012 12:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-08:i-sit-too-much.html</guid><category>Health</category></item><item><title>21st Century C</title><link>http://www.but-i-digress.ca/21st-century-c.html</link><description>&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
-&lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
-it caught my attention.&lt;/p&gt;
-&lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
-taught me much more than any of my professors, and
-&lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921634.do"&gt;Unix System Programming for System VR4&lt;/a&gt; taught me a great deal more about
-programming C on Unix/Linux. After reading those books, I became actually
-comfortable in working in C for all of my assignments, and other students
-kept coming to me for help until I had somehow become a local C expert.
-Amazing what a good investment in reading material will do, not to mention
-actually reading said material. Another friend in University taught me that.
-He told me not to ever begrudge the cost of a book that helps you get better
-at what you do. I've applied that lesson ever since.&lt;/p&gt;
-&lt;p&gt;I relied on O'Reilly for my first introduction to C++, with
-&lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921160.do"&gt;C++, the Core Language&lt;/a&gt;, which finally explained to me where some of my
-memory leaks were coming from, by explaining copy constructors and assignment
-operators. I turned to &lt;a class="reference external" href="http://books.google.com/books/about/Beginning_C++.html?id=vtcpAQAAMAAJ"&gt;another book&lt;/a&gt; to finish most of my C++ education, but
-O'Reilly got me started.&lt;/p&gt;
-&lt;p&gt;Since University, with the wealth of information on the Internet, I haven't
-bought many C books, but I did pick up &lt;a class="reference external" href="http://basepath.com/aup/"&gt;Advanced Unix Programming&lt;/a&gt;, second
-edition, on the recommendation of a coworker, and he did not lead me astray,
-the book is excellent. Mind you, I still haven't finished reading it. I seem
-to buy books faster than I read them these days.&lt;/p&gt;
-&lt;p&gt;Maybe one day I'll take a little vacation just to read. Anyway...&lt;/p&gt;
-&lt;p&gt;Looking at the new O'Reilly book, it looks like it has many practical ideas
-for someone living with C from day to day, and should also provide a nice
-introduction to the new C11 standard, just released in December of last year.
-Hopefully it'll sharpen my skills like previous O'Reilly books have. I'll try
-to post a full review once I've finished it...err...if I finish it.&lt;/p&gt;
-&lt;p&gt;I will stop buying faster than I can read. I will stop buying faster than I
-can read. Maybe if I keep repeating that, it'll sink in.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 06 Nov 2012 22:12:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</guid><category>C/C++</category><category>Books</category></item><item><title>Dusting off old games</title><link>http://www.but-i-digress.ca/dusting-off-old-games.html</link><description>&lt;p&gt;Back before I had any real responsibilities, I spent a lot of time playing
-various games. I've probably played most of them. Roleplaying games, tabletop
-battle simulations, although I stayed away from the card games like &lt;a class="reference external" href="http://www.wizards.com/Magic/Summoner/"&gt;Magic&lt;/a&gt;.
-I'll rant about that some other time.&lt;/p&gt;
-&lt;p&gt;My two favorite games were &lt;a class="reference external" href="http://boardgamegeek.com/thread/474579/air-superiority-playable-jet-combat"&gt;Air Superiority&lt;/a&gt;, and &lt;a class="reference external" href="http://www.starfleetgames.com"&gt;Starfleet Battles&lt;/a&gt;. As a
-science fiction fan, I did like Star Trek, and like a lot of boys my favorite
-parts were the ship to ship combat. SFB simulated that combat better than I'd
-ever seen before, and even spun off a pretty cool &lt;a class="reference external" href="http://www.youtube.com/watch?v=HwQ3rm0LcWU"&gt;video game&lt;/a&gt; that spawned a
-couple of sequels. I still have the first one.&lt;/p&gt;
-&lt;div class="figure"&gt;
-&lt;img alt="" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
-&lt;/div&gt;
-&lt;p&gt;The tabletop game was as complex as any chess game, and a lot more fun in my
-opinion, so it was with no small amount of nostalgia that I dusted off the
-game for my 10-year-old son and I to look at a couple of months ago. To my
-surprise, Jaan ate the game up, even if the rules sound like legalese and
-combined weigh a few pounds. Now he can't get enough of the game, and I get to
-play too, which is pretty cool, 'cause I don't have a lot of time for these
-things anymore and I wasn't sure if anyone around Ottawa played it anyway.&lt;/p&gt;
-&lt;p&gt;I'm not really interested in all of the new material that ADB has released
-since I was into the game, as I have plenty of material for it already, and
-it'll take Jaan and I ages to get tired of it. The physics of the game are
-broken and there are holes in the logic that I'll go into later, but it
-suceeds in providing a fun gaming experience, and it's a hell of a lot more
-fun than playing Monopoly or Clue, with all due respect to those games.&lt;/p&gt;
-&lt;p&gt;Lets be honest, in the end, boys don't grow up, our toys just get more
-expensive.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 04 Nov 2012 18:43:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-04:dusting-off-old-games.html</guid><category>Hobbies</category><category>SFB</category></item><item><title>New blog</title><link>http://www.but-i-digress.ca/new-static-blog.html</link><description>&lt;p&gt;So I decided to dump Wordpress and go to something that I have more control
-over. I was thinking of building my own static blogging system, but I looked
-around and found that there are a few already. Being a fan of &lt;a class="reference external" href="http://www.python.org/"&gt;Python&lt;/a&gt; I
-decided to try out &lt;a class="reference external" href="http://docs.getpelican.com/en/3.0/"&gt;Pelican&lt;/a&gt;. It uses a bunch of technology that I would use
-anyway, like &lt;a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html"&gt;reStructuredText&lt;/a&gt;, &lt;a class="reference external" href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt;, etc.&lt;/p&gt;
-&lt;p&gt;It also gives me an excuse to play with &lt;a class="reference external" href="http://heroku.com/"&gt;Heroku&lt;/a&gt; for hosting. Which, I must
-say, is pretty cool for getting a website or web service hosted quickly, with
-nothing but a push from &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt; to trigger the publishing of the site.&lt;/p&gt;
-&lt;p&gt;Granted, Heroku was meant to host dynamic sites driven by WSGI apps, but I
-found a &lt;a class="reference external" href="http://kennethreitz.com/static-sites-on-heroku-cedar.html"&gt;great hack&lt;/a&gt; to fool Heroku
-into running a static site.&lt;/p&gt;
-&lt;p&gt;So, we'll see how this goes. My main blogging tools now are &lt;a class="reference external" href="http://www.vim.org/"&gt;Vim&lt;/a&gt; and &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt;, so
-how can I go wrong?&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sat, 03 Nov 2012 10:20:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2012-11-03:new-static-blog.html</guid><category>Blogging</category><category>Python</category><category>FOSS</category></item></channel></rss>
+</summary><category term="OS X"></category></entry></feed>

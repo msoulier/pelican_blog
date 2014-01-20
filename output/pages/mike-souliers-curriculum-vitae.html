@@ -1,60 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Resumé</title>
+        <title>Mike Soulier's Curriculum Vitae</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href=".././theme/css/main.css" type="text/css" />
-        
-        
+        <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
         <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
-        
 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie.css"/>
-                <script src=".././js/IE8.js" type="text/javascript"></script><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie.css"/>
+                <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
 
         <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href=".././css/ie6.css"/><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
 
 </head>
 
 <body id="index" class="home">
-
 <a href="http://github.com/msoulier">
-
 <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
-
 </a>
-
         <header id="banner" class="body">
-                <h1><a href="../.">But I Digress </a></h1>
+                <h1><a href="..">But I Digress </a></h1>
                 <h2>Random neuron firings, digitized heedless of the
                 repurcussions.</h2>
                 <nav><ul>
-                
-                
-                
-                    <li><a href=".././pages/resume.html">Resumé</a></li>
-                
-                
-                
-                    <li ><a href=".././category/development.html">Development</a></li>
-                
-                    <li ><a href=".././category/personal.html">Personal</a></li>
-                
-                    <li ><a href=".././category/quotes.html">Quotes</a></li>
-                
-                    <li ><a href=".././category/technology.html">Technology</a></li>
-                
+                    <li><a href="../pages/mike-souliers-curriculum-vitae.html">Mike Soulier's Curriculum Vitae</a></li>
+                    <li ><a href="../category/development.html">Development</a></li>
+                    <li ><a href="../category/driving.html">Driving</a></li>
+                    <li ><a href="../category/personal.html">Personal</a></li>
+                    <li ><a href="../category/quotes.html">Quotes</a></li>
+                    <li ><a href="../category/technology.html">Technology</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
-                
+        
 <section id="content" class="body">    
-    <h1 class="entry-title">Resumé</h1>
-    
+    <h1 class="entry-title">Mike Soulier's Curriculum Vitae</h1>
     <div class="section" id="overview">
 <h2>Overview</h2>
 <p>I am a professional software developer, who has been in the industry of
@@ -81,7 +64,7 @@ what not to do on every new project.</p>
 material in this summary, please refer to the section entitled
 Experience, and the sections that follow it.</p>
 <ol class="arabic simple">
-<li>Ten year's experience with <a class="reference external" href="http://www.mitel.com">Mitel</a> as a software engineer,
+<li>Eleven year's experience with <a class="reference external" href="http://www.mitel.com">Mitel</a> as a software engineer,
 working on the Mitel 6000 Managed Application Server
 (formerly the E-Smith server and gateway), as well as applications
 on top of that server such as the Teleworker Solution (now
@@ -208,13 +191,29 @@ the world of IPv6. MBG has experimental IPv6 support at this time, as
 worldwide IPv6 adoption is slow. Later in 2011 in 7.1 the bulk of the 7.1
 release was finished, enhancing troubleshooting and maintenance or the
 release, and adding the remote management proxy to the application to permit
-web-based remote management of Mitel applications.</p>
+web-based remote management of Mitel applications. One of the features
+included in the 7.1 release was a web-based tcpdump and traceroute that I
+designed and implemented.</p>
 <p>In 2012 we continued supporting the 7.1 release, enhancing scaling of SIP
 trunk deployments for hosted environments, greatly enhanced security in a
 special 7.2 release, while continuing in the development release of 8.0. The
 8.0 release further enhanced SIP interoperability, security, maintenance and
 monitoring, and remote management capabilities with Mitel's flagship IP PBX,
 the Mitel Communications Director.</p>
+<p>Development of 8.0 continued in 2013, with inclusion of the ability to upload
+large MCD images to MBG, to allow remote upgrades of MCD and prevent
+truck-rolls. In parallel, I implemented a REST Web service for Mitel Standard
+Linux with plugins for applications, implemented in Perl and Mojolicious. The
+existing OAuth libraries were insufficient for my purposes, so I wrote my own.
+Meanwhile, I began playing with the Raspberry Pi, and with the help of a
+long-time coworker, ported MBG to the Raspberry Pi as an experiment. To
+achieve this, I redesigned the entire management layer to work on this
+platform, and wrote a new interface using AngularJS, an impressive new
+single-page application framework from Google that I've come to like.</p>
+<p>Work completed in 2013 while maintaining 5 parallel streams, 7.1, 7.2, 8.0, 8.1
+and 9.0. Quite challenging for a small development team, but we've found that
+using the appropriate tools goes a very long way, and Git is the appropriate
+tool here.</p>
 <p>On the side, I set up and still maintain an internal R&amp;D Wiki and Mailing list
 server, now used by the bulk of the R&amp;D organization. I have given several
 internal courses on a variety of subjects, from packaging software using RPM,
@@ -457,47 +456,27 @@ internally for Nortel employees.</p>
 </div>
 
 </section>
-
         <section id="extras" class="body">
-        
                 <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                        
                             <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                        
                             <li><a href="http://python.org">Python.org</a></li>
-                        
                             <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
-                        
                             <li><a href="http://fit613.wordpress.com">Fit613</a></li>
-                        
                             <li><a href="http://excess.org">Ian Ward</a></li>
-                        
                             <li><a href="http://www.mahdiyusuf.com/">Mahdi Yusuf</a></li>
-                        
                             <li><a href="http://mikegrouchy.com/">Mike Grouchy</a></li>
-                        
                         </ul>
                 </div><!-- /.blogroll -->
-        
-        
                 <div class="social">
                         <h2>social</h2>
                         <ul>
-                            
-                            
-                                
                             <li><a href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate">rss feed</a></li>
-                                
-                            
 
-                        
                             <li><a href="http://twitter.com/msoulier">Twitter</a></li>
-                        
                         </ul>
                 </div><!-- /.social -->
-        
         </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
@@ -508,9 +487,6 @@ internally for Nortel employees.</p>
 
         </footer><!-- /#contentinfo -->
 
-
-
-
 <script type="text/javascript">
     var disqus_shortname = 'butidigressca';
     (function () {
@@ -520,6 +496,5 @@ internally for Nortel employees.</p>
         (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
 </script>
-
 </body>
 </html>

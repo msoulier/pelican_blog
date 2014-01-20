@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/Technology.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 05 Jun 2013 00:30:00 -0400</lastBuildDate><item><title>Java, usable but pointlessly difficult</title><link>http://www.but-i-digress.ca/java-pointlessly-difficult.html</link><description>&lt;p&gt;I've been working on a REST client in Java at work lately. I know, it scares
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/technology.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 19 Jan 2014 19:30:00 -0500</lastBuildDate><item><title>Validation with Server-side call in AngularJS</title><link>http://www.but-i-digress.ca/validation-server-call-angularjs.html</link><description>&lt;p&gt;I've been playing with &lt;a class="reference external" href="http://www.angularjs.org"&gt;AngularJS&lt;/a&gt; for a little while, and in trying to
+understand how to validate a user's data as it's being entered, it didn't take
+long to find that to check with the server for some validation rules, like
+uniqueness constraints.&lt;/p&gt;
+&lt;p&gt;This presented a problem since the built-in validators know nothing about the
+data on the server. I looked into the issue and found that creating my own
+directive was the way to go. Difficult when I'm an AngularJS newbie and I
+barely understand such things, but luckily the AngularJS online community was
+helpful. To validate the uniqeness of an &amp;quot;ICP&amp;quot; (don't ask) when the user stops
+typing, it's not overly difficult.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;app&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;directive&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;uniqueIcpName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;$http&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;$timeout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;promise&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;restrict&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;A&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;require&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ngModel&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="nx"&gt;link&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;scope&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;elem&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;attrs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;ctrl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="c1"&gt;//when the scope changes, check&lt;/span&gt;
+            &lt;span class="nx"&gt;scope&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;$watch&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;attrs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;ngModel&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="c1"&gt;// if there was a previous attempt, stop it.&lt;/span&gt;
+                &lt;span class="nx"&gt;$timeout&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;cancel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;promise&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+                &lt;span class="nx"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;attrs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;uniqueIcpName&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+                &lt;span class="c1"&gt;// Determine the url based on whether this is an add or a&lt;/span&gt;
+                &lt;span class="c1"&gt;// modify.&lt;/span&gt;
+                &lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;attrs&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;uniqueIcpName&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;add&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                    &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/valid/icp/add/name/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                    &lt;span class="nx"&gt;url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/valid/icp/modify/name/&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nx"&gt;value&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+                &lt;span class="p"&gt;}&lt;/span&gt;
+
+                &lt;span class="c1"&gt;// start a new attempt with a delay to keep it from&lt;/span&gt;
+                &lt;span class="c1"&gt;// getting too &amp;quot;chatty&amp;quot;.&lt;/span&gt;
+                &lt;span class="nx"&gt;promise&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nx"&gt;$timeout&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                    &lt;span class="c1"&gt;// call to some API that returns { isValid: true } or&lt;/span&gt;
+                    &lt;span class="c1"&gt;// { isValid: false }&lt;/span&gt;
+                    &lt;span class="nx"&gt;$http&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                        &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;success&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+                            &lt;span class="kd"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                                &lt;span class="nx"&gt;ctrl&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;$setValidity&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;uniqueIcpName&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                                                &lt;span class="nx"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;isValid&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+                            &lt;span class="p"&gt;});&lt;/span&gt;
+                &lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="mi"&gt;500&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="p"&gt;})&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The timeout is a neat trick someone taught me, so you launch the event on every
+keypress, but on the next keypress you cancel the previous one, and put in a
+500ms delay on the ReST call, so you don't really make the request until the
+user stops typing for a full half second. Meanwhile I put in a little attribute
+check based on creation vs. modification of the data, since uniqueness checks
+must exclude the current object on a modification.&lt;/p&gt;
+&lt;p&gt;Then all you need is the server-side returning an &lt;cite&gt;isValid&lt;/cite&gt; attribute, which
+should have a boolean value. Simple, and it works.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 19 Jan 2014 19:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2014-01-19:validation-server-call-angularjs.html</guid><category>AngularJS</category><category>ReST</category></item><item><title>Java, usable but pointlessly difficult</title><link>http://www.but-i-digress.ca/java-pointlessly-difficult.html</link><description>&lt;p&gt;I've been working on a REST client in Java at work lately. I know, it scares
 me too. I've had to revisit much of my old Java knowledge, and pick up a lot
 of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.&lt;/p&gt;
 &lt;p&gt;Our internal servers use self-signed SSL certs at work, so to talk to them I
@@ -74,7 +131,7 @@ pie chart, with very little code.&lt;/p&gt;
 &lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
 &lt;/div&gt;
 &lt;p&gt;Very impressive. I tried it a few years ago and found it difficult, but it
 seems to have gotten much simpler. I must delve deeper now.&lt;/p&gt;
@@ -899,7 +956,7 @@ take the plunge with my new desktop, and try a &lt;a class="reference external" 
 in commercial software land, while being &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Darwin_%28operating_system%29"&gt;BSD Unix&lt;/a&gt; underneath, so maybe it's
 the best of both worlds.&lt;/p&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;I need to customize the crap out of it, and get used to the interface and
 keybindings, and do a lot of reading. I hope to post my experiences here, so
