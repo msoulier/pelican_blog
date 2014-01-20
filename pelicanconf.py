@@ -34,7 +34,7 @@ GITHUB_URL = 'http://github.com/msoulier'
 
 STATIC_PATHS = ["images", ]
 
-FILES_TO_COPY = (('extra/robots.txt', 'robots.txt'),)
+#FILES_TO_COPY = (('extra/robots.txt', 'robots.txt'),)
 
 DEFAULT_CATEGORY = 'Ramblings'
 

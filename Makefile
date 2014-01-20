@@ -9,7 +9,7 @@ PUBLISHCONF=$(BASEDIR)/publishconf.py
 HEROKUDIR=$(HOME)/work/static_blog
 FIREFOX=$(shell which firefox)
 ifeq ($(FIREFOX),)
-	FIREFOX = /Applications/Firefox.app/Contents/MacOS/firefox
+	FIREFOX = open
 endif
 
 help:
