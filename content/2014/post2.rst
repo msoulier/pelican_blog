@@ -71,3 +71,4 @@ the Homebrew people to coordinate on libpng? Yeah. Seems unlikely.
 .. _`OPAG mailing list`: https://lists.sourceforge.net/lists/listinfo/opag-general
 .. _`XQuartz`: https://xquartz.macosforge.org/landing/
 .. _`Homebrew`: http://brew.sh/
+.. _`GNUPlot`: http://www.gnuplot.info/

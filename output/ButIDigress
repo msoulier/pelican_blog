@@ -1,5 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Sun, 19 Jan 2014 19:30:00 -0500</lastBuildDate><item><title>Validation with Server-side call in AngularJS</title><link>http://www.but-i-digress.ca/validation-server-call-angularjs.html</link><description>&lt;p&gt;I've been playing with &lt;a class="reference external" href="http://www.angularjs.org"&gt;AngularJS&lt;/a&gt; for a little while, and in trying to
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Sun, 20 Apr 2014 08:00:00 -0400</lastBuildDate><item><title>Getting IPython Notebook Working on Mac OS X</title><link>http://www.but-i-digress.ca/ipython-notebook-macosx.html</link><description>&lt;p&gt;I've been getting into &lt;a class="reference external" href="http://ipython.org/notebook.html"&gt;ipython notebook&lt;/a&gt; recently, especially since seeing
+some demos at &lt;a class="reference external" href="https://us.pycon.org/2014/"&gt;PyCon 2014&lt;/a&gt;. I maintain a toolchain at work for processing
+monthly stats of our product's use in the field, using python but graphing in
+&lt;a class="reference external" href="http://www.gnuplot.info/"&gt;GNUPlot&lt;/a&gt;, Given the capabilities of &lt;a class="reference external" href="http://matplotlib.org/"&gt;matplotlib&lt;/a&gt; and &lt;a class="reference external" href="http://pandas.pydata.org/"&gt;pandas&lt;/a&gt;, this little
+project is ideal for a pure python replacement.&lt;/p&gt;
+&lt;p&gt;I don't need ipython notebook to make this solution work, but it's an excuse
+to play with it and I never miss an opportunity like that. But, I do have a
+Mac on my desktop at home right now. The official way to install ipython
+notebook and &lt;a class="reference external" href="http://www.scipy.org/"&gt;SciPy&lt;/a&gt; is to use &lt;a class="reference external" href="https://store.continuum.io/cshop/anaconda/"&gt;Anaconda&lt;/a&gt;, but I prefer to not run foreign
+installers as root on my system when I can avoid it, so virtualenv is
+preferred. I could work on my Linux laptop, but I have dual screens on my
+desktop, and it's possible that my next laptop will have a piece of fruit on
+it too, you never know.&lt;/p&gt;
+&lt;p&gt;Luckily I did find an &lt;a class="reference external" href="http://www.lowindata.com/2013/installing-scientific-python-on-mac-os-x/"&gt;excellent blog post&lt;/a&gt; on the topic, but as often
+happens online, the information is a bit dated. I tried building the
+components and got major complaints (ie. compile errors) from clang.
+Thankfully I got a hand from our own &lt;a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/opag-general"&gt;OPAG mailing list&lt;/a&gt;. Clang can be told
+to be less strict by setting the ARCHFLAGS environment variable like so:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+&lt;/pre&gt;
+&lt;p&gt;Do this before installing via pip, as pretty much every package will otherwise
+fail due to these errors. Hopefully our C programmers will fix these issues,
+as in future versions of clang, you likely won't be able to downgrade these
+errors to warnings.&lt;/p&gt;
+&lt;p&gt;Also, once installing freetype via brew, you do have to include it in the
+compiler's include path so it can find the freetype headers:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo ln -s /usr/local/include/freetype2/ /usr/include/freetype
+&lt;/pre&gt;
+&lt;p&gt;While this allowed me to build everything, unfortunately building the graphs
+still didn't work, and I saw this error in the terminal:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+libpng warning: Application built with libpng-1.5.11 but running with
+1.6.10
+&lt;/pre&gt;
+&lt;p&gt;I had to dig for a while, but I finally found that &lt;a class="reference external" href="https://xquartz.macosforge.org/landing/"&gt;XQuartz&lt;/a&gt; was linking to
+libpng 1.5, and I couldn't change that. &lt;a class="reference external" href="http://brew.sh/"&gt;Homebrew&lt;/a&gt; is currently pushing
+libpng 1.6, so I had to manually roll the version back via Git:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+brew versions libpng
+cd $( brew --prefix )
+git checkout &amp;lt;sha&amp;gt; &amp;lt;path&amp;gt;
+brew install libpng
+&lt;/pre&gt;
+&lt;p&gt;Once I did that and rebuilt everything depending on it (see brew deps),
+everything started working.&lt;/p&gt;
+&lt;p&gt;Hmm. What are the chances that I'll be able to convince the XQuartz people and
+the Homebrew people to coordinate on libpng? Yeah. Seems unlikely.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 20 Apr 2014 08:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2014-04-20:ipython-notebook-macosx.html</guid><category>Python</category><category>Mac OS X</category></item><item><title>Validation with Server-side call in AngularJS</title><link>http://www.but-i-digress.ca/validation-server-call-angularjs.html</link><description>&lt;p&gt;I've been playing with &lt;a class="reference external" href="http://www.angularjs.org"&gt;AngularJS&lt;/a&gt; for a little while, and in trying to
 understand how to validate a user's data as it's being entered, it didn't take
 long to find that to check with the server for some validation rules, like
 uniqueness constraints.&lt;/p&gt;

@@ -40,7 +40,81 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../validation-server-call-angularjs.html">Validation with Server-side call in AngularJS</a></h1> 
+                    <h1 class="entry-title"><a href="../ipython-notebook-macosx.html">Getting IPython Notebook Working on Mac OS X</a></h1> 
+<footer class="post-info">
+        <abbr class="published" title="2014-04-20T08:00:00">
+                Sun 20 April 2014
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/python.html">Python</a><a href="../tag/mac-os-x.html">Mac OS X</a></p></footer><!-- /.post-info --><p>I've been getting into <a class="reference external" href="http://ipython.org/notebook.html">ipython notebook</a> recently, especially since seeing
+some demos at <a class="reference external" href="https://us.pycon.org/2014/">PyCon 2014</a>. I maintain a toolchain at work for processing
+monthly stats of our product's use in the field, using python but graphing in
+<a class="reference external" href="http://www.gnuplot.info/">GNUPlot</a>, Given the capabilities of <a class="reference external" href="http://matplotlib.org/">matplotlib</a> and <a class="reference external" href="http://pandas.pydata.org/">pandas</a>, this little
+project is ideal for a pure python replacement.</p>
+<p>I don't need ipython notebook to make this solution work, but it's an excuse
+to play with it and I never miss an opportunity like that. But, I do have a
+Mac on my desktop at home right now. The official way to install ipython
+notebook and <a class="reference external" href="http://www.scipy.org/">SciPy</a> is to use <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda</a>, but I prefer to not run foreign
+installers as root on my system when I can avoid it, so virtualenv is
+preferred. I could work on my Linux laptop, but I have dual screens on my
+desktop, and it's possible that my next laptop will have a piece of fruit on
+it too, you never know.</p>
+<p>Luckily I did find an <a class="reference external" href="http://www.lowindata.com/2013/installing-scientific-python-on-mac-os-x/">excellent blog post</a> on the topic, but as often
+happens online, the information is a bit dated. I tried building the
+components and got major complaints (ie. compile errors) from clang.
+Thankfully I got a hand from our own <a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/opag-general">OPAG mailing list</a>. Clang can be told
+to be less strict by setting the ARCHFLAGS environment variable like so:</p>
+<pre class="literal-block">
+export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+</pre>
+<p>Do this before installing via pip, as pretty much every package will otherwise
+fail due to these errors. Hopefully our C programmers will fix these issues,
+as in future versions of clang, you likely won't be able to downgrade these
+errors to warnings.</p>
+<p>Also, once installing freetype via brew, you do have to include it in the
+compiler's include path so it can find the freetype headers:</p>
+<pre class="literal-block">
+sudo ln -s /usr/local/include/freetype2/ /usr/include/freetype
+</pre>
+<p>While this allowed me to build everything, unfortunately building the graphs
+still didn't work, and I saw this error in the terminal:</p>
+<pre class="literal-block">
+libpng warning: Application built with libpng-1.5.11 but running with
+1.6.10
+</pre>
+<p>I had to dig for a while, but I finally found that <a class="reference external" href="https://xquartz.macosforge.org/landing/">XQuartz</a> was linking to
+libpng 1.5, and I couldn't change that. <a class="reference external" href="http://brew.sh/">Homebrew</a> is currently pushing
+libpng 1.6, so I had to manually roll the version back via Git:</p>
+<pre class="literal-block">
+brew versions libpng
+cd $( brew --prefix )
+git checkout &lt;sha&gt; &lt;path&gt;
+brew install libpng
+</pre>
+<p>Once I did that and rebuilt everything depending on it (see brew deps),
+everything started working.</p>
+<p>Hmm. What are the chances that I'll be able to convince the XQuartz people and
+the Homebrew people to coordinate on libpng? Yeah. Seems unlikely.</p>
+<p>There are <a href="../ipython-notebook-macosx.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+        
+
+ 
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="../validation-server-call-angularjs.html" rel="bookmark"
+                           title="Permalink to Validation with Server-side call in AngularJS">Validation with Server-side call in AngularJS</a></h1>
+                </header>
+                
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-01-19T19:30:00">
                 Sun 19 January 2014
@@ -50,69 +124,14 @@
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
 <p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/angularjs.html">AngularJS</a><a href="../tag/rest.html">ReST</a></p></footer><!-- /.post-info --><p>I've been playing with <a class="reference external" href="http://www.angularjs.org">AngularJS</a> for a little while, and in trying to
+<p>tags: <a href="../tag/angularjs.html">AngularJS</a><a href="../tag/rest.html">ReST</a></p></footer><!-- /.post-info -->                <p>I've been playing with <a class="reference external" href="http://www.angularjs.org">AngularJS</a> for a little while, and in trying to
 understand how to validate a user's data as it's being entered, it didn't take
 long to find that to check with the server for some validation rules, like
 uniqueness constraints.</p>
-<p>This presented a problem since the built-in validators know nothing about the
-data on the server. I looked into the issue and found that creating my own
-directive was the way to go. Difficult when I'm an AngularJS newbie and I
-barely understand such things, but luckily the AngularJS online community was
-helpful. To validate the uniqeness of an &quot;ICP&quot; (don't ask) when the user stops
-typing, it's not overly difficult.</p>
-<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">&#39;uniqueIcpName&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$http</span><span class="p">,</span> <span class="nx">$timeout</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">promise</span><span class="p">;</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="nx">restrict</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>
-        <span class="nx">require</span><span class="o">:</span> <span class="s1">&#39;ngModel&#39;</span><span class="p">,</span>
-        <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">elem</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">ctrl</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">//when the scope changes, check</span>
-            <span class="nx">scope</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">ngModel</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// if there was a previous attempt, stop it.</span>
-                <span class="nx">$timeout</span><span class="p">.</span><span class="nx">cancel</span><span class="p">(</span><span class="nx">promise</span><span class="p">);</span>
-
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">uniqueIcpName</span><span class="p">);</span>
-
-                <span class="c1">// Determine the url based on whether this is an add or a</span>
-                <span class="c1">// modify.</span>
-                <span class="kd">var</span> <span class="nx">url</span><span class="p">;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">attrs</span><span class="p">.</span><span class="nx">uniqueIcpName</span> <span class="o">===</span> <span class="s2">&quot;add&quot;</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;/valid/icp/add/name/&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
-                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                    <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;/valid/icp/modify/name/&#39;</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">;</span>
-                <span class="p">}</span>
-
-                <span class="c1">// start a new attempt with a delay to keep it from</span>
-                <span class="c1">// getting too &quot;chatty&quot;.</span>
-                <span class="nx">promise</span> <span class="o">=</span> <span class="nx">$timeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-                    <span class="c1">// call to some API that returns { isValid: true } or</span>
-                    <span class="c1">// { isValid: false }</span>
-                    <span class="nx">$http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
-                        <span class="p">.</span><span class="nx">success</span><span class="p">(</span>
-                            <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-                                <span class="nx">ctrl</span><span class="p">.</span><span class="nx">$setValidity</span><span class="p">(</span><span class="s1">&#39;uniqueIcpName&#39;</span><span class="p">,</span>
-                                                <span class="nx">data</span><span class="p">.</span><span class="nx">isValid</span><span class="p">);</span>
-                            <span class="p">});</span>
-                <span class="p">},</span> <span class="mi">500</span><span class="p">);</span>
-            <span class="p">})</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">})</span>
-</pre></div>
-<p>The timeout is a neat trick someone taught me, so you launch the event on every
-keypress, but on the next keypress you cancel the previous one, and put in a
-500ms delay on the ReST call, so you don't really make the request until the
-user stops typing for a full half second. Meanwhile I put in a little attribute
-check based on creation vs. modification of the data, since uniqueness checks
-must exclude the current object on a modification.</p>
-<p>Then all you need is the server-side returning an <cite>isValid</cite> attribute, which
-should have a boolean value. Simple, and it works.</p>
-<p>There are <a href="../validation-server-call-angularjs.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>This presented a ...</p>
+                <a class="readmore" href="../validation-server-call-angularjs.html">read more</a>
+<p>There are <a href="../validation-server-call-angularjs.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
         
 
  
@@ -322,32 +341,6 @@ husband or brother or male friend, and you are telling him something
 perfectly obvious ...</p></blockquote>
                 <a class="readmore" href="../jim-butcher-on-men-vs-women.html">read more</a>
 <p>There are <a href="../jim-butcher-on-men-vs-women.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="../checking-the-weather.html" rel="bookmark"
-                           title="Permalink to Checking the weather">Checking the weather</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-12-23T20:30:00">
-                Sun 23 December 2012
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-<p>In <a href="../category/development.html">Development</a>. </p>
-<p>tags: <a href="../tag/python.html">Python</a></p></footer><!-- /.post-info -->                <p>A while back I needed a way to check the weather forecast, simply, from a
-terminal, as is the preference of most Unix geeks like me. Being a Canadian,
-I'm not interested in the Weather Channel as much as the Environment Canada
-data. Thankfully, they do publish an RSS ...</p>
-                <a class="readmore" href="../checking-the-weather.html">read more</a>
-<p>There are <a href="../checking-the-weather.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
             </ol><!-- /#posts-list -->
 <p class="paginator">
