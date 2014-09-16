@@ -1,1 +1,3 @@
-php_flag engine off
+RemoveHandler .php
+RemoveType .php
+DirectoryIndex index.html
