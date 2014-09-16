@@ -41,10 +41,9 @@ $(OUTPUTDIR)/%.html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
-	find $(OUTPUTDIR) -mindepth 1 -delete
+	find $(OUTPUTDIR) -mindepth 1 -delete -exclude .htaccess -exclude composer.json
 	touch $(OUTPUTDIR)/index.php
 	cp proxy.pac $(OUTPUTDIR)/proxy.pac
-	echo 'php_flag engine off' > $(OUTPUTDIR)/.htaccess
 
 regenerate: clean
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
