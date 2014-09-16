@@ -41,9 +41,11 @@ $(OUTPUTDIR)/%.html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
-	find $(OUTPUTDIR) -mindepth 1 -delete -exclude .htaccess -exclude composer.json
+	find $(OUTPUTDIR) -mindepth 1 -delete
 	touch $(OUTPUTDIR)/index.php
 	cp proxy.pac $(OUTPUTDIR)/proxy.pac
+	cp .htaccess $(OUTPUTDIR)
+	cp composer.json $(OUTPUTDIR)
 
 regenerate: clean
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
