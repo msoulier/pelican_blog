@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Sun, 20 Apr 2014 08:00:00 -0400</lastBuildDate><item><title>Getting IPython Notebook Working on Mac OS X</title><link>http://www.but-i-digress.ca/ipython-notebook-macosx.html</link><description>&lt;p&gt;I've been getting into &lt;a class="reference external" href="http://ipython.org/notebook.html"&gt;ipython notebook&lt;/a&gt; recently, especially since seeing
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/ButIDigress" rel="self"></atom:link><lastBuildDate>Tue, 16 Sep 2014 13:00:00 -0400</lastBuildDate><item><title>Why X11 still rocks</title><link>http://www.but-i-digress.ca/why-x11-still-rocks.html</link><description>&lt;p&gt;For years now, I've heard from Linux developers about why the venerable X11 is
+an obsolete piece of crap that needs replacing. The Wayland project aims to
+do so, real soon now, kinda like Perl 6. It's a tough problem, so I can hardly
+complain.&lt;/p&gt;
+&lt;p&gt;Still, when I hear the complaints about X11, I always feel like the individual
+doing the complaining has no appreciation for how amazing X11 really is.&lt;/p&gt;
+&lt;p&gt;The first complaint is that it's old. Yes. And? Nice logic there.&lt;/p&gt;
+&lt;p&gt;The next complaint is that it is network-aware. Yes, I know. And that has been
+infinitely useful to me over the years. When bandwidth was scarce and I was
+using dial-up (yes, I'm that old) to connect to work, if I needed a remote
+window all I had to do was set my DISPLAY environment variable, and I could
+open remote xterms. There was even a program for X protocol compression to
+reduce the network demands even more.&lt;/p&gt;
+&lt;p&gt;Today, I still appreciate the bandwidth savings, as there is never enough in a
+house with a wife and three kids. Opening an individual window instead of a
+full-screen, clumsy, scrolling VNC session is much preferrable. Microsoft's
+RDP is better, but still overkill if I just need a single window, and
+tunneling it is more complex than with X.&lt;/p&gt;
+&lt;p&gt;The last complaint I hear is implementing efficient kernel-level drivers for
+high performance graphics. I'll admit I know little about this, but it seems
+to me that a division of work makes sense, with a kernel module for the
+driver (which is done today) and a communications protocol to X from the
+kernel. There are complaints of X running in userspace, but for reliability,
+isn't that a good thing? If X crashes I'm only logged out, I don't get a full
+kernel panic.&lt;/p&gt;
+&lt;p&gt;I realize I'm not an expert on the topic, I'm just a user of X11 for 20 years
+or so, and I'm not convinced that those criticizing X understand just how
+useful it can be before wanting to throw it away. VNC and RDP are poor
+replacements, and I hope that you can see why. Is Wayland being developed
+because the Xorg code is unmaintainable? If so, that's really a different issue
+to the complaints about X itself. Fix Xorg then.&lt;/p&gt;
+&lt;p&gt;I can see the arguments for say, small, portable devices, but on my desktop?&lt;/p&gt;
+&lt;p&gt;I'm willing to be convinced, but so far, I'm just not.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 16 Sep 2014 13:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2014-09-16:why-x11-still-rocks.html</guid><category>Linux</category><category>X11</category></item><item><title>Getting IPython Notebook Working on Mac OS X</title><link>http://www.but-i-digress.ca/ipython-notebook-macosx.html</link><description>&lt;p&gt;I've been getting into &lt;a class="reference external" href="http://ipython.org/notebook.html"&gt;ipython notebook&lt;/a&gt; recently, especially since seeing
 some demos at &lt;a class="reference external" href="https://us.pycon.org/2014/"&gt;PyCon 2014&lt;/a&gt;. I maintain a toolchain at work for processing
 monthly stats of our product's use in the field, using python but graphing in
 &lt;a class="reference external" href="http://www.gnuplot.info/"&gt;GNUPlot&lt;/a&gt;, Given the capabilities of &lt;a class="reference external" href="http://matplotlib.org/"&gt;matplotlib&lt;/a&gt; and &lt;a class="reference external" href="http://pandas.pydata.org/"&gt;pandas&lt;/a&gt;, this little
@@ -363,7 +396,7 @@ pie chart, with very little code.&lt;/p&gt;
 &lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
+&lt;img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
 &lt;/div&gt;
 &lt;p&gt;Very impressive. I tried it a few years ago and found it difficult, but it
 seems to have gotten much simpler. I must delve deeper now.&lt;/p&gt;
@@ -1355,7 +1388,7 @@ take the plunge with my new desktop, and try a &lt;a class="reference external" 
 in commercial software land, while being &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Darwin_%28operating_system%29"&gt;BSD Unix&lt;/a&gt; underneath, so maybe it's
 the best of both worlds.&lt;/p&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
+&lt;img alt="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;I need to customize the crap out of it, and get used to the interface and
 keybindings, and do a lot of reading. I hope to post my experiences here, so
@@ -1456,7 +1489,7 @@ parts were the ship to ship combat. SFB simulated that combat better than I'd
 ever seen before, and even spun off a pretty cool &lt;a class="reference external" href="http://www.youtube.com/watch?v=HwQ3rm0LcWU"&gt;video game&lt;/a&gt; that spawned a
 couple of sequels. I still have the first one.&lt;/p&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
+&lt;img alt="http://www.but-i-digress.ca/static/images/sfb.png" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;The tabletop game was as complex as any chess game, and a lot more fun in my
 opinion, so it was with no small amount of nostalgia that I dusted off the
