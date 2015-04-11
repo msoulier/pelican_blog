@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/technology.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 16 Sep 2014 13:00:00 -0400</lastBuildDate><item><title>Why X11 still rocks</title><link>http://www.but-i-digress.ca/why-x11-still-rocks.html</link><description>&lt;p&gt;For years now, I've heard from Linux developers about why the venerable X11 is
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/technology.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 10 Apr 2015 20:30:00 -0400</lastBuildDate><item><title>Disabling Bash Completion</title><link>http://www.but-i-digress.ca/disable-bash-completion.html</link><description>&lt;p&gt;The bash shell is the standard shell on most Unix-like systems. It is full of
+great features to make your life typing on a command-line fairly painless. One
+of the most important features for any command-line is the ability to reduce
+unneeded typing via smart completion. Say I want to run a command in my path
+named foobar. I can just type foo, hit the tab character, and assuming that
+it's the only command beginning in foo, the shell with automagickally complete
+that as foobar, and I save some keystrokes, and slow down my inevitable slide
+into Carpal Tunnel (well, until I write some Java, anyway).&lt;/p&gt;
+&lt;p&gt;This is so handy that the authors of bash made completion even smarter. Lets
+say that I want to run &amp;quot;git status&amp;quot;, but that's feeling a little long for my
+tired fingers. If bash knew the valid commands for git, then it could complete
+that for me. I could type &amp;quot;git sta&amp;lt;tab&amp;gt;&amp;quot;, and it would complete status for me.
+Cool.&lt;/p&gt;
+&lt;p&gt;But what about when this doesn't work like I would like it to? Sometimes bash
+smart completion is so smart that it defeats itself, like when it refuses to
+complete a filename in a directory because it is assuming a certain list of
+valid file types for the command you've begun typing. I find this happens
+sometimes, and while I should probably just debug the built-in completion config
+and find out where the problem is, and fix it, I'm usually too buried in a
+problem of my own to side-track that work to go off fixing an environment that
+should just work to begin with.&lt;/p&gt;
+&lt;p&gt;If you find yourself in that situation you can simply disable smart completion
+in your current shell and go back to basic filename completion, which may be
+just what you need at the time. To do so, just run &amp;quot;complete -r&amp;quot;, and all of
+that smart completion will be disabled.&lt;/p&gt;
+&lt;p&gt;When you have time, go figure out what is misbehaving, as smart completion is
+still a good idea. A solid example of the problem is slipping my mind at the
+moment, but the next time it comes up I'll document it, and then troubleshoot
+it, and hopefully come up with a solution.&lt;/p&gt;
+&lt;p&gt;Until then, if you just want to keep it simple, &amp;quot;complete -r&amp;quot; is your friend.&lt;/p&gt;
+&lt;p&gt;Cheers.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 10 Apr 2015 20:30:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2015-04-10:disable-bash-completion.html</guid><category>Bash</category><category>Linux</category></item><item><title>Why X11 still rocks</title><link>http://www.but-i-digress.ca/why-x11-still-rocks.html</link><description>&lt;p&gt;For years now, I've heard from Linux developers about why the venerable X11 is
 an obsolete piece of crap that needs replacing. The Wayland project aims to
 do so, real soon now, kinda like Perl 6. It's a tough problem, so I can hardly
 complain.&lt;/p&gt;
@@ -317,7 +348,7 @@ the API right? Wrong. I forgot. Java.&lt;/p&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.net.ssl.HttpsURLConnection&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 
  &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;trustAllCerts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-         &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nf"&gt;X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+         &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
      &lt;span class="nd"&gt;@Override&lt;/span&gt;
      &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;security&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;X509Certificate&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="nf"&gt;getAcceptedIssuers&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
          &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
@@ -379,7 +410,7 @@ pie chart, with very little code.&lt;/p&gt;
 &lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
 &lt;/div&gt;
 &lt;p&gt;Very impressive. I tried it a few years ago and found it difficult, but it
 seems to have gotten much simpler. I must delve deeper now.&lt;/p&gt;
@@ -1204,7 +1235,7 @@ take the plunge with my new desktop, and try a &lt;a class="reference external" 
 in commercial software land, while being &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Darwin_%28operating_system%29"&gt;BSD Unix&lt;/a&gt; underneath, so maybe it's
 the best of both worlds.&lt;/p&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;I need to customize the crap out of it, and get used to the interface and
 keybindings, and do a lot of reading. I hope to post my experiences here, so
