@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>But I Digress - Mac OS X</title>
+        <title>But I Digress - Michael P. Soulier</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
                         <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
@@ -39,73 +39,38 @@
                 
             
 
-                            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="../ipython-notebook-macosx.html">Getting IPython Notebook Working on Mac OS X</a></h1> 
-                    <footer class="post-info">
-        <abbr class="published" title="2014-04-20T08:00:00">
-                Sun 20 April 2014
+                 
+                            <section id="content" class="body">
+                    <ol id="posts-list" class="hfeed" start="9">
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../why-x11-still-rocks.html" rel="bookmark"
+                           title="Permalink to Why X11 still rocks">Why X11 still rocks</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2014-09-16T13:00:00">
+                Tue 16 September 2014
         </abbr>
 
                 <address class="vcard author">
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
         <p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/python.html">Python</a><a href="../tag/mac-os-x.html">Mac OS X</a></p></footer><!-- /.post-info --><p>I've been getting into <a class="reference external" href="http://ipython.org/notebook.html">ipython notebook</a> recently, especially since seeing
-some demos at <a class="reference external" href="https://us.pycon.org/2014/">PyCon 2014</a>. I maintain a toolchain at work for processing
-monthly stats of our product's use in the field, using python but graphing in
-<a class="reference external" href="http://www.gnuplot.info/">GNUPlot</a>, Given the capabilities of <a class="reference external" href="http://matplotlib.org/">matplotlib</a> and <a class="reference external" href="http://pandas.pydata.org/">pandas</a>, this little
-project is ideal for a pure python replacement.</p>
-<p>I don't need ipython notebook to make this solution work, but it's an excuse
-to play with it and I never miss an opportunity like that. But, I do have a
-Mac on my desktop at home right now. The official way to install ipython
-notebook and <a class="reference external" href="http://www.scipy.org/">SciPy</a> is to use <a class="reference external" href="https://store.continuum.io/cshop/anaconda/">Anaconda</a>, but I prefer to not run foreign
-installers as root on my system when I can avoid it, so virtualenv is
-preferred. I could work on my Linux laptop, but I have dual screens on my
-desktop, and it's possible that my next laptop will have a piece of fruit on
-it too, you never know.</p>
-<p>Luckily I did find an <a class="reference external" href="http://www.lowindata.com/2013/installing-scientific-python-on-mac-os-x/">excellent blog post</a> on the topic, but as often
-happens online, the information is a bit dated. I tried building the
-components and got major complaints (ie. compile errors) from clang.
-Thankfully I got a hand from our own <a class="reference external" href="https://lists.sourceforge.net/lists/listinfo/opag-general">OPAG mailing list</a>. Clang can be told
-to be less strict by setting the ARCHFLAGS environment variable like so:</p>
-<pre class="literal-block">
-export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
-</pre>
-<p>Do this before installing via pip, as pretty much every package will otherwise
-fail due to these errors. Hopefully our C programmers will fix these issues,
-as in future versions of clang, you likely won't be able to downgrade these
-errors to warnings.</p>
-<p>Also, once installing freetype via brew, you do have to include it in the
-compiler's include path so it can find the freetype headers:</p>
-<pre class="literal-block">
-sudo ln -s /usr/local/include/freetype2/ /usr/include/freetype
-</pre>
-<p>While this allowed me to build everything, unfortunately building the graphs
-still didn't work, and I saw this error in the terminal:</p>
-<pre class="literal-block">
-libpng warning: Application built with libpng-1.5.11 but running with
-1.6.10
-</pre>
-<p>I had to dig for a while, but I finally found that <a class="reference external" href="https://xquartz.macosforge.org/landing/">XQuartz</a> was linking to
-libpng 1.5, and I couldn't change that. <a class="reference external" href="http://brew.sh/">Homebrew</a> is currently pushing
-libpng 1.6, so I had to manually roll the version back via Git:</p>
-<pre class="literal-block">
-brew versions libpng
-cd $( brew --prefix )
-git checkout &lt;sha&gt; &lt;path&gt;
-brew install libpng
-</pre>
-<p>Once I did that and rebuilt everything depending on it (see brew deps),
-everything started working.</p>
-<p>Hmm. What are the chances that I'll be able to convince the XQuartz people and
-the Homebrew people to coordinate on libpng? Yeah. Seems unlikely.</p>
-<p>There are <a href="../ipython-notebook-macosx.html#disqus_thread">comments</a>.</p>                </article>
-                                    <p class="paginator">
-        Page 1 / 1
+<p>tags: <a href="../tag/linux.html">Linux</a><a href="../tag/x11.html">X11</a></p></footer><!-- /.post-info -->                <p>For years now, I've heard from Linux developers about why the venerable X11 is
+an obsolete piece of crap that needs replacing. The Wayland project aims to
+do so, real soon now, kinda like Perl 6. It's a tough problem, so I can hardly
+complain.</p>
+<p>Still, when I ...</p>
+                <a class="readmore" href="../why-x11-still-rocks.html">read more</a>
+                <p>There are <a href="../why-x11-still-rocks.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+                        <a href="../author/michael-p-soulier3.html">&laquo;</a>
+                Page 4 / 4
     </p>
-                            </aside><!-- /#featured -->
-                                                </ol><!-- /#posts-list -->
                         </section><!-- /#content -->
                     <section id="extras" class="body">
                         <div class="blogroll">

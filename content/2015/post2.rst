@@ -12,7 +12,7 @@ to outline why I am less than pleased with my 2010 Honda Fit, and ensure
 that he, or whomever ends up reading this, has the full story of what our
 experience with his company has been like.
 
-This was my letter::
+This was my letter:
 
     Mr. Chenkin,
 
