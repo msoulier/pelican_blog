@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/technology.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 15 Dec 2015 16:00:00 -0500</lastBuildDate><item><title>Learning Google Go</title><link>http://www.but-i-digress.ca/learning-google-go.html</link><description>&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>But I Digress</title><link>http://www.but-i-digress.ca/</link><description></description><atom:link href="http://feeds.feedburner.com/feeds/michael-p-soulier.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 15 Dec 2015 16:00:00 -0500</lastBuildDate><item><title>Learning Google Go</title><link>http://www.but-i-digress.ca/learning-google-go.html</link><description>&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
 to look into it. I must admit, while working on updating my C++ knowledge to
 account for the new &lt;a class="reference external" href="http://www.stroustrup.com/C++11FAQ.html"&gt;2011&lt;/a&gt; and &lt;a class="reference external" href="https://isocpp.org/std/status"&gt;2014&lt;/a&gt; standards, and working on learning
 &lt;a class="reference external" href="http://www.boost.org"&gt;boost&lt;/a&gt;, picking up Go is a lot of fun by comparison.&lt;/p&gt;
@@ -87,7 +87,82 @@ took 0.342241 seconds
 1 goroutine done
 &lt;/pre&gt;
 &lt;p&gt;Neat huh? More to come, I suspect.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 15 Dec 2015 16:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2015-12-15:learning-google-go.html</guid><category>Go</category></item><item><title>Disabling Bash Completion</title><link>http://www.but-i-digress.ca/disable-bash-completion.html</link><description>&lt;p&gt;The bash shell is the standard shell on most Unix-like systems. It is full of
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 15 Dec 2015 16:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2015-12-15:learning-google-go.html</guid><category>Go</category></item><item><title>A Letter to Honda Canada</title><link>http://www.but-i-digress.ca/a-letter-to-honda-canada.html</link><description>&lt;p&gt;I recently had reason to write to the CEO of Honda Canada, Mr. Jerry Chenkin,
+to outline why I am less than pleased with my 2010 Honda Fit, and ensure
+that he, or whomever ends up reading this, has the full story of what our
+experience with his company has been like.&lt;/p&gt;
+&lt;p&gt;This was my letter:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mr. Chenkin,&lt;/p&gt;
+&lt;p&gt;In 2009, we decided as a family to replace our aging family car, a 1999
+Saturn SL1. In my research I found my way to Honda for your reputation for
+reliability, even though pound for pound, Hondas are more expensive.&lt;/p&gt;
+&lt;p&gt;Our needs as a family of four are modest, and gasoline is expensive,
+so the Fit caught our attention. We decided on a base model with no
+options. It became our new family car. Our only car, in fact.&lt;/p&gt;
+&lt;p&gt;Until late 2013, we really had no problems with the vehicle. It worked
+as advertised. It was reliable, flexible, cheap to operate and easy to
+drive. We put on a roof rack and camped with it. We brought home wood
+with it, even a washing machine. I loved this little car.&lt;/p&gt;
+&lt;p&gt;Then, in late 2013, my key began sticking in the rear hatch lock. I
+lubricated all of the locks but it only helped for moments at a time. I
+took the car into Kanata Honda, where I'd bought it.&lt;/p&gt;
+&lt;p&gt;Initially, they said my keys were worn, and they cut a new key to prove
+it to me, but this new key failed to continue working on the trunk for more
+than my visit, after any lubrication had a chance to wear off. I followed
+up by phone and was told that the lock would require replacing, in a barely
+3-year-old car whose OEM tires hadn't worn-out yet. They tried to tell me
+that this kind of wear is normal, especially with the salt on Ottawa roads.
+By that logic, Kanata Honda should not be selling Honda vehicles, since
+they are obviously not suitable for Ottawa's roads.&lt;/p&gt;
+&lt;p&gt;As I didn't feel like paying for work that should not be required, I paid
+a ludicrous $70 to Kanata Honda for a replacement cylinder and did the
+work myself. Now I have two keys, as I did not sync up the tumblers to
+the other cylinders.&lt;/p&gt;
+&lt;p&gt;If the problem had ended there, I might count myself lucky. Plenty of
+people have automotive horror stories. Car quality simply is not very
+good. But, it did not stop there.&lt;/p&gt;
+&lt;p&gt;Soon after, I noticed the key sticking in the ignition and the driver-side
+door. I lubricated them heavily and the problem ceased. Now, the
+passenger door key sticks so badly that my wife can barely get her key
+back. After talking to Kanata Honda and having their foreman try to feed
+me some tripe about it being normal it is clear that I will find no
+real help there.&lt;/p&gt;
+&lt;p&gt;After spending over 20 minutes waiting in the Honda Canada customer
+support phone queue, the woman I spoke with was less than sympathetic.
+The passenger lock is being replaced Friday at Kanata Honda, at my expense.
+I haven't a clue if Honda Canada will reimburse me for parts that are
+so obviously defective, but for obvious reasons, I am not hopeful.&lt;/p&gt;
+&lt;p&gt;So, what's next? The trunk again? The driver door? The ignition?&lt;/p&gt;
+&lt;p&gt;I really don't care if it's off warranty. Burning through key cylinders
+faster than brake pads is &lt;em&gt;ridiculous&lt;/em&gt;. They are &lt;em&gt;obviously&lt;/em&gt; defective,
+and if Honda cannot get key cylinders right, how can they be trusted with
+any other part of the car?&lt;/p&gt;
+&lt;p&gt;My son is about to turn 13. He'll be driving in a few years and I'll be
+looking for something sportier for myself. At the moment, my next car
+will &lt;em&gt;not&lt;/em&gt; be a Honda. However, the true test of a person or a company in
+my mind is not whether they make mistakes. It is whether they take
+responsibility for them.&lt;/p&gt;
+&lt;p&gt;I would enjoy having faith in a car company for a change. At the moment,
+it feels like Honda Canada and Kanata Honda stopped caring after they had
+my money. The only control that I have is ensuring that you don't get
+another cent from me, even if the next car company is just as bad.&lt;/p&gt;
+&lt;p&gt;I would enjoy hearing your thoughts on this matter.&lt;/p&gt;
+&lt;p&gt;Sincerely,
+Michael Soulier&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I mailed this letter today. What do you think the chances are that I'll get a
+response at all, let alone a fair and favourable one?&lt;/p&gt;
+&lt;p&gt;I would love to rely on the techs at Kanata Honda, but when they tell me that
+this is normal, I smell bullshit. There is no way this is normal. I just
+want them to admit that. Maybe then they lose money on this repair, but I
+keep coming back for more service, and possibly a future car. But I suppose
+they don't really care if they lose all of my future business. If they did,
+would they try to feed me such utter nonsense, and wipe their hands of
+the matter?&lt;/p&gt;
+&lt;p&gt;Good customer service, that is not. They didn't make the car, but they were
+happy to sell it to me.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 20 Aug 2015 17:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2015-08-20:a-letter-to-honda-canada.html</guid><category>Cars</category><category>Honda</category></item><item><title>Disabling Bash Completion</title><link>http://www.but-i-digress.ca/disable-bash-completion.html</link><description>&lt;p&gt;The bash shell is the standard shell on most Unix-like systems. It is full of
 great features to make your life typing on a command-line fairly painless. One
 of the most important features for any command-line is the ability to reduce
 unneeded typing via smart completion. Say I want to run a command in my path
@@ -423,7 +498,24 @@ work that expects it as input.&lt;/p&gt;
 could find some simple calls to make a CSR, without wrapping the openssl command
 line. I can't seem to find one, and it terribly overlooked in O'Reilly's
 &amp;quot;Network Security with OpenSSL&amp;quot;.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Aug 2013 08:30:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-08-20:scrypting-rsa-encryption.html</guid><category>Crypto</category><category>Python</category><category>Perl</category></item><item><title>Java, usable but pointlessly difficult</title><link>http://www.but-i-digress.ca/java-pointlessly-difficult.html</link><description>&lt;p&gt;I've been working on a REST client in Java at work lately. I know, it scares
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 20 Aug 2013 08:30:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-08-20:scrypting-rsa-encryption.html</guid><category>Crypto</category><category>Python</category><category>Perl</category></item><item><title>Drivers, it's really not that hard</title><link>http://www.but-i-digress.ca/drivers-its-not-that-hard.html</link><description>&lt;p&gt;I am constantly amazed at the ignorance and outright laziness of Canadian
+drivers. Yes, we could be worse, but we could also be much, much better.&lt;/p&gt;
+&lt;p&gt;Case in point, I see people constantly turning left, and swinging out into the
+right lane, or turning right, and swinging out into the left lane.&lt;/p&gt;
+&lt;p&gt;The rules really are &lt;a class="reference external" href="http://www.mto.gov.on.ca/english/dandv/driver/handbook/section2.6.4.shtml"&gt;not that hard&lt;/a&gt; to understand, and given the
+implications at an intersection with traffic coming from all directions, if
+you violate the rules, you're a idiot. Either you're too dumb to remember the
+rules, and can't figure out how, in this connected day and age, to look them
+up, or you simply don't care about the rules. And given the rules are there to
+not only keep me and my children alive, but also you, then yes, you're an
+idiot.&lt;/p&gt;
+&lt;p&gt;Kinda like not bothering to signal. What, lever too far away? Can't be
+bothered to be safe while sharing the road with me, and my two beautiful
+children? Then you shouldn't be driving. Idiot.&lt;/p&gt;
+&lt;p&gt;I'm very tempted to drive with a dash cam at all times, and post the worst
+offenders on youtube. Granted, we all have idiot moments, and sometimes it's
+me, but it's the consistent idiots I'm interested in.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 01 Aug 2013 10:20:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-08-01:drivers-its-not-that-hard.html</guid><category>Cars</category><category>Canada</category></item><item><title>Java, usable but pointlessly difficult</title><link>http://www.but-i-digress.ca/java-pointlessly-difficult.html</link><description>&lt;p&gt;I've been working on a REST client in Java at work lately. I know, it scares
 me too. I've had to revisit much of my old Java knowledge, and pick up a lot
 of new chops in Swing, Eclipse, and author a decent JSON-parsing HTTPS client.&lt;/p&gt;
 &lt;p&gt;Our internal servers use self-signed SSL certs at work, so to talk to them I
@@ -708,7 +800,81 @@ clear
 setterm -cursor on
 &lt;/pre&gt;
 &lt;p&gt;Simple, but it works.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 11 Mar 2013 21:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</guid><category>Linux</category><category>Raspberry Pi</category></item><item><title>Signatures in OAuth</title><link>http://www.but-i-digress.ca/signatures-in-oauth.html</link><description>&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Mon, 11 Mar 2013 21:00:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2013-03-11:video-on-raspbian.html</guid><category>Linux</category><category>Raspberry Pi</category></item><item><title>Jim Butcher on Men vs. Women</title><link>http://www.but-i-digress.ca/jim-butcher-on-men-vs-women.html</link><description>&lt;p&gt;I'm reading Jim Butcher's &amp;quot;Cold Days&amp;quot;, his latest installment in the
+&lt;a class="reference external" href="http://www.jim-butcher.com/books/dresden"&gt;Dresden Files&lt;/a&gt;, and I felt the need to share this quote:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;So, ladies, if you ever have some conversation with your boyfriend or
+husband or brother or male friend, and you are telling him something
+perfectly obvious, and he comes away from it utterly clueless? I know it's
+tempting to think to yourself, &amp;quot;The man can't possibly be that stupid!&amp;quot;&lt;/p&gt;
+&lt;p&gt;But yes. Yes, he can.&lt;/p&gt;
+&lt;p&gt;Our innate strengths just aren't the same. We are the mighty hunters, who
+are good at focusing on one thing at a time. For crying out loud, we have
+to turn down the radio in the car if we suspect we're lost and need to
+figure out how to get where we're going.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Umm, yeah, I've had to turn the radio down...&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 01 Jan 2013 09:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2013-01-01:jim-butcher-on-men-vs-women.html</guid><category>Funny</category></item><item><title>Checking the weather</title><link>http://www.but-i-digress.ca/checking-the-weather.html</link><description>&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
+terminal, as is the preference of most Unix geeks like me. Being a Canadian,
+I'm not interested in the Weather Channel as much as the Environment Canada
+data. Thankfully, they do publish an RSS feed, and good for them.&lt;/p&gt;
+&lt;p&gt;I'm interested in this one:
+&lt;a class="reference external" href="http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml"&gt;http://www.weatheroffice.gc.ca/rss/city/on-118_e.xml&lt;/a&gt;. So, to check the
+weather, I need to pull the feed and parse it. Pulling a page in Python is as
+simple as using &lt;tt class="docutils literal"&gt;urllib&lt;/tt&gt;. From there, I can walk the elements I want like
+so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;xml.etree.ElementTree&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, I wanted the option of picking a certain number of lines, and wrapping at
+a certain number of columns. I wanted this for using the script output as
+input into other apps, like &lt;a class="reference external" href="http://conky.sourceforge.net/"&gt;Conky&lt;/a&gt;. Skipping lines is easy, intelligently
+wrapping them is not. Luckily, Python has a &lt;tt class="docutils literal"&gt;textwrap&lt;/tt&gt; module in the
+standard library.&lt;/p&gt;
+&lt;p&gt;You use it like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;textwrap&lt;/span&gt;
+
+&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Put together, it's really that simple. I think the majority of my code is
+option parsing. The core loop is just this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parse_options&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ignore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;continue&lt;/span&gt;
+    &lt;span class="k"&gt;break&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The whole thing &lt;a class="reference external" href="https://github.com/msoulier/mikes-tools/blob/master/weather.py"&gt;is here&lt;/a&gt;. Sample output looks like this:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+No watches or warnings in effect, Ottawa (Kanata - Orléans)
+Current Conditions: Light Snow, -11.1°C
+Sunday night: A few flurries. Low minus 18.
+Monday: Sunny. High minus 9.
+Monday night: Increasing cloudiness. Low minus 12.
+Tuesday: Chance of flurries. High minus 7. POP 60%
+Wednesday: A mix of sun and cloud. Low minus 16. High minus 8.
+Thursday: Periods of snow. Low minus 8. High minus 2.
+Friday: Sunny. Low minus 12. High minus 7.
+Saturday: Periods of snow. Low minus 12. High minus 7.
+&lt;/pre&gt;
+&lt;p&gt;I love building my own tools like this, it's the ultimate in end-user
+computing. Unix and Python are my playground.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 23 Dec 2012 20:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-23:checking-the-weather.html</guid><category>Python</category></item><item><title>Signatures in OAuth</title><link>http://www.but-i-digress.ca/signatures-in-oauth.html</link><description>&lt;p&gt;Hi again. I already went into the basics of OAuth in a &lt;a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html"&gt;previous post&lt;/a&gt;, and
 alluded to the signatures being the hard part of the implementation. I'm using
 a &lt;a class="reference external" href="https://github.com/leah/python-oauth/"&gt;python-oauth&lt;/a&gt; module for the client, but for the server, I decided to
 implement my own in &lt;a class="reference external" href="http://www.perl.org/"&gt;Perl&lt;/a&gt; and &lt;a class="reference external" href="http://mojolicio.us/"&gt;Mojolicious&lt;/a&gt;, since I had problems with
@@ -960,7 +1126,66 @@ thing is that the signing part is simple, but constructing the base string is
 freakin' hard. You'll get what I mean if you read the &lt;a class="reference external" href="http://tools.ietf.org/html/rfc5849"&gt;RFC&lt;/a&gt;, or just stay
 tuned.&lt;/p&gt;
 &lt;p&gt;See? Geeky. I warned you.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 20 Dec 2012 10:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-20:understanding-oauth.html</guid><category>OAuth</category><category>Web Services</category></item><item><title>Brewing a better UNIX</title><link>http://www.but-i-digress.ca/brewing-a-better-unix.html</link><description>&lt;p&gt;Being a &lt;a class="reference external" href="http://www.linux.org/"&gt;Linux&lt;/a&gt; user, I'm used to a fairly standard set of tools on my
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 20 Dec 2012 10:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-20:understanding-oauth.html</guid><category>OAuth</category><category>Web Services</category></item><item><title>Getting started with autotools</title><link>http://www.but-i-digress.ca/getting-started-with-autotools.html</link><description>&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
+the go and I read slowly, and not often enough. I'm going through the section
+on &lt;a class="reference external" href="http://www.gnu.org/software/autoconf/"&gt;GNU autotools&lt;/a&gt;, which I've never been a heavy user of, albiet I'm a heavy
+consumer of. I just don't spend much time distributing C/C++ across platforms.&lt;/p&gt;
+&lt;p&gt;I have a little C tool that I figured I'd try it on, a small replacement for
+GNU tree that I wrote a while back, and since &lt;tt class="docutils literal"&gt;tree&lt;/tt&gt; isn't available on
+OS X, it seemed a good excuse to port it. Previously I just had a Makefile
+that I maintained, and it works fine, but it's a good excuse to learn how to
+use autotools for the future. I do have some libraries, and they're harder to
+port, which is where &lt;a class="reference external" href="http://www.gnu.org/software/libtool/"&gt;libtool&lt;/a&gt; comes in.&lt;/p&gt;
+&lt;p&gt;This &lt;tt class="docutils literal"&gt;build&lt;/tt&gt; script outlines the process of using autotools for the first
+time. This script borrows very heavily from the book's author.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating Makefile.am&amp;quot;&lt;/span&gt;
+cat &amp;gt; Makefile.am &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF&lt;/span&gt;
+&lt;span class="s"&gt;bin_PROGRAMS=twig&lt;/span&gt;
+&lt;span class="s"&gt;twig_SOURCES=twig.c&lt;/span&gt;
+&lt;span class="s"&gt;EOF&lt;/span&gt;
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoscan...&amp;quot;&lt;/span&gt;
+autoscan
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating configure.ac...&amp;quot;&lt;/span&gt;
+sed -e &lt;span class="s1"&gt;&amp;#39;s/FULL-PACKAGE-NAME/twig/&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;s/VERSION/1.0/&amp;#39;&lt;/span&gt;   &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;s|BUG-REPORT-ADDRESS|msoulier@digitaltorque.ca|&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+    -e &lt;span class="s1"&gt;&amp;#39;10i\&lt;/span&gt;
+&lt;span class="s1"&gt;    AM_INIT_AUTOMAKE&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+        &amp;lt; configure.scan &amp;gt; configure.ac
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating additional files...&amp;quot;&lt;/span&gt;
+touch NEWS README AUTHORS ChangeLog
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running autoreconf...&amp;quot;&lt;/span&gt;
+autoreconf -iv
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running configure...&amp;quot;&lt;/span&gt;
+./configure
+
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Running make distcheck to package sources...&amp;quot;&lt;/span&gt;
+make distcheck
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At this point, it's not ready to ship, as the &lt;tt class="docutils literal"&gt;NEWS&lt;/tt&gt;, &lt;tt class="docutils literal"&gt;README&lt;/tt&gt;,
+&lt;tt class="docutils literal"&gt;AUTHORS&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;ChangeLog&lt;/tt&gt; aren't populated yet. But it's close. The
+&lt;tt class="docutils literal"&gt;configure&lt;/tt&gt; script works, and I could then build it on OS X using the
+expected.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local
+make
+make install
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;My next project to package is a shared library for work, so that will be more
+interesting. Still, if you're looking to use autotools for the first time for
+something simple, this should take the mystery out of kick-starting it. Sure,
+there's some magic like the &lt;tt class="docutils literal"&gt;AM_INIT_AUTOMAKE&lt;/tt&gt; macro, and I've a ton to
+learn yet, but this worked on the first try, and the resulting tarball is good
+to push to &lt;a class="reference external" href="http://sourceforge.net/"&gt;SourceForge&lt;/a&gt; or elsewhere if you want to.&lt;/p&gt;
+&lt;p&gt;As I pick up more, I'll try to share it. I don't find autotools intuitive at
+all, but with some simple recipes I think I'll survive.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 16 Dec 2012 08:30:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-16:getting-started-with-autotools.html</guid><category>C/C++</category><category>FOSS</category><category>Autotools</category></item><item><title>Brewing a better UNIX</title><link>http://www.but-i-digress.ca/brewing-a-better-unix.html</link><description>&lt;p&gt;Being a &lt;a class="reference external" href="http://www.linux.org/"&gt;Linux&lt;/a&gt; user, I'm used to a fairly standard set of tools on my
 command-line. On &lt;a class="reference external" href="http://www.apple.com/osx/"&gt;OS X&lt;/a&gt;, it's essentially BSD UNIX underneath, which I have had
 some experience with thanks to &lt;a class="reference external" href="http://www.freebsd.org/"&gt;FreeBSD&lt;/a&gt;. The environment is very similar, but
 not identical, and on &lt;a class="reference external" href="http://www.freebsd.org/"&gt;FreeBSD&lt;/a&gt;, you quickly find yourself using the ports
@@ -1082,7 +1307,41 @@ should be. I've had plenty of bad experiences with other companies, and so far
 I've had mostly good ones with Apple, and now an exceptional one. The guy I'm
 talking to deserves a raise. Fingers crossed that the experience continues to
 be this good.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 06 Dec 2012 12:20:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-06:apple-support-experience.html</guid><category>Apple</category><category>Customer Service</category></item><item><title>Customizing Awesome</title><link>http://www.but-i-digress.ca/customizing-awesome.html</link><description>&lt;p&gt;As I mentioned previously, I'm currently running &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt; on my netbook. While
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 06 Dec 2012 12:20:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-12-06:apple-support-experience.html</guid><category>Apple</category><category>Customer Service</category></item><item><title>Parenting can really make you feel helpless</title><link>http://www.but-i-digress.ca/parenting-can-make-you-feel-helpless.html</link><description>&lt;p&gt;I've only been kicking around for a bit over 40 years now, but I've never
+found anything in the world to make me feel more helpless than my own child
+telling me that they feel bad, and knowing that I can't fix it.&lt;/p&gt;
+&lt;p&gt;My daughter was sick last night, and we monitored her fever as it rose up to a
+slightly worrisome 39.4C. I went out for some children's ibuprofen, as all I
+had in the cupboard had expired. Good thing that, the kids haven't been sick
+much. Meanwhile my lovely wife put her into the bath while I was gone. I
+brought back popsicles too, since her throat hurt and maybe the cold would
+help with the fever.&lt;/p&gt;
+&lt;p&gt;I ended up not using the medicine, as her temperature slowly dropped after the
+bath, and she feel asleep with her Mom for the night. I checked on her at
+about 2am and 4am, and she was definitely cooling off, so I just sighed in
+relief and got some sleep.&lt;/p&gt;
+&lt;p&gt;Still, it doesn't really feel like she got better because of anything that we
+did. We could comfort her, but in the end, her body was at war with an
+invader, and it was on its own. We were helpless to help. If her temperature
+suddenly spiked we'd be off to the hospital to let someone else try to save
+her. Still helpless to do anything personally. We pray that her body is
+stronger than the virus. We pray that the doctors know what they're doing. I
+hope the world will pardon me for feeling that prayer isn't particularly
+effective, and primarily an act of desperation. I don't like being deperate.&lt;/p&gt;
+&lt;p&gt;I had heard that nothing would terrify me as much as being a parent, but
+there's simply no way to prepare someone for just how scary it can be to have
+this perfect, beautiful little person in pain, or sick, or just crying, and
+not being able to do anything about it. It's even worse for a control freak
+like me, and like most parents, I think that the Universe would make more
+sense if parents could take the children's hurts on themselves. The rational
+part of my mind knows that some pain is necessary as part of life, and that
+getting sick makes your immune system stronger. The parent in me doesn't care.
+Child hurt. Must fix.&lt;/p&gt;
+&lt;p&gt;The little one is home today, as I want to keep an eye on her (see &amp;quot;Control
+Freak&amp;quot;), but the worse is past and she'll be fine. Her immune system wins
+another one, and comes away stronger. Me, I'm just relieved and very tired. I
+really should call my parents and thank them, repeatedly.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Wed, 28 Nov 2012 08:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-28:parenting-can-make-you-feel-helpless.html</guid><category>Parenting</category></item><item><title>Customizing Awesome</title><link>http://www.but-i-digress.ca/customizing-awesome.html</link><description>&lt;p&gt;As I mentioned previously, I'm currently running &lt;a class="reference external" href="http://awesome.naquadah.org/"&gt;Awesome&lt;/a&gt; on my netbook. While
 I added suspend on lid close, I still need to customize the crap out of it. I
 had nothing showing me my current battery status, so I searched around to find
 the appropriate &lt;a class="reference external" href="http://www.lua.org/"&gt;lua&lt;/a&gt; code, a language that I'm still picking up.&lt;/p&gt;
@@ -1330,4 +1589,128 @@ keybindings, and do a lot of reading. I hope to post my experiences here, so
 stay tuned if you're interested.&lt;/p&gt;
 &lt;p&gt;Sure, I could have just thrown Linux on another box, and maybe I still will,
 but I've &lt;em&gt;done&lt;/em&gt; that. I felt like doing something new.&lt;/p&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 16 Nov 2012 18:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</guid><category>OS X</category></item></channel></rss>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 16 Nov 2012 18:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-16:fruit-on-my-screen.html</guid><category>OS X</category></item><item><title>What Curling has taught me about life</title><link>http://www.but-i-digress.ca/curling-and-life.html</link><description>&lt;p&gt;I've been curling for about 4 years now, and it's already taught me a lot
+about life. I thought I'd share some of what it has taught me:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;balance is very important&lt;/li&gt;
+&lt;li&gt;anything worthwhile requires hard work&lt;/li&gt;
+&lt;li&gt;you often can't brute force your way out of a problem&lt;/li&gt;
+&lt;li&gt;you must think before you act&lt;/li&gt;
+&lt;li&gt;you can often do much more with help from others&lt;/li&gt;
+&lt;li&gt;shouting at people doesn't actually make them work harder&lt;/li&gt;
+&lt;li&gt;hope for the best and plan for the worst&lt;/li&gt;
+&lt;li&gt;when you finally understand the conditions, they change&lt;/li&gt;
+&lt;li&gt;don't take anything too seriously&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;and finally&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;men can still look like men while holding a broom :)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Cheers&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Fri, 09 Nov 2012 10:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-09:curling-and-life.html</guid><category>Curling</category><category>Hobbies</category></item><item><title>I sit too much</title><link>http://www.but-i-digress.ca/i-sit-too-much.html</link><description>&lt;p&gt;Yeah, I really do. From my childhood I always prefered more intellectual
+activities than active ones, reading, watching movies, tv. Growing up
+asthmatic had something to do with that, but I overcame it later in life and
+had no excuses anymore. Still, studies to do, computers to play with, digital
+bad guys to beat up, and a lot of my activities involved sitting.&lt;/p&gt;
+&lt;p&gt;I played baseball as a kid, got into Tae kwon Do in my late teens, but as a
+University student I couldn't afford the money to continue, and I moved a lot
+for a while. I was never much of a runner, but for a while I was a damn good
+cyclist because I didn't have a car and it was how I got around.&lt;/p&gt;
+&lt;p&gt;In recent years a back injury made it clear that I sit too much, and I've
+tried various things to try to fix it, usually charging in too fast,
+determined to conquer the problem and I ended up with another injury. I needed
+to figure out how to go slower, targeting my problems and not doing too much,
+but making progress.&lt;/p&gt;
+&lt;p&gt;Recently the wife that I don't deserve found &lt;a class="reference external" href="http://www.athlete365.com/"&gt;Athlete365&lt;/a&gt; and Mr. John
+Sokolowski. He looked at my flexibility and strength, or lack thereof, and has
+put together an evolving program to help me fix them, at a speed that won't
+set me back with another injury. He also gave me some tools to help with
+muscles that keep me awake at night, ruining my sleep. He also thinks that I
+should become a Yoga master. Heh...sure John. Maybe in 20 years of practice.
+I'm right on that.&lt;/p&gt;
+&lt;p&gt;I've also been tweaking my diet, not that my diet was bad, but I recently
+found out about some of the evils of excessive carbohydrates, from an amusing
+documentary, &lt;a class="reference external" href="http://www.fathead-movie.com/"&gt;Fat Head&lt;/a&gt;, a response to &amp;quot;Supersize Me&amp;quot;. Since reducing
+bread (not hard, I have a gluten tolerance issue), rice and potatoes in my
+diet, and exercising more, I've lost about ten pounds in the past couple of
+months.&lt;/p&gt;
+&lt;p&gt;My issues aren't gone by any means, I have a lot of work to do, but guidance
+helps. There's a difference between working hard and working smart.
+Previously, I was just working hard.&lt;/p&gt;
+&lt;p&gt;If you've read this sitting down, get up and move around. Trust me.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Thu, 08 Nov 2012 12:00:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-08:i-sit-too-much.html</guid><category>Health</category></item><item><title>21st Century C</title><link>http://www.but-i-digress.ca/21st-century-c.html</link><description>&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
+&lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
+it caught my attention.&lt;/p&gt;
+&lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
+taught me much more than any of my professors, and
+&lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921634.do"&gt;Unix System Programming for System VR4&lt;/a&gt; taught me a great deal more about
+programming C on Unix/Linux. After reading those books, I became actually
+comfortable in working in C for all of my assignments, and other students
+kept coming to me for help until I had somehow become a local C expert.
+Amazing what a good investment in reading material will do, not to mention
+actually reading said material. Another friend in University taught me that.
+He told me not to ever begrudge the cost of a book that helps you get better
+at what you do. I've applied that lesson ever since.&lt;/p&gt;
+&lt;p&gt;I relied on O'Reilly for my first introduction to C++, with
+&lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921160.do"&gt;C++, the Core Language&lt;/a&gt;, which finally explained to me where some of my
+memory leaks were coming from, by explaining copy constructors and assignment
+operators. I turned to &lt;a class="reference external" href="http://books.google.com/books/about/Beginning_C++.html?id=vtcpAQAAMAAJ"&gt;another book&lt;/a&gt; to finish most of my C++ education, but
+O'Reilly got me started.&lt;/p&gt;
+&lt;p&gt;Since University, with the wealth of information on the Internet, I haven't
+bought many C books, but I did pick up &lt;a class="reference external" href="http://basepath.com/aup/"&gt;Advanced Unix Programming&lt;/a&gt;, second
+edition, on the recommendation of a coworker, and he did not lead me astray,
+the book is excellent. Mind you, I still haven't finished reading it. I seem
+to buy books faster than I read them these days.&lt;/p&gt;
+&lt;p&gt;Maybe one day I'll take a little vacation just to read. Anyway...&lt;/p&gt;
+&lt;p&gt;Looking at the new O'Reilly book, it looks like it has many practical ideas
+for someone living with C from day to day, and should also provide a nice
+introduction to the new C11 standard, just released in December of last year.
+Hopefully it'll sharpen my skills like previous O'Reilly books have. I'll try
+to post a full review once I've finished it...err...if I finish it.&lt;/p&gt;
+&lt;p&gt;I will stop buying faster than I can read. I will stop buying faster than I
+can read. Maybe if I keep repeating that, it'll sink in.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Tue, 06 Nov 2012 22:12:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</guid><category>C/C++</category><category>Books</category></item><item><title>Dusting off old games</title><link>http://www.but-i-digress.ca/dusting-off-old-games.html</link><description>&lt;p&gt;Back before I had any real responsibilities, I spent a lot of time playing
+various games. I've probably played most of them. Roleplaying games, tabletop
+battle simulations, although I stayed away from the card games like &lt;a class="reference external" href="http://www.wizards.com/Magic/Summoner/"&gt;Magic&lt;/a&gt;.
+I'll rant about that some other time.&lt;/p&gt;
+&lt;p&gt;My two favorite games were &lt;a class="reference external" href="http://boardgamegeek.com/thread/474579/air-superiority-playable-jet-combat"&gt;Air Superiority&lt;/a&gt;, and &lt;a class="reference external" href="http://www.starfleetgames.com"&gt;Starfleet Battles&lt;/a&gt;. As a
+science fiction fan, I did like Star Trek, and like a lot of boys my favorite
+parts were the ship to ship combat. SFB simulated that combat better than I'd
+ever seen before, and even spun off a pretty cool &lt;a class="reference external" href="http://www.youtube.com/watch?v=HwQ3rm0LcWU"&gt;video game&lt;/a&gt; that spawned a
+couple of sequels. I still have the first one.&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/sfb.png" style="width: 800px; height: 478px;" /&gt;
+&lt;/div&gt;
+&lt;p&gt;The tabletop game was as complex as any chess game, and a lot more fun in my
+opinion, so it was with no small amount of nostalgia that I dusted off the
+game for my 10-year-old son and I to look at a couple of months ago. To my
+surprise, Jaan ate the game up, even if the rules sound like legalese and
+combined weigh a few pounds. Now he can't get enough of the game, and I get to
+play too, which is pretty cool, 'cause I don't have a lot of time for these
+things anymore and I wasn't sure if anyone around Ottawa played it anyway.&lt;/p&gt;
+&lt;p&gt;I'm not really interested in all of the new material that ADB has released
+since I was into the game, as I have plenty of material for it already, and
+it'll take Jaan and I ages to get tired of it. The physics of the game are
+broken and there are holes in the logic that I'll go into later, but it
+suceeds in providing a fun gaming experience, and it's a hell of a lot more
+fun than playing Monopoly or Clue, with all due respect to those games.&lt;/p&gt;
+&lt;p&gt;Lets be honest, in the end, boys don't grow up, our toys just get more
+expensive.&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sun, 04 Nov 2012 18:43:00 -0500</pubDate><guid>tag:www.but-i-digress.ca,2012-11-04:dusting-off-old-games.html</guid><category>Hobbies</category><category>SFB</category></item><item><title>New blog</title><link>http://www.but-i-digress.ca/new-static-blog.html</link><description>&lt;p&gt;So I decided to dump Wordpress and go to something that I have more control
+over. I was thinking of building my own static blogging system, but I looked
+around and found that there are a few already. Being a fan of &lt;a class="reference external" href="http://www.python.org/"&gt;Python&lt;/a&gt; I
+decided to try out &lt;a class="reference external" href="http://docs.getpelican.com/en/3.0/"&gt;Pelican&lt;/a&gt;. It uses a bunch of technology that I would use
+anyway, like &lt;a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html"&gt;reStructuredText&lt;/a&gt;, &lt;a class="reference external" href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt;, etc.&lt;/p&gt;
+&lt;p&gt;It also gives me an excuse to play with &lt;a class="reference external" href="http://heroku.com/"&gt;Heroku&lt;/a&gt; for hosting. Which, I must
+say, is pretty cool for getting a website or web service hosted quickly, with
+nothing but a push from &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt; to trigger the publishing of the site.&lt;/p&gt;
+&lt;p&gt;Granted, Heroku was meant to host dynamic sites driven by WSGI apps, but I
+found a &lt;a class="reference external" href="http://kennethreitz.com/static-sites-on-heroku-cedar.html"&gt;great hack&lt;/a&gt; to fool Heroku
+into running a static site.&lt;/p&gt;
+&lt;p&gt;So, we'll see how this goes. My main blogging tools now are &lt;a class="reference external" href="http://www.vim.org/"&gt;Vim&lt;/a&gt; and &lt;a class="reference external" href="http://git-scm.com/"&gt;Git&lt;/a&gt;, so
+how can I go wrong?&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Michael P. Soulier</dc:creator><pubDate>Sat, 03 Nov 2012 10:20:00 -0400</pubDate><guid>tag:www.but-i-digress.ca,2012-11-03:new-static-blog.html</guid><category>Blogging</category><category>Python</category><category>FOSS</category></item></channel></rss>

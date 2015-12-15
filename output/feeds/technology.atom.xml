@@ -1,5 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2015-04-10T20:30:00-04:00</updated><entry><title>Disabling Bash Completion</title><link href="http://www.but-i-digress.ca/disable-bash-completion.html" rel="alternate"></link><updated>2015-04-10T20:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-04-10:disable-bash-completion.html</id><summary type="html">&lt;p&gt;The bash shell is the standard shell on most Unix-like systems. It is full of
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2015-12-15T16:00:00-05:00</updated><entry><title>Learning Google Go</title><link href="http://www.but-i-digress.ca/learning-google-go.html" rel="alternate"></link><updated>2015-12-15T16:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:learning-google-go.html</id><summary type="html">&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
+to look into it. I must admit, while working on updating my C++ knowledge to
+account for the new &lt;a class="reference external" href="http://www.stroustrup.com/C++11FAQ.html"&gt;2011&lt;/a&gt; and &lt;a class="reference external" href="https://isocpp.org/std/status"&gt;2014&lt;/a&gt; standards, and working on learning
+&lt;a class="reference external" href="http://www.boost.org"&gt;boost&lt;/a&gt;, picking up Go is a lot of fun by comparison.&lt;/p&gt;
+&lt;p&gt;I'm finding that Go is filling a nice spot between say, C++ and &lt;a class="reference external" href="http://www.python.org"&gt;Python&lt;/a&gt;, as
+Python is much more productive to develop in, but it's byte-compiled and does
+not tend to perform anywhere near as well as C++, but C++ is filled with
+language cruft, low level details that programmers usually shouldn't have to
+bother with, and requires far more code typically to perform an equal task in
+a higher level language.&lt;/p&gt;
+&lt;p&gt;Go also has built-in multi-threading and synchronization support, in the form
+of &amp;quot;goroutines&amp;quot; and &amp;quot;channels&amp;quot;. Here's a pointless example that fires up
+ten goroutines, has each one count to a billion, and report back via the
+passed channel.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;package&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;time&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nx"&gt;wastetime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ch&lt;/span&gt; &lt;span class="kd"&gt;chan&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;start&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="c1"&gt;// Burn some time pointlessly looping&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;1000000000&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="nx"&gt;ch&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Sprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;took %f seconds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Since&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;start&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="nx"&gt;Seconds&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+    &lt;span class="nx"&gt;ch&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;done&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kd"&gt;func&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nx"&gt;ch&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="nb"&gt;make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;chan&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt; &lt;span class="p"&gt;&amp;lt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Starting goroutine %d\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;go&lt;/span&gt; &lt;span class="nx"&gt;wastetime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;ch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="nx"&gt;s&lt;/span&gt; &lt;span class="o"&gt;:=&lt;/span&gt; &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Sprintf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;&lt;span class="nx"&gt;ch&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;done&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%d goroutine done\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;count&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="nx"&gt;count&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="nx"&gt;fmt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%s\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nx"&gt;count&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once you get the syntax down, it's not bad at all. The left arrow operator
+is reading from or writing to the channel, which blocks until the goroutine
+on the other end does its part. It's like using threads and queues in other
+languages, but a tad higher level and simpler. Should be fun to continue
+learning. And it's compiled and fast:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+Starting goroutine 1
+Starting goroutine 2
+Starting goroutine 3
+Starting goroutine 4
+Starting goroutine 5
+Starting goroutine 6
+Starting goroutine 7
+Starting goroutine 8
+Starting goroutine 9
+Starting goroutine 10
+took 0.663542 seconds
+10 goroutine done
+took 0.663968 seconds
+9 goroutine done
+took 0.658279 seconds
+8 goroutine done
+took 0.663875 seconds
+7 goroutine done
+took 0.652669 seconds
+6 goroutine done
+took 0.645463 seconds
+5 goroutine done
+took 0.652085 seconds
+4 goroutine done
+took 0.655896 seconds
+3 goroutine done
+took 0.357376 seconds
+2 goroutine done
+took 0.342241 seconds
+1 goroutine done
+&lt;/pre&gt;
+&lt;p&gt;Neat huh? More to come, I suspect.&lt;/p&gt;
+</summary><category term="Go"></category></entry><entry><title>Disabling Bash Completion</title><link href="http://www.but-i-digress.ca/disable-bash-completion.html" rel="alternate"></link><updated>2015-04-10T20:30:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-04-10:disable-bash-completion.html</id><summary type="html">&lt;p&gt;The bash shell is the standard shell on most Unix-like systems. It is full of
 great features to make your life typing on a command-line fairly painless. One
 of the most important features for any command-line is the ability to reduce
 unneeded typing via smart completion. Say I want to run a command in my path
@@ -348,7 +436,7 @@ the API right? Wrong. I forgot. Java.&lt;/p&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.net.ssl.HttpsURLConnection&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 
  &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;trustAllCerts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-         &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nf"&gt;X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+         &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
      &lt;span class="nd"&gt;@Override&lt;/span&gt;
      &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;security&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;X509Certificate&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="nf"&gt;getAcceptedIssuers&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
          &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
@@ -410,7 +498,7 @@ pie chart, with very little code.&lt;/p&gt;
 &lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
 &lt;/div&gt;
 &lt;p&gt;Very impressive. I tried it a few years ago and found it difficult, but it
 seems to have gotten much simpler. I must delve deeper now.&lt;/p&gt;
@@ -1235,7 +1323,7 @@ take the plunge with my new desktop, and try a &lt;a class="reference external" 
 in commercial software land, while being &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Darwin_%28operating_system%29"&gt;BSD Unix&lt;/a&gt; underneath, so maybe it's
 the best of both worlds.&lt;/p&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
+&lt;img alt="" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;I need to customize the crap out of it, and get used to the interface and
 keybindings, and do a lot of reading. I hope to post my experiences here, so
