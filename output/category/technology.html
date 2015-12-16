@@ -41,7 +41,135 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../learning-google-go.html">Learning Google Go</a></h1> 
+                    <h1 class="entry-title"><a href="../re-learning-c++.html">Re-learning C++</a></h1> 
+<footer class="post-info">
+        <abbr class="published" title="2015-12-15T19:00:00-05:00">
+                Tue 15 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/c.html">C++</a></p></footer><!-- /.post-info --><p>So lately I've been dusting off my C++ knowledge, experimenting with replacing
+a daemon written in Python on the product that I work on with one written in
+C++. For most Python programmers this may seem like serious masochism, but I
+wanted to know just how much harder it would be to work in C++ with the new
+standards, plus the boost library, with hopefully a minor loss of productivity
+with a big gain in performance.</p>
+<p>I'm definitely moving slowly at first, as I re-learn use of the language,
+pick up the new features, cross-check with a co-worker who works in C++ all day,
+and keep the code building on both Mac OS X and Linux.</p>
+<p>To build C++ with the new 2011 standard, it's as simple as adding the <cite>--std=c++11</cite> argument to the g++ compiler. This can be problematic if, like me, your
+workplace is using a <a class="reference external" href="http://www.centos.org">CentOS 6</a> build environment from the Paleolithic era:</p>
+<pre class="literal-block">
+$ make
+g++ -Wall -Werror -I. --std=c++11 -ggdb -DLINUX -c EventWorker.cpp
+cc1plus: error: unrecognized command line option &quot;-std=c++11&quot;
+make: *** [EventWorker.o] Error 1
+
+$ g++ --version
+g++ (GCC) 4.4.7 20120313 (Red Hat 4.4.7-16)
+Copyright (C) 2010 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</pre>
+<p>GCC 4.4.7 isn't that old, but to build C++ 2011 code on Linux, I had to turn to
+my Debian Jessie desktop:</p>
+<pre class="literal-block">
+$ g++ --version
+g++ (Debian 4.9.2-10) 4.9.2
+Copyright (C) 2014 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</pre>
+<p>This did work fine using XCode on Mac as well, although I had to use boost out
+of Homebrew, so I did need to adapt my Makefile to work on both platforms.</p>
+<p>That aside, I could mainly just focus on the application, which needs to pull
+JSON events from a fifo, process them, and sometimes write events into
+another fifo. The current Python application runs 5 threads responsible for
+various jobs. So how do I do that using C++ and boost?</p>
+<div class="highlight"><pre>std::ifstream input_stream;
+input_stream.open(input_file, std::ios::in);
+
+SafeQueue&lt;Json::Value&gt; *json_queue = new SafeQueue&lt;Json::Value&gt;(MAX_QUEUE_SIZE);
+boost::thread reader_thread(start_reader, json_queue, &amp;input_stream);
+
+reader_thread.join();
+</pre></div>
+<p>Not too bad. That code doesn't get much shorter in Python. Mind you, the
+template that I wrote for the SafeQueue most certainly does. I'll show that
+soon but I want to keep these posts small.</p>
+<p>I think I could have used a synchronized queue-like something in boost, but
+honestly, I find the boost documentation horrible to read, and this was the
+best that I could do at the time. The start_reader function in JsonReader
+isn't too bad.</p>
+<div class="highlight"><pre>    JsonReader *reader = new JsonReader(fifopath, json_queue);
+    reader-&gt;startReading(stream);
+    logger.info(&quot;JsonReader: stopping&quot;);
+}
+</pre></div>
+<p>The logger is mine too, because I couldn't get the boost logger to link on
+Mac OS X, and the error was so obscure that I couldn't figure it out. Maybe
+later. The startReading method is pretty readable too.</p>
+<div class="highlight"><pre>    while (! m_stop_asap) {
+        std::string line;
+        std::getline(*stream, line);
+        if (line.length() &gt; 0) {
+            msg.str(&quot;&quot;);
+            msg &lt;&lt; &quot;JsonReader: read &quot; &lt;&lt; line.length() &lt;&lt; &quot; bytes: &quot; &lt;&lt; line;
+            logger.debug(msg.str());
+            msg.str(&quot;&quot;);
+            msg &lt;&lt; line;
+            msg &gt;&gt; json;
+            // If the logger is in debug mode, print a nicely formatted
+            // version of the json.
+            if (logger.getLevel() == LOGLEVEL_DEBUG) {
+                msg.str(&quot;Pretty printed:&quot;);
+                msg &lt;&lt; json;
+                logger.debug(msg.str());
+            }
+            else {
+                // Just print the raw line we read.
+                logger.info(msg.str());
+            }
+            // And enqueue the json for processing.
+            m_json_queue-&gt;enqueue(json);
+        }
+        else {
+            logger.warn(&quot;read nothing from input stream&quot;);
+            if (stream-&gt;eof()) {
+                logger.warn(&quot;EOF detected, exiting&quot;);
+                return;
+            }
+        }
+    }
+    logger.info(&quot;Exit of JsonReader requested.&quot;);
+}
+</pre></div>
+<p>The longest part is just the logging, which I can reduce a great deal if I
+improve the logging interface. Managing these std::stringstream objects is
+a lot more work than with Python strings. But damn, is it fast so far.</p>
+<p>I'll keep you posted on how it goes. Given my learning Google Go, it's tempting
+to use that, but I think I'll stick with C++ to finish my objective of
+re-learning it. I have other ideas for Go.</p>
+<p>Cheers.</p>
+<p>There are <a href="../re-learning-c++.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+        
+
+ 
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="../learning-google-go.html" rel="bookmark"
+                           title="Permalink to Learning Google Go">Learning Google Go</a></h1>
+                </header>
+                
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2015-12-15T16:00:00-05:00">
                 Tue 15 December 2015
@@ -51,100 +179,13 @@
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
 <p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/go.html">Go</a></p></footer><!-- /.post-info --><p>So, I heard from a friend that <a class="reference external" href="http://golang.org">Google Go</a> was worth learning, so I've started
+<p>tags: <a href="../tag/go.html">Go</a></p></footer><!-- /.post-info -->                <p>So, I heard from a friend that <a class="reference external" href="http://golang.org">Google Go</a> was worth learning, so I've started
 to look into it. I must admit, while working on updating my C++ knowledge to
 account for the new <a class="reference external" href="http://www.stroustrup.com/C++11FAQ.html">2011</a> and <a class="reference external" href="https://isocpp.org/std/status">2014</a> standards, and working on learning
-<a class="reference external" href="http://www.boost.org">boost</a>, picking up Go is a lot of fun by comparison.</p>
-<p>I'm finding that Go is filling a nice spot between say, C++ and <a class="reference external" href="http://www.python.org">Python</a>, as
-Python is much more productive to develop in, but it's byte-compiled and does
-not tend to perform anywhere near as well as C++, but C++ is filled with
-language cruft, low level details that programmers usually shouldn't have to
-bother with, and requires far more code typically to perform an equal task in
-a higher level language.</p>
-<p>Go also has built-in multi-threading and synchronization support, in the form
-of &quot;goroutines&quot; and &quot;channels&quot;. Here's a pointless example that fires up
-ten goroutines, has each one count to a billion, and report back via the
-passed channel.</p>
-<div class="highlight"><pre><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-    <span class="s">&quot;fmt&quot;</span>
-    <span class="s">&quot;time&quot;</span>
-    <span class="p">)</span>
-
-<span class="kd">func</span> <span class="nx">wastetime</span><span class="p">(</span><span class="nx">ch</span> <span class="kd">chan</span><span class="o">&lt;-</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">start</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">()</span>
-    <span class="c1">// Burn some time pointlessly looping</span>
-    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">1000000000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;took %f seconds&quot;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Since</span><span class="p">(</span><span class="nx">start</span><span class="p">).</span><span class="nx">Seconds</span><span class="p">())</span>
-    <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="s">&quot;done&quot;</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span>
-    <span class="nx">count</span> <span class="o">:=</span> <span class="mi">10</span>
-    <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-        <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;Starting goroutine %d\n&quot;</span><span class="p">,</span> <span class="nx">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">go</span> <span class="nx">wastetime</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="p">{</span>
-        <span class="nx">s</span> <span class="o">:=</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="o">&lt;-</span><span class="nx">ch</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nx">s</span> <span class="o">==</span> <span class="s">&quot;done&quot;</span> <span class="p">{</span>
-            <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%d goroutine done\n&quot;</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span>
-            <span class="nx">count</span><span class="o">--</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;%s\n&quot;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="nx">count</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
-            <span class="k">break</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-<p>Once you get the syntax down, it's not bad at all. The left arrow operator
-is reading from or writing to the channel, which blocks until the goroutine
-on the other end does its part. It's like using threads and queues in other
-languages, but a tad higher level and simpler. Should be fun to continue
-learning. And it's compiled and fast:</p>
-<pre class="literal-block">
-Starting goroutine 1
-Starting goroutine 2
-Starting goroutine 3
-Starting goroutine 4
-Starting goroutine 5
-Starting goroutine 6
-Starting goroutine 7
-Starting goroutine 8
-Starting goroutine 9
-Starting goroutine 10
-took 0.663542 seconds
-10 goroutine done
-took 0.663968 seconds
-9 goroutine done
-took 0.658279 seconds
-8 goroutine done
-took 0.663875 seconds
-7 goroutine done
-took 0.652669 seconds
-6 goroutine done
-took 0.645463 seconds
-5 goroutine done
-took 0.652085 seconds
-4 goroutine done
-took 0.655896 seconds
-3 goroutine done
-took 0.357376 seconds
-2 goroutine done
-took 0.342241 seconds
-1 goroutine done
-</pre>
-<p>Neat huh? More to come, I suspect.</p>
-<p>There are <a href="../learning-google-go.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<a class="reference external" href="http://www.boost.org">boost</a>, picking up Go is a lot ...</p>
+                <a class="readmore" href="../learning-google-go.html">read more</a>
+<p>There are <a href="../learning-google-go.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
         
 
  
@@ -355,32 +396,6 @@ filtering, etc., was all tasks that I'm used to doing, but for graphing I
 normally use <a class="reference external" href="http://www.gnuplot.org">Gnuplot</a>. But, Gnuplot can't do ...</p>
                 <a class="readmore" href="../matplotlib-is-really-cool.html">read more</a>
 <p>There are <a href="../matplotlib-is-really-cool.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="../joystick-mac-os-x-flightgear.html" rel="bookmark"
-                           title="Permalink to Joysticks on Mac OS X in Flightgear">Joysticks on Mac OS X in Flightgear</a></h1>
-                </header>
-                
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-03-11T22:00:00-04:00">
-                Mon 11 March 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-<p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/os-x.html">OS X</a></p></footer><!-- /.post-info -->                <p>I like flight simulators. I've played all of the good ones, <a class="reference external" href="http://www.flightgear.org/">Flightgear</a> is
-an open-source flight simulator that isn't bad, and is steadily getting better
-with every release. While it is available to run on Mac, there's no way to
-calibrate the Joystick due to a lack ...</p>
-                <a class="readmore" href="../joystick-mac-os-x-flightgear.html">read more</a>
-<p>There are <a href="../joystick-mac-os-x-flightgear.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
             </ol><!-- /#posts-list -->
 <p class="paginator">

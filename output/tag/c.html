@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>But I Digress - C++</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
+        <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
+
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie.css"/>
+                <script src="../js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="../css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+<a href="http://github.com/msoulier">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="..">But I Digress </a></h1>
+                <h2>Random neuron firings, digitized heedless of the
+                repurcussions.</h2>
+                <nav><ul>
+                    <li><a href="../pages/mike-souliers-curriculum-vitae.html">Mike Soulier's Curriculum Vitae</a></li>
+                    <li ><a href="../category/customer-service.html">Customer Service</a></li>
+                    <li ><a href="../category/development.html">Development</a></li>
+                    <li ><a href="../category/driving.html">Driving</a></li>
+                    <li ><a href="../category/personal.html">Personal</a></li>
+                    <li ><a href="../category/quotes.html">Quotes</a></li>
+                    <li ><a href="../category/technology.html">Technology</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+        
+        
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="../re-learning-c++.html">Re-learning C++</a></h1> 
+<footer class="post-info">
+        <abbr class="published" title="2015-12-15T19:00:00-05:00">
+                Tue 15 December 2015
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/c.html">C++</a></p></footer><!-- /.post-info --><p>So lately I've been dusting off my C++ knowledge, experimenting with replacing
+a daemon written in Python on the product that I work on with one written in
+C++. For most Python programmers this may seem like serious masochism, but I
+wanted to know just how much harder it would be to work in C++ with the new
+standards, plus the boost library, with hopefully a minor loss of productivity
+with a big gain in performance.</p>
+<p>I'm definitely moving slowly at first, as I re-learn use of the language,
+pick up the new features, cross-check with a co-worker who works in C++ all day,
+and keep the code building on both Mac OS X and Linux.</p>
+<p>To build C++ with the new 2011 standard, it's as simple as adding the <cite>--std=c++11</cite> argument to the g++ compiler. This can be problematic if, like me, your
+workplace is using a <a class="reference external" href="http://www.centos.org">CentOS 6</a> build environment from the Paleolithic era:</p>
+<pre class="literal-block">
+$ make
+g++ -Wall -Werror -I. --std=c++11 -ggdb -DLINUX -c EventWorker.cpp
+cc1plus: error: unrecognized command line option &quot;-std=c++11&quot;
+make: *** [EventWorker.o] Error 1
+
+$ g++ --version
+g++ (GCC) 4.4.7 20120313 (Red Hat 4.4.7-16)
+Copyright (C) 2010 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</pre>
+<p>GCC 4.4.7 isn't that old, but to build C++ 2011 code on Linux, I had to turn to
+my Debian Jessie desktop:</p>
+<pre class="literal-block">
+$ g++ --version
+g++ (Debian 4.9.2-10) 4.9.2
+Copyright (C) 2014 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</pre>
+<p>This did work fine using XCode on Mac as well, although I had to use boost out
+of Homebrew, so I did need to adapt my Makefile to work on both platforms.</p>
+<p>That aside, I could mainly just focus on the application, which needs to pull
+JSON events from a fifo, process them, and sometimes write events into
+another fifo. The current Python application runs 5 threads responsible for
+various jobs. So how do I do that using C++ and boost?</p>
+<div class="highlight"><pre>std::ifstream input_stream;
+input_stream.open(input_file, std::ios::in);
+
+SafeQueue&lt;Json::Value&gt; *json_queue = new SafeQueue&lt;Json::Value&gt;(MAX_QUEUE_SIZE);
+boost::thread reader_thread(start_reader, json_queue, &amp;input_stream);
+
+reader_thread.join();
+</pre></div>
+<p>Not too bad. That code doesn't get much shorter in Python. Mind you, the
+template that I wrote for the SafeQueue most certainly does. I'll show that
+soon but I want to keep these posts small.</p>
+<p>I think I could have used a synchronized queue-like something in boost, but
+honestly, I find the boost documentation horrible to read, and this was the
+best that I could do at the time. The start_reader function in JsonReader
+isn't too bad.</p>
+<div class="highlight"><pre>    JsonReader *reader = new JsonReader(fifopath, json_queue);
+    reader-&gt;startReading(stream);
+    logger.info(&quot;JsonReader: stopping&quot;);
+}
+</pre></div>
+<p>The logger is mine too, because I couldn't get the boost logger to link on
+Mac OS X, and the error was so obscure that I couldn't figure it out. Maybe
+later. The startReading method is pretty readable too.</p>
+<div class="highlight"><pre>    while (! m_stop_asap) {
+        std::string line;
+        std::getline(*stream, line);
+        if (line.length() &gt; 0) {
+            msg.str(&quot;&quot;);
+            msg &lt;&lt; &quot;JsonReader: read &quot; &lt;&lt; line.length() &lt;&lt; &quot; bytes: &quot; &lt;&lt; line;
+            logger.debug(msg.str());
+            msg.str(&quot;&quot;);
+            msg &lt;&lt; line;
+            msg &gt;&gt; json;
+            // If the logger is in debug mode, print a nicely formatted
+            // version of the json.
+            if (logger.getLevel() == LOGLEVEL_DEBUG) {
+                msg.str(&quot;Pretty printed:&quot;);
+                msg &lt;&lt; json;
+                logger.debug(msg.str());
+            }
+            else {
+                // Just print the raw line we read.
+                logger.info(msg.str());
+            }
+            // And enqueue the json for processing.
+            m_json_queue-&gt;enqueue(json);
+        }
+        else {
+            logger.warn(&quot;read nothing from input stream&quot;);
+            if (stream-&gt;eof()) {
+                logger.warn(&quot;EOF detected, exiting&quot;);
+                return;
+            }
+        }
+    }
+    logger.info(&quot;Exit of JsonReader requested.&quot;);
+}
+</pre></div>
+<p>The longest part is just the logging, which I can reduce a great deal if I
+improve the logging interface. Managing these std::stringstream objects is
+a lot more work than with Python strings. But damn, is it fast so far.</p>
+<p>I'll keep you posted on how it goes. Given my learning Google Go, it's tempting
+to use that, but I think I'll stick with C++ to finish my objective of
+re-learning it. I have other ideas for Go.</p>
+<p>Cheers.</p>
+<p>There are <a href="../re-learning-c++.html#disqus_thread">comments</a>.</p>                </article>
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+            </ol><!-- /#posts-list -->
+            </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                            <li><a href="http://python.org">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                            <li><a href="http://fit613.wordpress.com">Fit613</a></li>
+                            <li><a href="http://excess.org">Ian Ward</a></li>
+                            <li><a href="http://www.mahdiyusuf.com/">Mahdi Yusuf</a></li>
+                            <li><a href="http://mikegrouchy.com/">Mike Grouchy</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate">rss feed</a></li>
+
+                            <li><a href="http://twitter.com/msoulier">Twitter</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                <p>Email me at msoulier at digitaltorque dot ca</p>
+                </address><!-- /#about -->
+
+        </footer><!-- /#contentinfo -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'butidigressca';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+</body>
+</html>

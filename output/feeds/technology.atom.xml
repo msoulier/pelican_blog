@@ -1,5 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2015-12-15T16:00:00-05:00</updated><entry><title>Learning Google Go</title><link href="http://www.but-i-digress.ca/learning-google-go.html" rel="alternate"></link><updated>2015-12-15T16:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:learning-google-go.html</id><summary type="html">&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/technology.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2015-12-15T19:00:00-05:00</updated><entry><title>Re-learning C++</title><link href="http://www.but-i-digress.ca/re-learning-c++.html" rel="alternate"></link><updated>2015-12-15T19:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:re-learning-c++.html</id><summary type="html">&lt;p&gt;So lately I've been dusting off my C++ knowledge, experimenting with replacing
+a daemon written in Python on the product that I work on with one written in
+C++. For most Python programmers this may seem like serious masochism, but I
+wanted to know just how much harder it would be to work in C++ with the new
+standards, plus the boost library, with hopefully a minor loss of productivity
+with a big gain in performance.&lt;/p&gt;
+&lt;p&gt;I'm definitely moving slowly at first, as I re-learn use of the language,
+pick up the new features, cross-check with a co-worker who works in C++ all day,
+and keep the code building on both Mac OS X and Linux.&lt;/p&gt;
+&lt;p&gt;To build C++ with the new 2011 standard, it's as simple as adding the &lt;cite&gt;--std=c++11&lt;/cite&gt; argument to the g++ compiler. This can be problematic if, like me, your
+workplace is using a &lt;a class="reference external" href="http://www.centos.org"&gt;CentOS 6&lt;/a&gt; build environment from the Paleolithic era:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ make
+g++ -Wall -Werror -I. --std=c++11 -ggdb -DLINUX -c EventWorker.cpp
+cc1plus: error: unrecognized command line option &amp;quot;-std=c++11&amp;quot;
+make: *** [EventWorker.o] Error 1
+
+$ g++ --version
+g++ (GCC) 4.4.7 20120313 (Red Hat 4.4.7-16)
+Copyright (C) 2010 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+&lt;/pre&gt;
+&lt;p&gt;GCC 4.4.7 isn't that old, but to build C++ 2011 code on Linux, I had to turn to
+my Debian Jessie desktop:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ g++ --version
+g++ (Debian 4.9.2-10) 4.9.2
+Copyright (C) 2014 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+&lt;/pre&gt;
+&lt;p&gt;This did work fine using XCode on Mac as well, although I had to use boost out
+of Homebrew, so I did need to adapt my Makefile to work on both platforms.&lt;/p&gt;
+&lt;p&gt;That aside, I could mainly just focus on the application, which needs to pull
+JSON events from a fifo, process them, and sometimes write events into
+another fifo. The current Python application runs 5 threads responsible for
+various jobs. So how do I do that using C++ and boost?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;std::ifstream input_stream;
+input_stream.open(input_file, std::ios::in);
+
+SafeQueue&amp;lt;Json::Value&amp;gt; *json_queue = new SafeQueue&amp;lt;Json::Value&amp;gt;(MAX_QUEUE_SIZE);
+boost::thread reader_thread(start_reader, json_queue, &amp;amp;input_stream);
+
+reader_thread.join();
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Not too bad. That code doesn't get much shorter in Python. Mind you, the
+template that I wrote for the SafeQueue most certainly does. I'll show that
+soon but I want to keep these posts small.&lt;/p&gt;
+&lt;p&gt;I think I could have used a synchronized queue-like something in boost, but
+honestly, I find the boost documentation horrible to read, and this was the
+best that I could do at the time. The start_reader function in JsonReader
+isn't too bad.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    JsonReader *reader = new JsonReader(fifopath, json_queue);
+    reader-&amp;gt;startReading(stream);
+    logger.info(&amp;quot;JsonReader: stopping&amp;quot;);
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The logger is mine too, because I couldn't get the boost logger to link on
+Mac OS X, and the error was so obscure that I couldn't figure it out. Maybe
+later. The startReading method is pretty readable too.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    while (! m_stop_asap) {
+        std::string line;
+        std::getline(*stream, line);
+        if (line.length() &amp;gt; 0) {
+            msg.str(&amp;quot;&amp;quot;);
+            msg &amp;lt;&amp;lt; &amp;quot;JsonReader: read &amp;quot; &amp;lt;&amp;lt; line.length() &amp;lt;&amp;lt; &amp;quot; bytes: &amp;quot; &amp;lt;&amp;lt; line;
+            logger.debug(msg.str());
+            msg.str(&amp;quot;&amp;quot;);
+            msg &amp;lt;&amp;lt; line;
+            msg &amp;gt;&amp;gt; json;
+            // If the logger is in debug mode, print a nicely formatted
+            // version of the json.
+            if (logger.getLevel() == LOGLEVEL_DEBUG) {
+                msg.str(&amp;quot;Pretty printed:&amp;quot;);
+                msg &amp;lt;&amp;lt; json;
+                logger.debug(msg.str());
+            }
+            else {
+                // Just print the raw line we read.
+                logger.info(msg.str());
+            }
+            // And enqueue the json for processing.
+            m_json_queue-&amp;gt;enqueue(json);
+        }
+        else {
+            logger.warn(&amp;quot;read nothing from input stream&amp;quot;);
+            if (stream-&amp;gt;eof()) {
+                logger.warn(&amp;quot;EOF detected, exiting&amp;quot;);
+                return;
+            }
+        }
+    }
+    logger.info(&amp;quot;Exit of JsonReader requested.&amp;quot;);
+}
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The longest part is just the logging, which I can reduce a great deal if I
+improve the logging interface. Managing these std::stringstream objects is
+a lot more work than with Python strings. But damn, is it fast so far.&lt;/p&gt;
+&lt;p&gt;I'll keep you posted on how it goes. Given my learning Google Go, it's tempting
+to use that, but I think I'll stick with C++ to finish my objective of
+re-learning it. I have other ideas for Go.&lt;/p&gt;
+&lt;p&gt;Cheers.&lt;/p&gt;
+</summary><category term="C++"></category></entry><entry><title>Learning Google Go</title><link href="http://www.but-i-digress.ca/learning-google-go.html" rel="alternate"></link><updated>2015-12-15T16:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:learning-google-go.html</id><summary type="html">&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
 to look into it. I must admit, while working on updating my C++ knowledge to
 account for the new &lt;a class="reference external" href="http://www.stroustrup.com/C++11FAQ.html"&gt;2011&lt;/a&gt; and &lt;a class="reference external" href="https://isocpp.org/std/status"&gt;2014&lt;/a&gt; standards, and working on learning
 &lt;a class="reference external" href="http://www.boost.org"&gt;boost&lt;/a&gt;, picking up Go is a lot of fun by comparison.&lt;/p&gt;
