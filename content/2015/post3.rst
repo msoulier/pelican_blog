@@ -2,7 +2,7 @@ Learning Google Go
 ==================
 
 :date: 2015-12-15 16:00
-:category: Technology
+:category: Development
 :author: Michael P. Soulier
 :tags: Go
 :slug: learning-google-go

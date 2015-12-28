@@ -2,7 +2,7 @@ Re-learning C++
 ===============
 
 :date: 2015-12-15 19:00
-:category: Technology
+:category: Development
 :author: Michael P. Soulier
 :tags: C++
 :slug: re-learning-c++
