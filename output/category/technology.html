@@ -41,278 +41,7 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../a-working-logger.html">A working logger</a></h1> 
-<footer class="post-info">
-        <abbr class="published" title="2015-12-28T11:00:00-05:00">
-                Mon 28 December 2015
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
-        </address>
-<p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/c.html">C++</a></p></footer><!-- /.post-info --><p>So it took some work, and likely there are better ways to do this, but this
-logger satisfies my current needs in providing multiple levels of logging,
-and an iostream interface to make composing strings simpler. First some
-includes and definitions.</p>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="cp">#include &lt;ostream&gt;</span>
-<span class="cp">#include &lt;boost/thread.hpp&gt;</span>
-<span class="cp">#include &lt;boost/thread/mutex.hpp&gt;</span>
-
-<span class="cp">#define LOGLEVEL_TRACE 0</span>
-<span class="cp">#define LOGLEVEL_DEBUG 10</span>
-<span class="cp">#define LOGLEVEL_INFO 20</span>
-<span class="cp">#define LOGLEVEL_WARN 30</span>
-<span class="cp">#define LOGLEVEL_ERROR 40</span>
-</pre></div>
-<p>Then my thread-local buffer.</p>
-<div class="highlight"><pre><span class="k">extern</span> <span class="n">boost</span><span class="o">::</span><span class="n">thread_specific_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="o">&gt;</span> <span class="n">tls_buffer</span><span class="p">;</span>
-</pre></div>
-<p>The intention here is to &quot;collect&quot; logs from successive calls to the &lt;&lt; operator
-in one line, using a thread-local buffer to prevent each thread from
-stepping on one another. At the end of the line, we will then synchronize
-around the write to the std::ostream and flush the buffer. There might be a
-way to declare the tls_buffer inside of the class but my C++ chops are
-currently insufficient.</p>
-<p>I am also aware that one could use a temporary variable hack to get a
-thread-local buffer without using boost here, but the examples that I found
-showing this were very hard for me to understand. This, I understand so I'm
-going with it for now.</p>
-<p>Now, my logger is broken up into two classes. The main logger, and the
-logger handlers that are used to do the actual logging at each level
-(ie. debug, info, error, etc). This handler is where the &lt;&lt; operator
-overloading magic happens.</p>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">MLoggerHandler</span>
-<span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">mutex</span><span class="o">&amp;</span> <span class="n">mutex</span><span class="p">,</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">ostream</span><span class="p">,</span>
-                <span class="kt">int</span> <span class="n">threshold</span><span class="p">,</span>
-                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">prefix</span><span class="p">);</span>
-    <span class="o">~</span><span class="n">MLoggerHandler</span><span class="p">();</span>
-    <span class="kt">void</span> <span class="nf">setLevel</span><span class="p">(</span><span class="kt">int</span> <span class="n">level</span><span class="p">);</span>
-
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-    <span class="c1">// For handling &lt;&lt; from any object.</span>
-    <span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">T</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Only log if the level is set above our threshold.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">m_threshold</span> <span class="o">&gt;=</span> <span class="n">m_level</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">tls_buffer</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">tls_buffer</span><span class="p">.</span><span class="n">reset</span><span class="p">(</span><span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="p">());</span>
-            <span class="p">}</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">tls_buffer</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">().</span><span class="n">length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="o">*</span><span class="n">tls_buffer</span> <span class="o">&lt;&lt;</span> <span class="n">localDateTime</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">m_prefix</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">input</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="k">else</span> <span class="p">{</span>
-                <span class="o">*</span><span class="n">tls_buffer</span> <span class="o">&lt;&lt;</span> <span class="n">input</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="c1">// For handling std::endl</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="p">(</span><span class="o">*</span><span class="n">f</span><span class="p">)(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">))</span> <span class="p">{</span>
-        <span class="c1">// Only log if the level is set above our threshold.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">m_threshold</span> <span class="o">&gt;=</span> <span class="n">m_level</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">boost</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">boost</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">{</span><span class="n">m_mutex</span><span class="p">};</span>
-            <span class="c1">// Flush the buffer</span>
-            <span class="n">m_ostream</span> <span class="o">&lt;&lt;</span> <span class="n">tls_buffer</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">();</span>
-            <span class="n">f</span><span class="p">(</span><span class="n">m_ostream</span><span class="p">);</span>
-            <span class="c1">// Clear the buffer</span>
-            <span class="n">tls_buffer</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">m_ostream</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="c1">// A mutex passed in from the main logger for synchronization.</span>
-    <span class="n">boost</span><span class="o">::</span><span class="n">mutex</span><span class="o">&amp;</span> <span class="n">m_mutex</span><span class="p">;</span>
-    <span class="c1">// The logging level.</span>
-    <span class="kt">int</span> <span class="n">m_level</span><span class="p">;</span>
-    <span class="c1">// The output stream.</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">m_ostream</span><span class="p">;</span>
-    <span class="c1">// The threshold for logging for this handler.</span>
-    <span class="kt">int</span> <span class="n">m_threshold</span><span class="p">;</span>
-    <span class="c1">// The string prefix for logging.</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_prefix</span><span class="p">;</span>
-    <span class="c1">// Return the current date and time as a localized string.</span>
-    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">localDateTime</span><span class="p">();</span>
-<span class="p">};</span>
-</pre></div>
-<!-- ** -->
-<p>Note that the &lt;&lt; overload takes any type capable of itself using the &lt;&lt;
-operator, while there's a separate method required to implement handling
-for the <cite>std::endl</cite> at the end of the line. This allows us to knwo when the
-line is terminated, to write and flush the buffer, but it also imposes the
-limitation that the user of this logger <em>must</em> provide the <cite>std::endl</cite> to
-terminate the line or the logger won't work properly. These handlers are
-returned as a result of calling the individual level methods in the main
-logger, like <cite>info()</cite>, <cite>debug()</cite>, etc.</p>
-<p>Also note that when the thread-local buffer is empty, that is used as an
-indication of building the beginning of the line, and thus starting with
-a logging level prefix and a timestamp.</p>
-<p>And now the main logger...</p>
-<div class="highlight"><pre><span class="cm">/*</span>
-<span class="cm">* The MLogger (Mike-logger) is a thread-safe C++ logger using the iostream operators.</span>
-<span class="cm">* To use it, you must invoke a logging level handler which will return an</span>
-<span class="cm">* MLoggerHandler reference, and then terminate your line with std::endl to ensure</span>
-<span class="cm">* that the buffer is flushed and the line terminated with a newline.</span>
-<span class="cm">*/</span>
-<span class="k">class</span> <span class="nc">MLogger</span>
-<span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">MLogger</span><span class="p">();</span>
-    <span class="n">MLogger</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">);</span>
-    <span class="o">~</span><span class="n">MLogger</span><span class="p">();</span>
-    <span class="c1">// Set the current logging level</span>
-    <span class="kt">void</span> <span class="nf">setLevel</span><span class="p">(</span><span class="kt">int</span> <span class="n">level</span><span class="p">);</span>
-    <span class="c1">// Get the current logging level</span>
-    <span class="kt">int</span> <span class="nf">getLevel</span><span class="p">();</span>
-    <span class="c1">// Convenience methods for trace level log.</span>
-    <span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">trace</span><span class="p">();</span>
-    <span class="c1">// Convenience methods for debug level log</span>
-    <span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">debug</span><span class="p">();</span>
-    <span class="c1">// Convenience methods for info level log</span>
-    <span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">info</span><span class="p">();</span>
-    <span class="c1">// Convenience methods for warning level log</span>
-    <span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">warn</span><span class="p">();</span>
-    <span class="c1">// Convenicence methods for error level log</span>
-    <span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">error</span><span class="p">();</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="c1">// The logger name.</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">m_name</span><span class="p">;</span>
-    <span class="c1">// The current log level.</span>
-    <span class="kt">int</span> <span class="n">m_level</span><span class="p">;</span>
-    <span class="c1">// The output stream for the logger.</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">m_ostream</span><span class="p">;</span>
-    <span class="c1">// The mutex used for synchronization.</span>
-    <span class="n">boost</span><span class="o">::</span><span class="n">mutex</span> <span class="n">m_mutex</span><span class="p">;</span>
-    <span class="c1">// Trace handler</span>
-    <span class="n">MLoggerHandler</span> <span class="n">m_trace_handler</span><span class="p">;</span>
-    <span class="c1">// Debug handler</span>
-    <span class="n">MLoggerHandler</span> <span class="n">m_debug_handler</span><span class="p">;</span>
-    <span class="c1">// Info handler</span>
-    <span class="n">MLoggerHandler</span> <span class="n">m_info_handler</span><span class="p">;</span>
-    <span class="c1">// Warn handler</span>
-    <span class="n">MLoggerHandler</span> <span class="n">m_warn_handler</span><span class="p">;</span>
-    <span class="c1">// Error handler</span>
-    <span class="n">MLoggerHandler</span> <span class="n">m_error_handler</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-<!-- ** -->
-<p>The implementation is nothing special, but for completeness here it is.</p>
-<div class="highlight"><pre><span class="n">boost</span><span class="o">::</span><span class="n">thread_specific_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="o">&gt;</span> <span class="n">tls_buffer</span><span class="p">;</span>
-
-<span class="n">MLoggerHandler</span><span class="o">::</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">mutex</span><span class="o">&amp;</span> <span class="n">mutex</span><span class="p">,</span>
-                            <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">ostream</span><span class="p">,</span>
-                            <span class="kt">int</span> <span class="n">threshold</span><span class="p">,</span>
-                            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">prefix</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">m_mutex</span><span class="p">(</span><span class="n">mutex</span><span class="p">)</span>
-    <span class="p">,</span> <span class="n">m_level</span><span class="p">(</span><span class="n">LOGLEVEL_INFO</span><span class="p">)</span>
-    <span class="p">,</span> <span class="n">m_ostream</span><span class="p">(</span><span class="n">ostream</span><span class="p">)</span>
-    <span class="p">,</span> <span class="n">m_threshold</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
-    <span class="p">,</span> <span class="n">m_prefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
-<span class="p">{</span> <span class="p">}</span>
-
-<span class="n">MLoggerHandler</span><span class="o">::~</span><span class="n">MLoggerHandler</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">MLoggerHandler</span><span class="o">::</span><span class="n">setLevel</span><span class="p">(</span><span class="kt">int</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">m_level</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MLoggerHandler</span><span class="o">::</span><span class="n">localDateTime</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="s">&quot;%b %d %Y @ %X %Z&quot;</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="kt">time_t</span> <span class="n">t</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
-    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">strftime</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="n">format</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">)))</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">else</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">MLogger</span><span class="o">::</span><span class="n">MLogger</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">m_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="p">,</span> <span class="n">m_level</span><span class="p">(</span><span class="n">LOGLEVEL_INFO</span><span class="p">)</span>
-    <span class="p">,</span> <span class="n">m_ostream</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="p">)</span>
-    <span class="p">,</span> <span class="n">m_trace_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_TRACE</span><span class="p">,</span> <span class="s">&quot;TRACE&quot;</span><span class="p">))</span>
-    <span class="p">,</span> <span class="n">m_debug_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_DEBUG</span><span class="p">,</span> <span class="s">&quot;DEBUG&quot;</span><span class="p">))</span>
-    <span class="p">,</span> <span class="n">m_info_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_INFO</span><span class="p">,</span> <span class="s">&quot;INFO&quot;</span><span class="p">))</span>
-    <span class="p">,</span> <span class="n">m_warn_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_WARN</span><span class="p">,</span> <span class="s">&quot;WARN&quot;</span><span class="p">))</span>
-    <span class="p">,</span> <span class="n">m_error_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_ERROR</span><span class="p">,</span> <span class="s">&quot;ERROR&quot;</span><span class="p">))</span>
-    <span class="p">{</span> <span class="p">}</span>
-
-<span class="n">MLogger</span><span class="o">::</span><span class="n">MLogger</span><span class="p">()</span> <span class="o">:</span> <span class="n">MLogger</span><span class="p">(</span><span class="s">&quot;No name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-
-<span class="n">MLogger</span><span class="o">::~</span><span class="n">MLogger</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-
-<span class="kt">int</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">getLevel</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_level</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">setLevel</span><span class="p">(</span><span class="kt">int</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">m_level</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span>
-    <span class="c1">// And set it on all of the logger handlers.</span>
-    <span class="n">m_trace_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
-    <span class="n">m_debug_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
-    <span class="n">m_info_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
-    <span class="n">m_warn_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
-    <span class="n">m_error_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">trace</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_trace_handler</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">debug</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_debug_handler</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">info</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_info_handler</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">warn</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_warn_handler</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">error</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">m_error_handler</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<!-- ** -->
-<p>Currently, I'm using this through a simple shared global called <cite>logger</cite>,
-so you then just use it like so:</p>
-<div class="highlight"><pre><span class="n">MLogger</span> <span class="n">logger</span><span class="p">;</span>
-
-<span class="n">logger</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">LOGLEVEL_INFO</span><span class="p">);</span>
-
-<span class="c1">// This produces no output at INFO logging level.</span>
-<span class="n">logger</span><span class="p">.</span><span class="n">debug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;The current value of foo is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">foo</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-
-<span class="c1">// This produces output.</span>
-<span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;The current value of bar is &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">bar</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</pre></div>
-<p>So, it works, it's thread safe, and I don't have to manually build my own
-logging strings with <cite>std::stringstream</cite>, saving endless lines of code. I'm
-certain that it can be improved, I can certainly build in facilities like
-log rotation, compression, etc. But, it's a start.</p>
-<p>There are <a href="../a-working-logger.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-        
-
- 
-            <li><article class="hentry">    
-                <header>
-                    <h1><a href="../disable-bash-completion.html" rel="bookmark"
-                           title="Permalink to Disabling Bash Completion">Disabling Bash Completion</a></h1>
-                </header>
-                
-                <div class="entry-content">
+                    <h1 class="entry-title"><a href="../disable-bash-completion.html">Disabling Bash Completion</a></h1> 
 <footer class="post-info">
         <abbr class="published" title="2015-04-10T20:30:00-04:00">
                 Fri 10 April 2015
@@ -322,13 +51,43 @@ log rotation, compression, etc. But, it's a start.</p>
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
 <p>In <a href="../category/technology.html">Technology</a>. </p>
-<p>tags: <a href="../tag/bash.html">Bash</a><a href="../tag/linux.html">Linux</a></p></footer><!-- /.post-info -->                <p>The bash shell is the standard shell on most Unix-like systems. It is full of
+<p>tags: <a href="../tag/bash.html">Bash</a><a href="../tag/linux.html">Linux</a></p></footer><!-- /.post-info --><p>The bash shell is the standard shell on most Unix-like systems. It is full of
 great features to make your life typing on a command-line fairly painless. One
 of the most important features for any command-line is the ability to reduce
-unneeded typing via smart completion. Say I want to ...</p>
-                <a class="readmore" href="../disable-bash-completion.html">read more</a>
-<p>There are <a href="../disable-bash-completion.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
+unneeded typing via smart completion. Say I want to run a command in my path
+named foobar. I can just type foo, hit the tab character, and assuming that
+it's the only command beginning in foo, the shell with automagickally complete
+that as foobar, and I save some keystrokes, and slow down my inevitable slide
+into Carpal Tunnel (well, until I write some Java, anyway).</p>
+<p>This is so handy that the authors of bash made completion even smarter. Lets
+say that I want to run &quot;git status&quot;, but that's feeling a little long for my
+tired fingers. If bash knew the valid commands for git, then it could complete
+that for me. I could type &quot;git sta&lt;tab&gt;&quot;, and it would complete status for me.
+Cool.</p>
+<p>But what about when this doesn't work like I would like it to? Sometimes bash
+smart completion is so smart that it defeats itself, like when it refuses to
+complete a filename in a directory because it is assuming a certain list of
+valid file types for the command you've begun typing. I find this happens
+sometimes, and while I should probably just debug the built-in completion config
+and find out where the problem is, and fix it, I'm usually too buried in a
+problem of my own to side-track that work to go off fixing an environment that
+should just work to begin with.</p>
+<p>If you find yourself in that situation you can simply disable smart completion
+in your current shell and go back to basic filename completion, which may be
+just what you need at the time. To do so, just run &quot;complete -r&quot;, and all of
+that smart completion will be disabled.</p>
+<p>When you have time, go figure out what is misbehaving, as smart completion is
+still a good idea. A solid example of the problem is slipping my mind at the
+moment, but the next time it comes up I'll document it, and then troubleshoot
+it, and hopefully come up with a solution.</p>
+<p>Until then, if you just want to keep it simple, &quot;complete -r&quot; is your friend.</p>
+<p>Cheers.</p>
+<p>There are <a href="../disable-bash-completion.html#disqus_thread">comments</a>.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
         
 
  
@@ -540,9 +299,35 @@ calibrate the Joystick due to a lack ...</p>
                 <a class="readmore" href="../joystick-mac-os-x-flightgear.html">read more</a>
 <p>There are <a href="../joystick-mac-os-x-flightgear.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
+        
+
+ 
+            <li><article class="hentry">    
+                <header>
+                    <h1><a href="../video-on-raspbian.html" rel="bookmark"
+                           title="Permalink to Video on Raspbian">Video on Raspbian</a></h1>
+                </header>
+                
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2013-03-11T21:00:00-04:00">
+                Mon 11 March 2013
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
+        </address>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>tags: <a href="../tag/linux.html">Linux</a><a href="../tag/raspberry-pi.html">Raspberry Pi</a></p></footer><!-- /.post-info -->                <p>Currently our upstairs TV has a <a class="reference external" href="http://www.raspberrypi.org/">raspberry pi</a> attached to it. It's running
+the basic <a class="reference external" href="http://www.raspbian.org/">Raspbian</a> distribution, based on <a class="reference external" href="http://www.debian.org/">Debian Linux</a>. I'm using it for
+development as well as for a media center at the moment, so I'm not using
+<a class="reference external" href="http://www.raspbmc.com/">RaspBMC</a>, I'm going to order another ...</p>
+                <a class="readmore" href="../video-on-raspbian.html">read more</a>
+<p>There are <a href="../video-on-raspbian.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
             </ol><!-- /#posts-list -->
 <p class="paginator">
-    Page 1 / 3
+    Page 1 / 2
         <a href="../category/technology2.html">&raquo;</a>
 </p>
             </section><!-- /#content -->

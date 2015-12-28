@@ -2,7 +2,7 @@ A working logger
 ================
 
 :date: 2015-12-28 11:00
-:category: Technology
+:category: Development
 :author: Michael P. Soulier
 :tags: C++
 :slug: a-working-logger
