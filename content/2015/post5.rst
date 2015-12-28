@@ -25,22 +25,21 @@ includes and definitions.
     #define LOGLEVEL_WARN 30
     #define LOGLEVEL_ERROR 40
 
-And then the class declaration. To override the << operator and expect any
-type, it must be a template.
+Then my thread-local buffer.
 
 .. code-block:: C++
 
     extern boost::thread_specific_ptr<std::stringstream> tls_buffer;
 
 The intention here is to "collect" logs from successive calls to the << operator
-in one line, using a thread-specific buffer to prevent each thread from
+in one line, using a thread-local buffer to prevent each thread from
 stepping on one another. At the end of the line, we will then synchronize
 around the write to the std::ostream and flush the buffer. There might be a
 way to declare the tls_buffer inside of the class but my C++ chops are
-current insufficient. 
+currently insufficient. 
 
 I am also aware that one could use a temporary variable hack to get a
-thread-specific buffer without using boost here, but the examples that I found
+thread-local buffer without using boost here, but the examples that I found
 showing this were very hard for me to understand. This, I understand so I'm
 going with it for now.
 
@@ -106,6 +105,8 @@ overloading magic happens.
         const std::string localDateTime();
     };
 
+.. **
+
 Note that the << overload takes any type capable of itself using the <<
 operator, while there's a separate method required to implement handling
 for the `std::endl` at the end of the line. This allows us to knwo when the
@@ -114,6 +115,10 @@ limitation that the user of this logger *must* provide the `std::endl` to
 terminate the line or the logger won't work properly. These handlers are
 returned as a result of calling the individual level methods in the main
 logger, like `info()`, `debug()`, etc.
+
+Also note that when the thread-local buffer is empty, that is used as an
+indication of building the beginning of the line, and thus starting with
+a logging level prefix and a timestamp.
 
 And now the main logger...
 
@@ -165,6 +170,94 @@ And now the main logger...
         // Error handler
         MLoggerHandler m_error_handler;
     };
+
+.. **
+
+The implementation is nothing special, but for completeness here it is.
+
+.. code-block:: C++
+
+    boost::thread_specific_ptr<std::stringstream> tls_buffer;
+
+    MLoggerHandler::MLoggerHandler(boost::mutex& mutex,
+                                std::ostream& ostream,
+                                int threshold,
+                                std::string prefix)
+        : m_mutex(mutex)
+        , m_level(LOGLEVEL_INFO)
+        , m_ostream(ostream)
+        , m_threshold(threshold)
+        , m_prefix(prefix)
+    { }
+
+    MLoggerHandler::~MLoggerHandler() { }
+
+    void MLoggerHandler::setLevel(int level) {
+        m_level = level;
+    }
+
+    const std::string MLoggerHandler::localDateTime() {
+        const char *format = "%b %d %Y @ %X %Z";
+        std::time_t t = std::time(NULL);
+        char buffer[128];
+        if (std::strftime(buffer, sizeof(buffer), format, std::localtime(&t))) {
+            return std::string(buffer);
+        }
+        else {
+            return "";
+        }
+    }
+
+    MLogger::MLogger(std::string name)
+        : m_name(name)
+        , m_level(LOGLEVEL_INFO)
+        , m_ostream(std::cerr)
+        , m_trace_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_TRACE, "TRACE"))
+        , m_debug_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_DEBUG, "DEBUG"))
+        , m_info_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_INFO, "INFO"))
+        , m_warn_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_WARN, "WARN"))
+        , m_error_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_ERROR, "ERROR"))
+        { }
+
+    MLogger::MLogger() : MLogger("No name") { }
+
+    MLogger::~MLogger() { }
+
+    int MLogger::getLevel() {
+        return m_level;
+    }
+
+    void MLogger::setLevel(int level) {
+        m_level = level;
+        // And set it on all of the logger handlers.
+        m_trace_handler.setLevel(level);
+        m_debug_handler.setLevel(level);
+        m_info_handler.setLevel(level);
+        m_warn_handler.setLevel(level);
+        m_error_handler.setLevel(level);
+    }
+
+    MLoggerHandler& MLogger::trace() {
+        return m_trace_handler;
+    }
+
+    MLoggerHandler& MLogger::debug() {
+        return m_debug_handler;
+    }
+
+    MLoggerHandler& MLogger::info() {
+        return m_info_handler;
+    }
+
+    MLoggerHandler& MLogger::warn() {
+        return m_warn_handler;
+    }
+
+    MLoggerHandler& MLogger::error() {
+        return m_error_handler;
+    }
+
+.. **
 
 Currently, I'm using this through a simple shared global called `logger`,
 so you then just use it like so:

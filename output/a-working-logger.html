@@ -70,18 +70,17 @@ includes and definitions.</p>
 <span class="cp">#define LOGLEVEL_WARN 30</span>
 <span class="cp">#define LOGLEVEL_ERROR 40</span>
 </pre></div>
-<p>And then the class declaration. To override the &lt;&lt; operator and expect any
-type, it must be a template.</p>
+<p>Then my thread-local buffer.</p>
 <div class="highlight"><pre><span class="k">extern</span> <span class="n">boost</span><span class="o">::</span><span class="n">thread_specific_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="o">&gt;</span> <span class="n">tls_buffer</span><span class="p">;</span>
 </pre></div>
 <p>The intention here is to &quot;collect&quot; logs from successive calls to the &lt;&lt; operator
-in one line, using a thread-specific buffer to prevent each thread from
+in one line, using a thread-local buffer to prevent each thread from
 stepping on one another. At the end of the line, we will then synchronize
 around the write to the std::ostream and flush the buffer. There might be a
 way to declare the tls_buffer inside of the class but my C++ chops are
-current insufficient.</p>
+currently insufficient.</p>
 <p>I am also aware that one could use a temporary variable hack to get a
-thread-specific buffer without using boost here, but the examples that I found
+thread-local buffer without using boost here, but the examples that I found
 showing this were very hard for me to understand. This, I understand so I'm
 going with it for now.</p>
 <p>Now, my logger is broken up into two classes. The main logger, and the
@@ -143,6 +142,7 @@ overloading magic happens.</p>
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">localDateTime</span><span class="p">();</span>
 <span class="p">};</span>
 </pre></div>
+<!-- ** -->
 <p>Note that the &lt;&lt; overload takes any type capable of itself using the &lt;&lt;
 operator, while there's a separate method required to implement handling
 for the <cite>std::endl</cite> at the end of the line. This allows us to knwo when the
@@ -151,6 +151,9 @@ limitation that the user of this logger <em>must</em> provide the <cite>std::end
 terminate the line or the logger won't work properly. These handlers are
 returned as a result of calling the individual level methods in the main
 logger, like <cite>info()</cite>, <cite>debug()</cite>, etc.</p>
+<p>Also note that when the thread-local buffer is empty, that is used as an
+indication of building the beginning of the line, and thus starting with
+a logging level prefix and a timestamp.</p>
 <p>And now the main logger...</p>
 <div class="highlight"><pre><span class="cm">/*</span>
 <span class="cm">* The MLogger (Mike-logger) is a thread-safe C++ logger using the iostream operators.</span>
@@ -199,6 +202,89 @@ logger, like <cite>info()</cite>, <cite>debug()</cite>, etc.</p>
     <span class="n">MLoggerHandler</span> <span class="n">m_error_handler</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
+<!-- ** -->
+<p>The implementation is nothing special, but for completeness here it is.</p>
+<div class="highlight"><pre><span class="n">boost</span><span class="o">::</span><span class="n">thread_specific_ptr</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">stringstream</span><span class="o">&gt;</span> <span class="n">tls_buffer</span><span class="p">;</span>
+
+<span class="n">MLoggerHandler</span><span class="o">::</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">boost</span><span class="o">::</span><span class="n">mutex</span><span class="o">&amp;</span> <span class="n">mutex</span><span class="p">,</span>
+                            <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">ostream</span><span class="p">,</span>
+                            <span class="kt">int</span> <span class="n">threshold</span><span class="p">,</span>
+                            <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">prefix</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_mutex</span><span class="p">(</span><span class="n">mutex</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_level</span><span class="p">(</span><span class="n">LOGLEVEL_INFO</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_ostream</span><span class="p">(</span><span class="n">ostream</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_threshold</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_prefix</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+<span class="p">{</span> <span class="p">}</span>
+
+<span class="n">MLoggerHandler</span><span class="o">::~</span><span class="n">MLoggerHandler</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MLoggerHandler</span><span class="o">::</span><span class="n">setLevel</span><span class="p">(</span><span class="kt">int</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_level</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MLoggerHandler</span><span class="o">::</span><span class="n">localDateTime</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">format</span> <span class="o">=</span> <span class="s">&quot;%b %d %Y @ %X %Z&quot;</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="kt">time_t</span> <span class="n">t</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">128</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">strftime</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="n">format</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">localtime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">MLogger</span><span class="o">::</span><span class="n">MLogger</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">m_name</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_level</span><span class="p">(</span><span class="n">LOGLEVEL_INFO</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_ostream</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="p">)</span>
+    <span class="p">,</span> <span class="n">m_trace_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_TRACE</span><span class="p">,</span> <span class="s">&quot;TRACE&quot;</span><span class="p">))</span>
+    <span class="p">,</span> <span class="n">m_debug_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_DEBUG</span><span class="p">,</span> <span class="s">&quot;DEBUG&quot;</span><span class="p">))</span>
+    <span class="p">,</span> <span class="n">m_info_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_INFO</span><span class="p">,</span> <span class="s">&quot;INFO&quot;</span><span class="p">))</span>
+    <span class="p">,</span> <span class="n">m_warn_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_WARN</span><span class="p">,</span> <span class="s">&quot;WARN&quot;</span><span class="p">))</span>
+    <span class="p">,</span> <span class="n">m_error_handler</span><span class="p">(</span><span class="n">MLoggerHandler</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="n">m_ostream</span><span class="p">,</span> <span class="n">LOGLEVEL_ERROR</span><span class="p">,</span> <span class="s">&quot;ERROR&quot;</span><span class="p">))</span>
+    <span class="p">{</span> <span class="p">}</span>
+
+<span class="n">MLogger</span><span class="o">::</span><span class="n">MLogger</span><span class="p">()</span> <span class="o">:</span> <span class="n">MLogger</span><span class="p">(</span><span class="s">&quot;No name&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="n">MLogger</span><span class="o">::~</span><span class="n">MLogger</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">getLevel</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_level</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">setLevel</span><span class="p">(</span><span class="kt">int</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">m_level</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span>
+    <span class="c1">// And set it on all of the logger handlers.</span>
+    <span class="n">m_trace_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+    <span class="n">m_debug_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+    <span class="n">m_info_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+    <span class="n">m_warn_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+    <span class="n">m_error_handler</span><span class="p">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">trace</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_trace_handler</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">debug</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_debug_handler</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">info</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_info_handler</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">warn</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_warn_handler</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">MLoggerHandler</span><span class="o">&amp;</span> <span class="n">MLogger</span><span class="o">::</span><span class="n">error</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">m_error_handler</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<!-- ** -->
 <p>Currently, I'm using this through a simple shared global called <cite>logger</cite>,
 so you then just use it like so:</p>
 <div class="highlight"><pre><span class="n">MLogger</span> <span class="n">logger</span><span class="p">;</span>
