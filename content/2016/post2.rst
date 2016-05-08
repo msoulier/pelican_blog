@@ -1,11 +1,11 @@
-New post
-========
+Honda Finally Comes Through
+===========================
 
 :date: 2016-05-07 21:00
 :category: Customer Service
 :author: Michael P. Soulier
 :tags: Cars Honda
-:slug: resolution-of-honda-issue
+:slug: honda-finally-comes-through
 
 So, previous I ranted on about an `issue with my car`_ that I brought up with
 Honda Canada, complaining about Kanata Honda and their ridiculous justification
