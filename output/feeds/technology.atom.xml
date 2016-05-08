@@ -424,7 +424,7 @@ the API right? Wrong. I forgot. Java.&lt;/p&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;javax.net.ssl.HttpsURLConnection&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
 
  &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="n"&gt;trustAllCerts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;TrustManager&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
-         &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+         &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="nf"&gt;X509TrustManager&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
      &lt;span class="nd"&gt;@Override&lt;/span&gt;
      &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="n"&gt;java&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;security&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;cert&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;X509Certificate&lt;/span&gt;&lt;span class="o"&gt;[]&lt;/span&gt; &lt;span class="nf"&gt;getAcceptedIssuers&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
          &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="kc"&gt;null&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
@@ -486,7 +486,7 @@ pie chart, with very little code.&lt;/p&gt;
 &lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
+&lt;img alt="http://www.but-i-digress.ca/static/images/piechart.png" src="http://www.but-i-digress.ca/static/images/piechart.png" /&gt;
 &lt;/div&gt;
 &lt;p&gt;Very impressive. I tried it a few years ago and found it difficult, but it
 seems to have gotten much simpler. I must delve deeper now.&lt;/p&gt;
@@ -1311,7 +1311,7 @@ take the plunge with my new desktop, and try a &lt;a class="reference external" 
 in commercial software land, while being &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Darwin_%28operating_system%29"&gt;BSD Unix&lt;/a&gt; underneath, so maybe it's
 the best of both worlds.&lt;/p&gt;
 &lt;div class="figure"&gt;
-&lt;img alt="" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
+&lt;img alt="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" src="http://www.but-i-digress.ca/static/images/apple-logo1.jpg" style="width: 289px; height: 350px;" /&gt;
 &lt;/div&gt;
 &lt;p&gt;I need to customize the crap out of it, and get used to the interface and
 keybindings, and do a lot of reading. I hope to post my experiences here, so

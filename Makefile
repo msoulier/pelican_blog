@@ -33,6 +33,7 @@ view:
 	(cd $(OUTPUTDIR) && $(FIREFOX) index.html)
 
 html: clean $(OUTPUTDIR)/index.html
+	cp $(HOME)/Dropbox/pim/resume/cv.rst content/pages/resume.rst
 	mkdir $(OUTPUTDIR)/static
 	cp -R images $(OUTPUTDIR)/static
 	@echo 'Done'

@@ -1,5 +1,5 @@
-Mike Soulier's Curriculum Vitae
-===============================
+Michael P. Soulier's Curriculum Vitae
+=====================================
 
 Overview
 --------
@@ -29,11 +29,11 @@ My qualifications for the job are as follows. For full details on the
 material in this summary, please refer to the section entitled
 Experience, and the sections that follow it.
 
-1. Eleven year's experience with `Mitel`_ as a software engineer,
+1. Thirteen year's experience with `Mitel`_ as a software engineer,
    working on the Mitel 6000 Managed Application Server
    (formerly the E-Smith server and gateway), as well as applications
    on top of that server such as the Teleworker Solution (now
-   Mitel Border Gateway), Secure Recording Connector, Office
+   MiVoice Border Gateway), Secure Recording Connector, Office
    Productivity blade, and the IPSec VPN blade. I worked on other
    add-on blades as well, such as Mobile Extension, Groupware, Instant
    Messaging, Web Access Control, and others. I have spent much of my
@@ -195,6 +195,39 @@ Work completed in 2013 while maintaining 5 parallel streams, 7.1, 7.2, 8.0, 8.1
 and 9.0. Quite challenging for a small development team, but we've found that
 using the appropriate tools goes a very long way, and Git is the appropriate
 tool here.
+
+In 2014 my team finished up the 8.0 release, and used 8.1 to port it to an
+updated base MSL operating system. 8.1 also saw the addition of a custom ReST
+service that I wrote for MSL, written in Perl and using the Mojolicious
+web framework, with a custom OAuth 1.0a implementation that I wrote myself,
+as the Net::OAuth module did not seem to be implemented properly. I wrote the
+ReST framework with plugins in mind, and after MSL's plugin, MBG's was next,
+making use of a back-end Tornodo process to centralize validation in the
+Django forms and models.
+
+In 2015 we made major user interface changes in MBG in the 9.0 release,
+fixing performance issues in our event processing by going to an on-demand
+polling model for system status. Meanwhile the 8.1 version of the ReST
+framework had to be maintained permanently as version 1 of the API, so I added
+a new serialization framework that included versioned adapters, so we could
+continue to make schema changes but present the same ReST API. We also added
+full Unicode support in the management layer, working around the inability of
+our core service to understand it. Additional threads were added to the
+management layer's event daemon to improve performance, and I began
+experimenting with C++ and Google Go versions of this daemon, as Python's
+performance limitations began to show, including issues with the Global
+Interpreter Lock in a multi-threaded, multi-core environment.
+
+The 9.1 release continued this theme, and included an overhaul of our metrics
+graphing subsystem, moving to use jquery-jqplot to make the graphs more
+live and interactive. This did involve solving some performance problems with
+large amounts of data, including aggresive caching. 2015 closed out with our
+start on the MBG 9.2 release, which mostly involved alignment with Mitel's
+latest mergers and acquisitions, but for myself included integration of a
+new webrtc component, to permit anonymous and subscriber calls to our
+call managers from a simple web browser.
+
+At this time, we are working on MBG 9.3, primarily improving on work in 9.2.
 
 On the side, I set up and still maintain an internal R&D Wiki and Mailing list
 server, now used by the bulk of the R&D organization. I have given several
@@ -397,9 +430,10 @@ went for ease of maintenance.
 Active Activities
 -----------------
 I currently hold a red belt in Tae Kwon Do and I get regular workouts at home
-and with a trainer.  During the summer I enjoy cycling and hiking, two things
-that Ottawa is perfectly suited for. For winter activities, I occasionally
-snowshoe and I love curling.
+and with a trainer, as well as attending Yoga classes. I enjoy archery all year
+round, and during the summer I enjoy cycling and hiking, two things that Ottawa
+is perfectly suited for. For winter activities, I occasionally snowshoe and I
+love curling.
 
 Education
 ---------
