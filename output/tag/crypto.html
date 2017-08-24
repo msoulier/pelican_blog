@@ -4,8 +4,8 @@
         <title>But I Digress - Crypto</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-                        <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
-        
+        <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
+
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -27,30 +27,30 @@
                 <h2>Random neuron firings, digitized heedless of the
                 repurcussions.</h2>
                 <nav><ul>
-                                                                    <li><a href="../pages/michael-p-souliers-curriculum-vitae.html">Michael P. Soulier's Curriculum Vitae</a></li>
-                                                                    <li ><a href="../category/customer-service.html">Customer Service</a></li>
-                                    <li ><a href="../category/development.html">Development</a></li>
-                                    <li ><a href="../category/driving.html">Driving</a></li>
-                                    <li ><a href="../category/personal.html">Personal</a></li>
-                                    <li ><a href="../category/quotes.html">Quotes</a></li>
-                                    <li ><a href="../category/technology.html">Technology</a></li>
-                                </ul></nav>
+                    <li ><a href="../category/customer-service.html">Customer Service</a></li>
+                    <li ><a href="../category/development.html">Development</a></li>
+                    <li ><a href="../category/driving.html">Driving</a></li>
+                    <li ><a href="../category/pens.html">Pens</a></li>
+                    <li ><a href="../category/personal.html">Personal</a></li>
+                    <li ><a href="../category/quotes.html">Quotes</a></li>
+                    <li ><a href="../category/technology.html">Technology</a></li>
+                </ul></nav>
         </header><!-- /#banner -->
-                
-            
+        
+        
 
-                            <aside id="featured" class="body">
+            <aside id="featured" class="body">
                 <article>
                     <h1 class="entry-title"><a href="../scrypting-rsa-encryption.html">Scripting RSA Encryption</a></h1> 
-                    <footer class="post-info">
-        <abbr class="published" title="2013-08-20T08:30:00">
+<footer class="post-info">
+        <abbr class="published" title="2013-08-20T08:30:00-04:00">
                 Tue 20 August 2013
         </abbr>
 
-                <address class="vcard author">
+        <address class="vcard author">
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-        <p>In <a href="../category/technology.html">Technology</a>. </p>
+<p>In <a href="../category/technology.html">Technology</a>. </p>
 <p>tags: <a href="../tag/crypto.html">Crypto</a><a href="../tag/python.html">Python</a><a href="../tag/perl.html">Perl</a></p></footer><!-- /.post-info --><p>So, I have an <a class="reference external" href="http://oauth.net/core/1.0/">OAuth 1.0</a> implementation for work that I'm extending, and the
 one area of OAuth 1.0 that I didn't implement was <a class="reference external" href="http://oauth.net/core/1.0/#anchor19">RSA-SHA1</a> signatures, as I
 didn't think that anyone would care. Of course, someone cares. So, I'm looking
@@ -58,11 +58,11 @@ into them now, and looking into how to work with RSA in Perl and Python.</p>
 <p>I thought it would be painful, but it's actually refreshingly easy. Here's a
 <a class="reference external" href="https://www.dlitz.net/software/pycrypto/">PyCrypto</a> example from Python, where PyCrypto was a simple <cite>pip install
 pycrypto</cite> in a virtualenv:</p>
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto.PublicKey</span> <span class="kn">import</span> <span class="n">RSA</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">Crypto</span> <span class="kn">import</span> <span class="n">Random</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">rng</span> <span class="o">=</span> <span class="n">Random</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">read</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">RSAKey</span> <span class="o">=</span> <span class="n">RSA</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="n">rng</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">RSAKey</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s">&#39;PEM&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">RSAKey</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s1">&#39;PEM&#39;</span><span class="p">)</span>
 <span class="o">-----</span><span class="n">BEGIN</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
 <span class="n">MIICWwIBAAKBgQC1v8OaZ83</span><span class="o">+</span><span class="n">er082XyLcwCeFfgT5urSlORbdRTWGc95EilUFQ5E</span>
 <span class="mi">4</span><span class="n">uQ9gafAzjh09PJmnQOeMH</span><span class="o">/</span><span class="n">uJQGDmvAW4n9ilKWB</span><span class="o">/</span><span class="n">n6e7Yk8FA56fPA</span><span class="o">+</span><span class="n">Fnb8oJ</span><span class="o">/</span><span class="n">X</span>
@@ -79,7 +79,7 @@ pycrypto</cite> in a virtualenv:</p>
 <span class="n">InJUtIPdV</span><span class="o">+</span><span class="n">aOGt3bp7bKgZqMMe5uZ</span><span class="o">/</span><span class="n">vHIAv</span><span class="o">/</span><span class="n">OlIX</span><span class="o">/</span><span class="n">w</span><span class="o">==</span>
 <span class="o">-----</span><span class="n">END</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">pubkey</span> <span class="o">=</span> <span class="n">RSAKey</span><span class="o">.</span><span class="n">publickey</span><span class="p">()</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">pubkey</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s">&#39;PEM&#39;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span> <span class="n">pubkey</span><span class="o">.</span><span class="n">exportKey</span><span class="p">(</span><span class="s1">&#39;PEM&#39;</span><span class="p">)</span>
 <span class="o">-----</span><span class="n">BEGIN</span> <span class="n">PUBLIC</span> <span class="n">KEY</span><span class="o">-----</span>
 <span class="n">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC1v8OaZ83</span><span class="o">+</span><span class="n">er082XyLcwCeFfgT</span>
 <span class="mi">5</span><span class="n">urSlORbdRTWGc95EilUFQ5E4uQ9gafAzjh09PJmnQOeMH</span><span class="o">/</span><span class="n">uJQGDmvAW4n9ilKWB</span>
@@ -90,7 +90,7 @@ pycrypto</cite> in a virtualenv:</p>
 <p>Now, the only issue here is that I'm not sure how to put the public key into
 PKCS#1 format, where it starts with &quot;BEGIN RSA PUBLIC KEY&quot;. It's pretty obvious
 in the Perl API though.</p>
-<div class="highlight"><pre>use Crypt::OpenSSL::Random;
+<div class="highlight"><pre><span></span>use Crypt::OpenSSL::Random;
 use Crypt::OpenSSL::RSA;
 
 print &quot;Seeding prng...\n&quot;;
@@ -143,8 +143,8 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDSwv8lhOF83/uoMJrNLPIRjarl
 point is that picking the output format of the public key is trivial in Perl,
 but not in Python. I'm not sure why PyCrypto has this limitation. I can convert
 from X-509 to PKCS#1 with a one-liner...</p>
-<div class="highlight"><pre><span class="c1"># perl -MCrypt::OpenSSL::RSA -MCrypt::OpenSSL::X509 -e &#39;$rsa =</span>
-<span class="nn">Crypt::OpenSSL::</span><span class="n">RSA</span><span class="o">-&gt;</span><span class="n">new_public_key</span><span class="p">(</span><span class="nn">Crypt::OpenSSL::</span><span class="n">X509</span><span class="o">-&gt;</span><span class="n">new_from_file</span><span class="p">(</span><span class="nv">$ARGV</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-&gt;</span><span class="n">pubkey</span><span class="p">());</span>
+<div class="highlight"><pre><span></span><span class="c1"># perl -MCrypt::OpenSSL::RSA -MCrypt::OpenSSL::X509 -e &#39;$rsa =</span>
+<span class="nn">Crypt::OpenSSL::RSA</span><span class="o">-&gt;</span><span class="n">new_public_key</span><span class="p">(</span><span class="nn">Crypt::OpenSSL::X509</span><span class="o">-&gt;</span><span class="n">new_from_file</span><span class="p">(</span><span class="nv">$ARGV</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">-&gt;</span><span class="n">pubkey</span><span class="p">());</span>
 <span class="k">print</span> <span class="nv">$rsa</span><span class="o">-&gt;</span><span class="n">get_public_key_string</span><span class="p">()</span><span class="err">&#39;</span> <span class="sr">/var/c</span><span class="n">ache</span><span class="sr">/mslrest/c</span><span class="n">erts</span><span class="o">/</span><span class="n">google_cert</span><span class="o">.</span><span class="n">pem</span>
 <span class="o">-----</span><span class="k">BEGIN</span> <span class="n">RSA</span> <span class="n">PUBLIC</span> <span class="n">KEY</span><span class="o">-----</span>
 <span class="n">MIGJAoGBANBRXu6Qh8iLFuiQc40Yxb3553QT1fib30jy6k9CneIC2oi9aztcJsBs</span>
@@ -160,33 +160,33 @@ could find some simple calls to make a CSR, without wrapping the openssl command
 line. I can't seem to find one, and it terribly overlooked in O'Reilly's
 &quot;Network Security with OpenSSL&quot;.</p>
 <p>There are <a href="../scrypting-rsa-encryption.html#disqus_thread">comments</a>.</p>                </article>
-                                    <p class="paginator">
-        Page 1 / 1
-    </p>
-                            </aside><!-- /#featured -->
-                                                </ol><!-- /#posts-list -->
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        <div class="blogroll">
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+            </ol><!-- /#posts-list -->
+            </section><!-- /#content -->
+        <section id="extras" class="body">
+                <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                                                    <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://life-unbalanced.tumblr.com/">Life, unbalanced</a></li>
-                                                    <li><a href="http://excess.org">Ian Ward</a></li>
-                                                    <li><a href="http://www.mahdiyusuf.com/">Mahdi Yusuf</a></li>
-                                                    <li><a href="http://mikegrouchy.com/">Mike Grouchy</a></li>
-                                                </ul>
+                            <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                            <li><a href="http://python.org">Python.org</a></li>
+                            <li><a href="http://life-unbalanced.tumblr.com/">Life, unbalanced</a></li>
+                            <li><a href="http://excess.org">Ian Ward</a></li>
+                            <li><a href="http://www.mahdiyusuf.com/">Mahdi Yusuf</a></li>
+                            <li><a href="http://mikegrouchy.com/">Mike Grouchy</a></li>
+                        </ul>
                 </div><!-- /.blogroll -->
-                                <div class="social">
+                <div class="social">
                         <h2>social</h2>
                         <ul>
-                                                                                                                    <li><a href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate">rss feed</a></li>
-                                                            
-                                                    <li><a href="http://twitter.com/msoulier">Twitter</a></li>
-                                                </ul>
+                            <li><a href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate">rss feed</a></li>
+
+                            <li><a href="http://twitter.com/msoulier">Twitter</a></li>
+                        </ul>
                 </div><!-- /.social -->
-                </section><!-- /#extras -->
+        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">

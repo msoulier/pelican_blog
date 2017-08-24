@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/development.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2015-12-28T11:00:00-05:00</updated><entry><title>A working logger</title><link href="http://www.but-i-digress.ca/a-working-logger.html" rel="alternate"></link><updated>2015-12-28T11:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-28:a-working-logger.html</id><summary type="html">&lt;p&gt;So it took some work, and likely there are better ways to do this, but this
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress - Development</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/development.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2015-12-28T11:00:00-05:00</updated><entry><title>A working logger</title><link href="http://www.but-i-digress.ca/a-working-logger.html" rel="alternate"></link><published>2015-12-28T11:00:00-05:00</published><updated>2015-12-28T11:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-28:/a-working-logger.html</id><summary type="html">&lt;p&gt;So it took some work, and likely there are better ways to do this, but this
 logger satisfies my current needs in providing multiple levels of logging,
 and an iostream interface to make composing strings simpler. First some
 includes and definitions.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;#include &amp;lt;stdio.h&amp;gt;
-#include &amp;lt;ostream&amp;gt;
-#include &amp;lt;boost/thread.hpp&amp;gt;
-#include &amp;lt;boost/thread/mutex.hpp&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;ostream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;boost/thread.hpp …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;So it took some work, and likely there are better ways to do this, but this
+logger satisfies my current needs in providing multiple levels of logging,
+and an iostream interface to make composing strings simpler. First some
+includes and definitions.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;ostream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;boost/thread.hpp&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;boost/thread/mutex.hpp&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
-#define LOGLEVEL_TRACE 0
-#define LOGLEVEL_DEBUG 10
-#define LOGLEVEL_INFO 20
-#define LOGLEVEL_WARN 30
-#define LOGLEVEL_ERROR 40
+&lt;span class="cp"&gt;#define LOGLEVEL_TRACE 0&lt;/span&gt;
+&lt;span class="cp"&gt;#define LOGLEVEL_DEBUG 10&lt;/span&gt;
+&lt;span class="cp"&gt;#define LOGLEVEL_INFO 20&lt;/span&gt;
+&lt;span class="cp"&gt;#define LOGLEVEL_WARN 30&lt;/span&gt;
+&lt;span class="cp"&gt;#define LOGLEVEL_ERROR 40&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Then my thread-local buffer.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;extern boost::thread_specific_ptr&amp;lt;std::stringstream&amp;gt; tls_buffer;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;thread_specific_ptr&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;stringstream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tls_buffer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The intention here is to &amp;quot;collect&amp;quot; logs from successive calls to the &amp;lt;&amp;lt; operator
 in one line, using a thread-local buffer to prevent each thread from
@@ -31,60 +37,60 @@ going with it for now.&lt;/p&gt;
 logger handlers that are used to do the actual logging at each level
 (ie. debug, info, error, etc). This handler is where the &amp;lt;&amp;lt; operator
 overloading magic happens.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;class MLoggerHandler
-{
-public:
-    MLoggerHandler(boost::mutex&amp;amp; mutex,
-                std::ostream&amp;amp; ostream,
-                int threshold,
-                std::string prefix);
-    ~MLoggerHandler();
-    void setLevel(int level);
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MLoggerHandler&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;mutex&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;mutex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;threshold&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
-    template &amp;lt;class T&amp;gt;
-    // For handling &amp;lt;&amp;lt; from any object.
-    MLoggerHandler&amp;amp; operator &amp;lt;&amp;lt;(T input) {
-        // Only log if the level is set above our threshold.
-        if (m_threshold &amp;gt;= m_level) {
-            if (tls_buffer.get() == NULL) {
-                tls_buffer.reset(new std::stringstream());
-            }
-            if (tls_buffer-&amp;gt;str().length() == 0) {
-                *tls_buffer &amp;lt;&amp;lt; localDateTime() &amp;lt;&amp;lt; &amp;quot; &amp;quot; &amp;lt;&amp;lt; m_prefix &amp;lt;&amp;lt; &amp;quot;: &amp;quot; &amp;lt;&amp;lt; input;
-            }
-            else {
-                *tls_buffer &amp;lt;&amp;lt; input;
-            }
-        }
-        return *this;
-    }
-    // For handling std::endl
-    std::ostream&amp;amp; operator &amp;lt;&amp;lt;(std::ostream&amp;amp; (*f)(std::ostream&amp;amp;)) {
-        // Only log if the level is set above our threshold.
-        if (m_threshold &amp;gt;= m_level) {
-            boost::lock_guard&amp;lt;boost::mutex&amp;gt; lock{m_mutex};
-            // Flush the buffer
-            m_ostream &amp;lt;&amp;lt; tls_buffer-&amp;gt;str();
-            f(m_ostream);
-            // Clear the buffer
-            tls_buffer-&amp;gt;str(&amp;quot;&amp;quot;);
-        }
-        return m_ostream;
-    }
-private:
-    // A mutex passed in from the main logger for synchronization.
-    boost::mutex&amp;amp; m_mutex;
-    // The logging level.
-    int m_level;
-    // The output stream.
-    std::ostream&amp;amp; m_ostream;
-    // The threshold for logging for this handler.
-    int m_threshold;
-    // The string prefix for logging.
-    std::string m_prefix;
-    // Return the current date and time as a localized string.
-    const std::string localDateTime();
-};
+    &lt;span class="k"&gt;template&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;T&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="c1"&gt;// For handling &amp;lt;&amp;lt; from any object.&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;T&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// Only log if the level is set above our threshold.&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_threshold&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;m_level&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tls_buffer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="n"&gt;tls_buffer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reset&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;stringstream&lt;/span&gt;&lt;span class="p"&gt;());&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tls_buffer&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;tls_buffer&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;localDateTime&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;m_prefix&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+                &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;tls_buffer&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;input&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+            &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="c1"&gt;// For handling std::endl&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// Only log if the level is set above our threshold.&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_threshold&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="n"&gt;m_level&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;lock_guard&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;mutex&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;};&lt;/span&gt;
+            &lt;span class="c1"&gt;// Flush the buffer&lt;/span&gt;
+            &lt;span class="n"&gt;m_ostream&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;tls_buffer&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+            &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+            &lt;span class="c1"&gt;// Clear the buffer&lt;/span&gt;
+            &lt;span class="n"&gt;tls_buffer&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+        &lt;span class="p"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;// A mutex passed in from the main logger for synchronization.&lt;/span&gt;
+    &lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;mutex&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// The logging level.&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;m_level&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// The output stream.&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// The threshold for logging for this handler.&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;m_threshold&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// The string prefix for logging.&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;m_prefix&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Return the current date and time as a localized string.&lt;/span&gt;
+    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;localDateTime&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;!-- ** --&gt;
 &lt;p&gt;Note that the &amp;lt;&amp;lt; overload takes any type capable of itself using the &amp;lt;&amp;lt;
@@ -99,153 +105,156 @@ logger, like &lt;cite&gt;info()&lt;/cite&gt;, &lt;cite&gt;debug()&lt;/cite&gt;, 
 indication of building the beginning of the line, and thus starting with
 a logging level prefix and a timestamp.&lt;/p&gt;
 &lt;p&gt;And now the main logger...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;/*
-* The MLogger (Mike-logger) is a thread-safe C++ logger using the iostream operators.
-* To use it, you must invoke a logging level handler which will return an
-* MLoggerHandler reference, and then terminate your line with std::endl to ensure
-* that the buffer is flushed and the line terminated with a newline.
-*/
-class MLogger
-{
-public:
-    MLogger();
-    MLogger(std::string name);
-    ~MLogger();
-    // Set the current logging level
-    void setLevel(int level);
-    // Get the current logging level
-    int getLevel();
-    // Convenience methods for trace level log.
-    MLoggerHandler&amp;amp; trace();
-    // Convenience methods for debug level log
-    MLoggerHandler&amp;amp; debug();
-    // Convenience methods for info level log
-    MLoggerHandler&amp;amp; info();
-    // Convenience methods for warning level log
-    MLoggerHandler&amp;amp; warn();
-    // Convenicence methods for error level log
-    MLoggerHandler&amp;amp; error();
-private:
-    // The logger name.
-    std::string m_name;
-    // The current log level.
-    int m_level;
-    // The output stream for the logger.
-    std::ostream&amp;amp; m_ostream;
-    // The mutex used for synchronization.
-    boost::mutex m_mutex;
-    // Trace handler
-    MLoggerHandler m_trace_handler;
-    // Debug handler
-    MLoggerHandler m_debug_handler;
-    // Info handler
-    MLoggerHandler m_info_handler;
-    // Warn handler
-    MLoggerHandler m_warn_handler;
-    // Error handler
-    MLoggerHandler m_error_handler;
-};
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;* The MLogger (Mike-logger) is a thread-safe C++ logger using the iostream operators.&lt;/span&gt;
+&lt;span class="cm"&gt;* To use it, you must invoke a logging level handler which will return an&lt;/span&gt;
+&lt;span class="cm"&gt;* MLoggerHandler reference, and then terminate your line with std::endl to ensure&lt;/span&gt;
+&lt;span class="cm"&gt;* that the buffer is flushed and the line terminated with a newline.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MLogger&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;public&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="c1"&gt;// Set the current logging level&lt;/span&gt;
+    &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="c1"&gt;// Get the current logging level&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;getLevel&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="c1"&gt;// Convenience methods for trace level log.&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="c1"&gt;// Convenience methods for debug level log&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="c1"&gt;// Convenience methods for info level log&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="c1"&gt;// Convenience methods for warning level log&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+    &lt;span class="c1"&gt;// Convenicence methods for error level log&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="k"&gt;private&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="c1"&gt;// The logger name.&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;m_name&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// The current log level.&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;m_level&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// The output stream for the logger.&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// The mutex used for synchronization.&lt;/span&gt;
+    &lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;mutex&lt;/span&gt; &lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Trace handler&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt; &lt;span class="n"&gt;m_trace_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Debug handler&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt; &lt;span class="n"&gt;m_debug_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Info handler&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt; &lt;span class="n"&gt;m_info_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Warn handler&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt; &lt;span class="n"&gt;m_warn_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// Error handler&lt;/span&gt;
+    &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt; &lt;span class="n"&gt;m_error_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;};&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;!-- ** --&gt;
 &lt;p&gt;The implementation is nothing special, but for completeness here it is.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;boost::thread_specific_ptr&amp;lt;std::stringstream&amp;gt; tls_buffer;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;thread_specific_ptr&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;stringstream&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;tls_buffer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-MLoggerHandler::MLoggerHandler(boost::mutex&amp;amp; mutex,
-                            std::ostream&amp;amp; ostream,
-                            int threshold,
-                            std::string prefix)
-    : m_mutex(mutex)
-    , m_level(LOGLEVEL_INFO)
-    , m_ostream(ostream)
-    , m_threshold(threshold)
-    , m_prefix(prefix)
-{ }
+&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;boost&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;mutex&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;mutex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;threshold&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+                            &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mutex&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_level&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LOGLEVEL_INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ostream&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_threshold&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;threshold&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_prefix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;prefix&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-MLoggerHandler::~MLoggerHandler() { }
+&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;::~&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-void MLoggerHandler::setLevel(int level) {
-    m_level = level;
-}
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;m_level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-const std::string MLoggerHandler::localDateTime() {
-    const char *format = &amp;quot;%b %d %Y @ %X %Z&amp;quot;;
-    std::time_t t = std::time(NULL);
-    char buffer[128];
-    if (std::strftime(buffer, sizeof(buffer), format, std::localtime(&amp;amp;t))) {
-        return std::string(buffer);
-    }
-    else {
-        return &amp;quot;&amp;quot;;
-    }
-}
+&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;localDateTime&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;%b %d %Y @ %X %Z&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="kt"&gt;time_t&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;strftime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;localtime&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buffer&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-MLogger::MLogger(std::string name)
-    : m_name(name)
-    , m_level(LOGLEVEL_INFO)
-    , m_ostream(std::cerr)
-    , m_trace_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_TRACE, &amp;quot;TRACE&amp;quot;))
-    , m_debug_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_DEBUG, &amp;quot;DEBUG&amp;quot;))
-    , m_info_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_INFO, &amp;quot;INFO&amp;quot;))
-    , m_warn_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_WARN, &amp;quot;WARN&amp;quot;))
-    , m_error_handler(MLoggerHandler(m_mutex, m_ostream, LOGLEVEL_ERROR, &amp;quot;ERROR&amp;quot;))
-    { }
+&lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;m_name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_level&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LOGLEVEL_INFO&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cerr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_trace_handler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LOGLEVEL_TRACE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;TRACE&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_debug_handler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LOGLEVEL_DEBUG&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;DEBUG&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_info_handler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LOGLEVEL_INFO&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;INFO&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_warn_handler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LOGLEVEL_WARN&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;WARN&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_error_handler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;m_mutex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;m_ostream&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;LOGLEVEL_ERROR&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ERROR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-MLogger::MLogger() : MLogger(&amp;quot;No name&amp;quot;) { }
+&lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;No name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-MLogger::~MLogger() { }
+&lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::~&lt;/span&gt;&lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-int MLogger::getLevel() {
-    return m_level;
-}
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;getLevel&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m_level&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-void MLogger::setLevel(int level) {
-    m_level = level;
-    // And set it on all of the logger handlers.
-    m_trace_handler.setLevel(level);
-    m_debug_handler.setLevel(level);
-    m_info_handler.setLevel(level);
-    m_warn_handler.setLevel(level);
-    m_error_handler.setLevel(level);
-}
+&lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;m_level&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="c1"&gt;// And set it on all of the logger handlers.&lt;/span&gt;
+    &lt;span class="n"&gt;m_trace_handler&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;m_debug_handler&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;m_info_handler&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;m_warn_handler&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="n"&gt;m_error_handler&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;level&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-MLoggerHandler&amp;amp; MLogger::trace() {
-    return m_trace_handler;
-}
+&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;trace&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m_trace_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-MLoggerHandler&amp;amp; MLogger::debug() {
-    return m_debug_handler;
-}
+&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m_debug_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-MLoggerHandler&amp;amp; MLogger::info() {
-    return m_info_handler;
-}
+&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m_info_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-MLoggerHandler&amp;amp; MLogger::warn() {
-    return m_warn_handler;
-}
+&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;warn&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m_warn_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 
-MLoggerHandler&amp;amp; MLogger::error() {
-    return m_error_handler;
-}
+&lt;span class="n"&gt;MLoggerHandler&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;MLogger&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;m_error_handler&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;!-- ** --&gt;
 &lt;p&gt;Currently, I'm using this through a simple shared global called &lt;cite&gt;logger&lt;/cite&gt;,
 so you then just use it like so:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;MLogger logger;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;MLogger&lt;/span&gt; &lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-logger.setLevel(LOGLEVEL_INFO);
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setLevel&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;LOGLEVEL_INFO&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
-// This produces no output at INFO logging level.
-logger.debug() &amp;lt;&amp;lt; &amp;quot;The current value of foo is &amp;quot; &amp;lt;&amp;lt; foo &amp;lt;&amp;lt; std::endl;
+&lt;span class="c1"&gt;// This produces no output at INFO logging level.&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;debug&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;The current value of foo is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;foo&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
-// This produces output.
-logger.info() &amp;lt;&amp;lt; &amp;quot;The current value of bar is &amp;quot; &amp;lt;&amp;lt; bar &amp;lt;&amp;lt; std::endl;
+&lt;span class="c1"&gt;// This produces output.&lt;/span&gt;
+&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;The current value of bar is &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;bar&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;endl&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;So, it works, it's thread safe, and I don't have to manually build my own
 logging strings with &lt;cite&gt;std::stringstream&lt;/cite&gt;, saving endless lines of code. I'm
 certain that it can be improved, I can certainly build in facilities like
 log rotation, compression, etc. But, it's a start.&lt;/p&gt;
-</summary><category term="C++"></category></entry><entry><title>Re-learning C++</title><link href="http://www.but-i-digress.ca/re-learning-c++.html" rel="alternate"></link><updated>2015-12-15T19:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:re-learning-c++.html</id><summary type="html">&lt;p&gt;So lately I've been dusting off my C++ knowledge, experimenting with replacing
+</content><category term="C++"></category></entry><entry><title>Re-learning C++</title><link href="http://www.but-i-digress.ca/re-learning-c++.html" rel="alternate"></link><published>2015-12-15T19:00:00-05:00</published><updated>2015-12-15T19:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:/re-learning-c++.html</id><summary type="html">&lt;p&gt;So lately I've been dusting off my C++ knowledge, experimenting with replacing
+a daemon written in Python on the product that I work on with one written in
+C++. For most Python programmers this may seem like serious masochism, but I
+wanted to know just how much harder it would …&lt;/p&gt;</summary><content type="html">&lt;p&gt;So lately I've been dusting off my C++ knowledge, experimenting with replacing
 a daemon written in Python on the product that I work on with one written in
 C++. For most Python programmers this may seem like serious masochism, but I
 wanted to know just how much harder it would be to work in C++ with the new
@@ -283,7 +292,7 @@ of Homebrew, so I did need to adapt my Makefile to work on both platforms.&lt;/p
 JSON events from a fifo, process them, and sometimes write events into
 another fifo. The current Python application runs 5 threads responsible for
 various jobs. So how do I do that using C++ and boost?&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;std::ifstream input_stream;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;std::ifstream input_stream;
 input_stream.open(input_file, std::ios::in);
 
 SafeQueue&amp;lt;Json::Value&amp;gt; *json_queue = new SafeQueue&amp;lt;Json::Value&amp;gt;(MAX_QUEUE_SIZE);
@@ -298,7 +307,7 @@ soon but I want to keep these posts small.&lt;/p&gt;
 honestly, I find the boost documentation horrible to read, and this was the
 best that I could do at the time. The start_reader function in JsonReader
 isn't too bad.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    JsonReader *reader = new JsonReader(fifopath, json_queue);
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    JsonReader *reader = new JsonReader(fifopath, json_queue);
     reader-&amp;gt;startReading(stream);
     logger.info(&amp;quot;JsonReader: stopping&amp;quot;);
 }
@@ -306,7 +315,7 @@ isn't too bad.&lt;/p&gt;
 &lt;p&gt;The logger is mine too, because I couldn't get the boost logger to link on
 Mac OS X, and the error was so obscure that I couldn't figure it out. Maybe
 later. The startReading method is pretty readable too.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;    while (! m_stop_asap) {
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    while (! m_stop_asap) {
         std::string line;
         std::getline(*stream, line);
         if (line.length() &amp;gt; 0) {
@@ -348,7 +357,10 @@ a lot more work than with Python strings. But damn, is it fast so far.&lt;/p&gt;
 to use that, but I think I'll stick with C++ to finish my objective of
 re-learning it. I have other ideas for Go.&lt;/p&gt;
 &lt;p&gt;Cheers.&lt;/p&gt;
-</summary><category term="C++"></category></entry><entry><title>Learning Google Go</title><link href="http://www.but-i-digress.ca/learning-google-go.html" rel="alternate"></link><updated>2015-12-15T16:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:learning-google-go.html</id><summary type="html">&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
+</content><category term="C++"></category></entry><entry><title>Learning Google Go</title><link href="http://www.but-i-digress.ca/learning-google-go.html" rel="alternate"></link><published>2015-12-15T16:00:00-05:00</published><updated>2015-12-15T16:00:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-12-15:/learning-google-go.html</id><summary type="html">&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
+to look into it. I must admit, while working on updating my C++ knowledge to
+account for the new &lt;a class="reference external" href="http://www.stroustrup.com/C++11FAQ.html"&gt;2011&lt;/a&gt; and &lt;a class="reference external" href="https://isocpp.org/std/status"&gt;2014&lt;/a&gt; standards, and working on learning
+&lt;a class="reference external" href="http://www.boost.org"&gt;boost&lt;/a&gt;, picking up Go is a lot of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, I heard from a friend that &lt;a class="reference external" href="http://golang.org"&gt;Google Go&lt;/a&gt; was worth learning, so I've started
 to look into it. I must admit, while working on updating my C++ knowledge to
 account for the new &lt;a class="reference external" href="http://www.stroustrup.com/C++11FAQ.html"&gt;2011&lt;/a&gt; and &lt;a class="reference external" href="https://isocpp.org/std/status"&gt;2014&lt;/a&gt; standards, and working on learning
 &lt;a class="reference external" href="http://www.boost.org"&gt;boost&lt;/a&gt;, picking up Go is a lot of fun by comparison.&lt;/p&gt;
@@ -362,7 +374,7 @@ a higher level language.&lt;/p&gt;
 of &amp;quot;goroutines&amp;quot; and &amp;quot;channels&amp;quot;. Here's a pointless example that fires up
 ten goroutines, has each one count to a billion, and report back via the
 passed channel.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;package&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;package&lt;/span&gt; &lt;span class="nx"&gt;main&lt;/span&gt;
 
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
     &lt;span class="s"&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
@@ -436,7 +448,10 @@ took 0.342241 seconds
 1 goroutine done
 &lt;/pre&gt;
 &lt;p&gt;Neat huh? More to come, I suspect.&lt;/p&gt;
-</summary><category term="Go"></category></entry><entry><title>Checking the weather</title><link href="http://www.but-i-digress.ca/checking-the-weather.html" rel="alternate"></link><updated>2012-12-23T20:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-23:checking-the-weather.html</id><summary type="html">&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
+</content><category term="Go"></category></entry><entry><title>Checking the weather</title><link href="http://www.but-i-digress.ca/checking-the-weather.html" rel="alternate"></link><published>2012-12-23T20:30:00-05:00</published><updated>2012-12-23T20:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-23:/checking-the-weather.html</id><summary type="html">&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
+terminal, as is the preference of most Unix geeks like me. Being a Canadian,
+I'm not interested in the Weather Channel as much as the Environment Canada
+data. Thankfully, they do publish an RSS feed …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A while back I needed a way to check the weather forecast, simply, from a
 terminal, as is the preference of most Unix geeks like me. Being a Canadian,
 I'm not interested in the Weather Channel as much as the Environment Canada
 data. Thankfully, they do publish an RSS feed, and good for them.&lt;/p&gt;
@@ -445,10 +460,10 @@ data. Thankfully, they do publish an RSS feed, and good for them.&lt;/p&gt;
 weather, I need to pull the feed and parse it. Pulling a page in Python is as
 simple as using &lt;tt class="docutils literal"&gt;urllib&lt;/tt&gt;. From there, I can walk the elements I want like
 so:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;urllib&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;xml.etree.ElementTree&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;
 
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now, I wanted the option of picking a certain number of lines, and wrapping at
 a certain number of columns. I wanted this for using the script output as
@@ -456,20 +471,20 @@ input into other apps, like &lt;a class="reference external" href="http://conky.
 wrapping them is not. Luckily, Python has a &lt;tt class="docutils literal"&gt;textwrap&lt;/tt&gt; module in the
 standard library.&lt;/p&gt;
 &lt;p&gt;You use it like this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;textwrap&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;textwrap&lt;/span&gt;
 
-&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Put together, it's really that simple. I think the majority of my code is
 option parsing. The core loop is just this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parse_options&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parse_options&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;wrapper&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;textwrap&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TextWrapper&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;width&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subsequent_indent&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;    &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
-&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;ignore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urlopen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rssfeed&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;findall&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;channel/item/title&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elem&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;utf8&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ignore&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="n"&gt;lines&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;wrapper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;wrap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
         &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
@@ -496,7 +511,10 @@ Saturday: Periods of snow. Low minus 12. High minus 7.
 &lt;/pre&gt;
 &lt;p&gt;I love building my own tools like this, it's the ultimate in end-user
 computing. Unix and Python are my playground.&lt;/p&gt;
-</summary><category term="Python"></category></entry><entry><title>Getting started with autotools</title><link href="http://www.but-i-digress.ca/getting-started-with-autotools.html" rel="alternate"></link><updated>2012-12-16T08:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-16:getting-started-with-autotools.html</id><summary type="html">&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
+</content><category term="Python"></category></entry><entry><title>Getting started with autotools</title><link href="http://www.but-i-digress.ca/getting-started-with-autotools.html" rel="alternate"></link><published>2012-12-16T08:30:00-05:00</published><updated>2012-12-16T08:30:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-12-16:/getting-started-with-autotools.html</id><summary type="html">&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
+the go and I read slowly, and not often enough. I'm going through the section
+on &lt;a class="reference external" href="http://www.gnu.org/software/autoconf/"&gt;GNU autotools&lt;/a&gt;, which I've never been a heavy user of, albiet I'm a heavy
+consumer of. I just don't spend …&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, I'm still reading O'Rielly's &lt;a class="reference external" href="http://www.but-i-digress.ca/21st-century-c.html"&gt;21st Century C&lt;/a&gt;. I know, too many books on
 the go and I read slowly, and not often enough. I'm going through the section
 on &lt;a class="reference external" href="http://www.gnu.org/software/autoconf/"&gt;GNU autotools&lt;/a&gt;, which I've never been a heavy user of, albiet I'm a heavy
 consumer of. I just don't spend much time distributing C/C++ across platforms.&lt;/p&gt;
@@ -508,7 +526,7 @@ use autotools for the future. I do have some libraries, and they're harder to
 port, which is where &lt;a class="reference external" href="http://www.gnu.org/software/libtool/"&gt;libtool&lt;/a&gt; comes in.&lt;/p&gt;
 &lt;p&gt;This &lt;tt class="docutils literal"&gt;build&lt;/tt&gt; script outlines the process of using autotools for the first
 time. This script borrows very heavily from the book's author.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/sh&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
 
 &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Creating Makefile.am&amp;quot;&lt;/span&gt;
 cat &amp;gt; Makefile.am &lt;span class="s"&gt;&amp;lt;&amp;lt;EOF&lt;/span&gt;
@@ -543,7 +561,7 @@ make distcheck
 &lt;tt class="docutils literal"&gt;AUTHORS&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;ChangeLog&lt;/tt&gt; aren't populated yet. But it's close. The
 &lt;tt class="docutils literal"&gt;configure&lt;/tt&gt; script works, and I could then build it on OS X using the
 expected.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./configure --prefix&lt;span class="o"&gt;=&lt;/span&gt;/usr/local
 make
 make install
 &lt;/pre&gt;&lt;/div&gt;
@@ -555,7 +573,12 @@ learn yet, but this worked on the first try, and the resulting tarball is good
 to push to &lt;a class="reference external" href="http://sourceforge.net/"&gt;SourceForge&lt;/a&gt; or elsewhere if you want to.&lt;/p&gt;
 &lt;p&gt;As I pick up more, I'll try to share it. I don't find autotools intuitive at
 all, but with some simple recipes I think I'll survive.&lt;/p&gt;
-</summary><category term="C/C++"></category><category term="FOSS"></category><category term="Autotools"></category></entry><entry><title>21st Century C</title><link href="http://www.but-i-digress.ca/21st-century-c.html" rel="alternate"></link><updated>2012-11-06T22:12:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-06:21st-century-c.html</id><summary type="html">&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
+</content><category term="C/C++"></category><category term="FOSS"></category><category term="Autotools"></category></entry><entry><title>21st Century C</title><link href="http://www.but-i-digress.ca/21st-century-c.html" rel="alternate"></link><published>2012-11-06T22:12:00-05:00</published><updated>2012-11-06T22:12:00-05:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2012-11-06:/21st-century-c.html</id><summary type="html">&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
+&lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
+it caught my attention.&lt;/p&gt;
+&lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
+taught me much more than any of my professors, and
+&lt;a class="reference external" href="http://shop.oreilly.com/product/9781565921634.do"&gt;Unix …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I saw a sale from &lt;a class="reference external" href="http://oreilly.com/"&gt;O'Reilly Publishing&lt;/a&gt; tonight on an new ebook for
 &lt;a class="reference external" href="http://shop.oreilly.com/product/0636920025108.do?code=WKCPRGM"&gt;21st Century C&lt;/a&gt;. I have a good history with O'Reilly and C programming, so
 it caught my attention.&lt;/p&gt;
 &lt;p&gt;When I was in University, &lt;a class="reference external" href="http://shop.oreilly.com/product/9781565923065.do?code=WKCPRGM"&gt;Practical C Programming&lt;/a&gt;
@@ -586,4 +609,4 @@ Hopefully it'll sharpen my skills like previous O'Reilly books have. I'll try
 to post a full review once I've finished it...err...if I finish it.&lt;/p&gt;
 &lt;p&gt;I will stop buying faster than I can read. I will stop buying faster than I
 can read. Maybe if I keep repeating that, it'll sink in.&lt;/p&gt;
-</summary><category term="C/C++"></category><category term="Books"></category></entry></feed>
+</content><category term="C/C++"></category><category term="Books"></category></entry></feed>
