@@ -29,7 +29,7 @@ My qualifications for the job are as follows. For full details on the
 material in this summary, please refer to the section entitled
 Experience, and the sections that follow it.
 
-1. Thirteen year's experience with `Mitel`_ as a software engineer,
+1. Fifteen year's experience with `Mitel`_ as a software engineer,
    working on the Mitel 6000 Managed Application Server
    (formerly the E-Smith server and gateway), as well as applications
    on top of that server such as the Teleworker Solution (now
@@ -189,7 +189,9 @@ Meanwhile, I began playing with the Raspberry Pi, and with the help of a
 long-time coworker, ported MBG to the Raspberry Pi as an experiment. To
 achieve this, I redesigned the entire management layer to work on this
 platform, and wrote a new interface using AngularJS, an impressive new
-single-page application framework from Google that I've come to like.
+single-page application framework from Google that I've come to like. Since
+then we have supported the Raspberry Pi 3, with a new UI in Vue.js, and
+a management layer in Python and Go (more on that later).
 
 Work completed in 2013 while maintaining 5 parallel streams, 7.1, 7.2, 8.0, 8.1
 and 9.0. Quite challenging for a small development team, but we've found that
@@ -227,18 +229,44 @@ latest mergers and acquisitions, but for myself included integration of a
 new webrtc component, to permit anonymous and subscriber calls to our
 call managers from a simple web browser.
 
-At this time, we are working on MBG 9.3, primarily improving on work in 9.2.
+2015 involved the 9.2 and 9.3 releases, incorporating WebRTC functionality
+in MBG, and support for new call managers from Aastra. In 2016 we completed
+the 9.4 release with tone injection support, and scaling changes to support
+50000 DID rules on a SIP trunk, both in the management UI and ReST
+interfaces. The 10.0 release primary included configuration enhancements
+for ease of use, and a plugin framework for adaptation of SIP headers in
+internal pipelines using the Lua scripting language.
+
+At this time, we are working on MBG 10.1.
 
 On the side, I set up and still maintain an internal R&D Wiki and Mailing list
 server, now used by the bulk of the R&D organization. I have given several
 internal courses on a variety of subjects, from packaging software using RPM,
 to perl programming, to introductions to Unix, Ruby on Rails, Django and Git.
 
-To keep my work flexible I mirror all my work into my private Git
+We have continued our work on the Raspberry Pi, porting to the RP 3, using
+a web server written in Google Go. My coworker wrote a C++ API for managing
+our data transparently in a cluster, which I wrote Go and Python extensions
+for to use from my code. It is currently an ongoing prototyping environment
+that we use to determine where we want to product to eventually go,
+architecturally speaking.
+
+To keep my work flexible I used to mirror all my work into my private Git
 repositories, pushing them into the corporate-provided ClearCase repositories
-when appropriate. This keeps my full project history available at all times,
-with or without network connectivity. I have advocated this workflow to others
-internally and externally, and use it on my open-source projects.
+when appropriate. This kept my full project history available at all times,
+with or without network connectivity. I advocated this workflow to others
+internally and externally, and used it on my open-source projects.
+
+Since then I was tasked with building our nightly build system to move us
+completely out of ClearCase and into a pure Git environment. I built it in
+Python, and it runs every night on every supported release, automatically
+picking up changes from developers and building if there are changes to
+build. It builds the blade, pushing it to our AMC for deployment, and then
+builds a VMWare .ova file for deploying in the VSphere environment. It then
+messages our auto-sanity group through an ActiveMQ server to launch their
+automated sanity suite. I also built our nightly build website using
+Flask, which displays build status, sanity status, and allows export of
+the entire load.
 
 Nortel
 ^^^^^^
