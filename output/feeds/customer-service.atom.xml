@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress - Customer Service</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/customer-service.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2016-05-07T21:00:00-04:00</updated><entry><title>Honda Finally Comes Through</title><link href="http://www.but-i-digress.ca/honda-finally-comes-through.html" rel="alternate"></link><published>2016-05-07T21:00:00-04:00</published><updated>2016-05-07T21:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2016-05-07:/honda-finally-comes-through.html</id><summary type="html">&lt;p&gt;So, previous I ranted on about an &lt;a class="reference external" href="/a-letter-to-honda-canada.html"&gt;issue with my car&lt;/a&gt; that I brought up with
-Honda Canada, complaining about Kanata Honda and their ridiculous justification
-for the key cylinders in my car to wear out so quickly.&lt;/p&gt;
-&lt;p&gt;Well, Honda Canada did, in fact, get back to me. A nice …&lt;/p&gt;</summary><content type="html">&lt;p&gt;So, previous I ranted on about an &lt;a class="reference external" href="/a-letter-to-honda-canada.html"&gt;issue with my car&lt;/a&gt; that I brought up with
+<feed xmlns="http://www.w3.org/2005/Atom"><title>But I Digress</title><link href="http://www.but-i-digress.ca/" rel="alternate"></link><link href="http://feeds.feedburner.com/feeds/customer-service.atom.xml" rel="self"></link><id>http://www.but-i-digress.ca/</id><updated>2016-05-07T21:00:00-04:00</updated><entry><title>Honda Finally Comes Through</title><link href="http://www.but-i-digress.ca/honda-finally-comes-through.html" rel="alternate"></link><updated>2016-05-07T21:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2016-05-07:honda-finally-comes-through.html</id><summary type="html">&lt;p&gt;So, previous I ranted on about an &lt;a class="reference external" href="/a-letter-to-honda-canada.html"&gt;issue with my car&lt;/a&gt; that I brought up with
 Honda Canada, complaining about Kanata Honda and their ridiculous justification
 for the key cylinders in my car to wear out so quickly.&lt;/p&gt;
 &lt;p&gt;Well, Honda Canada did, in fact, get back to me. A nice lady from the office
@@ -46,10 +43,7 @@ they're frustrated out of their minds and irate on a telephone, or blogging
 for the world to see about your crappy service before you're embarrassed
 enough to do something.&lt;/p&gt;
 &lt;p&gt;You can do better.&lt;/p&gt;
-</content><category term="Cars Honda"></category></entry><entry><title>A Letter to Honda Canada</title><link href="http://www.but-i-digress.ca/a-letter-to-honda-canada.html" rel="alternate"></link><published>2015-08-20T17:00:00-04:00</published><updated>2015-08-20T17:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-08-20:/a-letter-to-honda-canada.html</id><summary type="html">&lt;p&gt;I recently had reason to write to the CEO of Honda Canada, Mr. Jerry Chenkin,
-to outline why I am less than pleased with my 2010 Honda Fit, and ensure
-that he, or whomever ends up reading this, has the full story of what our
-experience with his company has …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I recently had reason to write to the CEO of Honda Canada, Mr. Jerry Chenkin,
+</summary><category term="Cars Honda"></category></entry><entry><title>A Letter to Honda Canada</title><link href="http://www.but-i-digress.ca/a-letter-to-honda-canada.html" rel="alternate"></link><updated>2015-08-20T17:00:00-04:00</updated><author><name>Michael P. Soulier</name></author><id>tag:www.but-i-digress.ca,2015-08-20:a-letter-to-honda-canada.html</id><summary type="html">&lt;p&gt;I recently had reason to write to the CEO of Honda Canada, Mr. Jerry Chenkin,
 to outline why I am less than pleased with my 2010 Honda Fit, and ensure
 that he, or whomever ends up reading this, has the full story of what our
 experience with his company has been like.&lt;/p&gt;
@@ -124,4 +118,4 @@ would they try to feed me such utter nonsense, and wipe their hands of
 the matter?&lt;/p&gt;
 &lt;p&gt;Good customer service, that is not. They didn't make the car, but they were
 happy to sell it to me.&lt;/p&gt;
-</content><category term="Cars"></category><category term="Honda"></category></entry></feed>
+</summary><category term="Cars"></category><category term="Honda"></category></entry></feed>

@@ -4,8 +4,8 @@
         <title>But I Digress - Web Services</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-        <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
-
+                        <link href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate" title="But I Digress RSS Feed" />
+        
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -27,30 +27,31 @@
                 <h2>Random neuron firings, digitized heedless of the
                 repurcussions.</h2>
                 <nav><ul>
-                    <li ><a href="../category/customer-service.html">Customer Service</a></li>
-                    <li ><a href="../category/development.html">Development</a></li>
-                    <li ><a href="../category/driving.html">Driving</a></li>
-                    <li ><a href="../category/pens.html">Pens</a></li>
-                    <li ><a href="../category/personal.html">Personal</a></li>
-                    <li ><a href="../category/quotes.html">Quotes</a></li>
-                    <li ><a href="../category/technology.html">Technology</a></li>
-                </ul></nav>
+                                                                    <li><a href="../pages/michael-p-souliers-curriculum-vitae.html">Michael P. Soulier's Curriculum Vitae</a></li>
+                                                                    <li ><a href="../category/customer-service.html">Customer Service</a></li>
+                                    <li ><a href="../category/development.html">Development</a></li>
+                                    <li ><a href="../category/driving.html">Driving</a></li>
+                                    <li ><a href="../category/pens.html">Pens</a></li>
+                                    <li ><a href="../category/personal.html">Personal</a></li>
+                                    <li ><a href="../category/quotes.html">Quotes</a></li>
+                                    <li ><a href="../category/technology.html">Technology</a></li>
+                                </ul></nav>
         </header><!-- /#banner -->
-        
-        
+                
+            
 
-            <aside id="featured" class="body">
+                            <aside id="featured" class="body">
                 <article>
                     <h1 class="entry-title"><a href="../signatures-in-oauth.html">Signatures in OAuth</a></h1> 
-<footer class="post-info">
-        <abbr class="published" title="2012-12-21T18:00:00-05:00">
+                    <footer class="post-info">
+        <abbr class="published" title="2012-12-21T18:00:00">
                 Fri 21 December 2012
         </abbr>
 
-        <address class="vcard author">
+                <address class="vcard author">
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-<p>In <a href="../category/technology.html">Technology</a>. </p>
+        <p>In <a href="../category/technology.html">Technology</a>. </p>
 <p>tags: <a href="../tag/oauth.html">OAuth</a><a href="../tag/web-services.html">Web Services</a><a href="../tag/python.html">Python</a><a href="../tag/perl.html">Perl</a></p></footer><!-- /.post-info --><p>Hi again. I already went into the basics of OAuth in a <a class="reference external" href="http://www.but-i-digress.ca/understanding-oauth.html">previous post</a>, and
 alluded to the signatures being the hard part of the implementation. I'm using
 a <a class="reference external" href="https://github.com/leah/python-oauth/">python-oauth</a> module for the client, but for the server, I decided to
@@ -88,7 +89,7 @@ would any percent-encoded string, and then...</p>
 </blockquote>
 <p>I found that hard to read, but I did find this bit of Perl to solve the
 problem in <tt class="docutils literal"><span class="pre">Net::OAuth</span></tt>, which I converted to a Mojolicious helper.</p>
-<div class="highlight"><pre><span></span><span class="n">helper</span> <span class="n">encode</span> <span class="o">=&gt;</span> <span class="k">sub</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="n">helper</span> <span class="n">encode</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
     <span class="k">my</span> <span class="nv">$str</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
     <span class="nv">$str</span> <span class="o">=</span> <span class="s">&quot;&quot;</span> <span class="k">unless</span> <span class="nb">defined</span> <span class="nv">$str</span><span class="p">;</span>
@@ -105,29 +106,29 @@ problem in <tt class="docutils literal"><span class="pre">Net::OAuth</span></tt>
 <span class="p">};</span>
 </pre></div>
 <p>Decoding is even simpler.</p>
-<div class="highlight"><pre><span></span><span class="n">helper</span> <span class="n">decode</span> <span class="o">=&gt;</span> <span class="k">sub</span> <span class="p">{</span>
+<div class="highlight"><pre><span class="n">helper</span> <span class="n">decode</span> <span class="o">=&gt;</span> <span class="k">sub </span><span class="p">{</span>
     <span class="k">my</span> <span class="nv">$self</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
     <span class="k">my</span> <span class="nv">$str</span> <span class="o">=</span> <span class="nb">shift</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">uri_unescape</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
 <span class="p">};</span>
 </pre></div>
 <p>In Python, the same code looks like so.</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">urllib</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">urllib</span>
 
 <span class="k">def</span> <span class="nf">escape</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Escape a URL including any /.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;~&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s">&#39;~&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">_utf8_str</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert unicode to utf-8.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
 <span class="n">escaped</span> <span class="o">=</span> <span class="n">escape</span><span class="p">(</span><span class="n">_utf8_str</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
 
-<span class="c1"># Unquoting is just</span>
+<span class="c"># Unquoting is just</span>
 <span class="n">unquoted</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 <p>So, this needs to be done to each of the parameters, in this case, the
@@ -180,20 +181,20 @@ pevzNqSnJ8QtqFUDWVlYhVRp8D0=
 <p>Oddly, if I used the <tt class="docutils literal">b64encode</tt> method in <tt class="docutils literal"><span class="pre">Digest::HMAC_SHA1</span></tt>, a final
 &quot;=&quot; sign is missing on the final result, so I had to pull in <tt class="docutils literal"><span class="pre">MIME::Base64</span></tt>
 and do this instead:</p>
-<div class="highlight"><pre><span></span><span class="k">my</span> <span class="nv">$sig</span> <span class="o">=</span> <span class="n">encode_base64</span><span class="p">(</span><span class="nv">$hmac</span><span class="o">-&gt;</span><span class="n">digest</span><span class="p">);</span>
+<div class="highlight"><pre><span class="k">my</span> <span class="nv">$sig</span> <span class="o">=</span> <span class="n">encode_base64</span><span class="p">(</span><span class="nv">$hmac</span><span class="o">-&gt;</span><span class="n">digest</span><span class="p">);</span>
 </pre></div>
 <p>The equivalent Python in the <tt class="docutils literal">oauth</tt> library does this:</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">binascii</span>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">binascii</span>
 
-<span class="c1"># HMAC object.</span>
+<span class="c"># HMAC object.</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">hashlib</span> <span class="c1"># 2.5</span>
+    <span class="kn">import</span> <span class="nn">hashlib</span> <span class="c"># 2.5</span>
     <span class="n">hashed</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sha</span> <span class="c1"># Deprecated</span>
+    <span class="kn">import</span> <span class="nn">sha</span> <span class="c"># Deprecated</span>
     <span class="n">hashed</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="n">sha</span><span class="p">)</span>
 
-<span class="c1"># Calculate the digest base 64.</span>
+<span class="c"># Calculate the digest base 64.</span>
 <span class="k">return</span> <span class="n">binascii</span><span class="o">.</span><span class="n">b2a_base64</span><span class="p">(</span><span class="n">hashed</span><span class="o">.</span><span class="n">digest</span><span class="p">())[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 <p>That just leaves <tt class="docutils literal"><span class="pre">RSA-SHA1</span></tt>, but that requires a pre-existing SSL
@@ -208,63 +209,63 @@ do. I'd rather not drop the added security, and while they're a pain, there
 are sample implementations to follow. I think that OAuth 1.0 is a better
 choice. And it's, like, finished.</p>
 <p>There are <a href="../signatures-in-oauth.html#disqus_thread">comments</a>.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
                     <h1>Other articles</h1>
                     <hr />
                     <ol id="posts-list" class="hfeed">
-        
+                                                
 
- 
-            <li><article class="hentry">    
+                 
+                        <li><article class="hentry">    
                 <header>
                     <h1><a href="../understanding-oauth.html" rel="bookmark"
                            title="Permalink to Understanding OAuth">Understanding OAuth</a></h1>
                 </header>
                 
                 <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2012-12-20T10:30:00-05:00">
+                <footer class="post-info">
+        <abbr class="published" title="2012-12-20T10:30:00">
                 Thu 20 December 2012
         </abbr>
 
-        <address class="vcard author">
+                <address class="vcard author">
                 By <a class="url fn" href="../author/michael-p-soulier.html">Michael P. Soulier</a>
         </address>
-<p>In <a href="../category/technology.html">Technology</a>. </p>
+        <p>In <a href="../category/technology.html">Technology</a>. </p>
 <p>tags: <a href="../tag/oauth.html">OAuth</a><a href="../tag/web-services.html">Web Services</a></p></footer><!-- /.post-info -->                <p>We meet again. Thanks for stopping by. This post has a high geek factor, so if
 you're not one, feel free to move along, nothing to see here.</p>
 <p>Still here? K, your funeral. At work, I'm trying to add a <a class="reference external" href="http://en.wikipedia.org/wiki/Representational_state_transfer">ReST</a> Web Service to
-a product that could desperately use …</p>
+a product that could ...</p>
                 <a class="readmore" href="../understanding-oauth.html">read more</a>
-<p>There are <a href="../understanding-oauth.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+                <p>There are <a href="../understanding-oauth.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
+        Page 1 / 1
+    </p>
+                        </section><!-- /#content -->
+                    <section id="extras" class="body">
+                        <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                            <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                            <li><a href="http://python.org">Python.org</a></li>
-                            <li><a href="http://life-unbalanced.tumblr.com/">Life, unbalanced</a></li>
-                            <li><a href="http://excess.org">Ian Ward</a></li>
-                            <li><a href="http://www.mahdiyusuf.com/">Mahdi Yusuf</a></li>
-                            <li><a href="http://mikegrouchy.com/">Mike Grouchy</a></li>
-                        </ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://life-unbalanced.tumblr.com/">Life, unbalanced</a></li>
+                                                    <li><a href="http://excess.org">Ian Ward</a></li>
+                                                    <li><a href="http://www.mahdiyusuf.com/">Mahdi Yusuf</a></li>
+                                                    <li><a href="http://mikegrouchy.com/">Mike Grouchy</a></li>
+                                                </ul>
                 </div><!-- /.blogroll -->
-                <div class="social">
+                                <div class="social">
                         <h2>social</h2>
                         <ul>
-                            <li><a href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate">rss feed</a></li>
-
-                            <li><a href="http://twitter.com/msoulier">Twitter</a></li>
-                        </ul>
+                                                                                                                    <li><a href="http://feeds.feedburner.com/ButIDigress" type="application/rss+xml" rel="alternate">rss feed</a></li>
+                                                            
+                                                    <li><a href="http://twitter.com/msoulier">Twitter</a></li>
+                                                </ul>
                 </div><!-- /.social -->
-        </section><!-- /#extras -->
+                </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
