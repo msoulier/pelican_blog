@@ -6,7 +6,7 @@ INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
-HEROKUDIR=$(HOME)/work/static_blog
+STATICDIR=$(HOME)/work/static_blog
 FIREFOX=$(shell which firefox)
 ifeq ($(FIREFOX),)
 	FIREFOX = open
@@ -22,12 +22,12 @@ help:
 	@echo '   make regenerate                  regenerate files upon modification '
 	@echo '   make serve                       serve site at http://localhost:8000'
 	@echo '   make devserver                   start/restart develop_server.sh    '
-	@echo '   make heroku                      push to production heroku site     '
+	@echo '   make static                      push to static blog dir
 	@echo '   make view                        view the static site in firefox    '
 	@echo '                                                                       '
 
-heroku:
-	rsync -vaz --delete --exclude '.git' $(OUTPUTDIR)/ $(HEROKUDIR)
+static:
+	rsync -vaz --delete --exclude '.git' $(OUTPUTDIR)/ $(STATICDIR)
 
 view:
 	(cd $(OUTPUTDIR) && $(FIREFOX) index.html)
