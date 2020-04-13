@@ -23,3 +23,4 @@ everything on github_, so enjoy.
 .. _suckless: https://www.suckless.org/
 .. _dwm: https://dwm.suckless.org/
 .. _github: https://github.com/msoulier/dwm
+.. _i3: https://i3wm.org
