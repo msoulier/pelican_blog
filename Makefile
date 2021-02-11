@@ -22,7 +22,7 @@ help:
 	@echo '   make regenerate                  regenerate files upon modification '
 	@echo '   make serve                       serve site at http://localhost:8000'
 	@echo '   make devserver                   start/restart develop_server.sh    '
-	@echo '   make static                      push to static blog dir
+	@echo '   make static                      push to static blog dir            '
 	@echo '   make view                        view the static site in firefox    '
 	@echo '                                                                       '
 
