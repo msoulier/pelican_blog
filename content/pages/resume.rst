@@ -4,7 +4,7 @@ Michael P. Soulier's Curriculum Vitae
 Overview
 --------
 I am a professional software developer, who has been in the industry of
-software development for over ten years, starting with `Nortel`_ as my
+software development for over twenty years, starting with `Nortel`_ as my
 first job out of University, and eventually moving to `Mitel`_, working on
 developing and porting VoIP applications on the Linux platform. I
 specialize in Unix systems programming and Web applications, primarily,
@@ -12,7 +12,7 @@ but I have dabbled in many things and I learn quickly.
 
 I believe in developing applications in such a manner that the company
 that I work for maintains their right to choice of tools and platforms
-in the future. My choice of tools such as Perl, Python, Ruby and Java
+in the future. My choice of tools such as Perl, Python, Ruby and Go
 demonstrate that portability and lack of "lock-in", although I have
 happily developed in C/C++ and maintained the same values.
 
@@ -237,7 +237,13 @@ interfaces. The 10.0 release primary included configuration enhancements
 for ease of use, and a plugin framework for adaptation of SIP headers in
 internal pipelines using the Lua scripting language.
 
-At this time, we are working on MBG 10.1.
+2016 covered the 11.0 release, and experimentation into packaging our software
+in Docker containers for deployment into the cloud. I headed this
+re-architecture into microservices, and to this day MBG is the only
+application within Mitel to truly leverage a microservice architecture.
+
+As of all of this work I am now one of the local GCP and Kubernetes experts
+within Mitel, for better or for worse.
 
 On the side, I set up and still maintain an internal R&D Wiki and Mailing list
 server, now used by the bulk of the R&D organization. I have given several
