@@ -12,15 +12,14 @@ TIMEZONE = 'America/Montreal'
 DEFAULT_LANG = 'en'
 
 # Blogroll
-LINKS =  (('Pelican', 'http://docs.notmyidea.org/alexis/pelican/'),
+LINKS =  (('Pelican', 'https://getpelican.com/'),
           ('Python.org', 'http://python.org'),
           ('Ian Ward', 'http://excess.org'),
-          ('Mahdi Yusuf', 'http://www.mahdiyusuf.com/'),
           ('Mike Grouchy', 'http://mikegrouchy.com/'),
           )
 
 # Social widget
-SOCIAL = (('Twitter', 'http://twitter.com/msoulier'),)
+SOCIAL = (('Mastodon', 'https://mastodon.social/@msoulier'),)
 
 DEFAULT_PAGINATION = 10
 
